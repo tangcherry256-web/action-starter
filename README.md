@@ -1,0 +1,29 @@
+# 下班後行動啟動器 · 檔案說明
+
+> 最後更新：2026-10-23（最新版，含今天全部新功能）
+
+## ⭐ 要上傳到 GitHub 的檔案：只有 3 個，都在 `github-deploy/` 資料夾
+
+| 檔案 | 說明 |
+| --- | --- |
+| `github-deploy/index.html` | 應用本體（約 504 KB，圖標已內嵌） |
+| `github-deploy/manifest.json` | PWA 清單 |
+| `github-deploy/sw.js` | 離線緩存 |
+
+**上傳方式**（約 5 分鐘）：
+1. 打開 https://github.com/tangcherry256-web/action-starter
+2. 右上「Add file」→「Upload files」
+3. 把上面 3 個檔案拖進去（同名會自動覆蓋舊版）
+4. 按「Commit changes」→ 等約 1 分鐘，重新整理網站就是最新版
+
+## 其他檔案（不用動，也別上傳）
+
+| 檔案 / 資料夾 | 說明 |
+| --- | --- |
+| `index.html`、`sw.js`、`manifest.json`、`icons/` | 完整原始版。**內容與 `github-deploy/` 完全相同**（JS 和 CSS 逐字一致，僅圖標為獨立檔案 vs 內嵌的差別）。日後要改功能，改的是這一份，改完再重新產生 `github-deploy/` |
+| `preview/` | 各個頁面的界面截圖，僅供預覽，不是應用的一部分 |
+
+## 版本記錄
+
+- **2026-10-23（最新）**：今日頁新版佈局（快速記錄三格移至抽卡區上方、主題卡並排、抽卡改獨立緊縮卡、加入時間線可選現在/下午/晚上/自訂時間滾輪）；卡庫新增「長期專案」模式（專案進度卡、展開子卡）；新增卡片的專案欄改為下拉選擇 + 新建
+- **2026-10-22**：初版（線上 https://tangcherry256-web.github.io/action-starter/ 目前跑的就是這版，上傳上述 3 個檔案後即更新）

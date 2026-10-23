@@ -111,12 +111,15 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .q .l { font-size:9.5px; font-weight:800; color:var(--muted); margin-top:1px; }
 
 /* ---------- 今日行動 / 時間線任務 ---------- */
-.task { background:var(--card); border-radius:20px; box-shadow:var(--sh); padding:12px 14px; display:flex; align-items:center; gap:12px; position:relative; }
-.task .ic { width:42px; height:42px; border-radius:15px; background:var(--soft); color:var(--primary); display:grid; place-items:center; flex:0 0 auto; }
-.task .ic svg { width:19px; height:19px; }
+.task { background:var(--card); border-radius:18px; box-shadow:var(--sh); padding:11px 13px; display:flex; align-items:center; gap:11px; position:relative; }
+.task .ic { width:38px; height:38px; border-radius:13px; background:var(--soft); color:var(--primary); display:grid; place-items:center; flex:0 0 auto; }
+.task .ic svg { width:18px; height:18px; }
 .task .main { flex:1; min-width:0; }
-.task .n { font-size:14.5px; font-weight:800; color:var(--ink); }
-.task .m { margin-top:3px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.task .n { font-size:14px; font-weight:900; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.task .m { margin-top:3px; display:flex; align-items:center; gap:6px; flex-wrap:nowrap; overflow:hidden; }
+.task .m .tbadge { font-size:9px; padding:2px 7px; flex:0 0 auto; }
+.task .m .pill { font-size:9px; padding:3px 8px; flex:0 0 auto; }
+.task .m .meta { font-size:10.5px; flex:0 0 auto; }
 .pplay { width:34px; height:34px; border-radius:13px; border:none; background:var(--soft); color:var(--primary); display:grid; place-items:center; flex:0 0 auto; cursor:pointer; }
 .pplay svg { width:14px; height:14px; }
 .task .del { width:26px; height:26px; border:none; background:none; color:var(--muted); display:grid; place-items:center; cursor:pointer; border-radius:8px; }
@@ -389,7 +392,7 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .wheel-viewport { position:absolute; inset:0; overflow-y:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
 .wheel-viewport::-webkit-scrollbar { display:none; }
 .wheel-list { padding:96px 0; }
-.wheel-item { height:48px; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; color:var(--muted); }
+.wheel-item { height:48px; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; color:var(--muted); position:relative; z-index:1; }
 .wheel-item.active { color:var(--primary); font-size:21px; font-weight:900; }
 .wheel-highlight { position:absolute; left:16px; right:16px; top:50%; transform:translateY(-50%); height:48px; border-radius:14px; background:var(--soft); pointer-events:none; }
 .wheel-unit { position:absolute; right:24px; top:50%; transform:translateY(-50%); font-size:13px; font-weight:800; color:var(--primary); }
@@ -430,6 +433,94 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .sync-dot.syncing { background:var(--primary); animation:pulse 1s infinite; }
 .sync-dot.err { background:var(--danger); }
 @keyframes pulse { 50% { opacity:.35; } }
+
+/* ---------- 卡庫：專案進度卡片（長期專案模式） ---------- */
+.cgrid.single { grid-template-columns:1fr; }
+.ctags { display:flex; align-items:center; gap:5px; min-width:0; }
+.cproj { font-size:9.5px; font-weight:900; color:var(--primary); background:var(--soft); padding:3px 8px; border-radius:99px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:96px; }
+.pcard { grid-column:1/-1; background:var(--card); border-radius:18px; box-shadow:var(--sh); padding:14px 15px; cursor:pointer; border-left:4px solid var(--primary); display:flex; flex-direction:column; gap:10px; }
+.pcard .p-top { display:flex; align-items:center; gap:9px; }
+.pcard .p-ic { width:34px; height:34px; border-radius:12px; background:var(--soft); color:var(--primary); display:grid; place-items:center; flex:0 0 auto; }
+.pcard .p-ic svg { width:17px; height:17px; }
+.pcard .p-name { font-size:14.5px; font-weight:900; color:var(--ink); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.pcard .p-cnt { font-size:10.5px; font-weight:800; color:var(--muted); white-space:nowrap; }
+.pcard .p-chev { color:var(--muted); flex:0 0 auto; transition:transform .25s; display:inline-flex; }
+.pcard .p-chev svg { width:16px; height:16px; }
+.pcard.open .p-chev { transform:rotate(180deg); }
+.pbar { height:8px; border-radius:99px; background:var(--track); overflow:hidden; }
+.pbar-fill { height:100%; border-radius:99px; background:var(--primary); transition:width .35s ease; }
+.pcard .p-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.pcard .p-num { font-size:11px; font-weight:800; color:var(--muted); }
+.pstat { font-size:10.5px; font-weight:900; padding:4px 10px; border-radius:99px; background:var(--soft); color:var(--primary); white-space:nowrap; }
+.pstat.done { background:var(--green-soft); color:var(--green); }
+.pcard .p-kids { display:flex; flex-direction:column; gap:8px; border-top:1.5px dashed var(--bd); padding-top:10px; }
+.pkid { display:flex; align-items:center; gap:9px; }
+.pkid .k-ic { width:30px; height:30px; border-radius:10px; display:grid; place-items:center; flex:0 0 auto; }
+.pkid .k-ic svg { width:14px; height:14px; }
+.pkid .k-n { flex:1; min-width:0; font-size:12.5px; font-weight:800; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.pkid .k-m { font-size:10px; font-weight:700; color:var(--muted); white-space:nowrap; }
+.pkid.done .k-n { color:var(--muted); text-decoration:line-through; }
+
+/* ---------- 新增卡片：所屬長期專案選擇器 ---------- */
+.pselect { width:100%; background:var(--bg); border:1.5px solid transparent; border-radius:12px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; font-family:inherit; cursor:pointer; text-align:left; }
+.pselect .psv { font-size:13px; font-weight:800; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.pselect .psv.unset { color:var(--muted); font-weight:700; }
+.pselect .ps-chev { color:var(--muted); flex:0 0 auto; display:inline-flex; }
+.pselect .ps-chev svg { width:15px; height:15px; }
+.psheet-title { font-size:15px; font-weight:900; color:var(--ink); margin-bottom:12px; }
+.psheet-row { display:flex; align-items:center; gap:10px; padding:11px 12px; border-radius:13px; font-size:13.5px; font-weight:800; color:var(--ink); cursor:pointer; background:var(--bg); width:100%; border:none; font-family:inherit; text-align:left; margin-bottom:8px; }
+.psheet-row svg { width:15px; height:15px; color:var(--primary); flex:0 0 auto; }
+.psheet-row.on { background:var(--soft); color:var(--primary); box-shadow:inset 0 0 0 1.5px var(--primary); }
+.psheet-row.on svg { color:var(--primary); }
+.psheet-new-box { display:none; gap:8px; margin-top:4px; }
+.psheet-new-box.show { display:flex; }
+.psheet-new-box .input { flex:1; }
+
+/* ---------- 今日頁：抽卡緊湊長條卡 ---------- */
+#drawGrid { display:flex; flex-direction:column; gap:12px; }
+.dcard { background:var(--card); border-radius:18px; box-shadow:var(--sh); padding:11px 12px; display:flex; align-items:center; gap:11px; }
+.dcard .dc-ic { width:42px; height:42px; border-radius:14px; display:grid; place-items:center; flex:0 0 auto; }
+.dcard .dc-ic svg { width:20px; height:20px; }
+.dcard .dc-mid { flex:1; min-width:0; }
+.dcard .dc-n { font-size:14.5px; font-weight:900; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.dcard .dc-t { margin-top:3px; display:flex; align-items:center; gap:5px; font-size:10.5px; font-weight:700; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.dcard .dc-t .tbadge { font-size:9px; padding:2px 7px; flex:0 0 auto; }
+.dcard .dc-acts { display:flex; gap:7px; flex:0 0 auto; }
+.dc-btn { width:36px; height:36px; border-radius:50%; border:none; display:grid; place-items:center; cursor:pointer; }
+.dc-btn svg { width:15px; height:15px; }
+.dc-btn.go { background:var(--primary); color:#fff; }
+.dc-btn.clock { background:var(--soft); color:var(--primary); }
+
+/* ---------- 主題卡並排 ---------- */
+#themeStrip.duo { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+#themeStrip.duo .tcard { flex-direction:column; align-items:flex-start; gap:5px; padding:11px 12px; border-radius:16px; }
+#themeStrip.duo .tcard .ic-circle { width:30px; height:30px; border-radius:11px; }
+#themeStrip.duo .tcard .ic-circle svg { width:15px; height:15px; }
+#themeStrip.duo .tcard .tv { font-size:12.5px; margin-top:0; }
+#themeStrip.duo .tcard .te { display:none; }
+
+/* ---------- 加入時間線：時間選擇 Bottom Sheet ---------- */
+.tsheet-card { font-size:12px; font-weight:700; color:var(--muted); margin:-4px 0 12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.tsheet-opt { display:flex; align-items:center; gap:11px; padding:11px 13px; border-radius:14px; background:var(--bg); font-size:13.5px; font-weight:800; color:var(--ink); cursor:pointer; border:none; width:100%; font-family:inherit; text-align:left; margin-bottom:9px; }
+.tsheet-opt:last-child { margin-bottom:0; }
+.tsheet-opt .o-ic { width:34px; height:34px; border-radius:11px; background:#fff; color:var(--primary); display:grid; place-items:center; flex:0 0 auto; box-shadow:var(--sh); }
+.tsheet-opt .o-ic svg { width:16px; height:16px; }
+.tsheet-opt small { display:block; font-size:10px; font-weight:700; color:var(--muted); margin-top:1px; }
+
+/* ---------- 自訂時間雙滾輪 ---------- */
+.tw-overlay { position:fixed; inset:0; display:none; z-index:75; }
+.tw-overlay.show { display:block; }
+.tw-backdrop { position:absolute; inset:0; background:rgba(30,28,60,.4); }
+.tw-panel { position:absolute; left:50%; bottom:0; transform:translateX(-50%); width:min(440px,100%); background:var(--card); border-radius:24px 24px 0 0; padding:14px 16px 24px; }
+.tw-lbls { display:flex; gap:12px; margin-bottom:4px; }
+.tw-lbls span { flex:1; text-align:center; font-size:10.5px; font-weight:900; color:var(--muted); }
+.tw-cols { display:flex; gap:12px; position:relative; }
+.tw-hl { position:absolute; left:0; right:0; top:84px; height:48px; border-radius:12px; background:var(--soft); pointer-events:none; }
+.tw-col { flex:1; height:216px; overflow-y:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+.tw-col::-webkit-scrollbar { display:none; }
+.tw-list { padding:84px 0; }
+.tw-item { height:48px; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:800; color:var(--muted); position:relative; z-index:1; }
+.tw-item.active { color:var(--primary); font-size:20px; font-weight:900; }
 </style>
 </head>
 <body>
@@ -455,15 +546,17 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
       </div>
     </div>
     <div class="body">
-      <div class="lbl-row"><span class="l">抽三張卡</span><span class="r" id="drawBtn"><i data-lucide="refresh-cw"></i>換一批</span></div>
-      <div id="drawGrid"></div>
-
       <div class="lbl-row"><span class="l">快速記錄</span><span class="r-static">今天</span></div>
       <div class="quick">
         <div class="q" id="qSleep"><i data-lucide="moon"></i><div class="v" id="qSleepV">—</div><div class="l">睡眠</div></div>
         <div class="q" id="qWater"><i data-lucide="droplets"></i><div class="v" id="qWaterV">0</div><div class="l">喝水</div></div>
         <div class="q" id="qBowel"><i data-lucide="check"></i><div class="v" id="qBowelV">0</div><div class="l">排便</div></div>
       </div>
+
+      <div id="themeStrip" class="duo"></div>
+
+      <div class="lbl-row"><span class="l">抽三張卡</span><span class="r" id="drawBtn"><i data-lucide="refresh-cw"></i>換一批</span></div>
+      <div id="drawGrid"></div>
 
       <div class="lbl-row"><span class="l">今日行動</span><span class="r-static" id="schCount"></span></div>
       <div id="scheduleList"></div>
@@ -472,8 +565,6 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
         <input type="text" id="schText" class="input" placeholder="做點什麼…">
         <button class="btn btn-soft btn-sm" id="schAdd"><i data-lucide="plus"></i></button>
       </div>
-
-      <div id="themeStrip"></div>
     </div>
   </section>
 
@@ -488,8 +579,6 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
       <div id="cardCount"></div>
       <div class="filter-row" id="filterRow"></div>
       <div class="cgrid" id="cardGrid"></div>
-      <div class="sec-h" style="margin-top:2px"><span class="ic-circle c-butter"><i data-lucide="package"></i></span>長期專案</div>
-      <div id="projectArea"></div>
     </div>
   </section>
 
@@ -630,6 +719,49 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
       <div class="wheel-unit">分鐘</div>
       <div class="wheel-fade wheel-fade-top"></div>
       <div class="wheel-fade wheel-fade-bottom"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 所屬長期專案選擇（Bottom Sheet） -->
+<div class="overlay" id="projSheetOverlay"></div>
+<div class="sheet" id="projSheet">
+  <div class="grab"></div>
+  <div class="psheet-title">所屬長期專案</div>
+  <div id="projList"></div>
+  <div class="psheet-new-box" id="projNewBox">
+    <input type="text" class="input" id="projNewInput" placeholder="新專案名稱，例如：旅行博主" maxlength="20">
+    <button class="btn btn-primary btn-sm" id="projNewBtn"><i data-lucide="check"></i>建立</button>
+  </div>
+  <button class="psheet-row" id="projNewToggle" style="margin-top:4px;color:var(--primary);background:var(--soft);"><i data-lucide="plus"></i>新建專案</button>
+</div>
+
+<!-- 加入時間線：時間選擇（Bottom Sheet） -->
+<div class="overlay" id="timeSheetOverlay"></div>
+<div class="sheet" id="timeSheet">
+  <div class="grab"></div>
+  <div class="psheet-title">加入時間線</div>
+  <div class="tsheet-card" id="timeSheetCard">—</div>
+  <button class="tsheet-opt" data-t="now"><span class="o-ic"><i data-lucide="zap"></i></span><span>現在<small>立刻安排</small></span></button>
+  <button class="tsheet-opt" data-t="afternoon"><span class="o-ic"><i data-lucide="sun"></i></span><span>今天下午<small>15:00</small></span></button>
+  <button class="tsheet-opt" data-t="evening"><span class="o-ic"><i data-lucide="moon"></i></span><span>今天晚上<small>20:00</small></span></button>
+  <button class="tsheet-opt" data-t="custom"><span class="o-ic"><i data-lucide="clock"></i></span><span>自訂時間<small>選擇具體時間</small></span></button>
+</div>
+
+<!-- 自訂時間雙滾輪 -->
+<div class="tw-overlay" id="timeWheelOverlay">
+  <div class="tw-backdrop" id="timeWheelBackdrop"></div>
+  <div class="tw-panel">
+    <div class="wheel-head">
+      <button class="wheel-btn" id="twCancel">取消</button>
+      <div class="wheel-title" id="twTitle">20:00</div>
+      <button class="wheel-btn wheel-ok" id="twOk">確定</button>
+    </div>
+    <div class="tw-lbls"><span>時</span><span>分</span></div>
+    <div class="tw-cols">
+      <div class="tw-hl"></div>
+      <div class="tw-col" id="twHours"></div>
+      <div class="tw-col" id="twMins"></div>
     </div>
   </div>
 </div>
@@ -938,6 +1070,7 @@ let state = {
   selecting: { state: new Set(), activity: new Set() },
   bowelCount: 0,
   waterCups: 0,
+  openProjects: new Set(), // 長期專案模式下已展開的專案名
 };
 
 function switchTab(tab) {
@@ -1098,20 +1231,19 @@ async function drawCards() {
 function renderDrawn() {
   const g = $('#drawGrid');
   if (!state.drawn.length) { g.innerHTML = ''; return; }
-  g.innerHTML = state.drawn.map((c, i) => {
+  g.innerHTML = state.drawn.map(c => {
     const meta = TYPE_META[c.type] || TYPE_META['自我成長'];
     const ci = typeCi(c.type);
     const em = ENERGY_MODES[c.energyMode] || ENERGY_MODES['neutral'];
-    const pillTxt = em.label + ' ' + (c.energyAmount != null ? c.energyAmount : 3);
-    return '<div class="draw3">' +
-      '<div class="head"><div class="ic">' + meta.emoji + '</div><div><div class="n">' + esc(c.name) + '</div>' +
-      '<div class="m"><span class="tbadge ' + ci + '">' + esc(c.type) + '</span>' +
-      '<span class="meta"><i data-lucide="clock"></i>' + c.duration + '分</span>' +
-      '<span class="pill now">' + pillTxt + '</span></div></div></div>' +
-      (c.action ? '<div class="desc">' + esc(c.action) + '</div>' : '') +
-      '<div class="foot"><button class="go" onclick="startTimer(' + c.id + ')"><i data-lucide="play"></i>開始計時</button>' +
-      '<button class="split" onclick="addCardToTimeline(' + c.id + ')"><i data-lucide="clock"></i>加入時間線</button></div>' +
-      '</div>';
+    return '<div class="dcard">' +
+      '<div class="dc-ic" style="background:var(--' + ci + '-bg);color:var(--' + ci + '-ink)">' + meta.emoji + '</div>' +
+      '<div class="dc-mid"><div class="dc-n">' + esc(c.name) + '</div>' +
+      '<div class="dc-t"><span class="tbadge ' + ci + '">' + esc(c.type) + '</span>' +
+      '<span>' + esc(c.duration) + ' 分鐘 · ' + em.emoji + em.label + ' ' + (c.energyAmount != null ? c.energyAmount : 3) + '</span></div></div>' +
+      '<div class="dc-acts">' +
+      '<button class="dc-btn go" title="開始計時" onclick="startTimer(' + c.id + ')"><i data-lucide="play"></i></button>' +
+      '<button class="dc-btn clock" title="加入時間線" onclick="openAddTimeSheet(' + c.id + ')"><i data-lucide="clock"></i></button>' +
+      '</div></div>';
   }).join('');
 }
 
@@ -1327,6 +1459,91 @@ async function addCardToTimeline(cardId) {
   renderSchedule();
   toast('已加入時間線');
 }
+
+/* ---------------- 加入時間線：時間選擇面板 + 自訂時間滾輪 ---------------- */
+let addTimeCtx = null; // { cardId }
+function openAddTimeSheet(cardId) {
+  addTimeCtx = { cardId: cardId };
+  ldb.cards.get(cardId).then(c => {
+    $('#timeSheetCard').textContent = c ? '「' + c.name + '」安排到什麼時候？' : '—';
+  });
+  $('#timeSheet').classList.add('show');
+  $('#timeSheetOverlay').classList.add('show');
+}
+function closeTimeSheet() {
+  $('#timeSheet').classList.remove('show');
+  $('#timeSheetOverlay').classList.remove('show');
+  addTimeCtx = null;
+}
+function timeSheetPick(kind) {
+  const now = new Date();
+  if (kind === 'now') return pad(now.getHours()) + ':' + pad(now.getMinutes());
+  if (kind === 'afternoon') return '15:00';
+  return '20:00';
+}
+async function confirmAddToTimeline(time) {
+  const ctx = addTimeCtx;
+  closeTimeSheet();
+  closeTimeWheel();
+  if (!ctx || ctx.cardId == null) return;
+  const c = await ldb.cards.get(ctx.cardId);
+  if (!c) { toast('卡片不存在'); return; }
+  const list = await getSchedule();
+  const exists = list.some(it => it.kind === 'card' && it.cardId === c.id && !it.done);
+  if (exists) { toast('這張卡已在時間線'); return; }
+  list.push({ time: time, text: c.name, kind: 'card', cardId: c.id, type: c.type, duration: c.duration, energyMode: c.energyMode, energyAmount: c.energyAmount, done: false });
+  list.sort((a, b) => a.time.localeCompare(b.time));
+  await saveSchedule(list);
+  renderSchedule();
+  toast('已加入時間線 · ' + time);
+}
+
+/* 自訂時間雙滾輪（時 / 分） */
+let twCtx = null; // { h, m }
+const TW_ITEM_H = 48;
+function twUpdateTitle() {
+  if (!twCtx) return;
+  $('#twTitle').textContent = pad(twCtx.h) + ':' + pad(twCtx.m);
+}
+function twMarkActive(col, idx) {
+  col.querySelectorAll('.tw-item').forEach((it, i) => it.classList.toggle('active', i === idx));
+}
+function openTimeWheel() {
+  const now = new Date();
+  twCtx = { h: now.getHours(), m: Math.round(now.getMinutes() / 5) * 5 % 60 };
+  const hours = []; for (let i = 0; i < 24; i++) hours.push(i);
+  const mins = []; for (let i = 0; i < 60; i += 5) mins.push(i);
+  $('#twHours').innerHTML = '<div class="tw-list">' + hours.map(v => '<div class="tw-item" data-v="' + v + '">' + pad(v) + '</div>').join('') + '</div>';
+  $('#twMins').innerHTML = '<div class="tw-list">' + mins.map(v => '<div class="tw-item" data-v="' + v + '">' + pad(v) + '</div>').join('') + '</div>';
+  twUpdateTitle();
+  $('#timeWheelOverlay').classList.add('show');
+  requestAnimationFrame(() => {
+    $('#twHours').scrollTop = twCtx.h * TW_ITEM_H;
+    $('#twMins').scrollTop = (twCtx.m / 5) * TW_ITEM_H;
+    twMarkActive($('#twHours'), twCtx.h);
+    twMarkActive($('#twMins'), twCtx.m / 5);
+  });
+}
+function closeTimeWheel() {
+  $('#timeWheelOverlay').classList.remove('show');
+  twCtx = null;
+}
+function bindTwColumn(sel, key) {
+  const el = $(sel);
+  let raf = 0;
+  el.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      if (!twCtx) return;
+      const items = el.querySelectorAll('.tw-item');
+      const idx = Math.max(0, Math.min(items.length - 1, Math.round(el.scrollTop / TW_ITEM_H)));
+      twCtx[key] = parseInt(items[idx].dataset.v, 10);
+      twMarkActive(el, idx);
+      twUpdateTitle();
+    });
+  });
+}
 async function autoAddToTimeline(c) {
   const list = await getSchedule();
   const exists = list.some(it => it.kind === 'card' && it.cardId === c.id && !it.done);
@@ -1361,7 +1578,8 @@ async function renderSchedule() {
       const meta = TYPE_META[it.type] || TYPE_META['自我成長'];
       icon = meta.emoji;
       ci = typeCi(it.type);
-      badge = m.label + ' ' + (it.energyAmount != null ? it.energyAmount : 3);
+      badge = '<span class="tbadge ' + ci + '">' + esc(it.type) + '</span>' +
+        '<span class="pill now">' + m.emoji + m.label + ' ' + (it.energyAmount != null ? it.energyAmount : 3) + '</span>';
     } else { icon = '<i data-lucide="pen-line"></i>'; ci = 'c-slate'; badge = ''; }
     const timeHtml = '<span class="meta"><i data-lucide="clock"></i>' + esc(it.time) + '</span>';
     let action;
@@ -1435,12 +1653,15 @@ function renderFilter() {
 async function renderCards() {
   const list = await ldb.cards.toArray();
   $('#cardCount').textContent = '（' + list.length + '）';
-  let shown = list;
-  if (state.filter !== '全部') {
-    if (state.filter === '長期專案') shown = list.filter(c => c.projectName);
-    else shown = list.filter(c => c.type === state.filter);
-  }
   const g = $('#cardGrid');
+  if (state.filter === '長期專案') {
+    g.classList.add('single');
+    await renderProjectCards(list);
+    return;
+  }
+  g.classList.remove('single');
+  let shown = list;
+  if (state.filter !== '全部') shown = list.filter(c => c.type === state.filter);
   if (!shown.length) {
     g.innerHTML = '<div class="empty" style="grid-column:1/-1;"><span class="big"><i data-lucide="folder"></i></span>這裡還沒有卡片。<br>點右上角「＋ 新增」加入第一張。</div>';
   } else {
@@ -1450,32 +1671,58 @@ async function renderCards() {
       const badge = energyBadge(c);
       return '<div class="citem" style="--cb:var(--' + ci + '-ink)">' +
         '<div class="ctop"><span class="ic-circle ' + ci + '" style="background:var(--' + ci + '-bg);color:var(--' + ci + '-ink)">' + meta.emoji + '</span>' +
-        '<span class="tbadge ' + ci + '">' + esc(c.type) + '</span></div>' +
+        '<span class="ctags"><span class="tbadge ' + ci + '">' + esc(c.type) + '</span>' +
+        (c.projectName ? '<span class="cproj" title="' + esc(c.projectName) + '">' + esc(c.projectName) + '</span>' : '') + '</span></div>' +
         '<div class="cname">' + esc(c.name) + '</div>' +
-        '<div class="cmeta">' + (c.projectName ? '<i data-lucide="package"></i> ' + esc(c.projectName) + ' · ' : '') + c.duration + ' 分鐘</div>' +
+        '<div class="cmeta">' + c.duration + ' 分鐘</div>' +
         '<div class="cmeta en">' + badge + '</div>' +
         '<div class="cacts"><button class="cdo" onclick="startTimer(' + c.id + ')">做</button>' +
         '<button class="cdot" onclick="openCardMenu(' + c.id + ')"><i data-lucide="more-horizontal"></i></button></div>' +
         '</div>';
     }).join('');
   }
-  renderProjects(list);
 }
-async function renderProjects(list) {
-  if (!list) list = await ldb.cards.toArray();
+/* 長期專案模式：寬卡片 + 進度條 + 狀態標籤 + 點擊展開下屬行動卡 */
+async function renderProjectCards(list) {
+  const g = $('#cardGrid');
   const proj = list.filter(c => c.projectName);
-  const area = $('#projectArea');
   if (!proj.length) {
-    area.innerHTML = '<div class="empty" style="padding:18px;"><span class="big"><i data-lucide="package"></i></span>把卡片歸到一個長期專案，<br>就能在這裡看到進度。（成長線將在後續版本上線）</div>';
+    g.innerHTML = '<div class="empty" style="grid-column:1/-1;"><span class="big"><i data-lucide="package"></i></span>把卡片歸到一個長期專案，<br>切到這裡就能看到進度。</div>';
     return;
   }
   const groups = {};
   proj.forEach(c => { (groups[c.projectName] = groups[c.projectName] || []).push(c); });
-  area.innerHTML = Object.keys(groups).map(name =>
-    '<div class="mini-item"><span class="ic"><i data-lucide="film"></i></span>' +
-    '<div style="flex:1;"><div class="tt">' + esc(name) + '</div>' +
-    '<div class="dd">' + groups[name].length + ' 張卡</div></div></div>'
-  ).join('');
+  const doneIds = new Set();
+  try {
+    const recs = await ldb.records.toArray();
+    recs.forEach(r => { if (r.completed && r.cardId != null) doneIds.add(r.cardId); });
+  } catch (e) { /* ignore */ }
+  g.innerHTML = Object.keys(groups).sort().map(name => {
+    const cards = groups[name];
+    const total = cards.length;
+    const done = cards.filter(c => doneIds.has(c.id)).length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    const complete = total > 0 && done === total;
+    const open = state.openProjects.has(name);
+    const kids = open ? '<div class="p-kids">' + cards.map(c => {
+      const meta = TYPE_META[c.type] || TYPE_META['自我成長'];
+      const ci = typeCi(c.type);
+      const kd = doneIds.has(c.id);
+      return '<div class="pkid' + (kd ? ' done' : '') + '">' +
+        '<span class="k-ic ' + ci + '" style="background:var(--' + ci + '-bg);color:var(--' + ci + '-ink)">' + meta.emoji + '</span>' +
+        '<span class="k-n">' + esc(c.name) + '</span>' +
+        '<span class="k-m">' + c.duration + ' 分' + (kd ? ' · ✓' : '') + '</span></div>';
+    }).join('') + '</div>' : '';
+    return '<div class="pcard' + (open ? ' open' : '') + '" data-proj="' + esc(name) + '">' +
+      '<div class="p-top"><span class="p-ic"><i data-lucide="package"></i></span>' +
+      '<span class="p-name">' + esc(name) + '</span>' +
+      '<span class="p-cnt">' + done + '/' + total + ' 張卡</span>' +
+      '<span class="p-chev"><i data-lucide="chevron-down"></i></span></div>' +
+      '<div class="pbar"><div class="pbar-fill" style="width:' + pct + '%"></div></div>' +
+      '<div class="p-meta"><span class="p-num">已完成 ' + done + ' / 共 ' + total + ' 張</span>' +
+      '<span class="pstat' + (complete ? ' done' : '') + '">' + (complete ? '🏆 已完成' : '🌱 進行中') + '</span></div>' +
+      kids + '</div>';
+  }).join('');
 }
 
 function cardForm(card) {
@@ -1505,9 +1752,25 @@ function cardForm(card) {
     '<div class="fld"><label>能量量級</label><div class="amounts" id="fAmount">' + amountIcons + '</div><div class="hint2">參考：每 30 分鐘約等於 1 能量</div></div>' +
     '<div class="fld"><label>時間需求</label><div class="seg" id="fDuration">' + durSeg + '</div></div>' +
     '<div class="fld"><label>類型 <span class="hint">選中填滿分類色</span></label><div class="seg" id="fType">' + typeSeg + '</div></div>' +
-    '<div class="fld"><label>所屬長期專案 <span class="hint">選填</span></div><input type="text" id="fProject" class="input" placeholder="例如：學剪輯" value="' + esc(c.projectName) + '"></div>' +
+    '<div class="fld"><label>所屬長期專案 <span class="hint">選填</span></div>' +
+    '<button type="button" class="pselect" id="fProjectBtn"><span class="psv' + (c.projectName ? '' : ' unset') + '" id="fProjectVal">' + (c.projectName ? esc(c.projectName) : '不屬於任何專案') + '</span><span class="ps-chev"><i data-lucide="chevron-down"></i></span></button></div>' +
     '<button class="save2" id="formSaveBtn"><i data-lucide="check"></i>' + (isEdit ? '儲存修改' : '加入卡庫') + '</button>';
   $('#formSaveBtn').addEventListener('click', () => saveCard(isEdit ? c.id : -1));
+  $('#fProjectBtn').addEventListener('click', () => {
+    const cur = (window._cardDraft && window._cardDraft.projectName) || '';
+    projPickCtx = {
+      value: cur,
+      onPick: (name) => {
+        if (window._cardDraft) window._cardDraft.projectName = name;
+        const v = $('#fProjectVal');
+        if (v) {
+          v.textContent = name || '不屬於任何專案';
+          v.classList.toggle('unset', !name);
+        }
+      },
+    };
+    openProjectSheet(cur);
+  });
 }
 
 let formFrom = 'cards';
@@ -1515,7 +1778,7 @@ function openAddCard() {
   if (state.tab !== 'form') formFrom = state.tab;
   cardForm(null);
   switchTab('form');
-  bindCardFormSegs({ energyMode: 'neutral', energyAmount: 3, duration: 10, type: '自我成長' });
+  bindCardFormSegs({ energyMode: 'neutral', energyAmount: 3, duration: 10, type: '自我成長', projectName: '' });
 }
 function editCard(id) {
   ldb.cards.get(id).then(c => {
@@ -1609,6 +1872,32 @@ function closeWheel() {
   wheelCtx = null;
 }
 
+/* ---------------- 所屬長期專案選擇（Bottom Sheet） ---------------- */
+let projPickCtx = null; // { value, onPick }
+async function openProjectSheet(current) {
+  let names = [];
+  try {
+    const cards = await ldb.cards.toArray();
+    names = Array.from(new Set(cards.map(c => c.projectName).filter(Boolean))).sort();
+  } catch (e) { /* ignore */ }
+  $('#projList').innerHTML =
+    '<button type="button" class="psheet-row' + (!current ? ' on' : '') + '" data-p=""><i data-lucide="x"></i>不屬於任何專案</button>' +
+    names.map(n => '<button type="button" class="psheet-row' + (n === current ? ' on' : '') + '" data-p="' + esc(n) + '"><i data-lucide="package"></i>' + esc(n) + '</button>').join('');
+  $('#projNewBox').classList.remove('show');
+  $('#projNewInput').value = '';
+  $('#projSheet').classList.add('show');
+  $('#projSheetOverlay').classList.add('show');
+}
+function closeProjectSheet() {
+  $('#projSheet').classList.remove('show');
+  $('#projSheetOverlay').classList.remove('show');
+  projPickCtx = null;
+}
+function pickProject(name) {
+  if (projPickCtx && projPickCtx.onPick) projPickCtx.onPick(name);
+  closeProjectSheet();
+}
+
 async function saveCard(id) {
   const draft = window._cardDraft || {};
   const name = $('#fName').value.trim();
@@ -1620,7 +1909,7 @@ async function saveCard(id) {
     energyAmount: draft.energyAmount || 3,
     duration: draft.duration || 10,
     type: draft.type || '自我成長',
-    projectName: $('#fProject').value.trim(),
+    projectName: (draft.projectName || '').trim(),
     updatedAt: Date.now(),
   };
   if (id >= 0) {
@@ -2289,6 +2578,53 @@ function bindEvents() {
     renderFilter();
     renderCards();
   });
+
+  /* 長期專案模式：點專案寬卡展開/收起下屬行動卡 */
+  $('#cardGrid').addEventListener('click', e => {
+    const pc = e.target.closest('.pcard');
+    if (!pc || state.filter !== '長期專案') return;
+    const name = pc.dataset.proj;
+    if (state.openProjects.has(name)) state.openProjects.delete(name);
+    else state.openProjects.add(name);
+    renderCards();
+  });
+
+  /* 所屬長期專案選擇 Sheet */
+  $('#projSheetOverlay').addEventListener('click', closeProjectSheet);
+  $('#projList').addEventListener('click', e => {
+    const row = e.target.closest('.psheet-row');
+    if (row) pickProject(row.dataset.p);
+  });
+  $('#projNewToggle').addEventListener('click', () => {
+    $('#projNewBox').classList.add('show');
+    $('#projNewInput').focus();
+  });
+  $('#projNewBtn').addEventListener('click', () => {
+    const v = $('#projNewInput').value.trim();
+    if (!v) { toast('先輸入專案名稱'); return; }
+    pickProject(v);
+  });
+  $('#projNewInput').addEventListener('keydown', e => { if (e.key === 'Enter') $('#projNewBtn').click(); });
+
+  /* 加入時間線：時間選擇面板 */
+  $('#timeSheetOverlay').addEventListener('click', closeTimeSheet);
+  $('#timeSheet').addEventListener('click', e => {
+    const b = e.target.closest('.tsheet-opt');
+    if (!b || !addTimeCtx) return;
+    const t = b.dataset.t;
+    if (t === 'custom') { openTimeWheel(); return; }
+    confirmAddToTimeline(timeSheetPick(t));
+  });
+
+  /* 自訂時間雙滾輪 */
+  bindTwColumn('#twHours', 'h');
+  bindTwColumn('#twMins', 'm');
+  $('#twOk').addEventListener('click', () => {
+    if (!twCtx) return;
+    confirmAddToTimeline(pad(twCtx.h) + ':' + pad(twCtx.m));
+  });
+  $('#twCancel').addEventListener('click', closeTimeWheel);
+  $('#timeWheelBackdrop').addEventListener('click', closeTimeWheel);
 
   $('#stateTags').addEventListener('click', tagClick);
   $('#activityTags').addEventListener('click', tagClick);
