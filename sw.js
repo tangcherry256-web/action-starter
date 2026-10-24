@@ -7,11 +7,15 @@
    使用者所有歷史資料存在 IndexedDB（ActionStarterDB），
    版本更新只會替換快取裡的網頁檔案，重新載入後資料原樣呈現。
    ============================================================ */
-var CACHE = 'action-starter-v1';
+var CACHE = 'action-starter-v2';
 var ASSETS = [
   './',
   './index.html',
   './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './icons/icon-maskable-512.png',
+  './icons/apple-touch-icon.png'
 ];
 
 /* 安裝：離線時所需的應用外殼入快取（不自動跳過等待，由使用者確認更新） */
