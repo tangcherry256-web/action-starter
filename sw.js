@@ -7,7 +7,7 @@
    使用者所有歷史資料存在 IndexedDB（ActionStarterDB），
    版本更新只會替換快取裡的網頁檔案，重新載入後資料原樣呈現。
    ============================================================ */
-var CACHE = 'action-starter-v2';
+var CACHE = 'action-starter-v4';
 var ASSETS = [
   './',
   './index.html',
