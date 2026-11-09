@@ -702,7 +702,7 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .undo-bar .u-btn { border:none; flex:0 0 auto; background:rgba(255,255,255,.16); color:#fff; font-family:inherit; font-size:12px; font-weight:900; border-radius:10px; padding:7px 12px; cursor:pointer; }
 .undo-bar .u-btn:active { background:rgba(255,255,255,.28); }
 
-/* ---------- 一次性任務完成：歸檔提示條（輕量底部 Toast） ---------- */
+/* ---------- 完成任務：歸檔提示卡（底部滑出，一次性／循環都問） ---------- */
 .arch-bar { position:fixed; left:50%; bottom:88px; transform:translate(-50%,16px); width:calc(100% - 32px); max-width:420px; background:var(--deep); color:#fff; border-radius:16px; padding:13px 14px; display:flex; flex-direction:column; gap:10px; box-shadow:0 18px 44px -18px rgba(30,28,60,.62); opacity:0; pointer-events:none; transition:opacity .22s ease, transform .22s ease; z-index:67; }
 .arch-bar.show { opacity:1; pointer-events:auto; transform:translate(-50%,0); }
 .arch-bar .a-top { display:flex; align-items:center; gap:9px; }
@@ -768,29 +768,29 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .face.back{transform:rotateY(180deg);background:#FDFDFF;border-radius:18px;box-shadow:var(--sh);
   border-left:4px solid var(--cb,var(--bd));padding:11px 11px 10px;display:flex;flex-direction:column;overflow:hidden}
 .bhead{display:flex;align-items:flex-start;gap:6px;flex:0 0 auto}
-.bhead .bn{font-size:11px;font-weight:900;color:var(--ink);line-height:1.3;flex:1;min-width:0;
+.bhead .bn{font-size:12px;font-weight:900;color:var(--ink);line-height:1.3;flex:1;min-width:0;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bhead .bback{width:19px;height:19px;border-radius:50%;background:var(--soft);color:var(--primary);
   display:grid;place-items:center;flex:0 0 auto;cursor:pointer;border:none;padding:0}
 .bhead .bback svg{width:10px;height:10px}
 .bprog{height:3px;border-radius:99px;background:var(--track);margin:7px 0 6px;flex:0 0 auto;overflow:hidden}
 .bprog i{display:block;height:100%;border-radius:99px;background:var(--primary);transition:width .3s}
-.blist{flex:1;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;gap:2px}
+.blist{flex:1;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;gap:3px}
 .blist::-webkit-scrollbar{display:none}
-.bitem{display:flex;align-items:flex-start;gap:6px;padding:3px 0;cursor:pointer}
-.bitem .bc{width:14px;height:14px;border-radius:50%;border:1.6px solid var(--bd);background:#fff;
+.bitem{display:flex;align-items:flex-start;gap:7px;padding:5px 0;cursor:pointer}
+.bitem .bc{width:16px;height:16px;border-radius:50%;border:1.6px solid var(--bd);background:#fff;
   flex:0 0 auto;margin-top:1px;display:grid;place-items:center}
-.bitem .bc svg{width:8px;height:8px;color:#fff;opacity:0}
+.bitem .bc svg{width:9px;height:9px;color:#fff;opacity:0}
 .bitem.done .bc{background:var(--green);border-color:var(--green)}
 .bitem.done .bc svg{opacity:1}
-.bitem .bt{font-size:10px;font-weight:700;color:var(--ink);line-height:1.35}
+.bitem .bt{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.35}
 .bitem.done .bt{color:var(--muted);text-decoration:line-through}
 .bempty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:0 4px}
 .bempty .be-ic{width:30px;height:30px;border-radius:50%;background:var(--accent-quiet);color:var(--accent-quiet-ink);display:grid;place-items:center}
 .bempty .be-ic svg{width:15px;height:15px}
-.bempty p{font-size:9.5px;font-weight:700;color:var(--muted);line-height:1.5}
+.bempty p{font-size:11px;font-weight:700;color:var(--muted);line-height:1.5}
 .bfoot{flex:0 0 auto;padding-top:6px}
-.bfoot .bhint{font-size:8.5px;font-weight:800;color:var(--muted);text-align:center;line-height:1.4}
+.bfoot .bhint{font-size:9.5px;font-weight:800;color:var(--muted);text-align:center;line-height:1.4}
 
 /* ========== S2-P2：復盤圖表 ========== */
 .rv-card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:14px;margin-top:10px}
@@ -1082,6 +1082,10 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   cursor:pointer;font-family:inherit;border:1px solid var(--bd);background:#fff;color:var(--ink2)}
 .s2api .fld small{display:block;font-size:9.5px;font-weight:600;color:var(--muted);margin-top:5px;line-height:1.6}
 .s2api .err{font-size:10px;font-weight:900;color:var(--accent-quiet-ink);margin-top:8px;line-height:1.6}
+.s2api .presets{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.s2api .presets button{flex:1;min-width:92px;border:1px solid var(--bd);background:#fff;color:var(--ink2);
+  border-radius:10px;padding:8px 6px;font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit}
+.s2api .presets button:hover{border-color:var(--primary);color:var(--primary)}
 /* 螢幕常亮 */
 .foc-awake{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;
   padding:9px 12px;border-radius:13px;background:rgba(255,255,255,.055);flex:0 0 auto;width:100%;max-width:300px}
@@ -1094,20 +1098,23 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .foc-awake .sw.on{background:var(--primary)}
 .foc-awake .sw.on::after{left:21px}
 .foc-awake .sw.na{opacity:.4;cursor:not-allowed}
-/* 卡片：v21 兩欄近正方比例，背面留白更多 */
-.cgrid > .flip{height:192px}
+/* 卡片：v21 兩欄近正方比例；背面字級放大，步驟看得清楚 */
+.cgrid > .flip{height:200px}
 .flip .face.front.citem{padding:11px 11px 10px}
-.face.back{padding:11px 11px 10px}
-.blist{-webkit-mask-image:linear-gradient(to bottom,#000 86%,transparent 100%);
-  mask-image:linear-gradient(to bottom,#000 86%,transparent 100%);min-height:0}
-.bhead .bn{font-size:11px}
-.bprog{margin:8px 0 7px}
-.bitem{padding:4px 0}
-.bitem .bt{font-size:10px;line-height:1.4}
-.bfoot{padding-top:7px}
-.bfoot .bhint{font-size:8.5px}
-/* 管家：內容區自己捲動，輸入框固定在底部但不與內容重疊 */
-#page-butler .pg-body{overflow:hidden;padding-bottom:78px}
+.face.back{padding:12px 12px 10px}
+.blist{-webkit-mask-image:linear-gradient(to bottom,#000 92%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 92%,transparent 100%);min-height:0}
+.bhead .bn{font-size:12px}
+.bprog{margin:8px 0 8px}
+.bitem{padding:5px 0;gap:7px}
+.bitem .bc{width:16px;height:16px}
+.bitem .bc svg{width:9px;height:9px}
+.bitem .bt{font-size:12.5px;line-height:1.35}
+.bempty p{font-size:11px}
+.bfoot{padding-top:6px}
+.bfoot .bhint{font-size:9.5px}
+/* 管家：內容區自己捲動；浮球移除後輸入框下移，不再預留右下角空間 */
+#page-butler .pg-body{overflow:hidden;padding-bottom:28px}
 #page-butler #btBody{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;padding-bottom:8px}
 #page-butler #btBody::-webkit-scrollbar{display:none}
 #page-butler .bt-foot{position:static;background:transparent;padding-top:0}
@@ -1501,10 +1508,12 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   <button class="u-btn" id="undoBtn" type="button">撤銷</button>
 </div>
 
-<!-- 一次性任務完成：歸檔提示條（輕量底部 Toast） -->
+<!-- 完成任務：歸檔提示卡（從底部滑出；一次性／循環都問） -->
 <div class="arch-bar" id="archBar">
-  <span class="a-ic"><i data-lucide="party-popper"></i></span>
-  <span class="a-txt">恭喜完成！要從卡庫中移除嗎？</span>
+  <div class="a-top">
+    <span class="a-ic"><i data-lucide="party-popper"></i></span>
+    <span class="a-txt" id="archTxt">完成囉！要留在卡庫，還是收進成就牆？</span>
+  </div>
   <div class="a-btns">
     <button class="a-btn keep" id="archKeep" type="button">僅完成今天</button>
     <button class="a-btn arch" id="archDo" type="button">徹底完成並歸檔</button>
@@ -1894,13 +1903,10 @@ function switchTab(tab) {
   syncFab();
 }
 
-/* 浮球可見性：僅今日頁頂端隱藏（避免遮住第一條時間線的操作按鈕） */
+/* 浮動設定齒輪已退役：主題月／週在首頁主題卡直接點，完整設定從左上抽屜進。
+   卡庫、管家兩頁不再出現浮球；保留 DOM 與 openSheet 供既有入口呼叫。 */
 function syncFab() {
-  const body = $('#page-today .body');
-  const atTop = !body || body.scrollTop <= 8;
-  /* 首頁（時間線延伸到頁底，避免遮住打勾）、新增卡片頁、記錄頁、復盤頁隱藏浮球 */
-  const hide = state.tab === 'today' || state.tab === 'form' || state.tab === 'record' || state.tab === 'review';
-  $('#app').classList.toggle('fab-off', hide);
+  $('#app').classList.add('fab-off');
 }
 
 function openDrawer() { $('#drawer').classList.add('show'); $('#drawerOverlay').classList.add('show'); }
@@ -2235,6 +2241,8 @@ async function confirmCompletion(cardId) {
   timer = null;
   renderCards();
   renderReview();
+  /* 計時完成的這條路徑也要問歸檔（一次性與循環都問） */
+  if (card) showArchiveToast(card.id);
 }
 async function applyEnergyChange(card, mode) {
   const amt = card.energyAmount || 0;
@@ -2755,16 +2763,13 @@ async function toggleScheduleDone(id) {
   it.done = !it.done;
   await saveSchedule(list, date);
   await renderSchedule();
-  /* 剛完成（未完成 → 完成）才需要決定是否歸檔 */
+  /* 剛完成（未完成 → 完成）才需要決定是否歸檔；一次性與循環都問 */
   if (!wasDone && it.done) {
     let card = null;
     if (it.kind === 'card' && it.cardId != null) {
       try { card = await ldb.cards.get(it.cardId); } catch (e) { /* ignore */ }
     }
-    if (card && !card.isRepeating) {
-      /* 一次性任務：完成後詢問是否歸檔（循環任務只標記完成，卡片留在卡庫） */
-      showArchiveToast(card.id);
-    }
+    if (card) showArchiveToast(card.id);
   }
 }
 async function startTimelineCard(id) {
@@ -2806,7 +2811,7 @@ async function renderCards() {
     g.classList.remove('single');
     const arch = list.filter(c => c.isArchived);
     if (!arch.length) {
-      g.innerHTML = '<div class="empty" style="grid-column:1/-1;"><span class="big"><i data-lucide="archive"></i></span>還沒有歸檔的卡片。<br>完成一次性任務時選「徹底完成並歸檔」，<br>它就會來到這面成就牆。</div>';
+      g.innerHTML = '<div class="empty" style="grid-column:1/-1;"><span class="big"><i data-lucide="archive"></i></span>還沒有歸檔的卡片。<br>完成任務時選「徹底完成並歸檔」，<br>它就會來到這面成就牆。</div>';
       lucide.createIcons(g);
       return;
     }
@@ -2965,7 +2970,7 @@ function cardForm(card) {
     '<div class="fld"><label>時間需求</label><div class="seg" id="fDuration">' + durSeg + '</div></div>' +
     '<div class="fld"><label>類型 <span class="hint">選中填滿分類色</span></label><div class="seg" id="fType">' + typeSeg + '</div></div>' +
     '<div class="fld"><label>任務性質</label><div class="seg" id="fNature">' + natureSeg + '</div>' +
-    '<div class="hint2" id="fNatureHint">' + (c.isRepeating ? '循環：可反覆做，完成後留在卡庫' : '一次性：完成後可選擇歸檔移除') + '</div></div>' +
+    '<div class="hint2" id="fNatureHint">' + (c.isRepeating ? '循環：可反覆做，完成後也能收進成就牆' : '一次性：完成後可選擇歸檔移除') + '</div></div>' +
     '<div class="fld"><label>圖標 <span class="hint">從 lucide 選擇</span></label>' +
     '<button type="button" class="pselect" id="fIconBtn"><span class="psv" id="fIconVal" style="display:flex;align-items:center;gap:8px">' +
     '<i data-lucide="' + esc(c.icon || (TYPE_META[c.type] || TYPE_META['自我成長']).icon) + '"></i><span>' + (c.icon ? '自訂圖標' : '跟隨類型') + '</span></span>' +
@@ -3115,7 +3120,7 @@ function bindCardFormSegs(c) {
     cur.isRepeating = o.dataset.nat === 'repeat';
     $$('#fNature .opt').forEach(x => x.classList.toggle('active', x === o));
     const h = $('#fNatureHint');
-    if (h) h.textContent = cur.isRepeating ? '循環：可反覆做，完成後留在卡庫' : '一次性：完成後可選擇歸檔移除';
+    if (h) h.textContent = cur.isRepeating ? '循環：可反覆做，完成後也能收進成就牆' : '一次性：完成後可選擇歸檔移除';
   });
   window._cardDraft = cur;
 }
@@ -3273,17 +3278,25 @@ function openCardMenu(id) {
   });
 }
 
-/* ---------------- 一次性任務完成：歸檔提示條 ---------------- */
+/* ---------------- 完成任務：歸檔提示卡（底部滑出） ----------------
+   恢復原本的底部提示卡，不用置中對話框。
+   一次性與循環任務都問——循環任務也有結束的一天。
+   兩條完成路徑都要觸發：① 時間線直接勾選 ② 計時器 →「記錄完成」。 */
 let archTargetId = null;
 let archTimer = 0;
-function showArchiveToast(cardId) {
+async function showArchiveToast(cardId) {
+  var c = await ldb.cards.get(cardId);
+  if (!c) return;
   archTargetId = cardId;
-  $('#archBar').classList.add('show');
+  var bar = document.getElementById('archBar');
+  var txt = document.getElementById('archTxt');
+  if (txt) txt.textContent = '「' + c.name + '」完成囉！要留在卡庫，還是收進成就牆？';
+  bar.classList.add('show');
   clearTimeout(archTimer);
-  archTimer = setTimeout(hideArchiveToast, 9000); /* 9 秒後自動收起，不打斷節奏 */
+  archTimer = setTimeout(hideArchiveToast, 12000); /* 12 秒後自動收起 */
 }
 function hideArchiveToast() {
-  $('#archBar').classList.remove('show');
+  document.getElementById('archBar').classList.remove('show');
   archTargetId = null;
   clearTimeout(archTimer);
 }
@@ -4470,7 +4483,7 @@ function bindEvents() {
     if (fn) fn();
   });
 
-  /* 一次性任務完成：歸檔提示條 */
+  /* 完成任務：歸檔提示卡 */
   $('#archKeep').addEventListener('click', () => { hideArchiveToast(); }); /* 僅完成今天：卡片留在卡庫 */
   $('#archDo').addEventListener('click', () => { if (archTargetId != null) archiveCard(archTargetId); });
 
@@ -5740,8 +5753,8 @@ async function s2ButlerSend() {
     var msg = {
       nokey: '還沒設定 Key，先回到只讀本機模式。',
       key: 'Key 無效或沒有權限，到右上齒輪檢查一下。',
-      rate: '免費層額度用完了（429），稍後再試；資料都還在本機。',
-      net: mode === 'openai' ? '連不上這個 endpoint（自架模型請確認已開 CORS），我先不亂回。' : '連不上 Google（離線或逾時），我先不亂回。',
+      rate: '額度用完或請求太頻繁（429），稍後再試；資料都還在本機。',
+      net: mode === 'openai' ? '連不上這個 endpoint（檢查網址、Key，或服務是否允許瀏覽器直連），我先不亂回。' : '連不上 Google（離線或逾時），我先不亂回。',
       empty: '這次沒有回應，再問一次試試。',
       http: 'API 回應異常（HTTP ' + (res.status || '?') + '）。'
     }[res.err] || '連線有問題，先不亂回。';
@@ -5836,6 +5849,24 @@ async function s2RenderButler() {
 }
 
 /* ---------- ⑰ API 設定：三種模式 ---------- */
+/* 三種模式的費用/限制說明分開講，不對 DeepSeek 說「免費是真的免費」 */
+function s2QuotaHtml(m) {
+  if (m === 'gemini') {
+    return '<div class="qh"><i data-lucide="zap"></i>免費是真的免費，但有三件事要知道</div>' +
+      '<div class="qb">① 不綁卡、不扣款——<b>超過額度只會報錯，不會偷偷計費</b>。<br>' +
+      '② 免費層有「每分鐘／每天」的次數上限，個人一天幾十次絕對夠。<br>' +
+      '③ 免費層的內容會被用來改進模型，所以只送你的紀錄摘要，別貼密碼或合約。</div>';
+  }
+  if (m === 'openai') {
+    return '<div class="qh"><i data-lucide="zap"></i>自填通路的三件事要知道</div>' +
+      '<div class="qb">① DeepSeek、OpenAI 等<b>按用量計費</b>，不是免費層；請到平台看當下費率。<br>' +
+      '② 各家模型名會改，帶入的名稱僅供參考，<b>以平台公告為準</b>。<br>' +
+      '③ 瀏覽器直連可能被 CORS 擋；若測試連線一直失敗，需要一層同源代理。</div>';
+  }
+  return '<div class="qh"><i data-lucide="shield-check"></i>不接也能用</div>' +
+    '<div class="qb">睡眠、完成數、停滯標籤都由本機資料算出，<b>不需要任何 Key</b>，' +
+    '也不會把資料傳出去；只是不能聊天。</div>';
+}
 function s2ApiPick(m) {
   s2ApiMode = m;
   $$('.s2api .mcard').forEach(function (c) { c.classList.toggle('on', c.dataset.m === m); });
@@ -5843,6 +5874,8 @@ function s2ApiPick(m) {
   if (g) g.style.display = m === 'gemini' ? 'block' : 'none';
   if (o) o.style.display = m === 'openai' ? 'block' : 'none';
   var v = document.getElementById('s2Verify'); if (v) v.innerHTML = '';
+  var q = document.getElementById('s2Quota');
+  if (q) { q.innerHTML = s2QuotaHtml(m); if (window.lucide) lucide.createIcons(q); }
 }
 async function s2OpenApiModal() {
   var mode = await getSetting('geminiMode', 'off');
@@ -5864,8 +5897,8 @@ async function s2OpenApiModal() {
         '<b><i data-lucide="shield-check"></i>不接，只跑規則<span class="tagf">永遠可用</span></b>' +
         '<p>睡眠、完成數、停滯標籤照樣算得出來，只是不能聊天。</p></div>' +
       '<div class="mcard' + (mode === 'openai' ? ' on' : '') + '" data-m="openai" onclick="s2ApiPick(\'openai\')">' +
-        '<b><i data-lucide="server"></i>OpenAI / 自架模型<span class="tagf paid">要付費</span></b>' +
-        '<p>按用量計費，需要自己填 endpoint 與模型名。</p></div>' +
+        '<b><i data-lucide="server"></i>OpenAI 相容 · DeepSeek / 自架<span class="tagf paid">自填</span></b>' +
+        '<p>DeepSeek、OpenAI、Ollama 等都走這個通路，只要改 endpoint 與模型名。</p></div>' +
     '</div>' +
     '<div id="s2GeminiFields" style="display:' + (mode === 'gemini' ? 'block' : 'none') + '">' +
       '<div class="fld"><label>Gemini API Key</label>' +
@@ -5877,28 +5910,45 @@ async function s2OpenApiModal() {
       '<button class="bt-mini" style="margin-top:8px" onclick="s2ApiClearKey()"><i data-lucide="trash-2"></i> 清除本機 Key</button>' +
     '</div>' +
     '<div id="s2OpenaiFields" style="display:' + (mode === 'openai' ? 'block' : 'none') + '">' +
+      '<div class="fld"><label>快速帶入</label>' +
+        '<div class="presets">' +
+          '<button type="button" onclick="s2ApiPreset(\'deepseek\')">DeepSeek</button>' +
+          '<button type="button" onclick="s2ApiPreset(\'openai\')">OpenAI</button>' +
+          '<button type="button" onclick="s2ApiPreset(\'ollama\')">本機 Ollama</button>' +
+        '</div><small>只帶入 Endpoint 與模型名，Key 要自己填。模型名以平台當下公告為準。</small></div>' +
       '<div class="fld"><label>Endpoint（OpenAI 相容 /chat/completions）</label>' +
         '<input type="text" id="s2Endpoint" placeholder="https://api.openai.com/v1/chat/completions" value="' + esc(ep) + '">' +
-        '<small>自架（Ollama、LM Studio 等）請確認已開啟 CORS，否則瀏覽器會擋下請求。</small></div>' +
+        '<small>DeepSeek：https://api.deepseek.com/chat/completions。瀏覽器直連第三方 API 可能被 CORS 擋下；若「測試連線」一直失敗，需改用同源代理。Key 存在純前端，請勿在共用裝置上留存。</small></div>' +
       '<div class="fld"><label>模型名</label>' +
-        '<input type="text" id="s2LlmModel" placeholder="gpt-4o-mini" value="' + esc(mm) + '"></div>' +
+        '<input type="text" id="s2LlmModel" placeholder="deepseek-flash" value="' + esc(mm) + '"></div>' +
       '<div class="fld"><label>API Key</label>' +
         '<input type="password" id="s2LlmKey" placeholder="sk-…（存於本機）" value="' + esc(kk) + '"></div>' +
     '</div>' +
     '<div id="s2Verify"></div>' +
     '<div class="trow"><button onclick="s2ApiTest()"><i data-lucide="rotate-ccw"></i> 測試連線</button></div>' +
-    '<div class="quota"><div class="qh"><i data-lucide="zap"></i>免費是真的免費，但有三件事要知道</div>' +
-      '<div class="qb">① 不綁卡、不扣款——<b>超過額度只會報錯，不會偷偷計費</b>。<br>' +
-      '② 免費層有「每分鐘／每天」的次數上限，個人一天幾十次絕對夠。<br>' +
-      '③ 免費層的內容會被用來改進模型，所以只送你的紀錄摘要，別貼密碼或合約。</div></div>' +
-    '<div class="priv"><b>隱私</b>：Key 只存在這台裝置的 IndexedDB。免費層的輸入輸出可能被用來改進模型，' +
-      '所以我們只送統計數字，不送密碼、合約或筆記內容。<br>' +
+    '<div class="quota" id="s2Quota">' + s2QuotaHtml(mode) + '</div>' +
+    '<div class="priv"><b>隱私</b>：Key 只存在這台裝置的 IndexedDB。我們只送統計摘要，' +
+      '不送密碼、合約或筆記內容；純前端存放請勿在共用裝置上留存。<br>' +
       '<b>離線／額度用盡</b>：管家會明說連不上並回到觀察卡，不會編一段假回話給你。</div>' +
     '<div class="row"><button class="cancel" onclick="closeModal()">先不接，之後再說</button>' +
       '<button class="save" onclick="s2ApiSave()">儲存</button></div>' +
     '</div>';
   openModal(html);
   if (window.lucide) lucide.createIcons(document.getElementById('modalRoot'));
+}
+/* 常用服務一鍵帶入：只填 endpoint + 模型名，Key 永遠由使用者自己填 */
+function s2ApiPreset(p) {
+  var presets = {
+    deepseek: ['https://api.deepseek.com/chat/completions', 'deepseek-flash'],
+    openai:   ['https://api.openai.com/v1/chat/completions', 'gpt-4o-mini'],
+    ollama:   ['http://localhost:11434/v1/chat/completions', 'llama3.2']
+  };
+  var v = presets[p]; if (!v) return;
+  var ep = document.getElementById('s2Endpoint'), md = document.getElementById('s2LlmModel');
+  if (ep) ep.value = v[0];
+  if (md) md.value = v[1];
+  var box = document.getElementById('s2Verify'); if (box) box.innerHTML = '';
+  toast('已帶入 ' + p + ' 設定，補上 Key 就能測試');
 }
 async function s2ApiTest() {
   var m = s2ApiMode, box = document.getElementById('s2Verify');
@@ -5933,7 +5983,7 @@ async function s2ApiTest() {
       : '<div class="err">HTTP ' + r.status + '：檢查 Key／模型／endpoint</div>';
   } catch (e) {
     box.innerHTML = '<div class="err">連不上：' +
-      (m === 'openai' ? '自架模型要開 CORS，或檢查 endpoint' : '檢查網路或 Key') + '</div>';
+      (m === 'openai' ? '檢查 endpoint／Key，或服務是否允許瀏覽器直連（CORS）' : '檢查網路或 Key') + '</div>';
   } finally {
     clearTimeout(to);
     if (window.lucide) lucide.createIcons(document.getElementById('modalRoot'));
@@ -5960,7 +6010,7 @@ async function s2ApiSave() {
   s2Chat = [];
   await s2PersistChat();
   await s2RenderButler();
-  toast(m === 'off' ? '已回到只讀本機' : '已接上' + (m === 'gemini' ? 'Gemini' : '自訂模型'));
+  toast(m === 'off' ? '已回到只讀本機' : '已接上' + (m === 'gemini' ? 'Gemini' : 'OpenAI 相容模型'));
 }
 async function s2ApiClearKey() {
   var el = document.getElementById('s2Key'); if (el) el.value = '';
