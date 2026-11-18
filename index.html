@@ -345,6 +345,85 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .input, textarea.input, input.input { width:100%; background:var(--bg); border:1.5px solid transparent; border-radius:12px; padding:10px 12px; font-size:13px; font-weight:700; color:var(--ink); font-family:inherit; outline:none; }
 .input:focus, textarea.input:focus { border-color:var(--primary); background:#fff; }
 .hint2 { font-size:10.5px; color:var(--muted); font-weight:600; margin-top:5px; }
+/* ---------- S2-P10：表單微步驟「AI 拆步驟」按鈕 ---------- */
+.fld-label-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ai-split-btn{border:1px solid var(--accent-quiet-ink);border-radius:99px;padding:4px 9px;background:var(--accent-quiet);color:var(--accent-quiet-ink);font-size:10px;font-weight:900;font-family:inherit;display:inline-flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap;line-height:1.2;flex-shrink:0}
+.ai-split-btn svg{width:11px;height:11px}
+.ai-split-btn:disabled{opacity:.55;cursor:default}
+.ai-split-btn.loading svg{animation:aispin .9s linear infinite}
+@keyframes aispin{to{transform:rotate(360deg)}}
+.ai-split-note{font-size:10px;color:var(--muted);font-weight:700;line-height:1.5;margin:5px 0 0;min-height:14px}
+.ai-split-note.err{color:var(--danger)}
+.ai-split-note.ok{color:var(--ok,var(--primary))}
+/* ---------- S2-P11a：個性化設定 + AI 拆解結果頁 ---------- */
+/* 個性化拆解（管家 API 設定彈窗內） */
+.pc-persona{margin:14px 0 4px;padding:12px;border:1px solid var(--bd);border-radius:14px;background:var(--bg)}
+.pc-persona .pcph{font-size:11.5px;font-weight:900;color:var(--ink);display:flex;align-items:center;gap:6px;margin-bottom:9px}
+.pc-persona .pcph svg{width:15px;height:15px;color:var(--primary)}
+.pc-persona .fld{margin-top:9px}
+.pc-persona textarea{resize:vertical;min-height:52px}
+.pc-persona small{display:block;font-size:10px;color:var(--muted);line-height:1.6;margin-top:4px}
+/* 結果頁 */
+.pc-res-top{display:flex;align-items:center;gap:7px;margin-bottom:12px;flex-wrap:wrap}
+.pc-res-top .pc-btn{border:1px solid var(--bd);border-radius:99px;padding:7px 11px;background:var(--bg);color:var(--primary);font-size:11.5px;font-weight:800;font-family:inherit;display:inline-flex;align-items:center;gap:5px;cursor:pointer;white-space:nowrap}
+.pc-res-top .pc-btn svg{width:13px;height:13px}
+.pc-res-top .pc-btn:disabled{opacity:.5;cursor:default}
+.pc-res-list{display:flex;flex-direction:column;gap:9px;max-height:52vh;overflow-y:auto;padding-right:2px;scrollbar-width:thin}
+.pc-res-card{position:relative;background:var(--card);border:1px solid var(--bd);border-left:4px solid var(--primary);border-radius:14px;padding:11px 12px;box-shadow:var(--sh);touch-action:pan-y}
+.pc-res-card.pc-lp{transform:scale(1.02);box-shadow:0 10px 24px -10px rgba(40,28,60,.4);border-color:var(--primary)}
+.pc-res-card.pc-dragging{opacity:.9;z-index:5;box-shadow:0 14px 30px -10px rgba(40,28,60,.5)}
+.pc-res-card .pc-n{font-size:13.5px;font-weight:900;color:var(--ink);line-height:1.35}
+.pc-res-card .pc-a{font-size:11px;font-weight:600;color:var(--muted);line-height:1.5;margin-top:3px}
+.pc-res-card .pc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.pc-res-card .pc-tag{flex:0 0 auto;align-self:flex-start;font-size:10px;font-weight:800;padding:3px 8px;border-radius:99px;background:var(--bg);color:var(--muted);display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+.pc-res-card .pc-tag svg{width:11px;height:11px}
+.pc-res-card .pc-tag.tm{background:var(--soft);color:var(--primary)}
+.pc-res-card .pc-tag.restore{background:var(--green-soft);color:var(--green)}
+.pc-res-card .pc-tag.neutral{background:var(--soft);color:var(--primary)}
+.pc-res-card .pc-tag.drain{background:#FBE3DD;color:var(--danger)}
+.pc-res-card .pc-hint{position:absolute;top:8px;right:9px;color:var(--muted);opacity:.55}
+.pc-res-card .pc-hint svg{width:13px;height:13px}
+.pc-tip{margin-top:12px;padding:11px 12px;border-radius:14px;background:var(--accent-quiet);border:1px dashed var(--accent-quiet-ink);font-size:11.5px;font-weight:700;color:var(--accent-quiet-ink);line-height:1.6;display:flex;gap:7px}
+.pc-tip svg{width:15px;height:15px;flex-shrink:0}
+.pc-res-foot{margin-top:13px}
+.pc-res-foot .save2{margin-top:0}
+/* ---------- S2-P11b：長按微調/拖曳/錦囊 ---------- */
+.pkid.pc-lp{background:var(--soft);border-radius:10px}
+/* ---------- S2-P11c：撲克牌堆疊 + 全螢幕攤平 ---------- */
+.pc-stack{position:relative;flex:1;min-height:0;margin-top:5px}
+.pc-mini{position:absolute;left:5px;right:5px;top:calc(var(--k) * 11px);height:38px;
+  background:#fff;border:1.5px solid var(--bd);border-radius:10px;padding:8px 10px;
+  box-shadow:0 3px 8px -4px rgba(40,28,60,.4);z-index:calc(10 - var(--k));cursor:pointer;
+  display:flex;align-items:center;gap:6px}
+.pc-mini.done{opacity:.55}
+.pc-mini.done .bt{text-decoration:line-through;color:var(--muted)}
+.pc-mini .mdot{width:7px;height:7px;border-radius:50%;background:var(--primary);flex-shrink:0}
+.pc-mini.done .mdot{background:var(--green)}
+.pc-mini .bt{font-size:11.5px;font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc-spread-btn{position:absolute;left:5px;right:5px;bottom:0;height:30px;border:1px dashed var(--primary);
+  border-radius:10px;background:var(--soft);color:var(--primary);font-size:10.5px;font-weight:900;
+  font-family:inherit;display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;z-index:12}
+.pc-spread-btn svg{width:12px;height:12px}
+.pc-spread-wrap{}
+.pc-spread-wrap .pc-spread-overlay{z-index:64}
+.pc-spread{position:fixed;inset:0;z-index:65;background:var(--bg);padding:20px 16px 26px;
+  display:flex;flex-direction:column;overflow-y:auto}
+.pc-spread-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:16px}
+.pc-spread-head b{font-size:18px;font-weight:900;color:var(--ink);display:block}
+.pc-spread-count{font-size:11.5px;font-weight:800;color:var(--muted);display:block;margin-top:3px}
+.pc-spread-close{width:34px;height:34px;border-radius:50%;border:none;background:var(--bg);color:var(--muted);
+  display:grid;place-items:center;cursor:pointer;flex-shrink:0}
+.pc-spread-close svg{width:17px;height:17px}
+.pc-spread-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;align-content:start}
+.pc-spread-grid .bitem{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:13px;
+  box-shadow:var(--sh);min-height:72px;align-items:flex-start;cursor:pointer}
+.pc-spread-grid .bitem .bt{font-size:12.5px;font-weight:800;line-height:1.5}
+.pc-spread-grid .bitem .bc{width:18px;height:18px;flex-shrink:0}
+.pc-spread-tip{text-align:center;font-size:11px;font-weight:700;color:var(--muted);margin-top:18px}
+
+
+
+
 
 .btn { border:none; border-radius:14px; font-family:inherit; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
 .btn svg { width:14px; height:14px; }
@@ -1102,6 +1181,34 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .cgrid > .flip{height:200px}
 .flip .face.front.citem{padding:11px 11px 10px}
 .face.back{padding:12px 12px 10px}
+
+/* ========== S2-P12：卡庫任務卡 2.0（去翻轉 / 堆疊錯開彩色邊角 + 編輯·拆分） ========== */
+.cgrid > .c2card{position:relative;height:260px}
+.cgrid > .c2card.flat{height:242px}
+.c2card .c2ghost,.c2card .c2main{position:absolute;left:0;right:0;top:0;border-radius:18px;
+  border-left:5px solid var(--cb,var(--bd))}
+.c2card .c2ghost{height:242px;opacity:.96;box-shadow:0 4px 11px -10px rgba(80,72,60,.42)}
+.c2card .c2ghost.g1{transform:translate(-2px,5px) rotate(-.3deg);z-index:1}
+.c2card .c2ghost.g2{transform:translate(-4px,10px) rotate(.5deg);z-index:2}
+.c2card .c2ghost.g3{transform:translate(-6px,15px) rotate(-.8deg);z-index:3}
+.c2card .c2main{height:242px;z-index:4;background:var(--card);display:flex;flex-direction:column;
+  gap:7px;padding:11px 12px;box-shadow:0 13px 26px -14px rgba(80,72,60,.58)}
+.c2top{display:flex;align-items:flex-start;gap:10px}
+.c2top .ic-circle{width:40px;height:40px;border-radius:13px}
+.c2top .ic-circle svg{width:20px;height:20px}
+.c2head{flex:1;min-width:0}
+.c2head .cname{font-size:14px;font-weight:900;color:var(--ink);line-height:1.3}
+.c2main .cpills{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:6px;flex-shrink:0;min-height:19px}
+.c2main .step-chip{border:none;cursor:pointer}
+.c2desc{font-size:10.5px;font-weight:700;color:var(--muted);line-height:1.5;min-height:30px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.c2acts{display:flex;gap:8px;margin-top:auto;flex-shrink:0}
+.c2btn{flex:1;height:36px;border-radius:11px;font-family:inherit;font-size:12px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;white-space:nowrap}
+.c2btn svg{width:14px;height:14px;flex:0 0 auto}
+.c2edit{border:1.5px solid var(--bd);background:#fff;color:var(--muted)}
+.c2split{border:1.5px solid var(--primary);background:var(--primary);color:#fff}
+.c2card .cproj{max-width:100%}
 .blist{-webkit-mask-image:linear-gradient(to bottom,#000 92%,transparent 100%);
   mask-image:linear-gradient(to bottom,#000 92%,transparent 100%);min-height:0}
 .bhead .bn{font-size:12px}
@@ -2850,23 +2957,36 @@ async function renderCards() {
       const steps = Array.isArray(c.steps) ? c.steps : [];
       const done = Array.isArray(c.stepDone) ? c.stepDone : [];
       const doneN = steps.reduce((n, _t, i) => n + (done[i] ? 1 : 0), 0);
-      const stepBadge = steps.length ? '<span class="step-n">' + doneN + '/' + steps.length + '</span>' : '';
-      return '<div class="flip" data-card="' + c.id + '" style="--cb:var(--' + ci + '-ink)">' +
-        '<div class="flip-in">' +
-        '<div class="face front citem" style="--cb:var(--' + ci + '-ink)">' +
-        '<button type="button" class="ci-flip" data-act="flip" title="翻到背面看步驟"><i data-lucide="refresh-cw"></i></button>' +
-        '<div class="ctop"><span class="ic-circle ' + ci + '" style="background:var(--' + ci + '-bg);color:var(--' + ci + '-ink)"><i data-lucide="' + esc(c.icon || meta.icon) + '"></i></span>' +
-        '<span class="ct-right"><span class="tbadge ' + ci + '">' + esc(c.type) + '</span>' +
+      const stepChip = steps.length
+        ? '<button type="button" class="step-n step-chip" data-act="spread" data-card="' + c.id + '" title="攤開看步驟">' + doneN + '/' + steps.length + ' 步</button>' : '';
+      /* 只有拆過步驟的卡才墊一疊；色系統一用主題紫（深→淺），错开收斂避免擁擠 */
+      var ghosts = '';
+      if (steps.length) {
+        var ghostTones = [
+          { cb:'var(--c-violet-ink)', bg:'var(--soft)' },
+          { cb:'var(--primary)', bg:'var(--soft)' },
+          { cb:'var(--primary-dark)', bg:'var(--soft)' }
+        ];
+        ghosts = ghostTones.map(function (t, k) {
+          return '<div class="c2ghost g' + (k + 1) + '" style="--cb:' + t.cb + ';background:' + t.bg + '"></div>';
+        }).join('');
+      }
+      return '<div class="c2card' + (steps.length ? '' : ' flat') + '" data-card="' + c.id + '">' + ghosts +
+        '<div class="c2main" style="--cb:var(--' + ci + '-ink)">' +
+        '<div class="c2top"><span class="ic-circle ' + ci + '" style="background:var(--' + ci + '-bg);color:var(--' + ci + '-ink)"><i data-lucide="' + esc(c.icon || meta.icon) + '"></i></span>' +
+        '<div class="c2head"><div class="cname">' + esc(c.name) + '</div>' +
+        '<div class="cpills"><span class="tbadge ' + ci + '">' + esc(c.type) + '</span>' +
+        '<span class="tpil">' + esc(c.duration) + ' 分</span>' +
+        '<span class="epil">' + esc(energyBadge(c)) + '</span>' + stepChip +
         (c.isRepeating ? '<span class="ci-rep" title="可重複"><i data-lucide="repeat"></i></span>' : '') +
         (c.deadline ? '<span class="ci-dl' + deadlineClass(c.deadline) + '" title="截止 ' + mdShort(c.deadline) + '"><i data-lucide="flag"></i></span>' : '') +
-        '</span></div>' +
-        '<div class="cname">' + esc(c.name) + '</div>' +
-        '<div class="cpills"><span class="tpil">' + esc(c.duration) + ' 分鐘</span>' +
-        '<span class="epil">' + esc(energyBadge(c)) + '</span>' + stepBadge + '</div>' +
+        '</div></div></div>' +
         (c.projectName ? '<div class="cproj-row"><span class="cproj" title="' + esc(c.projectName) + '">' + esc(c.projectName) + '</span></div>' : '') +
-        '<div class="cacts"><button class="cdo" onclick="startTimer(' + c.id + ')">做</button>' +
-        '<button class="cdot" onclick="openCardMenu(' + c.id + ')"><i data-lucide="more-horizontal"></i></button></div>' +
-        '</div>' + s2CardBackHtml(c, steps, done) + '</div></div>';
+        '<div class="c2desc">' + esc(c.action || ('點「拆分」，用 AI 把「' + c.name + '」拆成幾個小步驟，做起來更沒負擔。')) + '</div>' +
+        '<div class="c2acts">' +
+        '<button type="button" class="c2btn c2edit" onclick="editCard(' + c.id + ')"><i data-lucide="pencil"></i>編輯</button>' +
+        '<button type="button" class="c2btn c2split" onclick="s2SplitFromCard(' + c.id + ')"><i data-lucide="scissors"></i>拆分</button>' +
+        '</div></div></div>';
     }).join('');
     if (window.lucide) lucide.createIcons(g);
   }
@@ -2881,13 +3001,18 @@ function s2CardBackHtml(c, steps, done) {
     body = '<div class="bempty"><span class="be-ic"><i data-lucide="sparkles"></i></span>' +
            '<p>這是一張簡單的小卡，<br>直接去正面點擊開始吧！</p></div>';
   } else {
-    body = '<div class="blist">' + steps.map((t, i) =>
-      '<div class="bitem' + (done[i] ? ' done' : '') + '" data-step="' + i + '">' +
-      '<span class="bc"><i data-lucide="check"></i></span><span class="bt">' + esc(t) + '</span></div>'
-    ).join('') + '</div>' +
-    '<div class="bfoot"><div class="bhint">' +
-    (doneN < total ? '完成步驟後，即可完成此卡' : '步驟都完成了，回正面按「做」開始吧') +
-    '</div></div>';
+    var miniN = Math.min(3, total);
+    body = '<div class="pc-stack" data-n="' + total + '">' +
+      steps.slice(0, miniN).map((t, i) =>
+        '<div class="pc-mini' + (done[i] ? ' done' : '') + '" data-step="' + i + '" data-spread="' + c.id + '" style="--k:' + i + '">' +
+        '<span class="mdot"></span><span class="bt">' + esc(t) + '</span></div>'
+      ).join('') +
+      '<button type="button" class="pc-spread-btn" data-act="spread" data-card="' + c.id + '">' +
+        '<i data-lucide="maximize"></i> 攤開全部 ' + total + ' 步</button>' +
+      '</div>' +
+      '<div class="bfoot"><div class="bhint">' +
+      (doneN < total ? '點「攤開」看全部步驟' : '步驟都完成了，回正面按「做」開始吧') +
+      '</div></div>';
   }
   return '<div class="face back">' +
     '<div class="bhead"><span class="bn">' + esc(c.name) + '</span>' +
@@ -2920,7 +3045,7 @@ async function renderProjectCards(list) {
       const meta = TYPE_META[c.type] || TYPE_META['自我成長'];
       const ci = typeCi(c.type);
       const kd = doneIds.has(c.id);
-      return '<div class="pkid' + (kd ? ' done' : '') + '">' +
+      return '<div class="pkid' + (kd ? ' done' : '') + '" data-card="' + c.id + '">' +
         '<span class="k-ic ' + ci + '" style="background:var(--' + ci + '-bg);color:var(--' + ci + '-ink)"><i data-lucide="' + esc(c.icon || meta.icon) + '"></i></span>' +
         '<span class="k-n">' + esc(c.name) + '</span>' +
         '<span class="k-m">' + c.duration + ' 分' + (kd ? ' · ✓' : '') + '</span></div>';
@@ -2963,8 +3088,10 @@ function cardForm(card) {
   $('#formBody').innerHTML =
     '<div class="fld"><label>卡名</label><input type="text" id="fName" class="input" placeholder="例如：寫3句話" value="' + esc(c.name) + '"></div>' +
     '<div class="fld"><label>啟動動作 <span class="hint">選填</span></label><input type="text" id="fAction" class="input" placeholder="例如：打開筆記本寫三句" value="' + esc(c.action) + '"></div>' +
-    '<div class="fld"><label>微步驟 <span class="hint">選填 · 一行一步，翻到背面可逐項勾選</span></label>' +
-    '<textarea class="input" id="fSteps" rows="4" placeholder="例如：&#10;打開筆記本&#10;寫三句話&#10;收尾">' + esc((c.steps || []).join('\n')) + '</textarea></div>' +
+    '<div class="fld"><div class="fld-label-row"><label>微步驟 <span class="hint">一行一步，背面可逐項勾選</span></label>' +
+    '<button type="button" class="ai-split-btn" id="fAiSplit"><i data-lucide="sparkles"></i>AI 拆步驟</button></div>' +
+    '<textarea class="input" id="fSteps" rows="4" placeholder="例如：&#10;打開筆記本&#10;寫三句話&#10;收尾">' + esc((c.steps || []).join('\n')) + '</textarea>' +
+    '<p class="ai-split-note" id="fAiSplitNote"></p></div>' +
     '<div class="fld"><label>能量流向</label><div class="seg" id="fMode">' + modeSeg + '</div></div>' +
     '<div class="fld"><label>能量量級</label><div class="amounts" id="fAmount">' + amountIcons + '</div><div class="hint2">參考：每 30 分鐘約等於 1 能量</div></div>' +
     '<div class="fld"><label>時間需求</label><div class="seg" id="fDuration">' + durSeg + '</div></div>' +
@@ -2984,6 +3111,7 @@ function cardForm(card) {
     '<button type="button" class="pselect" id="fProjectBtn"><span class="psv' + (c.projectName ? '' : ' unset') + '" id="fProjectVal">' + (c.projectName ? esc(c.projectName) : '不屬於任何專案') + '</span><span class="ps-chev"><i data-lucide="chevron-down"></i></span></button></div>' +
     '<button class="save2" id="formSaveBtn"><i data-lucide="check"></i>' + (isEdit ? '儲存修改' : '加入卡庫') + '</button>';
   $('#formSaveBtn').addEventListener('click', () => saveCard(isEdit ? c.id : -1));
+  $('#fAiSplit').addEventListener('click', () => s2AiSplitSteps());
   $('#fProjectBtn').addEventListener('click', () => {
     const cur = (window._cardDraft && window._cardDraft.projectName) || '';
     projPickCtx = {
@@ -4271,7 +4399,25 @@ function bindEvents() {
   $('#sheetOverlay').addEventListener('click', closeSheet);
   $('#fabBtn').addEventListener('click', openSheet);
   $('#page-today .body').addEventListener('scroll', syncFab, { passive: true });
-  $('#modalBackdrop').addEventListener('click', closeModal);
+  $('#modalBackdrop').addEventListener('click', function(){ if (Date.now() < pcSuppressClickUntil) return; closeModal(); });
+  /* S2-P11b：結果頁/專案卡長按手勢（绑在常駐 modalRoot 與 cardGrid） */
+  var mr = document.getElementById('modalRoot');
+  if (mr) {
+    mr.addEventListener('touchstart', onPcTouchStart, { passive: true });
+    mr.addEventListener('touchmove', onPcTouchMove, { passive: false });
+    mr.addEventListener('touchend', onPcTouchEnd);
+    mr.addEventListener('touchcancel', onPcTouchEnd);
+    mr.addEventListener('contextmenu', e => { if (e.target.closest('#pcResList .pc-res-card')) e.preventDefault(); });
+    mr.addEventListener('click', e => { if (Date.now() < pcSuppressClickUntil && e.target.closest('.pc-res-card')) { e.stopPropagation(); } }, true);
+  }
+  var cg = document.getElementById('cardGrid');
+  if (cg) {
+    cg.addEventListener('touchstart', onPcTouchStart, { passive: true });
+    cg.addEventListener('touchmove', onPcTouchMove, { passive: false });
+    cg.addEventListener('touchend', onPcTouchEnd);
+    cg.addEventListener('touchcancel', onPcTouchEnd);
+    cg.addEventListener('contextmenu', e => { if (e.target.closest('.pkid')) e.preventDefault(); });
+  }
 
   $$('#tabbar .tab').forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
 
@@ -4299,6 +4445,7 @@ function bindEvents() {
 
   /* 長期專案模式：點專案寬卡展開/收起下屬行動卡 */
   $('#cardGrid').addEventListener('click', e => {
+    if (Date.now() < pcSuppressClickUntil) return;
     const pc = e.target.closest('.pcard');
     if (!pc || state.filter !== '長期專案') return;
     const name = pc.dataset.proj;
@@ -4318,26 +4465,32 @@ function bindEvents() {
       if (fb) fb.classList.toggle('on', on);
       return;
     }
+    /* S2-P11c：攤開全部 → 全螢幕平鋪 */
+    const spreadBtn = e.target.closest('[data-act="spread"]');
+    if (spreadBtn) {
+      const sid = parseInt(spreadBtn.dataset.card, 10);
+      if (sid) s2OpenSpread(sid);
+      return;
+    }
     const bitem = e.target.closest('.bitem');
-    if (!bitem) return;
-    const f = bitem.closest('.flip');
-    if (!f) return;
-    const id = parseInt(f.dataset.card, 10);
-    const idx = parseInt(bitem.dataset.step, 10);
-    const c = await ldb.cards.get(id);
-    if (!c || !Array.isArray(c.steps) || !c.steps[idx]) return;
-    const done = Array.isArray(c.stepDone) ? c.stepDone.slice() : [];
-    done[idx] = !done[idx];
-    await ldb.cards.update(id, { stepDone: done, updatedAt: Date.now() });
-    const total = c.steps.length;
-    const doneN = c.steps.reduce((n, _t, i) => n + (done[i] ? 1 : 0), 0);
-    bitem.classList.toggle('done', !!done[idx]);
-    const bar = f.querySelector('.bprog i');
-    if (bar) bar.style.width = (total ? Math.round(doneN / total * 100) : 0) + '%';
-    const badge = f.querySelector('.step-n');
-    if (badge) badge.textContent = doneN + '/' + total;
-    const hint = f.querySelector('.bhint');
-    if (hint) hint.textContent = doneN < total ? '完成步驟後，即可完成此卡' : '步驟都完成了，回正面按「做」開始吧';
+    if (bitem) {
+      const spreadWrap = bitem.closest('.pc-spread');
+      if (spreadWrap) {
+        const sid = parseInt(bitem.dataset.cardspread, 10);
+        const idx = parseInt(bitem.dataset.step, 10);
+        await s2ToggleStep(sid, idx, bitem, document.body);
+        return;
+      }
+      const f = bitem.closest('.flip');
+      if (!f) return;
+      const id = parseInt(f.dataset.card, 10);
+      const idx = parseInt(bitem.dataset.step, 10);
+      await s2ToggleStep(id, idx, bitem, f);
+      return;
+    }
+    /* 背面堆疊縮圖：點一下直接攤開 */
+    const mini = e.target.closest('.pc-mini[data-spread]');
+    if (mini) { s2OpenSpread(parseInt(mini.dataset.spread, 10)); return; }
   });
 
   /* 所屬長期專案選擇 Sheet */
@@ -5688,6 +5841,562 @@ async function s2ToggleMemory() {
 }
 
 /* ---------- 三種 provider 的呼叫（Gemini / OpenAI 相容 / 無） ---------- */
+/* ---------- S2-P10：AI 一鍵拆微步驟（共用底層；s2CallLLM 維持原樣） ----------
+   只送卡名＋啟動動作給模型，不送筆記全文；沒接模型／Key 錯／429／離線都明說，不假裝拆好。 */
+async function s2LlmAsk(mode, system, user, maxTokens) {
+  var ctl = new AbortController();
+  var to = setTimeout(function () { ctl.abort(); }, 20000);
+  try {
+    var r, text = '';
+    if (mode === 'gemini') {
+      var key = await getSetting('geminiKey', '');
+      if (!key) return { err: 'nokey' };
+      var model = await getSetting('geminiModel', 'gemini-2.5-flash');
+      r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' +
+        encodeURIComponent(model) + ':generateContent?key=' + encodeURIComponent(key),
+        { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctl.signal,
+          body: JSON.stringify({ contents: [{ parts: [{ text: system + '\n\n' + user }] }],
+            generationConfig: { temperature: 0.4, maxOutputTokens: maxTokens || 320 } }) });
+      if (!r.ok) return { err: r.status === 429 ? 'rate' : (r.status === 401 || r.status === 403) ? 'key' : 'http', status: r.status };
+      var j = await r.json();
+      var parts = (j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts) || [];
+      text = parts.map(function (x) { return x.text || ''; }).join('').trim();
+    } else if (mode === 'openai') {
+      var ep = await getSetting('llmEndpoint', 'https://api.openai.com/v1/chat/completions');
+      var md = await getSetting('llmModel', 'gpt-4o-mini');
+      var k2 = await getSetting('llmKey', '');
+      if (!k2) return { err: 'nokey' };
+      r = await fetch(ep, { method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + k2 }, signal: ctl.signal,
+        body: JSON.stringify({ model: md, temperature: 0.4, max_tokens: maxTokens || 320,
+          messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }) });
+      if (!r.ok) return { err: r.status === 429 ? 'rate' : (r.status === 401 || r.status === 403) ? 'key' : 'http', status: r.status };
+      var j2 = await r.json();
+      text = ((j2.choices && j2.choices[0] && j2.choices[0].message && j2.choices[0].message.content) || '').trim();
+    } else return { err: 'off' };
+    return text ? { text: text } : { err: 'empty' };
+  } catch (e) { return { err: 'net' }; }
+  finally { clearTimeout(to); }
+}
+
+
+/* ---------- S2-P11c：撲克牌堆疊 + 全螢幕攤平 ---------- */
+async function s2ToggleStep(id, idx, bitemEl, scopeEl) {
+  const c = await ldb.cards.get(id);
+  if (!c || !Array.isArray(c.steps) || !c.steps[idx]) return;
+  const done = Array.isArray(c.stepDone) ? c.stepDone.slice() : [];
+  done[idx] = !done[idx];
+  await ldb.cards.update(id, { stepDone: done, updatedAt: Date.now() });
+  const total = c.steps.length;
+  const doneN = c.steps.reduce((n, _t, i) => n + (done[i] ? 1 : 0), 0);
+  if (bitemEl) bitemEl.classList.toggle('done', !!done[idx]);
+  // 更新進度：優先在卡片 scope 找，找不到就更新所有同卡背面
+  var scopes = scopeEl ? [scopeEl] : [].slice.call(document.querySelectorAll('.c2card[data-card="' + id + '"]'));
+  scopes.forEach(function (f) {
+    if (!f) return;
+    var bar = f.querySelector('.bprog i');
+    if (bar) bar.style.width = (total ? Math.round(doneN / total * 100) : 0) + '%';
+    var badge = f.querySelector('.step-n');
+    if (badge) badge.textContent = doneN + '/' + total + (badge.classList.contains('step-chip') ? ' 步' : '');
+    var hint = f.querySelector('.bhint');
+    if (hint) hint.textContent = doneN < total ? '完成步驟後，即可完成此卡' : '步驟都完成了，回正面按「做」開始吧';
+    // 同步堆疊縮圖的勾選態
+    [].slice.call(f.querySelectorAll('.pc-mini[data-step="' + idx + '"]')).forEach(function (m) {
+      m.classList.toggle('done', !!done[idx]);
+    });
+  });
+  CloudSync.notifyLocalChange('cards', null);
+}
+
+async function s2OpenSpread(id) {
+  var c = await ldb.cards.get(id);
+  if (!c || !Array.isArray(c.steps) || !c.steps.length) return;
+  var done = Array.isArray(c.stepDone) ? c.stepDone : [];
+  var total = c.steps.length;
+  var doneN = c.steps.reduce((n, _t, i) => n + (done[i] ? 1 : 0), 0);
+  var wrap = document.createElement('div');
+  wrap.className = 'pc-spread-wrap';
+  wrap.innerHTML =
+    '<div class="overlay pc-spread-overlay show"></div>' +
+    '<div class="pc-spread show">' +
+      '<div class="pc-spread-head"><div><b>' + esc(c.name) + '</b>' +
+        '<span class="pc-spread-count">' + doneN + ' / ' + total + ' 步</span></div>' +
+        '<button class="pc-spread-close" id="pcSpreadClose"><i data-lucide="x"></i></button></div>' +
+      '<div class="pc-spread-grid">' + c.steps.map(function (t, i) {
+        return '<div class="bitem' + (done[i] ? ' done' : '') + '" data-step="' + i + '" data-cardspread="' + id + '">' +
+          '<span class="bc"><i data-lucide="check"></i></span><span class="bt">' + esc(t) + '</span></div>';
+      }).join('') + '</div>' +
+      '<div class="pc-spread-tip">點一下步驟即可勾選完成</div>' +
+    '</div>';
+  document.body.appendChild(wrap);
+  document.getElementById('pcSpreadClose').onclick = s2CloseSpread;
+  wrap.querySelector('.pc-spread-overlay').onclick = s2CloseSpread;
+  // 攤平層掛在 body，不在 #cardGrid 內，需自行綁定勾選
+  var grid = wrap.querySelector('.pc-spread-grid');
+  if (grid) grid.addEventListener('click', async function (e) {
+    var item = e.target.closest('.bitem[data-cardspread]');
+    if (!item) return;
+    var sid = parseInt(item.dataset.cardspread, 10);
+    await s2ToggleStep(sid, parseInt(item.dataset.step, 10),
+      item, document.querySelector('.c2card[data-card="' + sid + '"]'));
+    // 同步攤平層頂部計數
+    var cc = await ldb.cards.get(sid);
+    if (cc && wrap.querySelector('.pc-spread-count')) {
+      var dn = (cc.stepDone || []).filter(Boolean).length;
+      wrap.querySelector('.pc-spread-count').textContent = dn + ' / ' + (cc.steps || []).length + ' 步';
+    }
+  });
+  if (window.lucide) lucide.createIcons(wrap);
+}
+function s2CloseSpread() {
+  var wrap = document.querySelector('.pc-spread-wrap');
+  if (wrap) wrap.remove();
+}
+
+function s2CleanSteps(raw) {
+  return String(raw || '').split(/\r?\n/).map(function (s) {
+    return s.trim()
+      .replace(/^\s*(?:\d+[\.、\)）]|[一二三四五六七八九十]+[\.、\)）]|[①-⑳]|[a-dA-D][\.、\)）]|[-•*·—])\s*/, '')
+      .replace(/^\s*step\s*\d*\s*[:：]?\s*/i, '')
+      .replace(/^["'「『]|["'」』]$/g, '')
+      .trim();
+  }).filter(function (s) {
+    if (!s || s.length < 2 || s.length > 40) return false;
+    if (/^(以下是|步驟如下|以下為|好的|Sure|Here are)/i.test(s)) return false;
+    return true;
+  }).slice(0, 6);
+}
+
+/* ---------- S2-P11a/b/c：PlanCoach 零阻力微教練（AI 拆解） ---------- */
+let pcResult = null;   // { cards:[{name,action,duration,energyMode,energyAmount,_i}], tip, ctx, draft }
+let pcDraft = null;    // 表單設定快照
+let pcGesture = null, pcLongPressed = false, pcLongTimer = 0, pcDrag = null, pcSuppressClickUntil = 0;
+
+function s2StyleTone(style) {
+  return ({
+    reason: '語氣簡潔理性、直述重點、不贅言，重視可执行性。',
+    gentle: '語氣溫柔支持，多給鼓勵與安全感，降低心理門檻。',
+    game:   '語氣活潑有趣，用闖關／得分／小任務的比喻，強調即時進展感。'
+  })[style] || '語氣簡潔理性、直述重點。';
+}
+
+async function s2BuildSplitPrompt(ctx) {
+  var profile = await getSetting('aiProfile', '');
+  var style = await getSetting('splitStyle', 'reason');
+  var sys = '你是一個專注零阻力啟動的微教練。請將用戶目標拆解成 5-7 張動作卡片。要求：' +
+    '第一步必須是物理動作（如打開軟件、拿出手機、站起來），必須在 1-5 分鐘內完成。' +
+    '每張卡片需要提供：卡名（動詞開頭極短）、啟動動作（一句降低門檻的引導語，如「30秒完成，立刻有進展感」）。' +
+    '為每張卡片評估並填入：時間需求（分鐘）、能量流向（恢復/不消耗/消耗）、能量量級（1-5）。' +
+    '強調即時可見的進展，絕對禁止包含複雜設置、安裝或長篇教學。' +
+    '在拆解結果的最末尾，提供一條簡短的「行動錦囊」（防卡殼技巧，如『卡住時先自查5分鐘，再查資料』）。' +
+    '\n\n【語氣要求】' + s2StyleTone(style) +
+    '\n【關於我】' + (profile || '（未填）') +
+    '\n\n【輸出格式｜最高優先】只回一個 JSON 物件，不要 markdown fence、不要任何前後綴文字：' +
+    '{"cards":[{"name":"…","action":"…","duration":3,"energyMode":"drain","energyAmount":2}],"tip":"…"}。' +
+    'energyMode 只能用 "restore"(恢復)|"neutral"(不消耗)|"drain"(消耗) 或中文；共 5-7 張卡；type 不用回。';
+  var user = '任務名稱：' + ctx.name + '\n啟動動作：' + (ctx.action || '（未填）') +
+    '\n類型：' + ctx.type + '\n預計時間：約 ' + ctx.duration + ' 分鐘';
+  return { sys: sys, user: user };
+}
+
+function s2NormalizeCard(x) {
+  if (!x || typeof x !== 'object') return null;
+  const pick = (o, keys) => { for (const k of keys) if (o[k] != null) return o[k]; return null; };
+  const name = String(pick(x, ['name', '卡名', '標題', 'title', '名稱']) || '').trim().slice(0, 24);
+  if (!name) return null;
+  const action = String(pick(x, ['action', '啟動動作', 'start', '引導語', 'lead']) || '').trim().slice(0, 60);
+  const durRaw = parseInt(pick(x, ['duration', '時間', '時間需求', 'minutes', '分鐘']), 10);
+  const amtRaw = parseInt(pick(x, ['energyAmount', '能量量級', 'amount', 'level', '量級']), 10);
+  const mRaw = String(pick(x, ['energyMode', '能量流向', 'mode', '流向']) || 'neutral');
+  const modeMap = { '恢復': 'restore', '不消耗': 'neutral', '無消耗': 'neutral', '消耗': 'drain',
+    'restore': 'restore', 'neutral': 'neutral', 'drain': 'drain' };
+  return {
+    name: name, action: action,
+    duration: isFinite(durRaw) ? Math.max(1, Math.min(60, durRaw)) : 5,
+    energyMode: modeMap[mRaw] || 'neutral',
+    energyAmount: isFinite(amtRaw) ? Math.max(1, Math.min(5, amtRaw)) : 3,
+  };
+}
+
+function s2ParsePlanJson(raw) {
+  let s = String(raw || '').trim();
+  s = s.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();          // ① 去 fence
+  const a = s.indexOf('{'), b = s.lastIndexOf('}');
+  if (a < 0 || b <= a) return { err: 'parse' };                                    // ② 抓大括號
+  s = s.slice(a, b + 1);
+  s = s.replace(/'/g, '"').replace(/,\s*([}\]])/g, '$1');                         // ③ 寬鬆修復
+  let obj; try { obj = JSON.parse(s); } catch (e) { return { err: 'parse' }; }     // ④ parse
+  const pick = (o, keys) => { for (const k of keys) if (o[k] != null) return o[k]; return null; };
+  const cardsRaw = pick(obj, ['cards', '卡', '卡片', '動作卡片', 'steps', 'result']) || [];
+  const tipRaw = pick(obj, ['tip', '行動錦囊', '錦囊', 'advice', 'hint']);         // ⑤ 別名
+  if (!Array.isArray(cardsRaw) || !cardsRaw.length) return { err: 'parse' };
+  const cards = cardsRaw.map(x => s2NormalizeCard(x)).filter(Boolean).slice(0, 7);
+  if (!cards.length) return { err: 'parse' };
+  cards.forEach((c, i) => { c._i = i; });
+  return { cards: cards, tip: String(tipRaw || '').trim().slice(0, 80) };
+}
+
+async function s2RunSplitCore(ctx) {
+  var mode = await getSetting('geminiMode', 'off');
+  if (mode !== 'gemini' && mode !== 'openai') return { err: 'off' };
+  var p = await s2BuildSplitPrompt(ctx);
+  var res = await s2LlmAsk(mode, p.sys, p.user, 1600);
+  if (res.err) return res;
+  var parsed = s2ParsePlanJson(res.text);
+  if (parsed.err) return { err: 'parse' };
+  return { data: parsed };
+}
+
+/* S2-P12：從卡庫卡一步拆解（不用先進表單），沿用 PlanCoach 結果頁 */
+async function s2SplitFromCard(id) {
+  var c = await ldb.cards.get(id);
+  if (!c) return;
+  var mode0 = await getSetting('geminiMode', 'off');
+  if (mode0 !== 'gemini' && mode0 !== 'openai') {
+    openModal('<div class="m-head"><h2><i data-lucide="sparkles"></i> 先接一顆腦袋</h2>' +
+      '<button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>' +
+      '<div class="imp-hint">AI 拆解需要連一個語言模型。管家那裡已準備好 Gemini 免費層或自架模型（DeepSeek 也算），填一次 Key 就能到處用。</div>' +
+      '<button class="btn save2" onclick="closeModal();switchTab(\'butler\');s2OpenApiModal()"><i data-lucide="key"></i> 去設定 AI 管家</button>');
+    if (window.lucide) lucide.createIcons(document.getElementById('modalRoot'));
+    return;
+  }
+  pcDraft = { type: c.type, projectName: c.projectName || '', icon: c.icon || '',
+    deadline: c.deadline || '', isRepeating: !!c.isRepeating,
+    energyMode: c.energyMode, energyAmount: c.energyAmount, duration: c.duration };
+  var ctx = { name: c.name, action: c.action || '', type: c.type || '自我成長', duration: c.duration || 10 };
+  toast('正在拆解「' + c.name + '」…');
+  var res = await s2RunSplitCore(ctx);
+  if (res.err) {
+    var msg = { nokey:'這台裝置的 Key 不見了，到管家重新填一次。', key:'Key 無效或沒有權限，到管家右上齒輪檢查。',
+      rate:'額度用完或太頻繁（429），稍後再試。', net:'連不上模型（離線、逾時或 CORS），我先不亂拆。',
+      empty:'這次沒有回應，再按一次試試。', http:'模型回應異常（HTTP ' + (res.status || '?') + '）。',
+      parse:'模型回的內容抓不到卡片，再按一次試試。', off:'尚未接上模型。' }[res.err] || '拆解失敗，再試一次。';
+    toast(msg, 3200); return;
+  }
+  pcResult = { cards: res.data.cards, tip: res.data.tip, ctx: ctx, draft: Object.assign({}, pcDraft) };
+  s2OpenPlanResult();
+}
+
+async function s2AiSplitSteps(silent) {
+  var btn = document.getElementById(silent ? 'pcReSplit' : 'fAiSplit');
+  var note = document.getElementById('fAiSplitNote');
+  var ctx;
+  if (!silent) {
+    var nameEl = document.getElementById('fName'), actEl = document.getElementById('fAction');
+    if (!nameEl) return;
+    var name = (nameEl.value || '').trim();
+    if (!name) { toast('先填卡名，我才知道要拆什麼'); nameEl.focus(); return; }
+    var mode0 = await getSetting('geminiMode', 'off');
+    if (mode0 !== 'gemini' && mode0 !== 'openai') {
+      openModal('<div class="m-head"><h2><i data-lucide="sparkles"></i> 先接一顆腦袋</h2>' +
+        '<button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>' +
+        '<div class="imp-hint">AI 拆解需要連一個語言模型。管家那裡已準備好 Gemini 免費層或自架模型（DeepSeek 也算），填一次 Key 就能到處用。</div>' +
+        '<button class="btn save2" onclick="closeModal();switchTab(\'butler\');s2OpenApiModal()"><i data-lucide="key"></i> 去設定 AI 管家</button>');
+      if (window.lucide) lucide.createIcons(document.getElementById('modalRoot'));
+      return;
+    }
+    pcDraft = Object.assign({}, window._cardDraft || {});
+    ctx = { name: name, action: actEl ? (actEl.value || '').trim() : '',
+      type: pcDraft.type || '自我成長', duration: pcDraft.duration || 10 };
+  } else {
+    if (!pcResult) return;
+    ctx = pcResult.ctx;
+  }
+
+  if (btn) { btn.disabled = true; btn.classList.add('loading'); }
+  if (note) { note.textContent = '正在拆解…'; note.className = 'ai-split-note'; }
+  var res = await s2RunSplitCore(ctx);
+  if (btn) { btn.disabled = false; btn.classList.remove('loading'); }
+  if (note) { note.textContent = ''; }
+
+  if (res.err) {
+    var msg = {
+      nokey: '這台裝置的 Key 不見了，到管家重新填一次。',
+      key: 'Key 無效或沒有權限，到管家右上齒輪檢查。',
+      rate: '額度用完或太頻繁（429），稍後再試。',
+      net: '連不上模型（離線、逾時或 CORS），我先不亂拆。',
+      empty: '這次沒有回應，再按一次試試。',
+      http: '模型回應異常（HTTP ' + (res.status || '?') + '）。',
+      parse: '模型回的內容抓不到卡片，再按一次試試。',
+      off: '尚未接上模型。'
+    }[res.err] || '拆解失敗，再試一次。';
+    if (silent) toast(msg, 3200);
+    else if (note) { note.textContent = msg; note.className = 'ai-split-note err'; }
+    else toast(msg, 3200);
+    return;
+  }
+  pcResult = { cards: res.data.cards, tip: res.data.tip, ctx: ctx, draft: Object.assign({}, pcDraft || {}) };
+  s2OpenPlanResult();
+  if (!silent) toast('拆好 ' + pcResult.cards.length + ' 張卡');
+}
+
+function s2OpenPlanResult() {
+  openModal('<div class="m-head"><h2><i data-lucide="sparkles"></i> 拆解結果</h2>' +
+    '<button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>' +
+    '<div id="pcResultBody"></div>');
+  s2RenderPlanResult();
+  if (window.lucide) lucide.createIcons(document.getElementById('modalRoot'));
+}
+
+function s2RenderPlanResult() {
+  var host = document.getElementById('pcResultBody');
+  if (!host || !pcResult) return;
+  var modeLabel = { restore: '恢復', neutral: '不消耗', drain: '消耗' };
+  host.innerHTML =
+    '<div class="pc-res-top">' +
+      '<button type="button" class="pc-btn" id="pcReSplit"><i data-lucide="rotate-ccw"></i>換個拆法</button>' +
+      '<button type="button" class="pc-btn" id="pcAiSort"><i data-lucide="wand-2"></i>AI 智能排序</button>' +
+    '</div>' +
+    '<div class="pc-res-list" id="pcResList">' + pcResult.cards.map(function (c, i) {
+      return '<div class="pc-res-card" data-i="' + i + '">' +
+        '<span class="pc-hint"><i data-lucide="more-horizontal"></i></span>' +
+        '<div class="pc-n">' + esc(c.name) + '</div>' +
+        (c.action ? '<div class="pc-a">' + esc(c.action) + '</div>' : '') +
+        '<div class="pc-tags">' +
+          '<span class="pc-tag tm"><i data-lucide="clock"></i>' + c.duration + ' 分鐘</span>' +
+          '<span class="pc-tag ' + c.energyMode + '">' + (modeLabel[c.energyMode] || '不消耗') + ' · ' + c.energyAmount + '</span>' +
+        '</div></div>';
+    }).join('') + '</div>' +
+    (pcResult.tip ? '<div class="pc-tip"><i data-lucide="sparkles"></i><span><b>行動錦囊：</b>' + esc(pcResult.tip) + '</span></div>' : '') +
+    '<div class="pc-res-foot"><button class="save2" id="pcBatchAdd"><i data-lucide="plus"></i>全部加入卡庫（' + pcResult.cards.length + ' 張）</button></div>';
+  var rb = document.getElementById('pcReSplit');
+  if (rb) rb.onclick = function () { s2AiSplitSteps(true); };
+  var sb = document.getElementById('pcAiSort');
+  if (sb) sb.onclick = function () { if (typeof s2AiReorder === 'function') s2AiReorder(); else toast('排序功能準備中'); };
+  var ab = document.getElementById('pcBatchAdd');
+  if (ab) ab.onclick = function () { s2BatchAddCards(); };
+  if (window.lucide) lucide.createIcons(host);
+}
+
+async function s2BatchAddCards() {
+  if (!pcResult || !pcResult.cards.length) return;
+  var d = pcResult.draft || {}, now = Date.now();
+  var rows = pcResult.cards.map(function (c) {
+    return {
+      name: c.name, action: c.action || '',
+      energyMode: c.energyMode, energyAmount: c.energyAmount, duration: c.duration,
+      type: d.type || '自我成長', projectName: d.projectName || '', icon: d.icon || '',
+      deadline: d.deadline || '', isRepeating: !!d.isRepeating,
+      steps: [c.name], stepDone: [false], createdAt: now, updatedAt: now
+    };
+  });
+  var btn = document.getElementById('pcBatchAdd'); if (btn) btn.disabled = true;
+  try {
+    await ldb.cards.bulkAdd(rows);
+    CloudSync.notifyLocalChange('cards', null);
+    closeModal(); pcResult = null; pcDraft = null;
+    await renderCards(); await drawCards(); switchTab('cards');
+    toast('已加入 ' + rows.length + ' 張卡');
+  } catch (e) {
+    if (btn) btn.disabled = false;
+    toast('寫入失敗，請再試一次');
+  }
+}
+
+/* ---------- S2-P11b：長按微調 / 拖曳排序 / AI 智能排序 ---------- */
+function s2CardToPlan(c) {
+  if (!c) return null;
+  return { name: c.name || '', action: c.action || '', duration: c.duration || 10,
+    energyMode: c.energyMode || 'neutral', energyAmount: c.energyAmount || 3 };
+}
+
+function s2OpenTuneModal(target) {
+  var isExisting = target && target.cardId != null;
+  var old = isExisting ? (ldb.cards.get(target.cardId)) : null;
+  var head = '<div class="m-head"><h2><i data-lucide="pencil"></i> 你想怎麼改這張卡？</h2>' +
+    '<button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>';
+  var body = '<div class="imp-hint">用一句話說就好，例如「太難了，拆小一點」「第一步改成站起來」「卡名再短一點」。其他欄位我會盡量保留。</div>' +
+    '<div class="fld"><textarea class="input" id="pcTuneText" rows="3" placeholder="例如：第一步改成站起來，啟動動作更短"></textarea></div>' +
+    '<div class="row"><button class="cancel" onclick="closeModal()">取消</button>' +
+    '<button class="save" id="pcTuneGo">交給 AI 改</button></div>';
+  openModal(head + body);
+  var go = document.getElementById('pcTuneGo');
+  if (go) go.onclick = function () { s2ApplyTune(target); };
+  if (window.lucide) lucide.createIcons(document.getElementById('modalRoot'));
+  var ta = document.getElementById('pcTuneText'); if (ta) ta.focus();
+}
+
+async function s2ApplyTune(target) {
+  var ta = document.getElementById('pcTuneText');
+  var opinion = ta ? ta.value.trim() : '';
+  if (!opinion) { toast('先說想改什麼'); return; }
+  var isExisting = target && target.cardId != null;
+  var oldCard;
+  if (isExisting) {
+    var c = await ldb.cards.get(target.cardId);
+    if (!c) { toast('這張卡已經不在了'); return; }
+    oldCard = s2CardToPlan(c);
+  } else {
+    oldCard = pcResult ? Object.assign({}, pcResult.cards[target.i]) : null;
+  }
+  if (!oldCard) { toast('找不到這張卡'); return; }
+
+  var go = document.getElementById('pcTuneGo');
+  if (go) { go.disabled = true; go.textContent = '改寫中…'; }
+  var mode = await getSetting('geminiMode', 'off');
+  var sys = '你是卡片微調助手。只回修改後的「單張卡」JSON 物件，不要 markdown fence、不要任何前後綴文字。' +
+    '格式：{"name":"…","action":"…","duration":3,"energyMode":"drain","energyAmount":2}。' +
+    '嚴格依照使用者的修改意見調整，其餘欄位盡量保留原值。能量流向只能是 restore|neutral|drain。';
+  var user = '原卡：' + JSON.stringify(oldCard) + '\n修改意見：' + opinion;
+  var res = await s2LlmAsk(mode, sys, user, 400);
+  if (go) { go.disabled = false; go.textContent = '交給 AI 改'; }
+  if (res.err) { toast(res.err === 'rate' ? '額度用完了，稍後再試' : '微調失敗，原卡還在'); return; }
+  var raw = String(res.text || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
+  var a0 = raw.indexOf('{'), b0 = raw.lastIndexOf('}');
+  var oneJson = (a0 >= 0 && b0 > a0) ? raw.slice(a0, b0 + 1) : raw;
+  var parsed = s2ParsePlanJson('{"cards":[' + oneJson + ']}');
+  var card = parsed.cards && parsed.cards[0];
+  if (!card) { toast('AI 回的看不懂，再試一次'); return; }
+
+  if (isExisting) {
+    await ldb.cards.update(target.cardId, {
+      name: card.name, action: card.action, duration: card.duration,
+      energyMode: card.energyMode, energyAmount: card.energyAmount,
+      steps: [card.name], updatedAt: Date.now()
+    });
+    CloudSync.notifyLocalChange('cards', null);
+    closeModal();
+    await renderCards();
+    toast('改好了');
+  } else {
+    pcResult.cards[target.i] = Object.assign({}, card, { _i: target.i });
+    s2OpenPlanResult();   // 微調 modal 覆蓋了結果頁，需重新開啟結果頁
+    toast('改好了');
+  }
+}
+
+function s2ParseOrder(raw, n) {
+  var s = String(raw || '').replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
+  var a = s.indexOf('{'), b = s.lastIndexOf('}');
+  if (a < 0 || b <= a) return null;
+  try {
+    var o = JSON.parse(s.slice(a, b + 1));
+    var pick = o.order || o.順序 || o.sequence || o.arr;
+    if (!Array.isArray(pick)) return null;
+    var idx = pick.map(function (x) { return parseInt(x, 10); }).filter(function (x) { return x >= 0 && x < n; });
+    if (idx.length !== n || new Set(idx).size !== n) return null;
+    return idx;
+  } catch (e) { return null; }
+}
+
+async function s2AiReorder() {
+  if (!pcResult || pcResult.cards.length < 2) return;
+  var sys = '你是排序助手。把下面的動作卡按「零阻力啟動 → 逐步推進 → 收尾」的邏輯先後順序重排。' +
+    '只回 {"order":[0,2,1,…]}，order 是卡片的 _i 索引（從 0 開始），包含全部索引且不重複。' +
+    '不要 markdown fence、不要任何文字。';
+  var user = JSON.stringify(pcResult.cards.map(function (c) { return { _i: c._i, name: c.name, action: c.action }; }));
+  var btn = document.getElementById('pcAiSort');
+  if (btn) { btn.disabled = true; }
+  var mode = await getSetting('geminiMode', 'off');
+  var res = await s2LlmAsk(mode, sys, user, 200);
+  if (btn) { btn.disabled = false; }
+  if (res.err) { toast('排序失敗，順序不變'); return; }
+  var order = s2ParseOrder(res.text, pcResult.cards.length);
+  if (!order) { toast('AI 回的順序看不懂，再試一次'); return; }
+  pcResult.cards = order.map(function (i) { return pcResult.cards.find(function (c) { return c._i === i; }); }).filter(Boolean);
+  pcResult.cards.forEach(function (c, i) { c._i = i; });
+  s2RenderPlanResult();
+  toast('已按邏輯重排');
+}
+
+/* ---- 結果頁長按手勢：不移動=微調，滑動=拖曳排序 ---- */
+function onPcTouchStart(e) {
+  if (e.touches.length !== 1) return;
+  var card = e.target.closest('#pcResList .pc-res-card');
+  var pkid = e.target.closest('#cardGrid .pkid');
+  if (card) {
+    var t = e.touches[0];
+    pcGesture = { card: card, y0: t.clientY, i: parseInt(card.dataset.i, 10), kind: 'result' };
+    pcLongPressed = false;
+    clearTimeout(pcLongTimer);
+    pcLongTimer = setTimeout(function () {
+      if (!pcGesture || pcDrag) return;
+      pcLongPressed = true;
+      if (navigator.vibrate) navigator.vibrate(12);
+      card.classList.add('pc-lp');
+    }, 430);
+  } else if (pkid) {
+    var t2 = e.touches[0];
+    var id = parseInt(pkid.dataset.card, 10);
+    if (!id) return;
+    pcGesture = { pkid: pkid, y0: t2.clientY, cardId: id, kind: 'pkid' };
+    pcLongPressed = false;
+    clearTimeout(pcLongTimer);
+    pcLongTimer = setTimeout(function () {
+      if (!pcGesture) return;
+      pcLongPressed = true;
+      if (navigator.vibrate) navigator.vibrate(12);
+      pkid.classList.add('pc-lp');
+    }, 430);
+  }
+}
+function onPcTouchMove(e) {
+  if (!pcGesture) return;
+  var dy = e.touches[0].clientY - pcGesture.y0;
+  if (pcGesture.kind === 'result' && pcLongPressed) {
+    e.preventDefault();
+    if (!pcDrag) startPcDrag(pcGesture.card, pcGesture.i);
+    movePcDrag(e.touches[0].clientY);
+  } else if (Math.abs(dy) > 8) {
+    clearTimeout(pcLongTimer);
+  }
+}
+function onPcTouchEnd() {
+  clearTimeout(pcLongTimer);
+  if (pcDrag) { finishPcDrag(); pcGesture = null; pcLongPressed = false; return; }
+  if (pcLongPressed && pcGesture) {
+    pcSuppressClickUntil = Date.now() + 1200;
+    if (pcGesture.kind === 'pkid') {
+      if (pcGesture.pkid) pcGesture.pkid.classList.remove('pc-lp');
+      s2OpenTuneModal({ cardId: pcGesture.cardId });
+    } else if (pcGesture.card) {
+      pcGesture.card.classList.remove('pc-lp');
+      s2OpenTuneModal({ i: pcGesture.i });
+    }
+  }
+  pcGesture = null; pcLongPressed = false;
+}
+function startPcDrag(card, i) {
+  var list = document.getElementById('pcResList');
+  if (!list) return;
+  pcDrag = { card: card, startY: (pcGesture ? pcGesture.y0 : 0), moved: false, listEl: list, fromI: i };
+  card.classList.add('pc-dragging');
+  card.style.transition = 'none';
+  pcSuppressClickUntil = Date.now() + 1200;
+}
+function movePcDrag(y) {
+  if (!pcDrag) return;
+  var dy = y - pcDrag.startY;
+  pcDrag.card.style.transform = 'translateY(' + dy + 'px)';
+  var others = [].slice.call(pcDrag.listEl.querySelectorAll('.pc-res-card')).filter(function (r) { return r !== pcDrag.card; });
+  var before = null;
+  for (var k = 0; k < others.length; k++) {
+    var rect = others[k].getBoundingClientRect();
+    if (y < rect.top + rect.height / 2) { before = others[k]; break; }
+  }
+  var oldTop = pcDrag.card.offsetTop;
+  if (before) pcDrag.listEl.insertBefore(pcDrag.card, before);
+  else pcDrag.listEl.appendChild(pcDrag.card);
+  var newTop = pcDrag.card.offsetTop;
+  if (newTop !== oldTop) { pcDrag.startY += (newTop - oldTop); pcDrag.moved = true; }
+}
+function finishPcDrag() {
+  var d = pcDrag;
+  pcDrag = null;
+  if (!d) return;
+  d.card.classList.remove('pc-dragging');
+  d.card.style.transition = '';
+  d.card.style.transform = '';
+  if (d.moved) {
+    var order = [].slice.call(d.listEl.querySelectorAll('.pc-res-card')).map(function (r) { return parseInt(r.dataset.i, 10); });
+    var byI = {};
+    pcResult.cards.forEach(function (c) { byI[c._i] = c; });
+    pcResult.cards = order.map(function (i) { return byI[i]; }).filter(Boolean);
+    pcResult.cards.forEach(function (c, i) { c._i = i; });
+    s2RenderPlanResult();   // 重繪讓 data-i 與新順序同步
+  }
+}
+
 async function s2CallLLM(question) {
   var mode = await getSetting('geminiMode', 'off');
   var summary = await s2BuildSummary();
@@ -5884,6 +6593,8 @@ async function s2OpenApiModal() {
   var ep = await getSetting('llmEndpoint', 'https://api.openai.com/v1/chat/completions');
   var mm = await getSetting('llmModel', 'gpt-4o-mini');
   var kk = await getSetting('llmKey', '');
+  var prof = await getSetting('aiProfile', '');
+  var sty = await getSetting('splitStyle', 'reason');
   s2ApiMode = mode;
   var html = '<div class="m-head"><h2><i data-lucide="bot"></i> 接上一顆腦袋</h2>' +
     '<button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>' +
@@ -5926,6 +6637,16 @@ async function s2OpenApiModal() {
     '</div>' +
     '<div id="s2Verify"></div>' +
     '<div class="trow"><button onclick="s2ApiTest()"><i data-lucide="rotate-ccw"></i> 測試連線</button></div>' +
+    '<div class="pc-persona">' +
+      '<div class="pcph"><i data-lucide="bot"></i>個人化拆解</div>' +
+      '<div class="fld"><label>關於我 <span class="hint">選填</span></label>' +
+        '<textarea class="input" id="pcProfile" rows="2" placeholder="例：晚上容易疲憊、對文字工作有畏難情緒">' + esc(prof) + '</textarea>' +
+        '<small>拆解時會一併送給 AI，讓它配合你的狀態調整步驟。</small></div>' +
+      '<div class="fld"><label>拆解風格</label><select id="pcStyle">' +
+        '<option value="reason"' + (sty === 'reason' ? ' selected' : '') + '>🤖 理性直接</option>' +
+        '<option value="gentle"' + (sty === 'gentle' ? ' selected' : '') + '>🌿 溫柔鼓勵</option>' +
+        '<option value="game"' + (sty === 'game' ? ' selected' : '') + '>🎮 遊戲化</option>' +
+      '</select></div></div>' +
     '<div class="quota" id="s2Quota">' + s2QuotaHtml(mode) + '</div>' +
     '<div class="priv"><b>隱私</b>：Key 只存在這台裝置的 IndexedDB。我們只送統計摘要，' +
       '不送密碼、合約或筆記內容；純前端存放請勿在共用裝置上留存。<br>' +
@@ -5990,6 +6711,8 @@ async function s2ApiTest() {
   }
 }
 async function s2ApiSave() {
+  if (document.getElementById('pcProfile')) await setSetting('aiProfile', ((document.getElementById('pcProfile') || {}).value || '').trim());
+  if (document.getElementById('pcStyle')) await setSetting('splitStyle', (document.getElementById('pcStyle') || {}).value || 'reason');
   var m = s2ApiMode;
   if (m === 'gemini') {
     var k = ((document.getElementById('s2Key') || {}).value || '').trim();
