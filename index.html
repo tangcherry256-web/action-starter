@@ -41,6 +41,17 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   --c-night-bg:#EAEAF4;  --c-night-ink:#6A6E9E;
   --c-slate-bg:#EDF0F5;  --c-slate-ink:#6E7893;
   --c-green-bg:#EEF2E9;  --c-green-ink:#7C9A82;
+  /* P19 馬卡龍 5 色系 × 深淺：加白提亮、低飽和，目的行清晰（key 為歷史代號） */
+  --c-clay-l-bg:#FBE4EA;  --c-clay-l-ink:#B67F93;   /* 櫻花粉·淺 */
+  --c-clay-d-bg:#F3C5D3;  --c-clay-d-ink:#9E6279;   /* 櫻花粉·深 */
+  --c-ochre-l-bg:#FDF6DC; --c-ochre-l-ink:#AC9859;  /* 奶油黃·淺 */
+  --c-ochre-d-bg:#F5E5B4; --c-ochre-d-ink:#938046;  /* 奶油黃·深 */
+  --c-sage-l-bg:#E8F3E9;  --c-sage-l-ink:#7FA089;   /* 薄荷綠·淺 */
+  --c-sage-d-bg:#CFE6D3;  --c-sage-d-ink:#618E70;   /* 薄荷綠·深 */
+  --c-azure-l-bg:#E5F1FB; --c-azure-l-ink:#7C9EBD;  /* 晴空藍·淺 */
+  --c-azure-d-bg:#C7DDF0; --c-azure-d-ink:#5C85AB;  /* 晴空藍·深 */
+  --c-mauve-l-bg:#EFE9FA; --c-mauve-l-ink:#9785B9;  /* 薰衣紫·淺 */
+  --c-mauve-d-bg:#DCD1EF; --c-mauve-d-ink:#7C69A3;  /* 薰衣紫·深 */
 }
 
 /* ---------- 總體佈局 ---------- */
@@ -214,6 +225,17 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .c-night{background:var(--c-night-bg);color:var(--c-night-ink)}
 .c-slate{background:var(--c-slate-bg);color:var(--c-slate-ink)}
 .c-green{background:var(--c-green-bg);color:var(--c-green-ink)}
+/* P17 油畫 10 色通用類 */
+.c-clay-l{background:var(--c-clay-l-bg);color:var(--c-clay-l-ink)}
+.c-clay-d{background:var(--c-clay-d-bg);color:var(--c-clay-d-ink)}
+.c-ochre-l{background:var(--c-ochre-l-bg);color:var(--c-ochre-l-ink)}
+.c-ochre-d{background:var(--c-ochre-d-bg);color:var(--c-ochre-d-ink)}
+.c-sage-l{background:var(--c-sage-l-bg);color:var(--c-sage-l-ink)}
+.c-sage-d{background:var(--c-sage-d-bg);color:var(--c-sage-d-ink)}
+.c-azure-l{background:var(--c-azure-l-bg);color:var(--c-azure-l-ink)}
+.c-azure-d{background:var(--c-azure-d-bg);color:var(--c-azure-d-ink)}
+.c-mauve-l{background:var(--c-mauve-l-bg);color:var(--c-mauve-l-ink)}
+.c-mauve-d{background:var(--c-mauve-d-bg);color:var(--c-mauve-d-ink)}
 
 /* ---------- meta（純文字 meta 行，非膠囊） ---------- */
 .meta { display:flex; align-items:center; gap:5px; font-size:11px; font-weight:700; color:var(--muted); }
@@ -264,6 +286,47 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .sleep-col .sl { font-size:10px; font-weight:800; color:var(--muted); display:block; margin-bottom:4px; }
 .time { width:100%; background:var(--card); border:1.5px solid transparent; border-radius:11px; padding:9px 10px; font-size:13px; font-weight:800; color:var(--ink); font-family:inherit; outline:none; }
 .sleep-calc { margin-top:6px; font-size:11px; font-weight:800; color:var(--green); }
+/* ---------- P22：情緒四象限（Russell circumplex） ---------- */
+.mood-axis{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:9.5px;font-weight:800;color:var(--muted);letter-spacing:.2px;}
+.mood-axis .ma-y{display:flex;gap:3px;align-items:center;}
+.mood-axis .ma-x{display:flex;gap:3px;align-items:center;}
+.mood-axis .ma-dim{color:var(--primary);}
+.mood-quad{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;}
+.mq-zone{position:relative;border-radius:16px;padding:8px 7px 7px;display:flex;flex-direction:column;gap:5px;min-width:0;}
+.mq-zone.mq-energized{background:var(--c-ochre-l-bg);}
+.mq-zone.mq-calm{background:var(--c-sage-l-bg);}
+.mq-zone.mq-anxious{background:var(--c-clay-l-bg);}
+.mq-zone.mq-low{background:var(--c-azure-l-bg);}
+.mq-zone .mqz-t{font-size:9px;font-weight:900;color:var(--ink);opacity:.62;letter-spacing:.3px;}
+.mq-face-row{display:flex;justify-content:space-around;align-items:flex-end;gap:2px;flex:1;}
+.mood-opt{position:relative;flex:1 1 0;min-width:0;border:2px solid transparent;border-radius:14px;padding:3px 1px 4px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer;font-family:inherit;background:transparent;transition:transform .18s ease,border-color .18s ease,background .18s ease;}
+.mood-opt .mo-svg{width:100%;max-width:46px;height:auto;display:block;}
+.mood-opt .mo-svg svg{width:100%;height:auto;display:block;}
+.mood-opt .mo-nm{font-size:9px;font-weight:900;margin-top:1px;color:var(--ink);white-space:nowrap;}
+.mood-opt .mo-ck{position:absolute;top:1px;right:2px;font-size:9px;font-weight:900;opacity:0;transform:scale(.6);transition:opacity .18s ease,transform .18s ease;color:var(--primary);}
+.mood-opt.on{background:rgba(255,255,255,.7);border-color:var(--primary);transform:translateY(-2px);box-shadow:0 3px 8px rgba(124,128,220,.18);}
+.mood-opt.on .mo-ck{opacity:1;transform:scale(1);}
+.mood-opt:active{transform:scale(.94);}
+.mood-attribution{font-size:8px;font-weight:600;color:var(--muted);text-align:center;margin-top:6px;opacity:.75;}
+.mood-note{margin-top:8px;font-size:10.5px;font-weight:700;color:var(--muted);text-align:center;line-height:1.5;min-height:15px;}
+.mood-note b{color:var(--primary);}
+/* 復盤：心情地圖 */
+.moodtree{display:flex;gap:5px;width:100%;height:172px;}
+.mt-node{display:flex;gap:5px;min-width:0;min-height:0;}
+.mt-node.row{flex-direction:row;}
+.mt-node.col{flex-direction:column;}
+.mt-tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:2px;border-radius:14px;padding:7px 9px;overflow:hidden;min-width:0;min-height:0;}
+.mt-tile.mq-energized{background:var(--c-ochre-l-bg);}
+.mt-tile.mq-calm{background:var(--c-sage-l-bg);}
+.mt-tile.mq-anxious{background:var(--c-clay-l-bg);}
+.mt-tile.mq-low{background:var(--c-azure-l-bg);}
+.mt-tile .mt-emoji{width:22px;height:22px;flex:0 1 auto;min-height:0;}
+.mt-tile .mt-emoji svg{width:100%;height:100%;display:block;}
+.mt-tile .mt-label{flex:0 0 auto;line-height:1.25;font-size:10px;font-weight:900;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+.mt-tile .mt-val{flex:0 0 auto;line-height:1.25;font-size:12px;font-weight:900;color:var(--ink);opacity:.78;}
+.mood-ins{margin-top:9px;font-size:10.5px;font-weight:600;color:var(--ink);background:var(--soft);border-radius:12px;padding:9px 10px;line-height:1.6;}
+.mood-ins b{color:var(--primary);}
+@media (prefers-reduced-motion:reduce){.mood-opt,.mood-opt .mo-ck{transition:none !important;}}
 .cups { display:flex; gap:4px; flex-wrap:wrap; justify-content:center; }
 .cup { cursor:pointer; }
 .cup svg { width:17px; height:17px; color:var(--tab-ink); }
@@ -498,6 +561,25 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .section-label svg { width:15px; height:15px; color:var(--primary); }
 .imp-hint { font-size:11px; font-weight:600; color:var(--muted); line-height:1.6; margin:10px 0; }
 
+/* ---------- P20：設定彈窗排版優化（分區卡片 + 全寬輸入 + 統一間距） ---------- */
+.modal.set-modal { padding:0; }
+.set-modal .m-head { position:sticky; top:0; z-index:2; margin:0; padding:18px 18px 14px; background:var(--card); border-bottom:1px solid var(--bd); border-radius:24px 24px 0 0; }
+.set-modal .set-body { padding:6px 18px 20px; }
+.set-sec { background:var(--bg); border-radius:16px; padding:14px; margin-top:12px; }
+.set-sec .section-label { margin:0 0 12px; font-size:12.5px; }
+.set-sec .section-label svg { width:15px; height:15px; }
+/* P21：欄位改「左項目名 + 右輸入框」橫排，統一標籤寬度讓輸入區左緣對齊 */
+.set-sec .field { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.set-sec .field:last-child { margin-bottom:0; }
+.set-sec .field label { flex:0 0 116px; margin-bottom:0; white-space:nowrap; }
+.set-sec .input, .set-sec input.input { flex:1 1 auto; width:auto; min-width:0; box-sizing:border-box; }
+.set-sec input[type=range] { flex:1 1 auto; width:auto; min-width:0; margin:0; accent-color:var(--primary); }
+.set-sec .imp-hint { margin:0 0 12px; }
+.set-sec .btn-block { margin-top:10px; }
+.set-sec .btn-block:first-of-type { margin-top:0; }
+.set-sec .sw-row { padding:6px 2px; }
+.set-sec .sync-row { margin:10px 2px; }
+
 /* ---------- 計時器 overlay（bigface） ---------- */
 .timer-overlay { position:fixed; inset:0; background:var(--bg); display:none; z-index:70; overflow-y:auto; }
 .timer-overlay.show { display:block; }
@@ -654,8 +736,40 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .c-sky .dc-cat { color:var(--c-sky-ink); }
 .c-mint .dc-cat { color:var(--c-mint-ink); }
 .c-pink .dc-cat { color:var(--c-pink-ink); }
+/* P19 馬卡龍色：抽卡卡渐变（白色延伸到更底部，目的行清晰） */
+.dcard.c-clay-l { background:linear-gradient(168deg,#FFFFFF 0%, var(--c-clay-l-bg) 115%); }
+.dcard.c-clay-d { background:linear-gradient(168deg,#FFFFFF 0%, var(--c-clay-d-bg) 115%); }
+.dcard.c-ochre-l { background:linear-gradient(168deg,#FFFFFF 0%, var(--c-ochre-l-bg) 115%); }
+.dcard.c-ochre-d { background:linear-gradient(168deg,#FFFFFF 0%, var(--c-ochre-d-bg) 115%); }
+.dcard.c-sage-l { background:linear-gradient(168deg,#FFFFFF 0%, var(--c-sage-l-bg) 115%); }
+.dcard.c-sage-d { background:linear-gradient(168deg,#FFFFFF 0%, var(--c-sage-d-bg) 115%); }
+.dcard.c-azure-l { background:linear-gradient(168deg,#FFFFFF 0%, var(--c-azure-l-bg) 115%); }
+.dcard.c-azure-d { background:linear-gradient(168deg,#FFFFFF 0%, var(--c-azure-d-bg) 115%); }
+.dcard.c-mauve-l { background:linear-gradient(168deg,#FFFFFF 0%, var(--c-mauve-l-bg) 115%); }
+.dcard.c-mauve-d { background:linear-gradient(168deg,#FFFFFF 0%, var(--c-mauve-d-bg) 115%); }
+/* P19 馬卡龍色：水印/分類/時間線著色 */
+.dcard.c-clay-l .dc-wm svg,.c-clay-l .dc-ic svg,.c-clay-l .dc-cat,.ti-node.c-clay-l svg{color:var(--c-clay-l-ink)}
+.ti-node.c-clay-l{background:var(--c-clay-l-bg)}
+.dcard.c-clay-d .dc-wm svg,.c-clay-d .dc-ic svg,.c-clay-d .dc-cat,.ti-node.c-clay-d svg{color:var(--c-clay-d-ink)}
+.ti-node.c-clay-d{background:var(--c-clay-d-bg)}
+.dcard.c-ochre-l .dc-wm svg,.c-ochre-l .dc-ic svg,.c-ochre-l .dc-cat,.ti-node.c-ochre-l svg{color:var(--c-ochre-l-ink)}
+.ti-node.c-ochre-l{background:var(--c-ochre-l-bg)}
+.dcard.c-ochre-d .dc-wm svg,.c-ochre-d .dc-ic svg,.c-ochre-d .dc-cat,.ti-node.c-ochre-d svg{color:var(--c-ochre-d-ink)}
+.ti-node.c-ochre-d{background:var(--c-ochre-d-bg)}
+.dcard.c-sage-l .dc-wm svg,.c-sage-l .dc-ic svg,.c-sage-l .dc-cat,.ti-node.c-sage-l svg{color:var(--c-sage-l-ink)}
+.ti-node.c-sage-l{background:var(--c-sage-l-bg)}
+.dcard.c-sage-d .dc-wm svg,.c-sage-d .dc-ic svg,.c-sage-d .dc-cat,.ti-node.c-sage-d svg{color:var(--c-sage-d-ink)}
+.ti-node.c-sage-d{background:var(--c-sage-d-bg)}
+.dcard.c-azure-l .dc-wm svg,.c-azure-l .dc-ic svg,.c-azure-l .dc-cat,.ti-node.c-azure-l svg{color:var(--c-azure-l-ink)}
+.ti-node.c-azure-l{background:var(--c-azure-l-bg)}
+.dcard.c-azure-d .dc-wm svg,.c-azure-d .dc-ic svg,.c-azure-d .dc-cat,.ti-node.c-azure-d svg{color:var(--c-azure-d-ink)}
+.ti-node.c-azure-d{background:var(--c-azure-d-bg)}
+.dcard.c-mauve-l .dc-wm svg,.c-mauve-l .dc-ic svg,.c-mauve-l .dc-cat,.ti-node.c-mauve-l svg{color:var(--c-mauve-l-ink)}
+.ti-node.c-mauve-l{background:var(--c-mauve-l-bg)}
+.dcard.c-mauve-d .dc-wm svg,.c-mauve-d .dc-ic svg,.c-mauve-d .dc-cat,.ti-node.c-mauve-d svg{color:var(--c-mauve-d-ink)}
+.ti-node.c-mauve-d{background:var(--c-mauve-d-bg)}
 /* 中區：卡名（固定兩行高度垂直置中）+ 時間／能量膠囊橫排置中 */
-.dcard .dc-mid { display:flex; flex-direction:column; align-items:center; width:100%; position:relative; z-index:1; }
+.dcard .dc-mid { display:flex; flex-direction:column; align-items:center; width:100%; position:relative; z-index:1; height:100px; }
 .dcard .dc-nz { height:44px; display:flex; align-items:center; justify-content:center; width:100%; }
 .dcard .dc-n { font-size:16px; font-weight:900; color:var(--ink); line-height:1.375; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; overflow-wrap:anywhere; width:100%; }
 .dcard .dc-pills { display:flex; align-items:center; justify-content:center; gap:5px; margin-top:8px; }
@@ -738,6 +852,90 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .ic-opt.on { background:var(--primary); color:#fff; box-shadow:0 10px 18px -10px rgba(111,102,210,.7); }
 .ic-opt.follow { font-size:9.5px; font-weight:900; color:var(--muted); background:var(--soft); line-height:1.1; text-align:center; }
 .ic-opt.follow.on { color:#fff; background:var(--primary); }
+
+/* ---------- P15：卡片自定颜色选择器 ---------- */
+.cl-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; padding:4px 2px 6px; }
+.cl-opt { aspect-ratio:1; border:2px solid transparent; border-radius:15px; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  background:var(--bg); font-family:inherit; padding:4px; position:relative; transition:transform .18s ease,box-shadow .18s ease; }
+.cl-opt:active { transform:scale(.94); }
+.cl-opt .sw { width:26px; height:26px; border-radius:50%; flex:0 0 auto;
+  box-shadow:0 0 0 1px rgba(58,53,71,.10),0 4px 8px -4px rgba(58,53,71,.35); }
+.cl-opt .cn { font-size:9px; font-weight:800; color:var(--muted); line-height:1; }
+.cl-opt.on { border-color:var(--primary); background:var(--soft); }
+.cl-opt.on .cn { color:var(--primary-dark); }
+.cl-opt.on::after { content:'✓'; position:absolute; top:3px; right:5px; font-size:10px; font-weight:900; color:var(--primary); }
+.cl-opt.follow .sw { background:linear-gradient(135deg,#EEEFFC 0%,#E8EEF9 25%,#EEF2E9 50%,#F8EBEF 75%,#FBF1D8 100%); }
+.cl-dot { width:16px; height:16px; border-radius:50%; flex:0 0 auto; background:var(--soft);
+  box-shadow:0 0 0 1px rgba(58,53,71,.12); }
+
+/* ---------- P15：卡片「為什麼」史詩意義行（淡淡顯示，不搶視覺） ---------- */
+.why-line { display:flex; align-items:flex-start; gap:5px; margin-top:-2px;
+  font-size:10px; font-weight:700; font-style:italic; line-height:1.4;
+  color:var(--accent-quiet-ink); opacity:.9; }
+.why-line svg { width:11px; height:11px; flex:0 0 auto; margin-top:1px; opacity:.75; }
+.why-line span { display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+.dc-why { margin-top:6px; padding-top:5px; border-top:1px dashed rgba(58,53,71,.10);
+  font-size:9px; font-weight:700; font-style:italic; line-height:1.3;
+  color:#7A5C12; opacity:1; display:flex; align-items:center; gap:3px; width:100%; }
+.dc-why svg { width:10px; height:10px; flex:0 0 auto; margin-top:0; opacity:.8; }
+.dc-why span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+.pk-why { font-size:9px; font-weight:700; font-style:italic; color:var(--accent-quiet-ink); opacity:.8;
+  margin-left:auto; margin-right:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:42%; }
+
+/* ---------- P15：放鬆盲盒入口 + 彈窗 ---------- */
+.blind-btn { display:inline-flex; align-items:center; gap:6px; width:100%; justify-content:center;
+  border:1.5px dashed var(--accent); border-radius:13px; background:var(--accent-quiet);
+  color:var(--accent-quiet-ink); padding:10px 12px; margin-top:2px; cursor:pointer;
+  font-family:inherit; font-size:12px; font-weight:900; transition:transform .16s ease,background .16s ease; }
+.blind-btn:active { transform:scale(.98); background:var(--honey-s); }
+.blind-btn svg { width:15px; height:15px; }
+.blind-card { text-align:center; }
+.blind-emoji { font-size:44px; line-height:1; margin:6px 0 10px; }
+.blind-kicker { font-size:11px; font-weight:900; color:var(--muted); letter-spacing:.08em; }
+.blind-title { font-size:21px; font-weight:900; color:var(--ink); margin:6px 0 4px; }
+.blind-sub { font-size:12px; font-weight:700; color:var(--muted); line-height:1.5; }
+.blind-count { font-size:40px; font-weight:900; color:var(--primary); font-variant-numeric:tabular-nums;
+  margin:14px 0 4px; letter-spacing:-.02em; }
+.blind-count small { font-size:14px; color:var(--muted); font-weight:800; }
+.blind-bar { height:6px; border-radius:99px; background:var(--track); overflow:hidden; margin:8px 0 16px; }
+.blind-bar i { display:block; height:100%; width:100%; background:var(--primary); border-radius:99px;
+  transition:width .9s linear; }
+.blind-done { font-size:11px; font-weight:800; color:var(--green); margin-top:10px; min-height:15px; }
+
+/* ---------- P15：管家情緒狀態化（電子寵物感） ---------- */
+.bt-av { position:relative; transition:filter .5s ease,opacity .5s ease; }
+.bt-av img { transition:filter .5s ease,opacity .5s ease; }
+.bt-av.mood-active img { filter:none; }
+.bt-av.mood-sleep img { filter:grayscale(.55) brightness(.97); }
+.bt-av.mood-wilt  img { filter:grayscale(.9) brightness(.9); opacity:.9; }
+.bt-av .mush { position:absolute; right:-5px; top:-7px; font-size:19px; line-height:1;
+  filter:drop-shadow(0 2px 2px rgba(58,53,71,.25)); opacity:0; transform:scale(.4) rotate(-20deg);
+  transition:opacity .45s ease,transform .45s cubic-bezier(.22,1.36,.36,1); pointer-events:none; }
+.bt-av.mood-wilt .mush { opacity:1; transform:scale(1) rotate(-12deg); }
+.bt-mood { display:flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--bd);
+  border-radius:14px; padding:10px 12px; flex:0 0 auto; transition:background .5s ease,border-color .5s ease; }
+.bt-mood .bm-ic { font-size:19px; flex:0 0 auto; }
+.bt-mood .bm-txt { min-width:0; }
+.bt-mood .bm-t { font-size:12px; font-weight:900; color:var(--ink); line-height:1.3; }
+.bt-mood .bm-s { font-size:10px; font-weight:700; color:var(--muted); margin-top:2px; line-height:1.35; }
+.bt-mood.mood-active { background:var(--green-soft,#EEF2E9); border-color:#D8E6CF; }
+.bt-mood.mood-sleep { background:var(--soft); border-color:#E3E4F6; }
+.bt-mood.mood-wilt  { background:#F6F3F2; border-color:#ECE6E3; }
+.bt-hd .txt .st.mood-active { color:var(--green); }
+.bt-hd .txt .st.mood-sleep { color:var(--muted); }
+.bt-hd .txt .st.mood-wilt  { color:var(--warn-deep); }
+@keyframes p15BubbleIn { from{opacity:0;transform:translateY(8px) scale(.96)} to{opacity:1;transform:none} }
+.bt-cheer { position:fixed; left:50%; top:14px; transform:translateX(-50%); z-index:80;
+  display:flex; align-items:center; gap:8px; background:#fff; border:1.5px solid var(--primary);
+  border-radius:99px; padding:9px 15px 9px 10px; box-shadow:0 16px 34px -14px rgba(80,72,140,.5);
+  font-size:12px; font-weight:900; color:var(--ink); animation:p15BubbleIn .3s cubic-bezier(.22,1.36,.36,1);
+  max-width:92vw; }
+.bt-cheer .bc-av { width:28px; height:28px; border-radius:50%; overflow:hidden; flex:0 0 auto; background:var(--soft); }
+.bt-cheer .bc-av img { width:100%; height:100%; }
+@media (prefers-reduced-motion:reduce) {
+  .bt-av,.bt-av img,.bt-av .mush,.cl-opt,.blind-btn,.bt-mood,.bprog i,.blind-bar i { transition:none !important; animation:none !important; }
+}
 
 
 /* ---------- 首頁：凌晨補記提示 ---------- */
@@ -884,6 +1082,39 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .rv-sub{font-size:10.5px;font-weight:600;color:var(--muted);margin:7px 0 9px;line-height:1.6}
 .slp-wrap{position:relative;height:186px}
 .slp-wrap canvas{width:100%!important;height:100%!important}
+/* ---------- P16：生命之輪雷達圖 ---------- */
+.wheel-wrap{position:relative;height:300px;margin:2px 0 4px}
+.wheel-wrap canvas{width:100%!important;height:100%!important}
+.wheel-legend{display:flex;align-items:center;justify-content:center;gap:16px;margin:2px 0 8px;flex-wrap:wrap}
+.wheel-legend .wl{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;color:var(--muted)}
+.wheel-legend .wl i{width:14px;height:0;border-top:3px solid var(--primary);border-radius:9px;display:inline-block}
+.wheel-legend .wl.prev i{border-top:2px dashed #C9C4D6}
+.wheel-insight{background:var(--soft);border-radius:12px;padding:10px 12px;margin-top:6px;
+  font-size:11px;font-weight:700;line-height:1.6;color:var(--primary-dark)}
+.wheel-insight b{font-weight:900}
+.wheel-insight .wi-emoji{font-size:14px;margin-right:3px}
+.wheel-detail{margin-top:8px;border-top:1px dashed var(--bd);padding-top:8px;display:none}
+.wheel-detail.show{display:block;animation:p15BubbleIn .28s ease}
+.wd-head{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+.wd-head .wd-ic{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;font-size:14px;flex:0 0 auto}
+.wd-head .wd-nm{font-size:12px;font-weight:900;color:var(--ink)}
+.wd-head .wd-score{margin-left:auto;font-size:15px;font-weight:900;color:var(--primary)}
+.wd-head .wd-score small{font-size:10px;color:var(--muted);font-weight:800}
+.wd-rows{display:flex;flex-direction:column;gap:5px}
+.wd-row{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;color:var(--ink)}
+.wd-row .bar{flex:1;height:6px;border-radius:99px;background:var(--track);overflow:hidden}
+.wd-row .bar i{display:block;height:100%;background:var(--primary);border-radius:99px}
+.wd-row .v{width:52px;text-align:right;color:var(--muted);font-weight:800;flex:0 0 auto}
+.wd-empty{font-size:10.5px;font-weight:700;color:var(--muted);line-height:1.6}
+.wheel-tip{font-size:9.5px;font-weight:700;color:var(--muted);text-align:center;margin-top:6px;opacity:.8}
+.wchip{border:1.5px solid var(--bd);border-radius:99px;background:#fff;padding:5px 9px;cursor:pointer;
+  font-family:inherit;font-size:10.5px;font-weight:800;color:var(--ink);transition:transform .15s ease,background .15s ease,border-color .15s ease}
+.wchip b{color:var(--wc);font-weight:900;margin-left:2px}
+.wchip:active{transform:scale(.95)}
+.wchip.on{background:var(--soft);border-color:var(--wc)}
+.wheel-empty{display:grid;place-items:center;text-align:center;min-height:230px;color:var(--muted);
+  font-size:12px;font-weight:700;line-height:1.7}
+.wheel-empty .we-ic{font-size:38px;margin-bottom:8px}
 .slp-empty{height:186px;display:grid;place-items:center;text-align:center;font-size:11px;
   font-weight:600;color:var(--muted);line-height:1.8}
 .slp-empty svg{width:20px;height:20px;color:var(--primary);margin-bottom:4px}
@@ -1215,6 +1446,8 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   border-left:2px solid var(--accent);padding-left:8px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .c2desc.c2desc-empty{border-left-color:transparent}
+/* P15b：同時有 why 的卡，action 收 1 行，避免在固定卡高內互相擠壓 */
+.c2main.has-why .c2desc{-webkit-line-clamp:1;line-height:1.4}
 .c2acts{display:flex;gap:7px;margin-top:auto;flex-shrink:0;justify-content:flex-end}
 .c2btn{flex:0 0 auto;height:34px;padding:0 13px;border-radius:11px;font-family:inherit;font-size:12px;font-weight:900;
   display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;white-space:nowrap}
@@ -1246,23 +1479,18 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   display:inline-flex;align-items:center;gap:4px}
 .c2sv-back svg{width:12px;height:12px}
 .c2sv-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:9px;padding:2px 2px;min-height:0}
-.c2sv-stack{position:relative;width:56px;height:38px;margin-bottom:0;flex:0 0 auto}
-.c2sv-stack i{position:absolute;left:50%;top:0;width:50px;height:34px;border-radius:9px;
-  background:var(--soft);border:2px solid var(--primary);transform:translateX(-50%);opacity:.55}
-.c2sv-stack i:nth-child(2){transform:translateX(-50%) translateY(3px) rotate(3deg);opacity:.75}
-.c2sv-stack i:nth-child(3){transform:translateX(-50%) translateY(6px) rotate(-2deg);opacity:1;background:#fff}
 .c2sv-step{font-size:18px;font-weight:900;color:var(--ink);line-height:1.3;word-break:break-word}
 .c2sv-step.done{text-decoration:line-through;color:var(--muted)}
 .c2sv-check{border:none;border-radius:11px;padding:7px 15px;font-family:inherit;font-size:11.5px;font-weight:900;
   cursor:pointer;display:inline-flex;align-items:center;gap:5px;background:var(--soft);color:var(--primary-dark);flex:0 0 auto}
 .c2sv-check.done{background:var(--green-soft,#EAF2E4);color:var(--green)}
 .c2sv-check svg{width:14px;height:14px}
-.c2sv-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.c2sv-nav{border:1px solid var(--bd);background:#fff;color:var(--primary);border-radius:10px;
-  padding:6px 8px;font-family:inherit;font-size:10.5px;font-weight:800;cursor:pointer;white-space:nowrap;flex:0 0 auto;
-  display:inline-flex;align-items:center;gap:3px}
-.c2sv-nav svg{width:12px;height:12px;flex:0 0 auto}
-.c2sv-hint{font-size:9px;font-weight:700;color:var(--muted);opacity:.8;white-space:nowrap;flex:1;text-align:center}
+.c2sv-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;position:relative}
+.c2sv-nav{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--bd);background:#fff;color:var(--primary);cursor:pointer;flex:0 0 auto;
+  display:inline-flex;align-items:center;justify-content:center;padding:0}
+.c2sv-nav:active{transform:scale(.92)}
+.c2sv-nav svg{width:17px;height:17px;flex:0 0 auto}
+.c2sv-hint{position:absolute;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;color:var(--muted);opacity:.8;white-space:nowrap}
 
 .citem.arch .cdo.restore svg{width:12px;height:12px;vertical-align:-1px}
 .s2api .trow button svg{width:12px;height:12px;vertical-align:-2px}
@@ -1324,6 +1552,7 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 
       <div class="lbl-row"><span class="l">抽三張卡</span><span class="r" id="drawBtn"><i data-lucide="refresh-cw"></i>換一批</span></div>
       <div id="drawGrid"></div>
+      <button type="button" class="blind-btn" id="blindBtn" aria-label="抽個五分鐘放鬆盲盒"><i data-lucide="sparkles"></i>無聊？抽個 5 分鐘放鬆盲盒</button>
 
       <div class="wk-head">
         <div class="wk-month" id="wkMonth"></div>
@@ -1377,6 +1606,12 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
       </div>
     </div>
     <div class="pg-body">
+      <div class="sec"><div class="sec-h"><span class="ic-circle c-violet"><i data-lucide="smile"></i></span>今日心情<small>選一個最接近的</small></div><div class="inner">
+        <div class="mood-axis"><span class="ma-y"><span class="ma-dim">上下</span> 愉快 → 不快</span><span class="ma-x"><span class="ma-dim">左右</span> 能量低 → 高</span></div>
+        <div class="mood-quad" id="moodQuad" role="radiogroup" aria-label="今日心情四象限"></div>
+        <div class="mood-note" id="moodNote">心情沒有好壞，只是今天落在哪一格。</div>
+        <div class="mood-attribution">表情風格：Doodle Emoji set（Figma Community · 手繪重繪）</div>
+      </div></div>
       <div class="sec"><div class="sec-h"><span class="ic-circle c-pink"><i data-lucide="pencil"></i></span>一句話記錄<small>限 200 字</small></div><div class="inner"><textarea class="input" id="logNote" rows="2" maxlength="200" placeholder="今天下班很累，但…"></textarea></div></div>
       <div class="sec"><div class="sec-h"><span class="ic-circle c-violet"><i data-lucide="heart-pulse"></i></span>今日狀態<small>可多選</small></div><div class="inner chips" id="stateTags"></div></div>
       <div class="sec"><div class="sec-h"><span class="ic-circle c-sky"><i data-lucide="party-popper"></i></span>今日活動<small>可多選</small></div><div class="inner chips" id="activityTags"></div></div>
@@ -1399,6 +1634,18 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
     </div>
     <div class="pg-body">
       <div id="reviewStats"></div>
+      <div class="rv-card" id="wheelCard">
+        <div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="target"></i></span><b>生命之輪</b>
+          <span style="margin-left:auto;font-size:9.5px;font-weight:700;color:var(--muted)">你的生活平衡嗎？</span></div>
+        <div class="rv-sub">8 個面向，從你這一週的記錄自動算出來。沒有記錄不代表失敗，只是這週的留白。</div>
+        <div id="wheelBody"></div>
+      </div>
+      <div class="rv-card" id="moodMapCard">
+        <div class="rv-h"><span class="ic-circle c-butter"><i data-lucide="smile"></i></span><b>心情地圖</b>
+          <span style="margin-left:auto;font-size:9.5px;font-weight:700;color:var(--muted)">這週，你過得怎樣？</span></div>
+        <div class="rv-sub">不看你做了多少事，只看你怎麼度過。區塊越大，代表那種心情陪你越久。</div>
+        <div id="s2MoodMap"></div>
+      </div>
       <div class="sec">
         <div class="sec-h cal-toggle" id="calToggle" style="cursor:pointer"><span class="ic-circle c-sky"><i data-lucide="calendar"></i></span>日曆<span id="calChev" style="margin-left:auto;color:var(--muted);font-size:13px">▾</span></div>
         <div class="inner" id="calBody" style="display:none;max-height:0;overflow:hidden">
@@ -1422,9 +1669,13 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
     </div>
     <div class="pg-body bt-pg">
       <div class="bt-hd">
-        <div class="bt-av"><img src="https://api.dicebear.com/10.x/gaze/svg?tags=animation&seed=jia" width="48" height="48" alt="管家" onerror="this.style.display='none';this.parentNode.classList.add('noav')"></div>
+        <div class="bt-av" id="btAv"><img src="https://api.dicebear.com/10.x/gaze/svg?tags=animation&seed=jia" width="48" height="48" alt="管家" onerror="this.style.display='none';this.parentNode.classList.add('noav')"><span class="mush">🍄</span></div>
         <div class="txt"><div class="nm">管家</div><div class="st" id="btStatus">只看數據，不會聊天</div></div>
         <button class="gear" onclick="s2OpenApiModal()" title="AI 管家設定"><i data-lucide="settings"></i></button>
+      </div>
+      <div class="bt-mood" id="btMood">
+        <span class="bm-ic" id="bmIc">🌱</span>
+        <div class="bm-txt"><div class="bm-t" id="bmT">正在看看你的近況…</div><div class="bm-s" id="bmS">状態會跟著你的記錄變化</div></div>
       </div>
       <div id="btKnow"></div>
       <div id="btSub"></div>
@@ -1666,6 +1917,15 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   <button class="btn btn-ghost btn-block sheet-cancel" id="iconCancel">取消</button>
 </div>
 
+<div class="overlay" id="colorSheetOverlay"></div>
+<div class="sheet" id="colorSheet">
+  <div class="grab"></div>
+  <div class="sh-title">卡片顏色</div>
+  <div class="sh-sub">低飽和配色，和整體風格一致</div>
+  <div class="cl-grid" id="colorGrid"></div>
+  <button class="btn btn-ghost btn-block sheet-cancel" id="colorCancel">取消</button>
+</div>
+
 <!-- 撤銷提示條 -->
 <div class="undo-bar" id="undoBar">
   <span class="u-txt" id="undoTxt"></span>
@@ -1730,7 +1990,20 @@ const TYPE_META = {
   '雜事': { emoji: '<i data-lucide="brush"></i>', icon: 'brush', color: 't-雜事' },
 };
 /* 卡片圖標可選清單（全部來自內聯 lucide 庫） */
-const ICON_PALETTE = ['briefcase','sprout','armchair','brush','notebook-pen','book','graduation-cap','list-todo','clipboard-list','laptop','code','presentation','mail','phone','message-square','users','handshake','camera','music','headphones','mic','video','image','paintbrush','wand-2','dumbbell','bike','footprints','heart','stethoscope','pill','apple','house','sofa','cooking-pot','utensils','washing-machine','shopping-cart','spray-can','coffee','plane','map-pin','car','wallet','piggy-bank','languages'];
+const ICON_PALETTE = [
+  /* 工作/學習 */
+  'briefcase','laptop','code','presentation','clipboard-list','list-todo','notebook-pen','pen-line','pencil','book','book-open','graduation-cap','mail','phone','message-square','users','handshake','scan','type',
+  /* 創意/興趣 */
+  'brush','paintbrush','palette','wand-2','camera','image','video','mic','music','headphones','film','sparkles','scissors','shapes','pen-tool',
+  /* 運動/健康 */
+  'dumbbell','bike','footprints','heart','heart-pulse','stethoscope','pill','activity','baby',
+  /* 生活/家務 */
+  'house','sofa','armchair','cooking-pot','utensils','washing-machine','spray-can','shopping-cart','shopping-bag','coffee','cup-soda','apple','bed','package','flame','gift',
+  /* 自然/外出 */
+  'sprout','flower-2','sun','moon','star','cloud-sun','droplet','droplets','plane','map-pin','car','compass',
+  /* 時間/其他 */
+  'clock','alarm-clock','timer','bell','calendar-heart','target','trophy','zap','smile','languages','wallet','piggy-bank'
+];
 const TYPES = ['副業', '自我成長', '放鬆', '雜事'];
 const FILTERS = ['全部', '副業', '自我成長', '放鬆', '雜事', '長期專案', '已歸檔'];
 const QUICK_DURATIONS = [5, 10, 15, 30, 60];
@@ -2048,6 +2321,7 @@ let state = {
   selecting: { state: new Set(), activity: new Set() },
   bowelCount: 0,
   waterCups: 0,
+  mood: null,               /* 今日心情四象限 key（P22） */
   openProjects: new Set(), // 長期專案模式下已展開的專案名
 };
 
@@ -2089,7 +2363,10 @@ function openModal(html) {
   $('#modalBox').innerHTML = html;
   $('#modalRoot').classList.add('show');
 }
-function closeModal() { $('#modalRoot').classList.remove('show'); }
+function closeModal() {
+  if (typeof blindTick !== 'undefined' && blindTick) { clearInterval(blindTick); blindTick = null; }
+  $('#modalRoot').classList.remove('show');
+}
 
 /* ---------------- 能量 ---------------- */
 async function getSuggestedEnergy() {
@@ -2203,6 +2480,33 @@ function typeCi(type) {
   if (type === '雜事') return 'c-pink';
   return 'c-violet';
 }
+/* P17：油畫 5 色系 × 深淺共 10 色（低飽和莫蘭迪，和諧柔軟）*/
+const CARD_COLORS = [
+  { k:'',          n:'跟隨類型', sw:'linear-gradient(135deg,#EEEFFC,#E4EBF1,#E7EDE3,#F4E7DF)' },
+  { k:'c-clay-l',  n:'櫻花粉·淺', sw:'#FBE4EA' },
+  { k:'c-clay-d',  n:'櫻花粉·深', sw:'#F3C5D3' },
+  { k:'c-ochre-l', n:'奶油黃·淺', sw:'#FDF6DC' },
+  { k:'c-ochre-d', n:'奶油黃·深', sw:'#F5E5B4' },
+  { k:'c-sage-l',  n:'薄荷綠·淺', sw:'#E8F3E9' },
+  { k:'c-sage-d',  n:'薄荷綠·深', sw:'#CFE6D3' },
+  { k:'c-azure-l', n:'晴空藍·淺', sw:'#E5F1FB' },
+  { k:'c-azure-d', n:'晴空藍·深', sw:'#C7DDF0' },
+  { k:'c-mauve-l', n:'薰衣紫·淺', sw:'#EFE9FA' },
+  { k:'c-mauve-d', n:'薰衣紫·深', sw:'#DCD1EF' },
+];
+/* 舊分類色：保留兼容既有卡片自定色資料 */
+const LEGACY_CARD_COLORS = ['c-violet','c-sky','c-mint','c-pink','c-butter','c-night','c-slate','c-green'];
+const LEGACY_COLOR_NAMES = { 'c-violet':'霧紫','c-sky':'天藍','c-mint':'薄荷綠','c-pink':'櫻花粉','c-butter':'蜜糖','c-night':'夜藍','c-slate':'石墨','c-green':'青苔' };
+function cardCi(c) {
+  if (c && typeof c.color === 'string' && c.color &&
+      (CARD_COLORS.some(x => x.k === c.color) || LEGACY_CARD_COLORS.indexOf(c.color) >= 0)) return c.color;
+  return typeCi(c ? c.type : '');
+}
+function colorName(k) {
+  var f = CARD_COLORS.find(x => x.k === k);
+  if (f) return f.n;
+  return LEGACY_COLOR_NAMES[k] || '跟隨類型';
+}
 async function drawCards() {
   const list = await ldb.cards.toArray();
   const pool = list.filter(c => !c.isArchived && (c.energyAmount || 3) <= state.energy);
@@ -2213,6 +2517,61 @@ async function drawCards() {
   }
   state.drawn = weightedSample(pool, 3);
   renderDrawn();
+}
+/* ---------------- P15：5 分鐘放鬆盲盒（不記錄任何數據） ----------------
+   纯粹的「替代滑手机」解压工具：随机抽一件小事 + 5 分钟倒计时，结束自动关闭。*/
+const BLIND_ITEMS = [
+  { e:'🌬️', t:'發呆 5 分鐘', s:'什麼都不做，看著空氣，讓腦子自己漫遊。' },
+  { e:'🎵', t:'聽一首歌', s:'戴上耳機，只聽這一首，不切歌。' },
+  { e:'🌿', t:'去陽台吹風', s:'站起來，走到有光的地方，深呼吸三口。' },
+  { e:'💧', t:'喝杯水', s:'慢慢喝，感受水走過喉嚨，順便舒展肩膀。' },
+  { e:'😌', t:'閉眼休息', s:'閉上眼睛，計時 5 分鐘，什麼都不想。' },
+  { e:'🧘', t:'深呼吸 10 次', s:'吸 4 秒、停 4 秒、吐 6 秒，重複十次。' },
+  { e:'🪟', t:'看看窗外', s:'找一個窗，看看遠方，讓眼睛放鬆。' },
+  { e:'🤸', t:'伸個懶腰', s:'站起來伸展四肢，轉轉脖子與手腕。' },
+  { e:'🍵', t:'泡杯茶', s:'用熱水泡一杯，等它慢慢變涼。' },
+  { e:'🫧', t:'揉揉肩頸', s:'用指尖按壓肩膀與後頸，慢慢來。' },
+  { e:'📖', t:'讀一頁書', s:'翻開手邊的書，只讀一頁，不求記住。' },
+  { e:'🤲', t:'活動手腳', s:'轉轉手腕、腳踝，慢慢伸展。' },
+  { e:'🌧️', t:'聽一段雨聲', s:'找段雨聲或白噪音，靜靜聽著。' },
+  { e:'🪴', t:'看看植物', s:'瞧瞧桌邊的綠意，摸摸葉子。' },
+  { e:'✏️', t:'隨手畫幾筆', s:'拿張紙亂畫，不為好看，只為放空。' },
+];
+let blindTick = null;
+function openBlindBox() {
+  const pick = BLIND_ITEMS[Math.floor(Math.random() * BLIND_ITEMS.length)];
+  const TOTAL = 300;
+  openModal(
+    '<div class="m-head"><h2><i data-lucide="gift"></i> 5 分鐘放鬆盲盒</h2><button class="m-close" onclick="closeBlindBox()"><i data-lucide="x"></i></button></div>' +
+    '<div class="blind-card">' +
+    '<div class="blind-kicker">這 5 分鐘，留給你自己</div>' +
+    '<div class="blind-emoji">' + pick.e + '</div>' +
+    '<div class="blind-title">' + pick.t + '</div>' +
+    '<div class="blind-sub">' + pick.s + '</div>' +
+    '<div class="blind-count" id="blindCount">5:00</div>' +
+    '<div class="blind-bar"><i id="blindBar"></i></div>' +
+    '<div class="blind-done" id="blindDone">時間到就自動關閉，不記錄任何數據</div>' +
+    '<button class="btn btn-ghost btn-block" onclick="closeBlindBox()">先不做了</button>' +
+    '</div>'
+  );
+  let left = TOTAL;
+  const cnt = $('#blindCount'), bar = $('#blindBar'), done = $('#blindDone');
+  if (blindTick) clearInterval(blindTick);
+  blindTick = setInterval(() => {
+    left--;
+    if (cnt) cnt.innerHTML = Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0');
+    if (bar) bar.style.width = (left / TOTAL * 100) + '%';
+    if (left <= 20 && left > 0 && done) { done.textContent = '快好了，慢慢來 ☕'; done.style.color = 'var(--accent-quiet-ink)'; }
+    if (left <= 0) {
+      clearInterval(blindTick); blindTick = null;
+      closeModal();
+      toast('5 分鐘到了，回到當下 🌿');
+    }
+  }, 1000);
+}
+function closeBlindBox() {
+  if (blindTick) { clearInterval(blindTick); blindTick = null; }
+  closeModal();
 }
 /* 加權抽樣（不重複）：距截止 ≤3 天（含已過期）權重 1.4，其餘 1——只是稍微提高，不是強制 */
 function weightedSample(pool, n) {
@@ -2233,7 +2592,7 @@ function renderDrawn() {
   if (!state.drawn.length) { g.innerHTML = ''; return; }
   g.innerHTML = state.drawn.map(c => {
     const meta = TYPE_META[c.type] || TYPE_META['自我成長'];
-    const ci = typeCi(c.type);
+    const ci = cardCi(c);
     const em = ENERGY_MODES[c.energyMode] || ENERGY_MODES['neutral'];
     const iconName = c.icon || meta.icon;
     return '<article class="dcard ' + ci + '">' +
@@ -2245,7 +2604,8 @@ function renderDrawn() {
       '<div class="dc-mid"><div class="dc-nz"><div class="dc-n">' + esc(c.name) + '</div></div>' +
       '<div class="dc-pills">' +
       '<span class="pc-time">' + esc(c.duration) + ' 分鐘</span>' +
-      '<span class="pc-en">' + em.label + ' ' + (c.energyAmount != null ? c.energyAmount : 3) + '</span></div></div>' +
+      '<span class="pc-en">' + em.label + ' ' + (c.energyAmount != null ? c.energyAmount : 3) + '</span></div>' +
+      (c.why ? '<div class="dc-why"><i data-lucide="sparkles"></i><span>為什麼：' + esc(c.why) + '</span></div>' : '') + '</div>' +
       '<div class="dc-foot">' +
       '<button class="dc-go" title="開始計時" onclick="startTimer(' + c.id + ')"><i data-lucide="play"></i>開始</button>' +
       '<button class="dc-sch" title="加入時間線" onclick="openAddTimeSheet(' + c.id + ')"><i data-lucide="calendar"></i></button>' +
@@ -2402,6 +2762,7 @@ async function confirmCompletion(cardId) {
   await markTimelineDoneByCard(card.id);
   const cheer = CHEERS[Math.floor(Math.random() * CHEERS.length)];
   toast(cheer);
+  Promise.resolve(s2ButlerCheer()).catch(function () { /* 管家氣泡靜默失敗 */ });
   timer = null;
   renderCards();
   renderReview();
@@ -2650,7 +3011,7 @@ function scheduleItemHtml(it, cardMap) {
   if (it.kind === 'card') {
     const c = cardMap ? cardMap.get(it.cardId) : null;
     const meta = TYPE_META[it.type] || TYPE_META['自我成長'];
-    ci = typeCi(it.type);
+    ci = cardCi(c) || typeCi(it.type);
     icon = '<i data-lucide="' + esc((c && c.icon) || meta.icon) + '"></i>';
     const mins = (c && c.duration != null) ? c.duration : it.duration;
     dur = mins != null ? esc(mins) + ' 分鐘' : '';
@@ -2934,6 +3295,7 @@ async function toggleScheduleDone(id) {
       try { card = await ldb.cards.get(it.cardId); } catch (e) { /* ignore */ }
     }
     if (card) showArchiveToast(card.id);
+    Promise.resolve(s2ButlerCheer()).catch(function () { /* 管家氣泡靜默失敗 */ });
   }
 }
 async function startTimelineCard(id) {
@@ -2981,7 +3343,7 @@ async function renderCards() {
     }
     g.innerHTML = arch.map(c => {
       const meta = TYPE_META[c.type] || TYPE_META['自我成長'];
-      const ci = typeCi(c.type);
+      const ci = cardCi(c);
       return '<div class="citem arch" style="--cb:var(--' + ci + '-ink)">' +
         '<div class="ctop"><span class="ic-circle ' + ci + '" style="background:var(--' + ci + '-bg);color:var(--' + ci + '-ink)"><i data-lucide="' + esc(c.icon || meta.icon) + '"></i></span>' +
         '<span class="ct-right"><span class="tbadge ' + ci + '">' + esc(c.type) + '</span>' +
@@ -3010,7 +3372,7 @@ async function renderCards() {
   } else {
     g.innerHTML = shown.map(c => {
       const meta = TYPE_META[c.type] || TYPE_META['自我成長'];
-      const ci = typeCi(c.type);
+      const ci = cardCi(c);
       const steps = Array.isArray(c.steps) ? c.steps : [];
       const done = Array.isArray(c.stepDone) ? c.stepDone : [];
       const doneN = steps.reduce((n, _t, i) => n + (done[i] ? 1 : 0), 0);
@@ -3029,7 +3391,7 @@ async function renderCards() {
         }).join('');
       }
       return '<div class="c2card' + (steps.length ? ' has-steps' : ' flat') + '" data-card="' + c.id + '">' + ghosts +
-        '<div class="c2main" style="--cb:var(--' + ci + '-ink)">' +
+        '<div class="c2main' + (c.why ? ' has-why' : '') + '" style="--cb:var(--' + ci + '-ink)">' +
         '<div class="c2top"><span class="ic-circle ' + ci + '" style="background:var(--' + ci + '-bg);color:var(--' + ci + '-ink)"><i data-lucide="' + esc(c.icon || meta.icon) + '"></i></span>' +
         '<div class="c2head"><div class="cname">' + esc(c.name) + '</div>' +
         (c.projectName ? '<span class="c2proj" title="' + esc(c.projectName) + '">' + esc(c.projectName) + '</span>' : '') +
@@ -3043,6 +3405,7 @@ async function renderCards() {
         '<span class="epil">' + esc(energyBadge(c)) + '</span>' + stepChip +
         '</div>' +
         (c.action ? '<div class="c2desc">' + esc(c.action) + '</div>' : '<div class="c2desc c2desc-empty"></div>') +
+        (c.why ? '<div class="why-line"><i data-lucide="sparkles"></i><span>為什麼：' + esc(c.why) + '</span></div>' : '') +
         (steps.length ? '<div class="c2stepview" aria-hidden="true"></div>' : '') +
         '<div class="c2acts">' +
         '<button type="button" class="c2btn c2edit" onclick="editCard(' + c.id + ')"><i data-lucide="pencil"></i>編輯</button>' +
@@ -3106,11 +3469,12 @@ async function renderProjectCards(list) {
     const open = state.openProjects.has(name);
     const kids = open ? '<div class="p-kids">' + cards.map(c => {
       const meta = TYPE_META[c.type] || TYPE_META['自我成長'];
-      const ci = typeCi(c.type);
+      const ci = cardCi(c);
       const kd = doneIds.has(c.id);
       return '<div class="pkid' + (kd ? ' done' : '') + '" data-card="' + c.id + '">' +
         '<span class="k-ic ' + ci + '" style="background:var(--' + ci + '-bg);color:var(--' + ci + '-ink)"><i data-lucide="' + esc(c.icon || meta.icon) + '"></i></span>' +
         '<span class="k-n">' + esc(c.name) + '</span>' +
+        (c.why ? '<span class="pk-why" title="為什麼：' + esc(c.why) + '">✦ ' + esc(c.why) + '</span>' : '') +
         '<span class="k-m">' + c.duration + ' 分' + (kd ? ' · ✓' : '') + '</span></div>';
     }).join('') + '</div>' : '';
     return '<div class="pcard' + (open ? ' open' : '') + '" data-proj="' + esc(name) + '">' +
@@ -3165,6 +3529,13 @@ function cardForm(card) {
     '<button type="button" class="pselect" id="fIconBtn"><span class="psv" id="fIconVal" style="display:flex;align-items:center;gap:8px">' +
     '<i data-lucide="' + esc(c.icon || (TYPE_META[c.type] || TYPE_META['自我成長']).icon) + '"></i><span>' + (c.icon ? '自訂圖標' : '跟隨類型') + '</span></span>' +
     '<span class="ps-chev"><i data-lucide="chevron-down"></i></span></button></div>' +
+    '<div class="fld"><label>卡片顏色 <span class="hint">選填 · 不選則跟隨類型</span></label>' +
+    '<button type="button" class="pselect" id="fColorBtn"><span class="psv" id="fColorVal" style="display:flex;align-items:center;gap:8px">' +
+    '<span class="cl-dot" id="fColorDot"></span><span id="fColorTxt">' + (c.color ? colorName(c.color) : '跟隨類型') + '</span></span>' +
+    '<span class="ps-chev"><i data-lucide="chevron-down"></i></span></button></div>' +
+    '<div class="fld"><label>為什麼做這件事？ <span class="hint">選填 · 淡淡提醒你，這不是打工，是為自己添磚</span></label>' +
+    '<input type="text" id="fWhy" class="input" placeholder="例如：學剪輯是為了紀錄生活" value="' + esc(c.why || '') + '">' +
+    '<div class="hint2">抽卡與專案裡會靜靜出現在標題下方</div></div>' +
     '<div class="fld"><label>截止日 <span class="hint">選填 · 僅作輔助提醒，不催不惱</span></label>' +
     '<div class="dl-row"><button type="button" class="dl-main" id="fDeadlineBtn"><i data-lucide="flag"></i>' +
     '<span class="dlv' + (c.deadline ? '' : ' unset') + '" id="fDeadlineVal">' + (c.deadline ? mdStr(parseDate(c.deadline)) : '未設定') + '</span>' +
@@ -3197,6 +3568,13 @@ function cardForm(card) {
       updateIconField(name);
     });
   });
+  $('#fColorBtn').addEventListener('click', () => {
+    const cur = (window._cardDraft && window._cardDraft.color) || '';
+    openColorSheet(cur, (k) => {
+      if (window._cardDraft) window._cardDraft.color = k;
+      updateColorField(k);
+    });
+  });
   $('#fDeadlineBtn').addEventListener('click', () => {
     const cur = (window._cardDraft && window._cardDraft.deadline) || '';
     openDateSheet(cur, (ds) => {
@@ -3225,6 +3603,13 @@ function updateIconField(name) {
   const meta = TYPE_META[(window._cardDraft || {}).type] || TYPE_META['自我成長'];
   v.innerHTML = '<i data-lucide="' + esc(name || meta.icon) + '"></i><span>' + (name ? '自訂圖標' : '跟隨類型') + '</span>';
   lucide.createIcons(v);
+}
+function updateColorField(k) {
+  const dot = $('#fColorDot'), txt = $('#fColorTxt');
+  if (!dot) return;
+  const meta = CARD_COLORS.find(x => x.k === k);
+  dot.style.background = meta ? meta.sw : 'var(--soft)';
+  if (txt) txt.textContent = meta ? meta.n : '跟隨類型';
 }
 function updateDeadlineField(ds) {
   const v = $('#fDeadlineVal'), sub = $('#fDeadlineSub'), clr = $('#fDeadlineClear');
@@ -3268,6 +3653,22 @@ function closeIconSheet() {
   $('#iconSheet').classList.remove('show');
   $('#iconSheetOverlay').classList.remove('show');
   iconCtx = null;
+}
+/* ---------- P15：卡片顏色選擇（Bottom Sheet） ---------- */
+let colorCtx = null;
+function openColorSheet(current, onPick) {
+  colorCtx = { value: current || '', onPick };
+  $('#colorGrid').innerHTML = CARD_COLORS.map(o =>
+    '<button type="button" class="cl-opt' + (!o.k ? ' follow' : '') + (o.k === current ? ' on' : '') + '" data-k="' + o.k + '">' +
+    '<span class="sw" style="' + (!o.k ? '' : 'background:' + o.sw) + '"></span>' +
+    '<span class="cn">' + o.n + '</span></button>').join('');
+  $('#colorSheet').classList.add('show');
+  $('#colorSheetOverlay').classList.add('show');
+}
+function closeColorSheet() {
+  $('#colorSheet').classList.remove('show');
+  $('#colorSheetOverlay').classList.remove('show');
+  colorCtx = null;
 }
 
 let formFrom = 'cards';
@@ -3314,6 +3715,8 @@ function bindCardFormSegs(c) {
     if (h) h.textContent = cur.isRepeating ? '循環：可反覆做，完成後也能收進成就牆' : '一次性：完成後可選擇歸檔移除';
   });
   window._cardDraft = cur;
+  /* P15：初始化颜色圆点（表單 DOM 已由 cardForm 生成） */
+  setTimeout(function () { updateColorField(cur.color || ''); }, 0);
 }
 /* ---------------- 時間滾輪選擇器（Wheel Picker） ---------------- */
 let wheelCtx = null;
@@ -3425,6 +3828,8 @@ async function saveCard(id) {
     type: draft.type || '自我成長',
     projectName: (draft.projectName || '').trim(),
     icon: draft.icon || '',
+    color: draft.color || '',
+    why: $('#fWhy') ? $('#fWhy').value.trim() : '',
     deadline: draft.deadline || '',
     isRepeating: !!draft.isRepeating,
     steps: steps,
@@ -3563,6 +3968,9 @@ async function renderRecord(date) {
   state.selecting.activity = new Set(log && log.activityTags ? log.activityTags : []);
   state.bowelCount = log && log.bowelCount != null ? log.bowelCount : 0;
   state.waterCups = log && log.waterCups != null ? log.waterCups : 0;
+  state.mood = normMood(log && log.mood);   /* P23 回显今日心情（含舊 key 相容） */
+  buildMoodQuad();
+  renderMoodQuad();
   setMeter($('#logPressure'), log ? log.pressure : '中');
   setTgl($('#logExercise'), log ? !!log.exercise : false);
   renderBowel();
@@ -3662,6 +4070,75 @@ function meterValue(el) {
 }
 /* 運動：開關 */
 function setTgl(el, on) { el.classList.toggle('on', !!on); el.dataset.v = on ? '1' : '0'; }
+/* ---------- P24：情緒四象限（10 個 Doodle 手繪表情） ---------- */
+/* 表情風格：Figma Community「Doodle Emoji set」— 圓臉 + 黑色手繪線條五官，手繪重繪後內聯，離線可用 */
+const MOOD_SVG = {
+  excited:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#FFD35E"/><path d="M70 78 L75 91 L88 96 L75 101 L70 114 L65 101 L52 96 L65 91 Z" fill="#3A2E1E"/><path d="M130 78 L135 91 L148 96 L135 101 L130 114 L125 101 L112 96 L125 91 Z" fill="#3A2E1E"/><path d="M62 120 Q100 164 138 120 Z" fill="#3A2E1E"/><path d="M86 146 Q100 158 116 146" stroke="#F79AA8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M152 38 L155 48 L165 51 L155 54 L152 64 L149 54 L139 51 L149 48 Z" fill="#fff" opacity=".9"/><path d="M44 44 L46 51 L53 53 L46 55 L44 62 L42 55 L35 53 L42 51 Z" fill="#fff" opacity=".85"/></svg>',
+  happy:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#FFD35E"/><path d="M56 88 Q70 71 85 88" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M115 88 Q130 71 145 88" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M68 122 Q100 154 133 121" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><ellipse cx="50" cy="112" rx="12" ry="7" fill="#F79AA8" opacity=".55"/><ellipse cx="150" cy="112" rx="12" ry="7" fill="#F79AA8" opacity=".55"/></svg>',
+  love:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#FFD35E"/><path d="M72 110 C52 97 57 77 72 86 C87 77 92 97 72 110 Z" fill="#E8556E"/><path d="M128 110 C108 97 113 77 128 86 C143 77 148 97 128 110 Z" fill="#E8556E"/><path d="M80 130 Q100 148 120 130" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><ellipse cx="50" cy="120" rx="11" ry="6" fill="#F79AA8" opacity=".55"/><ellipse cx="150" cy="120" rx="11" ry="6" fill="#F79AA8" opacity=".55"/></svg>',
+  cool:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#FFD35E"/><rect x="38" y="76" width="56" height="32" rx="13" fill="#3A2E1E"/><rect x="106" y="76" width="56" height="32" rx="13" fill="#3A2E1E"/><path d="M94 88 Q100 83 106 88" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M48 82 L62 82" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".35"/><path d="M116 82 L130 82" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".35"/><path d="M80 134 Q104 149 128 128" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/></svg>',
+  surprised:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#FFD35E"/><circle cx="70" cy="90" r="17" fill="#fff"/><circle cx="70" cy="90" r="8" fill="#3A2E1E"/><circle cx="130" cy="90" r="17" fill="#fff"/><circle cx="130" cy="90" r="8" fill="#3A2E1E"/><path d="M50 62 Q66 54 82 62" stroke="#3A2E1E" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M118 62 Q134 54 150 62" stroke="#3A2E1E" stroke-width="6" fill="none" stroke-linecap="round"/><ellipse cx="100" cy="142" rx="13" ry="18" fill="#3A2E1E"/></svg>',
+  sad:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#7FB6EA"/><path d="M54 90 Q70 105 86 90" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M114 90 Q130 105 146 90" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M70 100 C64 113 62 122 70 127 C78 122 76 113 70 100 Z" fill="#3E86CC"/><path d="M130 100 C124 113 122 122 130 127 C138 122 136 113 130 100 Z" fill="#3E86CC"/><path d="M72 144 Q100 120 128 144" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/></svg>',
+  sleepy:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#FFD35E"/><path d="M54 92 Q70 100 86 92" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M114 92 Q130 100 146 92" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M90 138 Q100 145 110 138" stroke="#3A2E1E" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M150 48 L170 48 L150 68 L170 68" stroke="#3A2E1E" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/></svg>',
+  angry:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#EB746C"/><path d="M48 72 L88 86" stroke="#3A2E1E" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M152 72 L112 86" stroke="#3A2E1E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="70" cy="100" r="7" fill="#3A2E1E"/><circle cx="130" cy="100" r="7" fill="#3A2E1E"/><path d="M72 142 Q100 122 128 142" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M96 44 L90 32 M108 44 L114 32" stroke="#3A2E1E" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/></svg>',
+  nervous:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#8FC0EC"/><circle cx="70" cy="92" r="8" fill="#3A2E1E"/><circle cx="130" cy="92" r="8" fill="#3A2E1E"/><path d="M68 138 Q82 127 96 138 Q110 149 124 138" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M162 58 C162 58 152 74 162 82 C172 74 162 58 162 58 Z" fill="#3E86CC"/><ellipse cx="50" cy="116" rx="11" ry="6" fill="#F79AA8" opacity=".5"/><ellipse cx="150" cy="116" rx="11" ry="6" fill="#F79AA8" opacity=".5"/></svg>',
+  disgusted:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#86C98A"/><path d="M54 84 L84 96 M146 84 L116 96" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M68 136 Q82 124 96 136 Q110 148 126 134" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M88 150 Q100 158 112 148" stroke="#E8556E" stroke-width="6" fill="none" stroke-linecap="round"/></svg>'
+
+};
+const QUADRANTS = {
+  calm:{name:'平靜滿足',cls:'mq-calm'},
+  energized:{name:'活力充沛',cls:'mq-energized'},
+  low:{name:'低落疲憊',cls:'mq-low'},
+  anxious:{name:'焦慮煩躁',cls:'mq-anxious'}
+};
+const QUAD_ORDER = ['calm','energized','low','anxious'];
+const QUAD_FACE = {energized:'happy', calm:'cool', low:'sad', anxious:'nervous'};
+const MOODS = {
+  excited:{name:'興奮',quad:'energized',note:'能量滿滿的一天，記得把這股勁留一點給自己。'},
+  happy:{name:'開心',quad:'energized',note:'快樂值得被記下來，讓它多留一會兒。'},
+  love:{name:'喜愛',quad:'energized',note:'心裡暖暖的，是被什麼觸動了吧。'},
+  cool:{name:'放鬆',quad:'calm',note:'安靜的理所當然，其實很難得。'},
+  surprised:{name:'驚喜',quad:'calm',note:'生活偶爾給的小意外，也是禮物。'},
+  sad:{name:'難過',quad:'low',note:'難過不用藏著，它在提醒你都在乎什麼。'},
+  sleepy:{name:'疲憊',quad:'low',note:'沒力氣的日子，允許自己慢一點也沒關係。'},
+  angry:{name:'生氣',quad:'anxious',note:'憤怒也是一種訊號，聽聽它想說什麼。'},
+  nervous:{name:'焦慮',quad:'anxious',note:'緊繃也是一種訊號，先深呼吸一口氣。'},
+  disgusted:{name:'煩躁',quad:'anxious',note:'有些事就是不順，進情緒裡待一下沒關係。'}
+};
+/* 舊 4 key 相容：舊資料映射到新表情 */
+const MOOD_LEGACY = {energized:'happy', calm:'cool', anxious:'nervous', low:'sad'};
+function normMood(k){ if(!k) return null; if(MOODS[k]) return k; return MOOD_LEGACY[k] || null; }
+function buildMoodQuad(){
+  const host = $('#moodQuad'); if(!host) return;
+  let html = '';
+  QUAD_ORDER.forEach(q=>{
+    const items = Object.keys(MOODS).filter(k=>MOODS[k].quad===q);
+    html += '<div class="mq-zone ' + QUADRANTS[q].cls + '"><div class="mqz-t">' + QUADRANTS[q].name + '</div><div class="mq-face-row">';
+    items.forEach(k=>{
+      html += '<button type="button" class="mood-opt" data-mood="' + k + '" role="radio" aria-checked="false" title="' + MOODS[k].name + '">' +
+        '<span class="mo-ck">✓</span><span class="mo-svg">' + MOOD_SVG[k] + '</span><span class="mo-nm">' + MOODS[k].name + '</span></button>';
+    });
+    html += '</div></div>';
+  });
+  host.innerHTML = html;
+}
+function renderMoodQuad(){
+  const sel = normMood(state.mood);
+  $$('#moodQuad .mood-opt').forEach(b=>{
+    const on = b.dataset.mood === sel;
+    b.classList.toggle('on', !!on);
+    b.setAttribute('aria-checked', on ? 'true' : 'false');
+  });
+  const note = $('#moodNote');
+  if (note) {
+    if (sel && MOODS[sel]) note.innerHTML = '<b>' + MOODS[sel].name + '</b> · ' + MOODS[sel].note;
+    else note.textContent = '心情沒有好壞，只是今天落在哪一格。';
+  }
+}
+function pickMood(key){
+  state.mood = (normMood(state.mood) === key) ? null : key;   /* 再點一次取消 */
+  renderMoodQuad();
+}
 async function renderTagGroups() {
   const states = await getTags('state');
   const acts = await getTags('activity');
@@ -3785,7 +4262,7 @@ async function saveLog() {
     /* 只有「今天」才把目前能量環寫進當日；補記保留原值 */
     energy: isToday ? state.energy : (prevLog ? prevLog.energy : undefined),
     bowelCount: state.bowelCount, waterCups: state.waterCups,
-    stateTags, activityTags, updatedAt: now,
+    stateTags, activityTags, mood: state.mood || null, updatedAt: now,
     cloudId: prevLog ? prevLog.cloudId : undefined,
   });
   const allTags = stateTags.concat(activityTags);
@@ -3803,6 +4280,239 @@ async function saveLog() {
   if (isToday) renderEnergyMeta();
   renderReview();
   renderQuick();
+}
+
+/* ================= P16：生命之輪（Wheel of Life）=================
+   8 個 app 定制維度，全部從現有資料自動推導，不增加任何記錄負擔。
+   每個維度回傳 {score, reasons:[{label,val,detail}]}，讓分數有據可依、可解釋。*/
+const WHEEL_DIMS = [
+  { key:'body',   name:'身心',   emoji:'🌿', ci:'c-mint'   },
+  { key:'work',   name:'副業',   emoji:'💼', ci:'c-sky'    },
+  { key:'growth', name:'成長',   emoji:'📚', ci:'c-violet' },
+  { key:'relax',  name:'放鬆',   emoji:'☕', ci:'c-butter' },
+  { key:'social', name:'人際',   emoji:'👥', ci:'c-pink'   },
+  { key:'family', name:'家庭',   emoji:'🏠', ci:'c-green'  },
+  { key:'mind',   name:'心靈',   emoji:'🌙', ci:'c-night'  },
+  { key:'order',  name:'秩序',   emoji:'✨', ci:'c-slate'  },
+];
+function clamp10(v) { return Math.max(0, Math.min(10, v)); }
+function countDays(logs, pred) { return logs.filter(pred).length; }
+function tagCount(logs, field, names) {
+  return logs.reduce((n, l) => n + (Array.isArray(l[field]) && l[field].some(t => names.indexOf(t) >= 0) ? 1 : 0), 0);
+}
+/* 計算某一週（weekOffset: 0=本週, -1=上週）的 8 維分數 */
+async function s2WheelCompute(weekOffset) {
+  const base = weekRange();
+  const mon = addDays(base.monday, (weekOffset || 0) * 7);
+  const sun = addDays(mon, 6);
+  const mStr = dateStr(mon), sStr = dateStr(sun);
+  const logs = await ldb.dailyLogs.where('date').between(mStr, sStr, true, true).toArray();
+  const recs = await ldb.records.where('ts').between(mon.getTime(), sun.getTime() + 86399999, true, true).toArray();
+  const done = recs.filter(r => r.completed);
+  const days = logs.length || 1;  // 避免除以 0；用「有記錄的天數」當分母更公平
+  const doneType = (t) => done.filter(r => r.type === t).length;
+  const R = (label, val, raw, detail) => ({ label, val: clamp10(Math.round(val * 10) / 10), raw, detail });
+
+  const dims = {};
+
+  // 身心：睡眠達標天數 + 運動 + 疲憊/睡眠不足（負向）
+  const sleepOk = countDays(logs, l => l.sleepHours != null && l.sleepHours >= 6.5 && l.sleepHours <= 9);
+  const exercise = countDays(logs, l => !!l.exercise);
+  const tired = tagCount(logs, 'stateTags', ['疲憊', '睡眠不足']);
+  dims.body = {
+    score: clamp10((sleepOk / days) * 5 + (exercise / 3) * 3 + Math.max(0, (1 - tired / days)) * 2),
+    reasons: [
+      R('睡眠達標', sleepOk + '/' + logs.length + ' 天', sleepOk, '每晚睡 6.5–9 小時'),
+      R('運動', exercise + ' 次', exercise, '目標每週 3 次'),
+      R('疲憊天數', tired + ' 天', tired, '越少越好'),
+    ],
+  };
+
+  // 副業：副業類完成 + 工作加班
+  const workCards = doneType('副業');
+  const overtime = tagCount(logs, 'activityTags', ['工作加班']);
+  dims.work = {
+    score: clamp10((workCards / 4) * 6 + (overtime / 4) * 4),
+    reasons: [
+      R('副業完成', workCards + ' 次', workCards, '完成卡片'),
+      R('工作投入', overtime + ' 天', overtime, '標記「工作加班」'),
+    ],
+  };
+
+  // 成長：自我成長類完成 + 學習
+  const growCards = doneType('自我成長');
+  const study = tagCount(logs, 'activityTags', ['學習']);
+  dims.growth = {
+    score: clamp10((growCards / 4) * 6 + (study / 4) * 4),
+    reasons: [
+      R('成長完成', growCards + ' 次', growCards, '完成卡片'),
+      R('學習', study + ' 天', study, '標記「學習」'),
+    ],
+  };
+
+  // 放鬆：放鬆類完成 + 興趣/戶外
+  const relaxCards = doneType('放鬆');
+  const fun = tagCount(logs, 'activityTags', ['興趣', '戶外活動']);
+  dims.relax = {
+    score: clamp10((relaxCards / 4) * 5 + (fun / 4) * 5),
+    reasons: [
+      R('放鬆完成', relaxCards + ' 次', relaxCards, '完成卡片'),
+      R('興趣/戶外', fun + ' 天', fun, '標記「興趣」或「戶外活動」'),
+    ],
+  };
+
+  // 人際：朋友聚會
+  const friends = tagCount(logs, 'activityTags', ['朋友聚會']);
+  dims.social = {
+    score: clamp10((friends / 3) * 10),
+    reasons: [ R('朋友聚會', friends + ' 天', friends, '目標每週 3 次') ],
+  };
+
+  // 家庭：家庭活動
+  const family = tagCount(logs, 'activityTags', ['家庭活動']);
+  dims.family = {
+    score: clamp10((family / 4) * 10),
+    reasons: [ R('家庭活動', family + ' 天', family, '標記「家庭活動」') ],
+  };
+
+  // 心靈：獨處放鬆 + 情緒低落/焦慮（負向）
+  const alone = tagCount(logs, 'activityTags', ['獨處放鬆']);
+  const lowMood = tagCount(logs, 'stateTags', ['情緒低落', '焦慮']);
+  dims.mind = {
+    score: clamp10((alone / 4) * 6 + Math.max(0, (1 - lowMood / days)) * 4),
+    reasons: [
+      R('獨處放鬆', alone + ' 天', alone, '標記「獨處放鬆」'),
+      R('情緒低落', lowMood + ' 天', lowMood, '越少越好'),
+    ],
+  };
+
+  // 秩序：喝水 + 記錄天數 + 壓力
+  const water = countDays(logs, l => (l.waterCups || 0) >= 4);
+  const calm = countDays(logs, l => l.pressure === '低');
+  dims.order = {
+    score: clamp10((water / days) * 4 + (calm / days) * 3 + (logs.length / 7) * 3),
+    reasons: [
+      R('喝水達標', water + '/' + logs.length + ' 天', water, '每天 4 杯以上'),
+      R('壓力低', calm + ' 天', calm, '標記壓力「低」'),
+      R('記錄天數', logs.length + '/7 天', logs.length, '每天記一筆'),
+    ],
+  };
+
+  return { labels: WHEEL_DIMS.map(d => d.name), dims, logs: logs.length, done: done.length, from: mStr, to: sStr };
+}
+
+let s2WheelChart = null;
+let s2WheelData = null;       // 本週計算結果（供點擊展開）
+let s2WheelOpenDim = null;    // 目前展開的維度 key
+
+function s2WheelScoreText(v) {
+  if (v >= 8) return '飽滿';
+  if (v >= 5) return '還行';
+  if (v >= 2.5) return '待照顧';
+  return '留白';
+}
+async function s2RenderWheel() {
+  const box = $('#wheelBody');
+  if (!box) return;
+  const now = await s2WheelCompute(0);
+  const prev = await s2WheelCompute(-1);
+  s2WheelData = now;
+  /* 完全沒有任何記錄 → 空狀態引導（不顯示全 0 讓人挫敗） */
+  if (!now.logs && !prev.logs && !now.done && !prev.done) {
+    box.innerHTML = '<div class="wheel-empty"><div><div class="we-ic">🛞</div>还没有足够的记录来画出你的生命之轮。<br>' +
+      '去「记录」页填几笔睡眠、状态、活动，<br>或完成几张卡片，它就会慢慢长出来。</div></div>';
+    return;
+  }
+  const cur = WHEEL_DIMS.map(d => now.dims[d.key].score);
+  const last = WHEEL_DIMS.map(d => prev.dims[d.key].score);
+  box.innerHTML =
+    '<div class="wheel-legend">' +
+      '<span class="wl"><i></i>本週</span>' +
+      '<span class="wl prev"><i></i>上週</span>' +
+    '</div>' +
+    '<div class="wheel-wrap"><canvas id="wheelChart"></canvas></div>' +
+    '<div id="wheelInsight"></div>' +
+    '<div class="wheel-detail" id="wheelDetail"></div>' +
+    '<div class="wheel-tip">點下面的維度，看分數是怎麼算出來的</div>' +
+    '<div class="wheel-chips" id="wheelChips" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px">' +
+      WHEEL_DIMS.map(d => '<button type="button" class="wchip" data-k="' + d.key + '" style="--wc:var(--' + d.ci + '-ink)">' +
+        d.emoji + ' ' + d.name + ' <b>' + now.dims[d.key].score.toFixed(1) + '</b></button>').join('') +
+    '</div>';
+  /* 洞察：最高/最低維度 */
+  const ranked = WHEEL_DIMS.map(d => ({ d, v: now.dims[d.key].score })).sort((a, b) => b.v - a.v);
+  const hi = ranked[0], lo = ranked[ranked.length - 1];
+  const insight = $('#wheelInsight');
+  if (insight) {
+    insight.innerHTML = '<span class="wi-emoji">' + hi.d.emoji + '</span><b>' + hi.d.name + '</b>這週最飽滿（' + hi.v.toFixed(1) +
+      '），而 <b>' + lo.d.name + '</b>留了白（' + lo.v.toFixed(1) + '）。' +
+      (lo.v < 3 ? '不用急著補滿，偶爾留白也是生活。' : '下面點開看看，是什麼撐起了這些分數。');
+  }
+  /* 雷達圖 */
+  const cv = document.getElementById('wheelChart');
+  if (s2WheelChart) { try { s2WheelChart.destroy(); } catch (e) {} s2WheelChart = null; }
+  if (cv && window.Chart) {
+    const FONT = 'Nunito, system-ui, sans-serif';
+    s2WheelChart = new Chart(cv, {
+      type: 'radar',
+      data: {
+        labels: now.labels,
+        datasets: [
+          { label: '上週', data: last, borderColor: '#C9C4D6', backgroundColor: 'rgba(201,196,214,.08)',
+            borderWidth: 1.5, borderDash: [5, 4], pointBackgroundColor: '#C9C4D6', pointRadius: 2, pointHoverRadius: 3 },
+          { label: '本週', data: cur, borderColor: '#7C80DC', backgroundColor: 'rgba(124,128,220,.20)',
+            borderWidth: 2, pointBackgroundColor: '#7C80DC', pointBorderColor: '#fff', pointBorderWidth: 1.5,
+            pointRadius: 3.5, pointHoverRadius: 5 },
+        ],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: false,
+        layout: { padding: { top: 4, bottom: 4 } },
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: true, callbacks: { label: function (c) {
+            const d = WHEEL_DIMS[c.dataIndex];
+            return c.dataset.label + ' · ' + d.emoji + ' ' + d.name + '：' + Number(c.raw).toFixed(1) + '（' + s2WheelScoreText(c.raw) + '）';
+          } } },
+        },
+        scales: { r: {
+          min: 0, max: 10,
+          ticks: { stepSize: 2, display: false, backdropColor: 'transparent' },
+          grid: { color: 'rgba(58,53,71,.09)' },
+          angleLines: { color: 'rgba(58,53,71,.09)' },
+          pointLabels: { color: '#5F63BE', font: { family: FONT, size: 11, weight: '800' } },
+        } },
+      },
+    });
+  }
+  /* 維度 chip 點擊 */
+  const chips = $('#wheelChips');
+  if (chips) chips.onclick = (e) => {
+    const b = e.target.closest('.wchip');
+    if (!b) return;
+    s2WheelOpenDim = (s2WheelOpenDim === b.dataset.k) ? null : b.dataset.k;
+    $$('#wheelChips .wchip').forEach(x => x.classList.toggle('on', x.dataset.k === s2WheelOpenDim));
+    s2WheelRenderDetail();
+  };
+  if (s2WheelOpenDim) s2WheelRenderDetail();
+}
+function s2WheelRenderDetail() {
+  const box = $('#wheelDetail');
+  if (!box) return;
+  if (!s2WheelOpenDim) { box.classList.remove('show'); box.innerHTML = ''; return; }
+  const d = WHEEL_DIMS.find(x => x.key === s2WheelOpenDim);
+  const info = s2WheelData && s2WheelData.dims[s2WheelOpenDim];
+  if (!d || !info) return;
+  const prevInfo = null;
+  box.innerHTML =
+    '<div class="wd-head"><span class="wd-ic" style="background:var(--' + d.ci + '-bg)">' + d.emoji + '</span>' +
+      '<span class="wd-nm">' + d.name + '</span>' +
+      '<span class="wd-score">' + info.score.toFixed(1) + '<small> /10 · ' + s2WheelScoreText(info.score) + '</small></span></div>' +
+    '<div class="wd-rows">' + info.reasons.map(r =>
+      '<div class="wd-row"><span style="width:62px;flex:0 0 auto">' + r.label + '</span>' +
+      '<span class="bar"><i style="width:' + Math.min(100, r.val * 12) + '%"></i></span>' +
+      '<span class="v">' + r.raw + '</span></div>').join('') + '</div>' +
+    '<div class="wd-empty" style="margin-top:7px">' + info.reasons.map(r => r.label + '：' + r.detail).join(' · ') + '</div>';
+  box.classList.add('show');
 }
 
 /* ---------------- 復盤頁（本週數據 + 可收起日曆） ---------------- */
@@ -3835,6 +4545,8 @@ async function renderReview() {
     '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-mint"><i data-lucide="tag"></i></span><b>最常做的事</b></div>' +
       '<div id="s2Tags"></div></div>';
   renderCalendar();
+  Promise.resolve(s2RenderWheel()).catch(function (e) { console.warn('[s2] wheel', e); });
+  Promise.resolve(s2RenderMoodMap(logs)).catch(function (e) { console.warn('[s2] moodmap', e); });
   Promise.resolve(s2RenderReviewExtras(logs, records)).catch(function (e) { console.warn('[s2] review extras', e); });
 }
 
@@ -3916,6 +4628,7 @@ async function renderCalDetail() {
   const modeStr = (log && log.energyMode) ? modeLabel(log.energyMode) : (recs.length ? modeLabel(recs[recs.length - 1].energyMode) : '未記錄');
   const rows = [];
   rows.push(dk('c-pink', 'message-circle', '一句話', log && log.note ? log.note : '—'));
+  rows.push(dk('c-violet', 'smile', '心情', (function(){ var k=normMood(log&&log.mood); return k ? MOODS[k].name : '未記錄'; })()));
   rows.push(dk('c-butter', 'zap', '能量', (energyVal != null ? energyVal + ' / 10' : '未記錄') + ' · ' + modeStr));
   rows.push(dk('c-night', 'moon', '睡眠', log && log.sleepHours != null ? log.sleepHours + ' 小時' : '未記錄'));
   rows.push(dk('c-green', 'activity', '運動', log ? (log.exercise ? '有' : '無') : '未記錄'));
@@ -3957,45 +4670,65 @@ async function openSettings() {
   const hOn = await getSetting('healthSyncOn', false);
   openModal(
     '<div class="m-head"><h2><i data-lucide="settings"></i> 設定</h2><button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>' +
+    '<div class="set-body">' +
 
-    '<div class="field"><label><i data-lucide="target"></i> 本月主題</label><input type="text" id="sMonth" placeholder="例如：運動月" value="' + esc(month) + '"></div>' +
-    '<div class="field"><label><i data-lucide="target"></i> 本週重點</label><input type="text" id="sWeek" placeholder="例如：早睡" value="' + esc(week) + '"></div>' +
-    '<button class="btn btn-soft btn-block btn-sm" onclick="saveThemes()">儲存主題</button>' +
+    '<div class="set-sec">' +
+      '<div class="section-label"><i data-lucide="palette"></i> 主題設定</div>' +
+      '<div class="field"><label>本月主題</label><input type="text" class="input" id="sMonth" placeholder="例如：運動月" value="' + esc(month) + '"></div>' +
+      '<div class="field"><label>本週重點</label><input type="text" class="input" id="sWeek" placeholder="例如：早睡" value="' + esc(week) + '"></div>' +
+      '<button class="btn btn-primary btn-block btn-sm" onclick="saveThemes()">儲存主題</button>' +
+    '</div>' +
 
-    '<div class="section-label"><i data-lucide="droplet"></i> 經期設定</div>' +
-    '<div class="field"><label>上次經期開始日</label><input type="date" id="sStart" value="' + esc(start) + '"></div>' +
-    '<div class="field"><label>上次經期結束日</label><input type="date" id="sEnd" value="' + esc(end) + '"></div>' +
-    '<div class="field"><label>平均週期（天） <span id="sCycleVal" style="color:var(--primary);font-weight:700;">' + cycleLen + '</span></label>' +
-    '<input type="range" id="sCycle" min="15" max="60" step="1" value="' + cycleLen + '" oninput="document.getElementById(\'sCycleVal\').textContent=this.value"></div>' +
-    '<button class="btn btn-soft btn-block btn-sm" onclick="savePeriod()">儲存經期</button>' +
+    '<div class="set-sec">' +
+      '<div class="section-label"><i data-lucide="droplet"></i> 經期設定</div>' +
+      '<div class="field"><label>上次經期開始日</label><input type="date" class="input" id="sStart" value="' + esc(start) + '"></div>' +
+      '<div class="field"><label>上次經期結束日</label><input type="date" class="input" id="sEnd" value="' + esc(end) + '"></div>' +
+      '<div class="field"><label>平均週期（天） <span id="sCycleVal" style="color:var(--primary);font-weight:700;">' + cycleLen + '</span></label>' +
+      '<input type="range" id="sCycle" min="15" max="60" step="1" value="' + cycleLen + '" oninput="document.getElementById(\'sCycleVal\').textContent=this.value"></div>' +
+      '<button class="btn btn-primary btn-block btn-sm" onclick="savePeriod()">儲存經期</button>' +
+    '</div>' +
 
-    '<div class="section-label"><i data-lucide="bot"></i> AI 管家</div>' +
-    '<div class="imp-hint" style="margin-top:0;">預設只讀本機紀錄、不送出任何資料。要讓管家回話才需要自帶 Gemini Key（免費層）。</div>' +
-    '<button class="btn btn-soft btn-block btn-sm" onclick="closeModal();switchTab(\'butler\');s2OpenApiModal()"><i data-lucide="key"></i> 設定 AI 管家 / 填入 Key</button>' +
+    '<div class="set-sec">' +
+      '<div class="section-label"><i data-lucide="bot"></i> AI 管家</div>' +
+      '<div class="imp-hint">預設只讀本機紀錄、不送出任何資料。要讓管家回話才需要自帶 Gemini Key（免費層）。</div>' +
+      '<button class="btn btn-soft btn-block btn-sm" onclick="closeModal();switchTab(\'butler\');s2OpenApiModal()"><i data-lucide="key"></i> 設定 AI 管家 / 填入 Key</button>' +
+    '</div>' +
 
-    '<div class="section-label"><i data-lucide="heart-pulse"></i> 健康數據自動同步</div>' +
-    '<div class="imp-hint" style="margin-top:0;">電腦端橋接器把小米運動健康的睡眠/運動整理成 JSON；App 開啟時自動拉取並寫入記錄。</div>' +
-    '<div class="field"><label>JSON 網址（HTTPS）</label><input type="url" id="sHealthUrl" placeholder="https://gist.githubusercontent.com/..." value="' + esc(hUrl) + '"></div>' +
-    '<label class="sw-row"><span>開啟自動同步</span><input type="checkbox" id="sHealthOn"' + (hOn ? ' checked' : '') + '></label>' +
-    '<button class="btn btn-soft btn-block btn-sm" onclick="saveHealthCfg()">儲存健康同步設定</button>' +
-    '<div class="sync-row" id="healthSyncStatus" style="margin:10px 2px;"></div>' +
-    '<button class="btn btn-ghost btn-block btn-sm" style="margin-top:8px;" onclick="manualHealthSync()"><i data-lucide="refresh-cw"></i> 立即同步健康數據</button>' +
+    '<div class="set-sec">' +
+      '<div class="section-label"><i data-lucide="heart-pulse"></i> 健康數據自動同步</div>' +
+      '<div class="imp-hint">電腦端橋接器把小米運動健康的睡眠/運動整理成 JSON；App 開啟時自動拉取並寫入記錄。</div>' +
+      '<div class="field"><label>JSON 網址（HTTPS）</label><input type="url" class="input" id="sHealthUrl" placeholder="https://gist.githubusercontent.com/..." value="' + esc(hUrl) + '"></div>' +
+      '<label class="sw-row"><span>開啟自動同步</span><input type="checkbox" id="sHealthOn"' + (hOn ? ' checked' : '') + '></label>' +
+      '<button class="btn btn-primary btn-block btn-sm" onclick="saveHealthCfg()">儲存健康同步設定</button>' +
+      '<div class="sync-row" id="healthSyncStatus"></div>' +
+      '<button class="btn btn-ghost btn-block btn-sm" onclick="manualHealthSync()"><i data-lucide="refresh-cw"></i> 立即同步健康數據</button>' +
+    '</div>' +
 
-    '<div class="section-label"><i data-lucide="refresh-cw"></i> 雲端同步</div>' +
-    '<div class="imp-hint" style="margin-top:0;">在 WorkBuddy 資料庫版中運行時，資料會自動同步到你的資料庫表格；<br>本機 IndexedDB 永遠是主要儲存，離線也能正常使用。</div>' +
-    '<div class="sync-row" data-sync-status style="margin:10px 2px 10px;"></div>' +
-    '<button class="btn btn-soft btn-block btn-sm" id="syncNowBtn" style="margin-top:8px;" onclick="manualSync()"><i data-lucide="refresh-cw"></i> 立即同步</button>' +
+    '<div class="set-sec">' +
+      '<div class="section-label"><i data-lucide="refresh-cw"></i> 雲端同步</div>' +
+      '<div class="imp-hint">在 WorkBuddy 資料庫版中運行時，資料會自動同步到你的資料庫表格；<br>本機 IndexedDB 永遠是主要儲存，離線也能正常使用。</div>' +
+      '<div class="sync-row" data-sync-status></div>' +
+      '<button class="btn btn-soft btn-block btn-sm" id="syncNowBtn" onclick="manualSync()"><i data-lucide="refresh-cw"></i> 立即同步</button>' +
+    '</div>' +
 
-    '<div class="section-label"><i data-lucide="save"></i> 備份與還原</div>' +
-    '<div class="imp-hint" style="margin-top:0;">換新版本、換裝置或換瀏覽器前，先匯出備份；<br>新版開啟後再匯入，資料即可帶過去。</div>' +
-    '<button class="btn btn-primary btn-block btn-sm" style="margin-top:8px;" onclick="exportJSON()"><i data-lucide="upload"></i> 匯出備份（JSON）</button>' +
-    '<button class="btn btn-soft btn-block btn-sm" style="margin-top:8px;" onclick="pickBackupFile()"><i data-lucide="download"></i> 匯入備份（JSON）</button>' +
-    '<input type="file" id="importFile" accept=".json,application/json" hidden>' +
+    '<div class="set-sec">' +
+      '<div class="section-label"><i data-lucide="save"></i> 備份與還原</div>' +
+      '<div class="imp-hint">換新版本、換裝置或換瀏覽器前，先匯出備份；<br>新版開啟後再匯入，資料即可帶過去。</div>' +
+      '<button class="btn btn-soft btn-block btn-sm" onclick="exportJSON()"><i data-lucide="upload"></i> 匯出備份（JSON）</button>' +
+      '<button class="btn btn-soft btn-block btn-sm" onclick="pickBackupFile()"><i data-lucide="download"></i> 匯入備份（JSON）</button>' +
+      '<input type="file" id="importFile" accept=".json,application/json" hidden>' +
+    '</div>' +
 
-    '<div class="section-label"><i data-lucide="pie-chart"></i> 匯出表格</div>' +
-    '<button class="btn btn-ghost btn-block btn-sm" onclick="exportCSV()">導出 CSV</button>' +
-    '<button class="btn btn-ghost btn-block btn-sm" style="margin-top:8px;background:#FBE3DD;color:var(--danger);" onclick="clearAll()">清除所有數據</button>'
+    '<div class="set-sec">' +
+      '<div class="section-label"><i data-lucide="pie-chart"></i> 匯出表格</div>' +
+      '<button class="btn btn-ghost btn-block btn-sm" onclick="exportCSV()">導出 CSV</button>' +
+      '<button class="btn btn-ghost btn-block btn-sm" style="background:#FBE3DD;color:var(--danger);" onclick="clearAll()">清除所有數據</button>' +
+    '</div>' +
+
+    '</div>'
   );
+  var sm = document.querySelector('.modal-root.show .modal');
+  if (sm) sm.classList.add('set-modal');
   $('#importFile').addEventListener('change', onBackupFileChosen);
   renderSyncStatus(); // 彈窗內新建的 sync-row 需要重新填充
   await renderHealthStatus();
@@ -4235,9 +4968,9 @@ async function exportCSV() {
   const records = await ldb.records.toArray();
   const lines = [];
   lines.push('【每日記錄】');
-  lines.push('日期,一句話記錄,睡眠(小時),工作壓力,運動,排便次數,喝水量(杯),能量流向,狀態標籤,活動標籤');
+  lines.push('日期,一句話記錄,睡眠(小時),工作壓力,運動,排便次數,喝水量(杯),能量流向,狀態標籤,活動標籤,心情');
   logs.sort((a, b) => a.date.localeCompare(b.date)).forEach(l => {
-    lines.push([l.date, csvCell(l.note || ''), l.sleepHours != null ? l.sleepHours : '', l.pressure || '', l.exercise ? '有' : '無', l.bowelCount != null ? l.bowelCount : '', l.waterCups != null ? l.waterCups : '', l.energyMode || '', (l.stateTags || []).join('、'), (l.activityTags || []).join('、')].join(','));
+    lines.push([l.date, csvCell(l.note || ''), l.sleepHours != null ? l.sleepHours : '', l.pressure || '', l.exercise ? '有' : '無', l.bowelCount != null ? l.bowelCount : '', l.waterCups != null ? l.waterCups : '', l.energyMode || '', (l.stateTags || []).join('、'), (l.activityTags || []).join('、'), (function(){var k=normMood(l.mood);return k?MOODS[k].name:'';})()].join(','));
   });
   lines.push('');
   lines.push('【完成記錄】');
@@ -4500,6 +5233,7 @@ function bindEvents() {
   $('#energyPlus').addEventListener('click', () => setEnergy(state.energy + 1));
 
   $('#drawBtn').addEventListener('click', drawCards);
+  $('#blindBtn').addEventListener('click', openBlindBox);
 
 
   $('#addCardBtn').addEventListener('click', openAddCard);
@@ -4691,6 +5425,17 @@ function bindEvents() {
     if (cb) cb(v);
   });
 
+  /* 顏色選擇 */
+  $('#colorSheetOverlay').addEventListener('click', closeColorSheet);
+  $('#colorCancel').addEventListener('click', closeColorSheet);
+  $('#colorGrid').addEventListener('click', e => {
+    const b = e.target.closest('.cl-opt');
+    if (!b || !colorCtx) return;
+    const v = b.dataset.k || '', cb = colorCtx.onPick;
+    closeColorSheet();
+    if (cb) cb(v);
+  });
+
   /* 週曆 */
   $('#wkDays').addEventListener('click', e => {
     const b = e.target.closest('.wd');
@@ -4741,6 +5486,10 @@ function bindEvents() {
   $('#archKeep').addEventListener('click', () => { hideArchiveToast(); }); /* 僅完成今天：卡片留在卡庫 */
   $('#archDo').addEventListener('click', () => { if (archTargetId != null) archiveCard(archTargetId); });
 
+  $('#moodQuad').addEventListener('click', e => {
+    const opt = e.target.closest('.mood-opt');
+    if (opt) pickMood(opt.dataset.mood);
+  });
   $('#stateTags').addEventListener('click', tagClick);
   $('#activityTags').addEventListener('click', tagClick);
   $('#logPressure').addEventListener('click', e => {
@@ -4919,6 +5668,7 @@ const SYNC_DEFS = {
         喝水: { number: r.waterCups == null ? 0 : r.waterCups },
         狀態標籤: { text: (r.stateTags || []).join('、') },
         活動標籤: { text: (r.activityTags || []).join('、') },
+        心情: { select: (function(){var k=normMood(r.mood);return k?MOODS[k].name:'';})() },
         更新時間: { number: r.updatedAt || 0 },
       };
       if (r.energyMode) o['能量流向'] = { select: EM_LABEL[r.energyMode] || r.energyMode };
@@ -4931,6 +5681,7 @@ const SYNC_DEFS = {
       bowelCount: c['排便'] == null ? 0 : c['排便'], waterCups: c['喝水'] == null ? 0 : c['喝水'],
       stateTags: c['狀態標籤'] ? String(c['狀態標籤']).split('、').filter(Boolean) : [],
       activityTags: c['活動標籤'] ? String(c['活動標籤']).split('、').filter(Boolean) : [],
+      mood: (function(){ var nm=c['心情']; if(!nm) return null; var k=Object.keys(MOODS).find(function(x){return MOODS[x].name===nm;}); return k||null; })(),
       updatedAt: c['更新時間'] || 0, cloudId: cloudId,
     }),
   },
@@ -5612,6 +6363,55 @@ async function s2RenderTags(records) {
 function s2PickTag(t) { s2TagSel = t; Promise.resolve(s2RenderTags(s2LastRecords)).catch(function () {}); }
 var s2LastRecords = [];
 
+/* 復盤：心情地圖（本週每日心情分布） */
+function s2TreemapNodes(items, horizontal) {
+  if (!items.length) return '';
+  if (items.length === 1) {
+    var it = items[0], q = QUADRANTS[it.k], f = QUAD_FACE[it.k];
+    return '<div class="mt-tile ' + q.cls + '" style="flex:' + it.v + '">' +
+      '<span class="mt-emoji">' + (MOOD_SVG[f] || '') + '</span>' +
+      '<span class="mt-label"># ' + q.name + '</span>' +
+      '<span class="mt-val">' + it.v + ' 天</span></div>';
+  }
+  var total = 0; items.forEach(function (i) { total += i.v; });
+  var half = total / 2, acc = 0, idx = 1;
+  while (idx < items.length - 1) {
+    acc += items[idx - 1].v;
+    if (acc >= half) break;
+    idx++;
+  }
+  var g1 = items.slice(0, idx), g2 = items.slice(idx);
+  function sum(g) { var t = 0; g.forEach(function (i) { t += i.v; }); return t; }
+  var dir = horizontal ? 'row' : 'col';
+  return '<div class="mt-node ' + dir + '" style="flex:' + total + '">' +
+    s2TreemapNodes(g1, !horizontal) + s2TreemapNodes(g2, !horizontal) + '</div>';
+}
+async function s2RenderMoodMap(logs) {
+  var host = document.getElementById('s2MoodMap');
+  if (!host) return;
+  var qcnt = { calm:0, energized:0, low:0, anxious:0 };
+  (logs || []).forEach(function (l) {
+    var k = (typeof normMood === 'function') ? normMood(l.mood) : l.mood;
+    if (k && MOODS[k]) qcnt[MOODS[k].quad] += 1;
+  });
+  var days = qcnt.calm + qcnt.energized + qcnt.low + qcnt.anxious;
+  if (!days) {
+    host.innerHTML = '<div class="rv-sub" style="margin:2px 0 0">這週還沒記下心情。到「記錄」頁最上面選一格，回頭就能看見自己的起伏。</div>';
+    return;
+  }
+  var items = QUAD_ORDER.filter(function (q) { return qcnt[q] > 0; })
+    .map(function (q) { return { k:q, v:qcnt[q] }; })
+    .sort(function (a, b) { return b.v - a.v; });
+  var html = '<div class="moodtree">' + s2TreemapNodes(items, true) + '</div>';
+  var topQ = items[0].k;
+  var lowish = qcnt.low + qcnt.anxious;
+  var insight = '這週最常落在 <b>' + QUADRANTS[topQ].name + '</b>（' + qcnt[topQ] + ' 天）';
+  if (lowish > days / 2) insight += '。緊繃和低落加起來比較多——你這段時間不容易，記得對自己溫柔一點。';
+  else insight += '。起起伏伏都正常，從來不需要每天都活力滿滿。';
+  html += '<div class="mood-ins">' + insight + '</div>';
+  host.innerHTML = html;
+}
+
 async function s2RenderReviewExtras(logs, records) {
   s2LastRecords = records || [];
   s2RenderHighlight(records);
@@ -6094,16 +6894,15 @@ async function c2FillStepView(cardEl, dir) {
       '<button type="button" class="c2sv-back" data-act="c2back"><i data-lucide="rotate-ccw"></i>返回</button>' +
     '</div>' +
     '<div class="c2sv-body' + (dir > 0 ? ' in-next' : (dir < 0 ? ' in-prev' : '')) + '">' +
-      '<span class="c2sv-stack"><i></i><i></i><i></i></span>' +
       '<div class="c2sv-step' + (isDone ? ' done' : '') + '">' + esc(c.steps[c2StepIdx]) + '</div>' +
       '<button type="button" class="c2sv-check' + (isDone ? ' done' : '') + '" data-act="c2done">' +
         '<i data-lucide="' + (isDone ? 'circle-check' : 'circle-dot') + '"></i>' + (isDone ? '已完成' : '標記完成') +
       '</button>' +
     '</div>' +
     '<div class="c2sv-foot">' +
-      '<button type="button" class="c2sv-nav" data-act="c2prev"><i data-lucide="chevron-left"></i>上一步</button>' +
+      '<button type="button" class="c2sv-nav" data-act="c2prev" aria-label="上一步" title="上一步"><i data-lucide="chevron-left"></i></button>' +
       '<span class="c2sv-hint">滑動切換</span>' +
-      '<button type="button" class="c2sv-nav" data-act="c2next">下一步<i data-lucide="chevron-right"></i></button>' +
+      '<button type="button" class="c2sv-nav" data-act="c2next" aria-label="下一步" title="下一步"><i data-lucide="chevron-right"></i></button>' +
     '</div>';
   if (window.lucide) lucide.createIcons(overlay);
 }
@@ -6155,7 +6954,7 @@ function onC2TouchMove(e) {
     }
   }
 }
-function onC2TouchEnd(e) {
+async function onC2TouchEnd(e) {
   if (!c2Swipe) return;
   var sw = c2Swipe; c2Swipe = null;
   if (sw.main) { sw.main.style.transition = ''; sw.main.style.transform = ''; }
@@ -6163,8 +6962,21 @@ function onC2TouchEnd(e) {
   if (Math.abs(dx) < 40) return; /* 未達門檻：回彈即可 */
   c2SuppressClickUntil = Date.now() + 500;
   if (!sw.wasOpen) {
-    /* 左滑第一步；右滑最後一步 */
-    c2ShowStepView(sw.card, dx < 0 ? 0 : Math.max(0, (sw.total || 1) - 1), dx < 0 ? 1 : -1);
+    var startIdx = 0;
+    if (dx < 0) {
+      /* P17：左滑首次進入 → 從「還沒做的第一步」開始（全完成則回第一步）*/
+      try {
+        var _cid = parseInt(sw.card.dataset.card, 10);
+        var _c = await ldb.cards.get(_cid);
+        var _done = (_c && Array.isArray(_c.stepDone)) ? _c.stepDone : [];
+        var _first = -1;
+        for (var _i = 0; _i < sw.total; _i++) { if (!_done[_i]) { _first = _i; break; } }
+        startIdx = _first < 0 ? 0 : _first;
+      } catch (err) { startIdx = 0; }
+    } else {
+      startIdx = Math.max(0, (sw.total || 1) - 1); /* 右滑最後一步 */
+    }
+    c2ShowStepView(sw.card, startIdx, dx < 0 ? 1 : -1);
   } else {
     c2ShowStepView(sw.card, c2StepIdx + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
   }
@@ -6715,6 +7527,69 @@ function s2ActRemind() {
 }
 
 /* ---------- 主渲染 ---------- */
+/* ---------------- P15：管家情緒狀態化（電子寵物感） ----------------
+   只讀本地 records 完成時間，三態：活躍(≤3天)/休眠(3-7天)/枯萎(>7天)。
+   颜色不是唯一線索：同時用 emoji + 文字 + 頭像濾鏡傳達狀態。*/
+const BT_MOOD = {
+  active: { ic:'☀️', t:'今天狀態真好！', s:'這 3 天你都有在照顧自己，我也跟著亮了起來。' },
+  sleep:  { ic:'💤', t:'等你回來…',   s:'這幾天比較安靜，沒關係，我一直都在。' },
+  wilt:   { ic:'🥀', t:'救命，我快發霉啦！', s:'已經超過一週沒見你完成的卡了，點個 1 分鐘的小卡救救我吧。' },
+};
+async function s2LastDoneDays() {
+  try {
+    const recs = await ldb.records.where('completed').equals(1).toArray();
+    let latest = 0;
+    recs.forEach(r => { if (r.ts > latest) latest = r.ts; });
+    if (!latest) {
+      // 兜底：部分舊資料 completed 可能是 true
+      const all = await ldb.records.toArray();
+      all.forEach(r => { if (r.completed && (r.ts || 0) > latest) latest = r.ts; });
+    }
+    if (!latest) return null;
+    return Math.floor((Date.now() - latest) / 86400000);
+  } catch (e) { return null; }
+}
+function s2MoodKey(days) {
+  if (days == null) return 'sleep';       // 還沒有任何完成記錄：用溫和的休眠，不打击
+  if (days <= 3) return 'active';
+  if (days <= 7) return 'sleep';
+  return 'wilt';
+}
+async function s2RenderButlerMood() {
+  const days = await s2LastDoneDays();
+  const key = s2MoodKey(days);
+  const m = BT_MOOD[key];
+  const av = document.getElementById('btAv');
+  const wrap = document.getElementById('btMood');
+  const ic = document.getElementById('bmIc');
+  const t = document.getElementById('bmT');
+  const sub = document.getElementById('bmS');
+  const st = document.getElementById('btStatus');
+  if (av) { av.classList.remove('mood-active','mood-sleep','mood-wilt'); av.classList.add('mood-' + key); }
+  if (wrap) { wrap.classList.remove('mood-active','mood-sleep','mood-wilt'); wrap.classList.add('mood-' + key); }
+  if (ic) ic.textContent = m.ic;
+  if (t) t.textContent = m.t;
+  if (sub) sub.textContent = m.s;
+  if (st && !st.dataset.apiSet) {
+    st.classList.remove('mood-active','mood-sleep','mood-wilt');
+    st.classList.add('mood-' + key);
+  }
+}
+/* 完成卡片後：管家滿血復活氣泡（任何頁面都能看到，幾秒自動消失） */
+let cheerEl = null, cheerTimer = null;
+async function s2ButlerCheer() {
+  await s2RenderButlerMood();
+  if (cheerEl && cheerEl.parentNode) cheerEl.parentNode.removeChild(cheerEl);
+  if (cheerTimer) clearTimeout(cheerTimer);
+  const el = document.createElement('div');
+  el.className = 'bt-cheer';
+  el.innerHTML = '<span class="bc-av"><img src="https://api.dicebear.com/10.x/gaze/svg?tags=animation&seed=jia" alt=""></span>' +
+    '<span>🎉 謝謝你，我又滿血復活啦！</span>';
+  document.body.appendChild(el);
+  cheerEl = el;
+  cheerTimer = setTimeout(() => { if (el.parentNode) el.parentNode.removeChild(el); cheerEl = null; }, 2800);
+}
+
 async function s2RenderButler() {
   var mode = await getSetting('geminiMode', 'off');
   var connected = (mode === 'gemini' || mode === 'openai');
@@ -6726,8 +7601,12 @@ async function s2RenderButler() {
   } else s2Chat = [];
 
   var st = document.getElementById('btStatus');
-  if (st) st.textContent = mode === 'gemini' ? '已接上 Gemini · 記得最近 14 天' :
-    mode === 'openai' ? '已接上自訂模型 · 只送統計摘要' : '只看數據，不會聊天';
+  if (st) {
+    st.textContent = mode === 'gemini' ? '已接上 Gemini · 記得最近 14 天' :
+      mode === 'openai' ? '已接上自訂模型 · 只送統計摘要' : (connected ? '已接上模型' : '只看數據，不會聊天');
+    if (connected) { st.dataset.apiSet = '1'; st.classList.remove('mood-active','mood-sleep','mood-wilt'); }
+    else { delete st.dataset.apiSet; }
+  }
   var inp = document.getElementById('btText');
   var box = document.getElementById('btInput');
   var send = document.getElementById('btSend');
@@ -6752,6 +7631,7 @@ async function s2RenderButler() {
     await s2RenderObserve();
   }
   if (window.lucide) lucide.createIcons(document.getElementById('page-butler'));
+  Promise.resolve(s2RenderButlerMood()).catch(function () { /* 管家情緒渲染靜默失敗 */ });
 }
 
 /* ---------- ⑰ API 設定：三種模式 ---------- */
@@ -6764,10 +7644,11 @@ function s2QuotaHtml(m) {
       '③ 免費層的內容會被用來改進模型，所以只送你的紀錄摘要，別貼密碼或合約。</div>';
   }
   if (m === 'openai') {
-    return '<div class="qh"><i data-lucide="zap"></i>自填通路的三件事要知道</div>' +
+    return '<div class="qh"><i data-lucide="zap"></i>自填通路要知道的事</div>' +
       '<div class="qb">① DeepSeek、OpenAI 等<b>按用量計費</b>，不是免費層；請到平台看當下費率。<br>' +
-      '② 各家模型名會改，帶入的名稱僅供參考，<b>以平台公告為準</b>。<br>' +
-      '③ 瀏覽器直連可能被 CORS 擋；若測試連線一直失敗，需要一層同源代理。</div>';
+      '② 用 OpenRouter 的 <b>:free</b> 模型：沒買過額度是每分鐘 20 次／每天 50 次；<b>短時間連按會吃到 429，等一下再試，不是 Key 壞了</b>。買過 10 美元額度可升到每天 1000 次。<br>' +
+      '③ 各家模型名會改，帶入的名稱僅供參考，<b>以平台公告為準</b>。<br>' +
+      '④ 瀏覽器直連可能被 CORS 擋；若測試連線一直失敗，需要一層同源代理。</div>';
   }
   return '<div class="qh"><i data-lucide="shield-check"></i>不接也能用</div>' +
     '<div class="qb">睡眠、完成數、停滯標籤都由本機資料算出，<b>不需要任何 Key</b>，' +
@@ -6822,6 +7703,7 @@ async function s2OpenApiModal() {
         '<div class="presets">' +
           '<button type="button" onclick="s2ApiPreset(\'deepseek\')">DeepSeek</button>' +
           '<button type="button" onclick="s2ApiPreset(\'openai\')">OpenAI</button>' +
+          '<button type="button" onclick="s2ApiPreset(\'openrouter\')">OpenRouter 免費</button>' +
           '<button type="button" onclick="s2ApiPreset(\'ollama\')">本機 Ollama</button>' +
         '</div><small>只帶入 Endpoint 與模型名，Key 要自己填。模型名以平台當下公告為準。</small></div>' +
       '<div class="fld"><label>Endpoint（OpenAI 相容 /chat/completions）</label>' +
@@ -6859,7 +7741,8 @@ function s2ApiPreset(p) {
   var presets = {
     deepseek: ['https://api.deepseek.com/chat/completions', 'deepseek-flash'],
     openai:   ['https://api.openai.com/v1/chat/completions', 'gpt-4o-mini'],
-    ollama:   ['http://localhost:11434/v1/chat/completions', 'llama3.2']
+    ollama:   ['http://localhost:11434/v1/chat/completions', 'llama3.2'],
+    openrouter: ['https://openrouter.ai/api/v1/chat/completions', 'google/gemma-4-26b-a4b-it:free']
   };
   var v = presets[p]; if (!v) return;
   var ep = document.getElementById('s2Endpoint'), md = document.getElementById('s2LlmModel');
@@ -6897,8 +7780,12 @@ async function s2ApiTest() {
         body: JSON.stringify({ model: v.mm, messages: [{ role: 'user', content: '只回 OK' }], max_tokens: 10 }) });
       ok = r.ok;
     }
-    box.innerHTML = ok ? '<div class="verified"><i data-lucide="circle-check"></i>已驗證 · 可正常連線</div>'
-      : '<div class="err">HTTP ' + r.status + '：檢查 Key／模型／endpoint</div>';
+    if (ok) box.innerHTML = '<div class="verified"><i data-lucide="circle-check"></i>已驗證 · 可正常連線</div>';
+    else box.innerHTML = '<div class="err">' + (
+      r.status === 429 ? '429：免費額度短暫用盡或上游忙碌——<b>不是你的 Key 錯</b>。等 30 秒～幾分鐘再按測試；若一直 429，可換模型或到 OpenRouter 買 10 美元額度（每天上限 50→1000 次）。'
+      : r.status === 402 ? '402：OpenRouter 帳號餘額不足，到官網加值（不是 Key 錯）。'
+      : (r.status === 401 || r.status === 403) ? 'HTTP ' + r.status + '：Key 無效或沒有權限，檢查 API Key。'
+      : 'HTTP ' + r.status + '：檢查 Key／模型名／endpoint。') + '</div>';
   } catch (e) {
     box.innerHTML = '<div class="err">連不上：' +
       (m === 'openai' ? '檢查 endpoint／Key，或服務是否允許瀏覽器直連（CORS）' : '檢查網路或 Key') + '</div>';
