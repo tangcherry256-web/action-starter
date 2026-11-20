@@ -7766,7 +7766,7 @@ async function s2ApiTest() {
   box.innerHTML = '<div class="err">測試中…</div>';
   var ctl = new AbortController(), to = setTimeout(function () { ctl.abort(); }, 12000);
   try {
-    var r, ok = false;
+    var r, ok = false, detail = '';
     if (m === 'gemini') {
       r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' +
         encodeURIComponent(v.md) + ':generateContent?key=' + encodeURIComponent(v.k),
@@ -7779,19 +7779,58 @@ async function s2ApiTest() {
         signal: ctl.signal,
         body: JSON.stringify({ model: v.mm, messages: [{ role: 'user', content: '只回 OK' }], max_tokens: 10 }) });
       ok = r.ok;
+      if (!ok) {
+        var eb = null;
+        try { eb = await r.clone().json(); } catch (_) {}
+        var eo = (eb && eb.error) || {};
+        var bits = [];
+        if (eo.message) bits.push(String(eo.message).slice(0, 120));
+        if (eo.metadata && (eo.metadata.error_type || eo.metadata.provider_code))
+          bits.push('[' + [eo.metadata.error_type, eo.metadata.provider_code].filter(Boolean).join('/') + ']');
+        var ra = r.headers.get('Retry-After'), rem = r.headers.get('X-RateLimit-Remaining');
+        if (ra) bits.push('等 ' + ra + ' 秒');
+        if (rem !== null && rem !== undefined) bits.push('剩餘 ' + rem);
+        if (!bits.length) { try { bits.push((await r.clone().text()).slice(0, 120)); } catch (_) {} }
+        detail = bits.join(' · ');
+      }
     }
     if (ok) box.innerHTML = '<div class="verified"><i data-lucide="circle-check"></i>已驗證 · 可正常連線</div>';
     else box.innerHTML = '<div class="err">' + (
       r.status === 429 ? '429：免費額度短暫用盡或上游忙碌——<b>不是你的 Key 錯</b>。等 30 秒～幾分鐘再按測試；若一直 429，可換模型或到 OpenRouter 買 10 美元額度（每天上限 50→1000 次）。'
       : r.status === 402 ? '402：OpenRouter 帳號餘額不足，到官網加值（不是 Key 錯）。'
       : (r.status === 401 || r.status === 403) ? 'HTTP ' + r.status + '：Key 無效或沒有權限，檢查 API Key。'
-      : 'HTTP ' + r.status + '：檢查 Key／模型名／endpoint。') + '</div>';
+      : 'HTTP ' + r.status + '：檢查 Key／模型名／endpoint。') +
+      (detail ? '<div style="font-size:11px;opacity:.72;margin-top:5px;word-break:break-all">OpenRouter 回傳：' + esc(detail) + '</div>' : '') +
+      (/openrouter/i.test(v.ep || '') ? '<button type="button" class="bt-mini" style="margin-top:6px" onclick="s2ApiQuota()">查今天剩餘額度</button>' : '') +
+      '</div>';
   } catch (e) {
     box.innerHTML = '<div class="err">連不上：' +
       (m === 'openai' ? '檢查 endpoint／Key，或服務是否允許瀏覽器直連（CORS）' : '檢查網路或 Key') + '</div>';
   } finally {
     clearTimeout(to);
     if (window.lucide) lucide.createIcons(document.getElementById('modalRoot'));
+  }
+}
+/* 查 OpenRouter 今日免費額度：官方建議用 GET /api/v1/key 監控 free_model_daily_requests */
+async function s2ApiQuota() {
+  var box = document.getElementById('s2Verify'); if (!box) return;
+  var ep = ((document.getElementById('s2Endpoint') || {}).value || '').trim();
+  var kk = ((document.getElementById('s2LlmKey') || {}).value || '').trim();
+  if (!kk) { box.innerHTML = '<div class="err">先填 Key 才能查額度。</div>'; return; }
+  var base = ep.replace(/\/chat\/completions[\s\S]*$/, '').replace(/\/$/, '');
+  if (!/openrouter\.ai/.test(base)) { box.innerHTML = '<div class="err">查額度只適用 OpenRouter endpoint。</div>'; return; }
+  box.innerHTML = '<div class="err">查詢中…</div>';
+  try {
+    var r = await fetch(base + '/key', { headers: { 'Authorization': 'Bearer ' + kk } });
+    if (!r.ok) { box.innerHTML = '<div class="err">查不到額度（HTTP ' + r.status + '）。</div>'; return; }
+    var j = await r.json(), d = j.data || {}, f = d.free_model_daily_requests || {};
+    var used = f.used, lim = f.limit, rem = f.remaining;
+    box.innerHTML = '<div class="verified">今日免費額度：已用 <b>' + (used == null ? '?' : used) +
+      '</b> / 上限 <b>' + (lim == null ? '?' : lim) + '</b>，剩餘 <b>' + (rem == null ? '?' : rem) + '</b> 次。<br>' +
+      (rem > 0 ? '額度還夠——若仍 429，多是上游忙碌或共用 IP，等一下再試。'
+               : '額度已用完——明天 UTC 00:00 重置，或買 10 美元額度升到每天 1000 次。') + '</div>';
+  } catch (e) {
+    box.innerHTML = '<div class="err">查詢失敗（CORS 或網路）：' + esc(String((e && e.message) || e).slice(0, 100)) + '</div>';
   }
 }
 async function s2ApiSave() {
