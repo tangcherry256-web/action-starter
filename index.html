@@ -267,7 +267,7 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .proj .pd { margin-left:auto; font-size:11px; font-weight:800; color:var(--muted); }
 
 /* ---------- 記錄頁分組 ---------- */
-.sec { background:var(--bg); border-radius:16px; padding:13px 14px; }
+.sec { background:var(--bg); border-radius:16px; padding:13px 14px; flex:0 0 auto; }
 .sec-h { display:flex; align-items:center; gap:9px; font-size:13.5px; font-weight:900; color:var(--ink); }
 .sec-h small { margin-left:auto; font-size:10.5px; font-weight:700; color:var(--muted); }
 .sec .inner { margin-top:10px; }
@@ -281,35 +281,115 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .tag-chip.on { background:var(--primary); color:#fff; }
 .tag-chip.add { color:var(--primary); font-weight:900; background:var(--soft); box-shadow:none; }
 #cardCount { font-size:11px; font-weight:800; color:var(--muted); margin-bottom:2px; }
-.sleep-row { display:flex; gap:8px; }
-.sleep-col { flex:1; }
-.sleep-col .sl { font-size:10px; font-weight:800; color:var(--muted); display:block; margin-bottom:4px; }
-.time { width:100%; background:var(--card); border:1.5px solid transparent; border-radius:11px; padding:9px 10px; font-size:13px; font-weight:800; color:var(--ink); font-family:inherit; outline:none; }
-.sleep-calc { margin-top:6px; font-size:11px; font-weight:800; color:var(--green); }
-/* ---------- P22：情緒四象限（Russell circumplex） ---------- */
-.mood-axis{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:9.5px;font-weight:800;color:var(--muted);letter-spacing:.2px;}
-.mood-axis .ma-y{display:flex;gap:3px;align-items:center;}
-.mood-axis .ma-x{display:flex;gap:3px;align-items:center;}
-.mood-axis .ma-dim{color:var(--primary);}
-.mood-quad{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;}
-.mq-zone{position:relative;border-radius:16px;padding:8px 7px 7px;display:flex;flex-direction:column;gap:5px;min-width:0;}
-.mq-zone.mq-energized{background:var(--c-ochre-l-bg);}
-.mq-zone.mq-calm{background:var(--c-sage-l-bg);}
-.mq-zone.mq-anxious{background:var(--c-clay-l-bg);}
-.mq-zone.mq-low{background:var(--c-azure-l-bg);}
-.mq-zone .mqz-t{font-size:9px;font-weight:900;color:var(--ink);opacity:.62;letter-spacing:.3px;}
-.mq-face-row{display:flex;justify-content:space-around;align-items:flex-end;gap:2px;flex:1;}
-.mood-opt{position:relative;flex:1 1 0;min-width:0;border:2px solid transparent;border-radius:14px;padding:3px 1px 4px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer;font-family:inherit;background:transparent;transition:transform .18s ease,border-color .18s ease,background .18s ease;}
-.mood-opt .mo-svg{width:100%;max-width:46px;height:auto;display:block;}
-.mood-opt .mo-svg svg{width:100%;height:auto;display:block;}
-.mood-opt .mo-nm{font-size:9px;font-weight:900;margin-top:1px;color:var(--ink);white-space:nowrap;}
-.mood-opt .mo-ck{position:absolute;top:1px;right:2px;font-size:9px;font-weight:900;opacity:0;transform:scale(.6);transition:opacity .18s ease,transform .18s ease;color:var(--primary);}
-.mood-opt.on{background:rgba(255,255,255,.7);border-color:var(--primary);transform:translateY(-2px);box-shadow:0 3px 8px rgba(124,128,220,.18);}
-.mood-opt.on .mo-ck{opacity:1;transform:scale(1);}
-.mood-opt:active{transform:scale(.94);}
-.mood-attribution{font-size:8px;font-weight:600;color:var(--muted);text-align:center;margin-top:6px;opacity:.75;}
-.mood-note{margin-top:8px;font-size:10.5px;font-weight:700;color:var(--muted);text-align:center;line-height:1.5;min-height:15px;}
-.mood-note b{color:var(--primary);}
+/* P29：標籤管理 */
+.tag-tabs{display:flex;gap:6px;margin-bottom:10px;}
+.tag-tabs button{flex:1;border:1.5px solid var(--bd);background:var(--card);color:var(--muted);border-radius:10px;padding:8px;font-size:12px;font-weight:800;font-family:inherit;cursor:pointer;}
+.tag-tabs button.on{background:var(--soft);border-color:var(--primary);color:var(--primary-dark);}
+/* P42：活動圖標選擇器 */
+.tag-ic-pick{margin-bottom:10px;}
+.tag-ic-tip{font-size:10.5px;font-weight:900;color:var(--muted);margin-bottom:6px;}
+.tag-ic-row{display:flex;flex-wrap:wrap;gap:5px;max-height:110px;overflow-y:auto;padding:1px;}
+.tag-ic{width:34px;height:34px;border-radius:9px;border:1.5px solid var(--bd);background:var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);transition:border-color .15s,color .15s,background .15s;}
+.tag-ic svg{width:17px;height:17px;stroke-width:1.9;}
+.tag-ic.on{border-color:var(--primary);background:var(--soft);color:var(--primary);}
+.tag-ic-mini{display:inline-flex;width:22px;height:22px;border-radius:7px;background:var(--bg);align-items:center;justify-content:center;margin-right:7px;color:var(--primary);vertical-align:middle;}
+.tag-ic-mini svg{width:13px;height:13px;stroke-width:2;}
+.tag-add-row{display:flex;gap:6px;align-items:center;margin-bottom:8px;}
+.tag-add-row .input{flex:1;min-width:0;}
+.tag-add-row .bt-mini{flex:0 0 auto;white-space:nowrap;font-size:12px;font-weight:900;border:1.5px solid var(--primary);background:var(--primary);color:#fff;border-radius:10px;padding:8px 14px;cursor:pointer;font-family:inherit;}
+.tag-add-row select{flex:0 0 auto;padding-left:8px;padding-right:8px;font-size:12px;}
+.tag-mgr-list{display:flex;flex-direction:column;gap:6px;max-height:50vh;overflow-y:auto;}
+.tag-mgr-row{display:flex;align-items:center;justify-content:space-between;background:var(--bg);border-radius:10px;padding:9px 12px;font-size:12.5px;font-weight:800;color:var(--ink);}
+.tag-del{width:26px;height:26px;border-radius:8px;border:none;background:#FBE3DD;color:var(--danger);font-weight:900;cursor:pointer;font-size:11px;}
+/* ---------- P29：記錄頁重構（折疊 / 活動網格 / pill / 2D Vitals） ---------- */
+/* 修復標題被手機狀態欄遮擋 */
+.pg-head.rec-head{padding-top:calc(16px + env(safe-area-inset-top));}
+/* 折疊面板 */
+.rec-acc{background:var(--card);border-radius:16px;box-shadow:var(--sh);overflow:hidden;flex:0 0 auto;}
+.rec-acc .acc-hd{display:flex;align-items:center;gap:9px;padding:13px 14px;cursor:pointer;font-size:13.5px;font-weight:900;color:var(--ink);user-select:none;}
+.rec-acc .acc-hd .acc-tt{flex:1;}
+.rec-acc .acc-hd small{font-size:10.5px;font-weight:700;color:var(--muted);}
+.rec-acc .acc-chev{color:var(--muted);font-size:12px;transition:transform .28s ease;}
+.rec-acc.open .acc-chev{transform:rotate(180deg);}
+.rec-acc .acc-bd{max-height:0;overflow:hidden;opacity:0;transition:max-height .36s cubic-bezier(.4,0,.2,1),opacity .24s ease;}
+.rec-acc.open .acc-bd{max-height:1600px;opacity:1;}
+.rec-acc .acc-in{padding:2px 14px 14px;}
+/* 活動圖標網格（lucide 矢量線條，風格統一，非 emoji） */
+.act-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px 6px;}
+.act-cell{position:relative;border:none;background:transparent;border-radius:14px;padding:0;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;font-family:inherit;transition:transform .16s ease;}
+.act-cell .ac-em{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.72);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;color:var(--muted);box-shadow:0 1px 2px rgba(60,60,90,.04);transition:transform .16s ease,color .16s ease,background .16s ease,border-color .16s ease,box-shadow .16s ease;}
+.act-cell .ac-em svg{width:19px;height:19px;stroke-width:1.8;}
+.act-cell .ac-nm{font-size:8.5px;font-weight:800;color:var(--muted);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;line-height:1.2;}
+.act-cell.on .ac-em{background:var(--primary);border-color:var(--primary);color:#fff;transform:scale(1.06);box-shadow:0 3px 10px rgba(124,128,220,.3);}
+.act-cell.on .ac-nm{color:var(--primary-dark);}
+.act-cell:active{transform:scale(.94);}
+/* 詳細情緒 / 狀態 文字膠囊 */
+.pill-grp{margin-bottom:12px;}
+.pill-grp:last-child{margin-bottom:0;}
+.pill-gt{font-size:10.5px;font-weight:900;color:var(--muted);margin-bottom:6px;letter-spacing:.2px;}
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;}
+/* 情緒四維：每維一行可橫滑（仿參考圖） */
+.pill-row.scroll{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding:2px 2px 6px;margin:0 -2px;scrollbar-width:thin;-webkit-overflow-scrolling:touch;}
+.pill-row.scroll .mpill{flex:0 0 auto;}
+/* P42：情緒四維 — 左維度名、右多行膠囊（不橫滑，一屏看全） */
+.emo-grp{display:flex;gap:9px;margin-bottom:12px;}
+.emo-grp:last-child{margin-bottom:0;}
+.emo-dim{flex:0 0 66px;font-size:8.8px;font-weight:900;color:var(--muted);line-height:1.35;padding-top:4px;}
+.emo-dim small{display:block;font-size:6.5px;font-weight:700;opacity:.58;letter-spacing:.05px;margin-top:2px;line-height:1.22;}
+.emo-pills{flex:1;display:flex;flex-wrap:wrap;gap:5px;align-content:flex-start;}
+.emo-pills .mpill{padding:5px 9px;font-size:10.5px;}
+.mpill{border:1.5px solid var(--bd);background:var(--card);color:var(--muted);border-radius:99px;padding:6px 11px;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;transition:background .16s ease,color .16s ease,border-color .16s ease,transform .16s ease;}
+.mpill.on{background:var(--primary);border-color:var(--primary);color:#fff;}
+.mpill:active{transform:scale(.95);}
+/* 2D Vitals 滑板 */
+.vitals-pad{position:relative;width:100%;aspect-ratio:1/1.04;max-height:336px;border-radius:18px;overflow:hidden;touch-action:none;background:linear-gradient(160deg,#FCFCFE 0%,#F4F4FA 100%);border:1px solid rgba(140,140,170,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 1px 3px rgba(60,60,90,.05);cursor:pointer;user-select:none;-webkit-user-select:none;}
+.vitals-pad .vq{position:absolute;width:50%;height:50%;pointer-events:none;transition:opacity .18s ease;}
+.vitals-pad .vq.tl{left:0;top:0;background:rgba(226,138,138,.28);}
+.vitals-pad .vq.tr{right:0;top:0;background:rgba(123,168,222,.30);}
+.vitals-pad .vq.bl{left:0;bottom:0;background:rgba(214,110,110,.24);}
+.vitals-pad .vq.br{right:0;bottom:0;background:rgba(240,196,120,.30);}
+.vitals-pad .vline{position:absolute;background:rgba(120,120,150,.30);pointer-events:none;}
+.vitals-pad .vline.v{left:50%;top:0;bottom:0;width:1px;}
+.vitals-pad .vline.h{top:50%;left:0;right:0;height:1px;}
+.vitals-pad .vlabel{position:absolute;font-size:9px;font-weight:900;color:var(--ink);opacity:.58;letter-spacing:.3px;pointer-events:none;}
+.vitals-pad .vlabel.top{top:7px;left:50%;transform:translateX(-50%);}
+.vitals-pad .vlabel.bot{bottom:7px;left:50%;transform:translateX(-50%);}
+.vitals-pad .vlabel.left{left:7px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;}
+.vitals-pad .vlabel.right{right:7px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;}
+/* P42：四象限各有一點說明 */
+.vitals-pad .vq-lb{position:absolute;width:50%;padding:10px 11px;pointer-events:none;display:flex;flex-direction:column;gap:2px;z-index:1;}
+.vitals-pad .vq-lb.tl{left:0;top:0;align-items:flex-start;}
+.vitals-pad .vq-lb.tr{right:0;top:0;align-items:flex-end;text-align:right;}
+.vitals-pad .vq-lb.bl{left:0;bottom:0;align-items:flex-start;}
+.vitals-pad .vq-lb.br{right:0;bottom:0;align-items:flex-end;text-align:right;}
+.vitals-pad .vq-lb .vl-t{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;font-weight:900;color:var(--ink);opacity:.74;}
+.vitals-pad .vq-lb .vl-t svg{width:11px;height:11px;stroke-width:2.2;}
+.vitals-pad .vq-lb .vl-s{font-size:8px;font-weight:700;color:var(--muted);opacity:.9;line-height:1.3;}
+.vitals-knob{position:absolute;width:36px;height:36px;border-radius:50%;background:var(--kc,#7BA8DE);border:3px solid #fff;box-shadow:0 0 0 1px rgba(60,60,90,.10),0 0 0 5px var(--kg,rgba(123,168,222,.18)),0 3px 10px rgba(60,60,90,.22);transform:translate(-50%,-50%) scale(1);pointer-events:none;z-index:3;transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s ease,background .2s ease;}
+.vitals-knob.drag{transform:translate(-50%,-50%) scale(1.5);box-shadow:0 0 0 1px rgba(255,255,255,.75),0 0 0 9px var(--kg,rgba(123,168,222,.24)),0 6px 18px rgba(60,60,90,.3);}
+.vitals-desc{margin-top:10px;background:var(--soft);border-radius:12px;padding:10px 12px;font-size:11.5px;font-weight:800;color:var(--primary-dark);text-align:center;line-height:1.5;min-height:18px;}
+/* P41：Focus 專注度（5 級刻度 + 圓角色标签） */
+.focus-sec{margin-top:13px;padding:12px 2px 2px;border-top:1px solid var(--bd);}
+.focus-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px;}
+.focus-tt{font-size:12.5px;font-weight:900;color:var(--ink);}
+.focus-badge{border-radius:99px;padding:6px 13px;font-size:12px;font-weight:900;color:#2b2b33;background:#E9E9EE;white-space:nowrap;transition:background .2s ease;}
+.focus-scale{display:flex;gap:7px;}
+.focus-cell{flex:1;height:40px;border:1.5px solid var(--bd);border-radius:11px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:inherit;font-size:19px;font-weight:900;color:transparent;cursor:pointer;transition:transform .16s ease,background .2s ease,border-color .2s ease;}
+.focus-cell.on{border-color:transparent;color:#222;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.focus-cell:active{transform:scale(.94);}
+.focus-ends{display:flex;justify-content:space-between;margin-top:7px;font-size:9.5px;font-weight:800;color:var(--muted);letter-spacing:.2px;}
+/* 折疊後顯示的分數條 */
+.vitals-bars{padding:2px 14px 14px;}
+.vb-row{display:flex;align-items:center;gap:9px;margin-top:10px;}
+.vb-lb{width:42px;font-size:11px;font-weight:900;color:var(--ink);}
+.vb-track{flex:1;display:flex;gap:3px;}
+.vb-track i{flex:1;height:7px;border-radius:99px;background:var(--track);}
+.vb-track i.on{background:var(--primary);}
+.vb-track.energy i.on{background:#E8A05A;}
+.vb-track.stress i.on{background:#D98A94;}
+.vb-track.focus i.on{background:#6FB6C4;}
+.vb-val{width:26px;text-align:right;font-size:11px;font-weight:900;color:var(--ink);}
+@media (prefers-reduced-motion:reduce){.rec-acc .acc-bd,.rec-acc .acc-chev,.act-cell,.mpill,.vitals-knob,.focus-cell,.focus-badge{transition:none !important;}}
 /* 復盤：心情地圖 */
 .moodtree{display:flex;gap:5px;width:100%;height:172px;}
 .mt-node{display:flex;gap:5px;min-width:0;min-height:0;}
@@ -326,7 +406,6 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .mt-tile .mt-val{flex:0 0 auto;line-height:1.25;font-size:12px;font-weight:900;color:var(--ink);opacity:.78;}
 .mood-ins{margin-top:9px;font-size:10.5px;font-weight:600;color:var(--ink);background:var(--soft);border-radius:12px;padding:9px 10px;line-height:1.6;}
 .mood-ins b{color:var(--primary);}
-@media (prefers-reduced-motion:reduce){.mood-opt,.mood-opt .mo-ck{transition:none !important;}}
 .cups { display:flex; gap:4px; flex-wrap:wrap; justify-content:center; }
 .cup { cursor:pointer; }
 .cup svg { width:17px; height:17px; color:var(--tab-ink); }
@@ -1515,6 +1594,141 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .s2api .row{position:sticky;bottom:-18px;margin:12px -18px -18px;padding:10px 18px 18px;
   background:var(--card);border-top:1px solid var(--bd);z-index:2}
 
+/* ================= P43：24 小時睡眠記錄器 ================= */
+/* 記錄頁摘要列 */
+.sleep-sum{display:flex;align-items:center;gap:10px;width:100%;background:var(--card);border:none;border-radius:14px;padding:12px 13px;font-family:inherit;text-align:left;cursor:pointer;box-shadow:inset 0 0 0 1.5px var(--bd);transition:box-shadow .18s,transform .12s;}
+.sleep-sum:active{transform:scale(.985);}
+.sleep-sum .ss-txt{min-width:0;flex:1;}
+.sleep-sum .ss-main{display:block;font-size:14px;font-weight:900;color:var(--ink);letter-spacing:-.01em;font-variant-numeric:tabular-nums;}
+.sleep-sum .ss-main.empty{color:var(--muted);font-weight:800;font-size:12.5px;}
+.sleep-sum .ss-sub{display:flex;align-items:center;gap:5px;margin-top:3px;font-size:10.5px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;}
+.sleep-sum .ss-sub svg{width:11px;height:11px;}
+.sleep-sum .ss-sub .m{color:var(--c-violet-ink);}
+.sleep-sum .ss-sub .s{color:var(--warn-deep);}
+.sleep-sum .ss-sub .ar{color:#C6C1D4;font-weight:900;margin:0 1px;}
+.sleep-sum .ss-chev{width:15px;height:15px;color:var(--muted);opacity:.55;flex:0 0 auto;}
+
+/* 彈窗 */
+.sm-root{position:fixed;inset:0;z-index:75;visibility:hidden;pointer-events:none;}
+.sm-root.show{visibility:visible;pointer-events:auto;}
+.sm-backdrop{position:absolute;inset:0;background:rgba(32,28,54,.38);opacity:0;transition:opacity .24s;}
+.sm-root.show .sm-backdrop{opacity:1;}
+.sm-sheet{position:absolute;left:50%;bottom:0;transform:translate(-50%,100%);width:min(460px,100%);max-height:94vh;max-height:94dvh;background:#fff;border-radius:26px 26px 0 0;display:flex;flex-direction:column;box-shadow:0 -18px 50px -22px rgba(40,28,60,.55);transition:transform .3s cubic-bezier(.22,1,.36,1);overflow:hidden;}
+.sm-root.show .sm-sheet{transform:translate(-50%,0);}
+.sm-root [hidden]{display:none!important;}
+.sm-grab{width:38px;height:4px;border-radius:99px;background:#E4E1EC;margin:8px auto 0;flex:0 0 auto;}
+.sm-head{display:flex;align-items:flex-start;justify-content:space-between;padding:10px 20px 0;flex:0 0 auto;}
+.sm-title{font-size:18px;font-weight:900;color:var(--ink);letter-spacing:-.02em;}
+.sm-date{font-size:10.5px;font-weight:800;color:var(--muted);margin-top:2px;}
+.sm-x{width:32px;height:32px;border-radius:50%;border:none;background:var(--bg);color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.sm-x svg{width:16px;height:16px;}
+.sm-body{overflow-y:auto;padding:0 20px 8px;scrollbar-width:none;flex:1 1 auto;min-height:0;}
+.sm-body::-webkit-scrollbar{display:none;}
+.sm-foot{flex:0 0 auto;padding:10px 20px calc(14px + env(safe-area-inset-bottom));border-top:1px solid #F4F2F8;background:#fff;}
+.sm-foot .btn[disabled]{opacity:.45;box-shadow:none;}
+
+/* 24 小時圓環 */
+.sleep-dial-wrap{position:relative;width:100%;max-width:300px;margin:0 auto;aspect-ratio:1/1;touch-action:none;user-select:none;-webkit-user-select:none;}
+.sleep-dial{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+.sd-track{fill:none;stroke:#F0F0F0;stroke-width:13;}
+.sd-tick{stroke:#E8E5F0;stroke-width:1.5;stroke-linecap:round;}
+.sd-tick.hour{stroke:#D9D5E6;}
+.sd-arc{fill:none;stroke:url(#sleepGrad);stroke-width:13;stroke-linecap:round;}
+.sd-lab{font-size:9px;font-weight:800;fill:#AEA8BD;letter-spacing:.02em;transition:opacity .15s;}
+.sd-lab.dim{opacity:0;}
+.sd-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;width:172px;}
+.sd-dur{font-size:23px;font-weight:900;color:var(--ink);letter-spacing:-.035em;line-height:1.05;font-variant-numeric:tabular-nums;}
+.sd-range{margin-top:6px;font-size:9.5px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.01em;}
+.sd-hint{font-size:10.5px;font-weight:800;color:var(--muted);line-height:1.45;}
+.sd-hint svg{width:21px;height:21px;margin:0 auto 5px;color:#C9C4DA;display:block;}
+
+.sd-badge{position:absolute;width:38px;height:38px;border-radius:50%;border:none;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;cursor:grab;padding:0;transition:transform .16s,box-shadow .16s;touch-action:none;z-index:3;}
+.sd-badge::before{content:'';position:absolute;inset:-8px;border-radius:50%;}
+.sd-badge svg{width:17px;height:17px;pointer-events:none;}
+.sd-badge.bed{background:linear-gradient(150deg,#9094EA,#6B6FCE);color:#fff;box-shadow:0 4px 12px -3px rgba(108,111,206,.55),0 0 0 3px #fff;}
+.sd-badge.wake{background:linear-gradient(150deg,#FFF8EC,#FAE7C6);color:#D89A4C;box-shadow:0 4px 12px -3px rgba(207,160,90,.42),0 0 0 3px #fff;}
+.sd-badge.drag{transform:translate(-50%,-50%) scale(1.22);cursor:grabbing;}
+
+.sd-bubble{position:absolute;transform:translate(-50%,-100%);background:#fff;border-radius:12px;padding:6px 10px;font-size:11px;font-weight:900;color:var(--ink);white-space:nowrap;box-shadow:0 10px 24px -10px rgba(40,28,60,.45),0 0 0 1px rgba(120,112,150,.08);pointer-events:none;opacity:0;transition:opacity .1s;z-index:6;font-variant-numeric:tabular-nums;}
+.sd-bubble.show{opacity:1;}
+.sd-bubble::after{content:'';position:absolute;left:50%;bottom:-5px;width:10px;height:10px;background:#fff;transform:translateX(-50%) rotate(45deg);border-radius:2px;}
+.sd-bubble.below{transform:translate(-50%,0);}
+.sd-bubble.below::after{bottom:auto;top:-5px;}
+
+.same-usual{display:flex;align-items:center;gap:6px;margin:8px auto 0;padding:8px 14px;border-radius:99px;border:none;background:var(--bg);color:var(--muted);font-size:10.5px;font-weight:900;font-family:inherit;cursor:pointer;}
+.same-usual svg{width:12px;height:12px;}
+
+/* 就寢 / 起床 */
+.sleep-times{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px;}
+.st-card{background:var(--bg);border-radius:15px;padding:10px 11px;}
+.st-top{display:flex;align-items:center;gap:5px;font-size:9px;font-weight:900;color:var(--muted);letter-spacing:.02em;}
+.st-top svg{width:11px;height:11px;}
+.st-val{display:flex;align-items:center;justify-content:space-between;gap:4px;margin-top:3px;}
+.st-val b{font-size:14px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.02em;white-space:nowrap;}
+.st-btns{display:flex;gap:3px;}
+.st-btn{width:25px;height:25px;border-radius:8px;border:none;background:#fff;color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 1px 3px rgba(60,50,90,.09);}
+.st-btn:disabled{opacity:.35;cursor:default;box-shadow:none;}
+.st-btn svg{width:12px;height:12px;}
+
+/* 區塊 */
+.sm-sec{margin-top:15px;}
+.sm-sec-h{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:900;color:var(--ink);}
+.sm-sec-h small{margin-left:auto;font-size:9.5px;font-weight:800;color:var(--muted);}
+.q-chip{margin-left:auto;font-size:10px;font-weight:900;padding:5px 10px;border-radius:99px;background:var(--soft);color:var(--primary-dark);transition:background .2s,color .2s;}
+.sleep-q{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:9px;}
+.q-cell{height:36px;border-radius:11px;border:none;background:var(--qbg,#F6F5F9);box-shadow:inset 0 0 0 1.5px transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .18s,box-shadow .18s,transform .12s;color:transparent;}
+.q-cell svg{width:16px;height:16px;}
+.q-cell:active{transform:scale(.96);}
+.q-cell:not(.on){color:transparent!important;}
+.q-cell.on{background:var(--qc);box-shadow:inset 0 0 0 1.5px var(--qc);color:#fff!important;}
+.sleep-q-ends{display:flex;justify-content:space-between;font-size:8.5px;font-weight:800;color:var(--muted);opacity:.8;margin-top:6px;letter-spacing:.01em;}
+
+/* 標籤 */
+.sleep-tags{display:flex;gap:7px;overflow-x:auto;padding:9px 0 2px;scrollbar-width:none;}
+.sleep-tags::-webkit-scrollbar{display:none;}
+.stag{flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:8px 11px;border-radius:99px;border:1.5px solid var(--bd);background:#fff;color:var(--muted);font-size:11px;font-weight:800;font-family:inherit;cursor:pointer;white-space:nowrap;transition:background .16s,border-color .16s,color .16s;}
+.stag svg{width:12px;height:12px;}
+.stag.on{background:var(--soft);border-color:var(--primary);color:var(--primary-dark);}
+
+/* 午睡 */
+.nap-add{display:flex;align-items:center;gap:7px;margin-top:14px;padding:10px 14px;border-radius:13px;border:1.5px dashed #DCD8E8;background:#fff;color:var(--primary-dark);font-size:11.5px;font-weight:900;font-family:inherit;cursor:pointer;}
+.nap-add svg{width:14px;height:14px;}
+.nap-chip{display:flex;align-items:center;gap:8px;margin-top:9px;padding:9px 11px;border-radius:13px;background:var(--c-butter-bg);color:var(--c-butter-ink);font-size:10.5px;font-weight:800;font-variant-numeric:tabular-nums;}
+.nap-chip svg{width:14px;height:14px;flex:0 0 auto;}
+.nap-chip b{font-weight:900;}
+.nap-chip .nx{margin-left:auto;width:24px;height:24px;border:none;background:transparent;color:inherit;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.7;}
+.nap-chip .nx svg{width:13px;height:13px;}
+
+/* 午睡抽屜 */
+.nap-sheet{position:absolute;inset:0;z-index:4;visibility:hidden;pointer-events:none;}
+.nap-sheet.show{visibility:visible;pointer-events:auto;}
+.nap-backdrop{position:absolute;inset:0;background:rgba(32,28,54,.32);opacity:0;transition:opacity .2s;}
+.nap-sheet.show .nap-backdrop{opacity:1;}
+.nap-panel{position:absolute;left:50%;bottom:0;transform:translate(-50%,100%);width:100%;background:#fff;border-radius:24px 24px 0 0;padding:8px 20px calc(16px + env(safe-area-inset-bottom));transition:transform .28s cubic-bezier(.22,1,.36,1);box-shadow:0 -16px 40px -18px rgba(40,28,60,.45);}
+.nap-sheet.show .nap-panel{transform:translate(-50%,0);}
+.nap-title{font-size:14px;font-weight:900;text-align:center;color:var(--ink);margin:6px 0 12px;}
+.nap-step{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:4px 6px 10px;}
+.nap-step button{width:46px;height:46px;border-radius:50%;border:none;background:var(--bg);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.nap-step button:disabled{opacity:.35;}
+.nap-step button svg{width:19px;height:19px;}
+.nap-step .nv{display:flex;align-items:baseline;gap:4px;}
+.nap-step .nv b{font-size:34px;font-weight:900;letter-spacing:-.04em;color:var(--ink);font-variant-numeric:tabular-nums;}
+.nap-step .nv span{font-size:11px;font-weight:900;color:var(--muted);}
+.nap-startrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 2px 14px;border-top:1px solid #F4F2F8;}
+.nap-startrow .k{font-size:12px;font-weight:900;color:var(--ink);}
+.nap-startrow .k small{display:block;font-size:9.5px;font-weight:800;color:var(--muted);margin-top:2px;}
+.sel-wrap{position:relative;display:flex;align-items:center;}
+.sel-wrap select{appearance:none;-webkit-appearance:none;border:none;background:var(--bg);border-radius:11px;padding:9px 30px 9px 12px;font-size:12px;font-weight:900;color:var(--ink);font-family:inherit;}
+.sel-wrap svg{position:absolute;right:10px;width:13px;height:13px;color:var(--muted);pointer-events:none;}
+
+@media (max-height:740px){
+  .sleep-dial-wrap{max-width:252px;}
+  .sd-dur{font-size:21px;}
+  .sd-center{width:158px;}
+  .sd-hint{font-size:10px;}
+}
+@media (prefers-reduced-motion:reduce){.sd-arc,.sm-sheet,.nap-panel,.sm-backdrop,.nap-backdrop,.sd-badge,.q-cell,.stag{transition:none!important;}}
+
 </style>
 </head>
 <body>
@@ -1526,7 +1740,7 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   <!-- 今日頁 -->
   <section class="page active" id="page-today">
     <div class="hd">
-      <div class="hd-top"><span class="hi">晚上好</span><button class="hc" id="menuBtn"><i data-lucide="menu"></i></button></div>
+      <div class="hd-top"><button class="hc" id="menuBtn"><i data-lucide="menu"></i></button><span class="hi">晚上好</span></div>
       <div class="hd-main">
         <div class="hd-txt"><h2 id="topDate">—</h2><div class="sub">今晚，來點小行動</div><div class="hd-meta" id="energyMeta"></div>
           <div class="late-hint" id="lateNightHint" hidden><i data-lucide="moon"></i>還在為昨天記錄哦</div></div>
@@ -1606,20 +1820,44 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
       </div>
     </div>
     <div class="pg-body">
-      <div class="sec"><div class="sec-h"><span class="ic-circle c-violet"><i data-lucide="smile"></i></span>今日心情<small>選一個最接近的</small></div><div class="inner">
-        <div class="mood-axis"><span class="ma-y"><span class="ma-dim">上下</span> 愉快 → 不快</span><span class="ma-x"><span class="ma-dim">左右</span> 能量低 → 高</span></div>
-        <div class="mood-quad" id="moodQuad" role="radiogroup" aria-label="今日心情四象限"></div>
-        <div class="mood-note" id="moodNote">心情沒有好壞，只是今天落在哪一格。</div>
-        <div class="mood-attribution">表情風格：Doodle Emoji set（Figma Community · 手繪重繪）</div>
-      </div></div>
-      <div class="sec"><div class="sec-h"><span class="ic-circle c-pink"><i data-lucide="pencil"></i></span>一句話記錄<small>限 200 字</small></div><div class="inner"><textarea class="input" id="logNote" rows="2" maxlength="200" placeholder="今天下班很累，但…"></textarea></div></div>
-      <div class="sec"><div class="sec-h"><span class="ic-circle c-violet"><i data-lucide="heart-pulse"></i></span>今日狀態<small>可多選</small></div><div class="inner chips" id="stateTags"></div></div>
-      <div class="sec"><div class="sec-h"><span class="ic-circle c-sky"><i data-lucide="party-popper"></i></span>今日活動<small>可多選</small></div><div class="inner chips" id="activityTags"></div></div>
+      <div class="rec-acc" id="accDetail">
+        <div class="acc-hd" data-acc="detail"><span class="ic-circle c-violet"><i data-lucide="sparkles"></i></span><span class="acc-tt">詳細情緒</span><small>選填 · 可多選</small><span class="acc-chev">▾</span></div>
+        <div class="acc-bd"><div class="acc-in"><div id="detailEmotions"></div></div></div>
+      </div>
+      <div class="sec"><div class="sec-h">一句話記錄<small>限 200 字</small></div><div class="inner"><textarea class="input" id="logNote" rows="2" maxlength="200" placeholder="今天下班很累，但…"></textarea></div></div>
+      <div class="sec" id="actCard"><div class="sec-h"><span class="ic-circle c-sky"><i data-lucide="party-popper"></i></span>今日活動<small>可多選</small></div><div class="inner"><div class="act-grid" id="activityGrid"></div></div></div>
+      <div class="rec-acc" id="accState">
+        <div class="acc-hd" data-acc="state"><span class="ic-circle c-violet"><i data-lucide="heart-pulse"></i></span><span class="acc-tt">身體與情緒狀態</span><small>選填 · 可多選</small><span class="acc-chev">▾</span></div>
+        <div class="acc-bd"><div class="acc-in"><div id="stateGroups"></div></div></div>
+      </div>
+      <div class="rec-acc open" id="accVitals">
+        <div class="acc-hd" data-acc="vitals"><span class="ic-circle c-mint"><i data-lucide="activity"></i></span><span class="acc-tt">能量與壓力</span><small>拖曳圓點</small><span class="acc-chev">▾</span></div>
+        <div class="acc-bd"><div class="acc-in">
+          <div class="vitals-pad" id="vitalsPad" role="slider" aria-label="能量與壓力滑塊" aria-valuemin="0" aria-valuemax="10">
+            <div class="vq tl"></div><div class="vq tr"></div><div class="vq bl"></div><div class="vq br"></div>
+            <div class="vline v"></div><div class="vline h"></div>
+            <div class="vlabel top">元氣滿滿</div><div class="vlabel bot">力竭</div>
+            <div class="vlabel left">緊繃</div><div class="vlabel right">平靜</div>
+            <div class="vq-lb tl"><span class="vl-t"><i data-lucide="zap"></i>過熱運轉</span><span class="vl-s">緊繃・靜不下來</span></div>
+            <div class="vq-lb tr"><span class="vl-t"><i data-lucide="sun"></i>狀態飽滿</span><span class="vl-s">有勁・能專注</span></div>
+            <div class="vq-lb bl"><span class="vl-t"><i data-lucide="battery"></i>能量見底</span><span class="vl-s">耗盡・快到臨界</span></div>
+            <div class="vq-lb br"><span class="vl-t"><i data-lucide="moon"></i>漸漸放鬆</span><span class="vl-s">鬆懈・想休息</span></div>
+            <div class="vitals-knob" id="vitalsKnob"></div>
+          </div>
+          <div class="vitals-desc" id="vitalsDesc">拖曳圓點，告訴我現在的狀態</div>
+          <div class="focus-sec">
+            <div class="focus-top"><span class="focus-tt">專注度</span><span class="focus-badge" id="focusBadge">4 · 專注</span></div>
+            <div class="focus-scale" id="focusScale" role="radiogroup" aria-label="專注度"></div>
+            <div class="focus-ends"><span>分心 distracted</span><span>laser focus 心流</span></div>
+          </div>
+        </div></div>
+        <div class="vitals-bars" id="vitalsBars" style="display:none"></div>
+      </div>
       <div class="sec"><div class="sec-h"><span class="ic-circle c-mint"><i data-lucide="droplets"></i></span>喝水量<small>每杯 400mL</small></div><div class="inner"><div class="cups" id="waterCups"></div><div class="water-txt" id="waterTxt">0 杯（0mL）</div></div></div>
-      <div class="sec"><div class="sec-h"><span class="ic-circle c-night"><i data-lucide="moon"></i></span>睡眠<small>自動算時長</small></div><div class="inner"><div class="sleep-row"><div class="sleep-col"><span class="sl">就寢</span><input class="time" type="time" id="sleepStart"></div><div class="sleep-col"><span class="sl">起床</span><input class="time" type="time" id="sleepEnd"></div></div><div class="sleep-calc" id="sleepCalc">—</div><div class="auto-hint" id="sleepAutoHint" hidden></div></div></div>
+      <div class="sec sleep-sec"><div class="sec-h"><span class="ic-circle c-night"><i data-lucide="moon"></i></span>睡眠<small>圓環記錄</small></div><div class="inner"><button class="sleep-sum" id="sleepSum" type="button"><span class="ss-txt"><span class="ss-main empty" id="sleepSumMain">尚未記錄</span><span class="ss-sub" id="sleepSumSub">點一下，記下昨晚的睡眠</span></span><i data-lucide="chevron-right" class="ss-chev"></i></button></div></div>
       <div class="mini3">
         <div class="mini"><span class="ic-circle c-butter"><i data-lucide="check"></i></span><span class="ml">排便</span><div class="step" id="bowelSeg"></div></div>
-        <div class="mini"><span class="ic-circle c-slate"><i data-lucide="gauge"></i></span><span class="ml">壓力</span><div class="meter" id="logPressure"><i data-v="低"></i><i data-v="中"></i><i data-v="高"></i></div></div>
+        <div class="mini" style="display:none"><span class="ic-circle c-slate"><i data-lucide="gauge"></i></span><span class="ml">壓力</span><div class="meter" id="logPressure"><i data-v="低"></i><i data-v="中"></i><i data-v="高"></i></div></div>
         <div class="mini"><span class="ic-circle c-green"><i data-lucide="activity"></i></span><span class="ml">運動</span><div class="tgl" id="logExercise" data-v="0" role="switch" aria-label="運動"></div></div>
       </div>
       <div class="auto-hint" id="workoutAutoHint" hidden></div>
@@ -1727,6 +1965,7 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   <div class="brand-sub">下班後，做一件想做的事</div>
   <div class="item" data-drawer="achieve"><i data-lucide="trophy"></i>成就</div>
   <div class="item" data-drawer="shop"><i data-lucide="shopping-bag"></i>商店</div>
+  <div class="item" data-drawer="tags"><i data-lucide="tag"></i>標籤管理</div>
   <div class="item" data-drawer="settings"><i data-lucide="settings"></i>設定</div>
   <div class="spacer"></div>
   <div class="sync-row" data-sync-status style="margin:0 2px 8px;"></div>
@@ -1748,6 +1987,94 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   <div class="backdrop" id="modalBackdrop"></div>
   <div class="modal" id="modalBox"></div>
 </div>
+<!-- 睡眠記錄器（P43） -->
+<div class="sm-root" id="sleepRoot">
+  <div class="sm-backdrop" id="sleepBackdrop"></div>
+  <div class="sm-sheet" role="dialog" aria-modal="true" aria-labelledby="sleepTitle">
+    <div class="sm-grab"></div>
+    <div class="sm-head">
+      <div><div class="sm-title" id="sleepTitle">睡眠</div><div class="sm-date" id="sleepDateLabel">—</div></div>
+      <button class="sm-x" id="sleepClose" type="button" aria-label="關閉"><i data-lucide="x"></i></button>
+    </div>
+    <div class="sm-body" id="sleepBody">
+      <div class="sleep-dial-wrap" id="sleepDialWrap">
+        <svg class="sleep-dial" id="sleepDial" viewBox="0 0 300 300" aria-hidden="true">
+          <defs>
+            <linearGradient id="sleepGrad" x1="0" y1="0" x2="0.85" y2="1">
+              <stop offset="0%" stop-color="#9CA0F0"/>
+              <stop offset="55%" stop-color="#7C80DC"/>
+              <stop offset="100%" stop-color="#6367C4"/>
+            </linearGradient>
+          </defs>
+          <circle class="sd-track" cx="150" cy="150" r="112"/>
+          <g id="sleepTicks"></g>
+          <path class="sd-arc" id="sleepArc" d=""/>
+          <text class="sd-lab" id="sdLab00" x="150" y="66" text-anchor="middle">00:00</text>
+          <text class="sd-lab" id="sdLab06" x="234" y="153" text-anchor="middle">06:00</text>
+          <text class="sd-lab" id="sdLab12" x="150" y="237" text-anchor="middle">12:00</text>
+          <text class="sd-lab" id="sdLab18" x="66" y="153" text-anchor="middle">18:00</text>
+        </svg>
+        <div class="sd-center">
+          <div class="sd-hint" id="sleepHint"><i data-lucide="moon"></i><span>輕點圓環<br>設定入睡時間</span></div>
+          <div class="sd-dur" id="sleepDur" hidden>—</div>
+          <div class="sd-range" id="sleepRange" hidden>—</div>
+        </div>
+        <button class="sd-badge bed" id="sleepBedBadge" type="button" role="slider" tabindex="0" aria-label="入睡時間" aria-valuemin="0" aria-valuemax="1435" hidden><i data-lucide="moon"></i></button>
+        <button class="sd-badge wake" id="sleepWakeBadge" type="button" role="slider" tabindex="0" aria-label="起床時間" aria-valuemin="0" aria-valuemax="1435" hidden><i data-lucide="sun"></i></button>
+        <div class="sd-bubble" id="sleepBubble"></div>
+      </div>
+      <button class="same-usual" id="sleepSame" type="button" hidden><i data-lucide="rotate-ccw"></i><span id="sleepSameTxt">沿用上次作息</span></button>
+
+      <div class="sleep-times">
+        <div class="st-card">
+          <div class="st-top"><i data-lucide="moon"></i>入睡 Bedtime</div>
+          <div class="st-val"><b id="sleepBedTxt">—</b><span class="st-btns"><button class="st-btn" id="sleepBedMinus" type="button" aria-label="入睡時間減 5 分鐘"><i data-lucide="minus"></i></button><button class="st-btn" id="sleepBedPlus" type="button" aria-label="入睡時間加 5 分鐘"><i data-lucide="plus"></i></button></span></div>
+        </div>
+        <div class="st-card">
+          <div class="st-top"><i data-lucide="sun"></i>起床 Wake-up</div>
+          <div class="st-val"><b id="sleepWakeTxt">—</b><span class="st-btns"><button class="st-btn" id="sleepWakeMinus" type="button" aria-label="起床時間減 5 分鐘"><i data-lucide="minus"></i></button><button class="st-btn" id="sleepWakePlus" type="button" aria-label="起床時間加 5 分鐘"><i data-lucide="plus"></i></button></span></div>
+        </div>
+      </div>
+
+      <div class="sm-sec">
+        <div class="sm-sec-h"><span>睡眠體感</span><span class="q-chip" id="sleepQChip">未評分</span></div>
+        <div class="sleep-q" id="sleepQScale" role="radiogroup" aria-label="睡眠體感"></div>
+        <div class="sleep-q-ends"><span>Very tired</span><span>Fully rested</span></div>
+      </div>
+
+      <div class="sm-sec">
+        <div class="sm-sec-h"><span>睡眠標籤</span><small>可多選</small></div>
+        <div class="sleep-tags" id="sleepTags"></div>
+      </div>
+
+      <button class="nap-add" id="napAdd" type="button"><i data-lucide="plus"></i><span id="napAddTxt">新增午睡</span></button>
+      <div class="nap-chip" id="napChip" hidden></div>
+      <div class="auto-hint" id="sleepAutoHint" hidden></div>
+    </div>
+    <div class="sm-foot">
+      <button class="btn btn-primary btn-big btn-block" id="sleepSave" type="button" disabled><i data-lucide="save"></i>儲存睡眠</button>
+    </div>
+
+    <div class="nap-sheet" id="napSheet" aria-hidden="true">
+      <div class="nap-backdrop" id="napBackdrop"></div>
+      <div class="nap-panel">
+        <div class="sm-grab"></div>
+        <div class="nap-title">午睡</div>
+        <div class="nap-step">
+          <button id="napMinus" type="button" aria-label="減少 5 分鐘"><i data-lucide="minus"></i></button>
+          <div class="nv"><b id="napMinVal">30</b><span>min</span></div>
+          <button id="napPlus" type="button" aria-label="增加 5 分鐘"><i data-lucide="plus"></i></button>
+        </div>
+        <div class="nap-startrow">
+          <div class="k">開始<small id="napEndTxt">結束 14:30</small></div>
+          <div class="sel-wrap"><select id="napStartSel" aria-label="午睡開始時間"></select><i data-lucide="chevron-down"></i></div>
+        </div>
+        <button class="btn btn-primary btn-big btn-block" id="napSaveBtn" type="button">儲存午睡</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- 計時器 -->
 <div class="timer-overlay" id="timerOverlay">
@@ -2275,6 +2602,43 @@ async function seedTags() {
   CloudSync.notifyLocalChange('tags', null);
 }
 
+/* P42：常用活動補種（名稱→lucide 圖標；幂等，只補缺的，不動既有） */
+const EXTRA_ACTIVITIES = [
+  ['旅遊','plane'],['生病','stethoscope'],['飯後','utensils'],['甜點','apple'],['零食','package'],
+  ['茶','cup-soda'],['健康','heart-pulse'],['玩手機','phone'],['不玩手機','wifi-off'],['失眠','moon'],
+  ['跳舞','music'],['游泳','droplet'],['看電影','video'],['唱歌','mic'],['化妝','brush'],
+  ['洗澡','droplets'],['散步','footprints'],
+  ['冥想','flower-2'],['寫日記','notebook-pen'],['打掃','spray-can'],['做飯','cooking-pot'],['購物','shopping-bag'],
+  ['睡眠','bed'],['咖啡','coffee'],['閱讀','book-open'],['遊戲','target'],['追劇','film']
+];
+async function seedActivityExtras() {
+  const existing = new Set((await ldb.tags.where('type').equals('activity').toArray()).map(function(t){ return t.name; }));
+  const now = Date.now();
+  const items = [];
+  EXTRA_ACTIVITIES.forEach(function(pair){
+    if (!existing.has(pair[0])) items.push({ type:'activity', name:pair[0], icon:pair[1], useCount:0, lastUsedAt:0, pinned:0, updatedAt:now });
+  });
+  if (items.length) {
+    await ldb.tags.bulkPut(items);
+    CloudSync.notifyLocalChange('tags', null);
+  }
+}
+
+/* P30：情緒四維標籤種子（type='emotion'，帶 quad；幂等，既有用戶也補種） */
+async function seedEmotions() {
+  const have = await ldb.tags.where('type').equals('emotion').count();
+  if (have > 0) return;
+  const items = [];
+  const now = Date.now();
+  Object.keys(DETAIL_EMOTIONS).forEach(function(q){
+    DETAIL_EMOTIONS[q].items.forEach(function(nm){
+      items.push({ type:'emotion', name:nm, quad:q, useCount:0, lastUsedAt:0, pinned:0, updatedAt:now });
+    });
+  });
+  await ldb.tags.bulkPut(items);
+  CloudSync.notifyLocalChange('tags', null);
+}
+
 async function getTags(type) {
   const list = await ldb.tags.where('type').equals(type).toArray();
   list.sort((a, b) => {
@@ -2322,6 +2686,12 @@ let state = {
   bowelCount: 0,
   waterCups: 0,
   mood: null,               /* 今日心情四象限 key（P22） */
+  detailMoods: new Set(),    /* P29 詳細情緒 pill（可多選） */
+  allEmotion: [],            /* P30 全部情緒標籤（含 quad），由 tags 表讀取 */
+  vitals: null,              /* P29 2D 滑板 {x,y,energy,stress,focus} */
+  focus: 4,                  /* P41 專注度 1-5（獨立刻度） */
+  activityIconMap: {},       /* P42 自訂活動圖標 name→lucide */
+  sleep: null,               /* P43 目前檢視日期的睡眠（摘要列 / saveLog 共用） */
   openProjects: new Set(), // 長期專案模式下已展開的專案名
 };
 
@@ -2427,7 +2797,7 @@ async function renderEnergyMeta() {
   const yest = dateStr(addDays(parseDate(getLogicalDate()), -1));
   const log = await ldb.dailyLogs.get(yest);
   const parts = [];
-  if (log && log.sleepHours != null) parts.push('昨晚睡 ' + log.sleepHours + 'h');
+  if (log && slLogMin(log) != null) parts.push('昨晚睡 ' + slDur(slLogMin(log)));
   else parts.push('昨晚睡眠未記錄');
   const cycle = await getLatestCycle();
   if (cycle) parts.push(calcPeriodStatus(cycle, parseDate(getLogicalDate())).label);
@@ -3962,36 +4332,33 @@ async function renderRecord(date) {
   /* 運動提示只留時間，避免同一頁重複兩次「電腦端可能沒跑」 */
   const hShort = genAt ? (' · ' + healthAgeLabel(genAt)) : '';
   $('#logNote').value = log ? (log.note || '') : '';
-  $('#sleepStart').value = log && log.sleepStart ? log.sleepStart : '';
-  $('#sleepEnd').value = log && log.sleepEnd ? log.sleepEnd : '';
+  state.sleep = log ? {
+    start: log.sleepStart || '', end: log.sleepEnd || '',
+    hours: log.sleepHours != null ? log.sleepHours : null,
+    min: log.sleepMin != null ? log.sleepMin : null,
+    quality: log.sleepQuality != null ? log.sleepQuality : null,
+    tags: Array.isArray(log.sleepTags) ? log.sleepTags : [],
+    napMin: log.napMin || 0, napStart: log.napStart || null, napEnd: log.napEnd || null
+  } : { start: '', end: '', hours: null, min: null, quality: null, tags: [], napMin: 0, napStart: null, napEnd: null };
   state.selecting.state = new Set(log && log.stateTags ? log.stateTags : []);
   state.selecting.activity = new Set(log && log.activityTags ? log.activityTags : []);
   state.bowelCount = log && log.bowelCount != null ? log.bowelCount : 0;
   state.waterCups = log && log.waterCups != null ? log.waterCups : 0;
-  state.mood = normMood(log && log.mood);   /* P23 回显今日心情（含舊 key 相容） */
-  buildMoodQuad();
-  renderMoodQuad();
+  state.mood = normMood(log && log.mood);   /* 保留舊資料相容（復盤 / 匯出仍會讀取） */
+  state.detailMoods = new Set(log && Array.isArray(log.detailMoods) ? log.detailMoods : []);
+  state.vitals = log && log.vitals ? log.vitals : {x:.5, y:.5, energy:5, stress:5, focus:5};  /* P29 */
+  state.focus = log && log.focus ? Math.max(1, Math.min(5, log.focus))
+    : (log && log.vitals && log.vitals.focus != null ? Math.max(1, Math.min(5, Math.round(log.vitals.focus / 2))) : 4);  /* P41/P42 含舊 vitals.focus 遷移 */
+  renderDetailEmotions();
+  renderVitals();
+  renderFocus();
+  setAcc('vitals', true); setAcc('detail', false); setAcc('state', false);
   setMeter($('#logPressure'), log ? log.pressure : '中');
   setTgl($('#logExercise'), log ? !!log.exercise : false);
   renderBowel();
   renderWater();
-  renderSleepCalc();
+  await renderSleepSummary();
 
-  /* 健康數據自動同步的來源提示（不影響手動編輯） */
-  const sa = $('#sleepAutoHint');
-  if (sa) {
-    const a = log && log.autoSleep;
-    if (a) {
-      const bits = [];
-      if (a.deepMin != null) bits.push('深睡 ' + Math.round(a.deepMin) + ' 分');
-      if (a.remMin != null) bits.push('REM ' + Math.round(a.remMin) + ' 分');
-      sa.textContent = '已從小米運動健康自動同步' + (bits.length ? ' · ' + bits.join(' · ') : '') + hSuffix;
-      sa.classList.toggle('stale', !!hStale);
-      sa.hidden = false;
-    } else {
-      sa.hidden = true;
-    }
-  }
   const wa = $('#workoutAutoHint');
   if (wa) {
     if (log && Array.isArray(log.workoutTypes) && log.workoutTypes.length) {
@@ -4107,66 +4474,266 @@ const MOODS = {
 };
 /* 舊 4 key 相容：舊資料映射到新表情 */
 const MOOD_LEGACY = {energized:'happy', calm:'cool', anxious:'nervous', low:'sad'};
-function normMood(k){ if(!k) return null; if(MOODS[k]) return k; return MOOD_LEGACY[k] || null; }
-function buildMoodQuad(){
-  const host = $('#moodQuad'); if(!host) return;
-  let html = '';
-  QUAD_ORDER.forEach(q=>{
-    const items = Object.keys(MOODS).filter(k=>MOODS[k].quad===q);
-    html += '<div class="mq-zone ' + QUADRANTS[q].cls + '"><div class="mqz-t">' + QUADRANTS[q].name + '</div><div class="mq-face-row">';
-    items.forEach(k=>{
-      html += '<button type="button" class="mood-opt" data-mood="' + k + '" role="radio" aria-checked="false" title="' + MOODS[k].name + '">' +
-        '<span class="mo-ck">✓</span><span class="mo-svg">' + MOOD_SVG[k] + '</span><span class="mo-nm">' + MOODS[k].name + '</span></button>';
+
+/* ---------- P29：詳細情緒（4 維度文字膠囊）---------- */
+const DETAIL_EMOTIONS = {
+  energized:{ name:'正向・高能量', en:'Positive & energized', items:['驚喜','開朗','有同情心','大膽','活潑','有愛心','有動力','外向'] },
+  calm:      { name:'正向・低能量', en:'Positive & calm',      items:['冷靜','舒服','自信','專注','放鬆','鬆一口氣','滿足','安心'] },
+  low:       { name:'負向・低能量', en:'Negative & calm',      items:['羞愧','無聊','困惑','失望','悲觀','難過','不自在'] },
+  anxious:   { name:'負向・高能量', en:'Negative & energized', items:['害怕','惱怒','焦慮','沮喪','不知所措','震驚','緊繃','暴躁'] }
+};
+const DETAIL_ORDER = ['energized','calm','low','anxious'];
+/* 詳細情緒 → 溫暖文案（供底部提示） */
+const DETAIL_NOTE = {
+  '焦慮':'深呼吸，允許自己今天有一點焦慮，這很正常。',
+  '煩躁':'有些事就是不順，進情緒裡待一下沒關係。',
+  '壓力大':'先把肩膀放鬆，你已經很努力了。',
+  '生氣':'憤怒也是一種訊號，聽聽它想說什麼。',
+  '疲憊':'沒力氣的日子，允許自己慢一點也沒關係。',
+  '難過':'難過不用藏著，它在提醒你都在乎什麼。',
+  '孤獨':'一個人也可以被好好對待，包括你自己。',
+  '無力':'今天做不到也沒關係，明天再說。',
+  '羞愧':'沒有人要求你完美，放下對自己的苛責吧。',
+  '無聊':'無聊也是一種留白，看看它想帶你去哪裡。',
+  '困惑':'搞不清楚也沒關係，答案常常是慢慢浮現的。',
+  '失望':'失望代表你有在乎過，溫柔地接住它。',
+  '悲觀':'允許自己今天看得灰一點，明天再重新看。',
+  '不自在':'在人前緊繃是正常的，回到自己就好。',
+  '害怕':'怕是正常的，先陪自己待在安全的地方。',
+  '惱怒':'有點煩，先喝口水，給自己一點空間。',
+  '沮喪':'低落的時候，先別責怪自己，慢慢來。',
+  '不知所措':'一樣一樣來，你不需要一次處理所有事。',
+  '震驚':'先深呼吸，讓自己回到當下。',
+  '緊繃':'試著鬆開肩膀，你已經撐很久了。',
+  '暴躁':'火氣上來時，先離開一下，沒有人會怪你。'
+};
+/* ---------- P30：活動圖標對照（lucide 矢量線條，無 emoji） ---------- */
+const ACT_ICON = {
+  '學習':'graduation-cap','工作':'briefcase','工作加班':'briefcase','閱讀':'book-open','寫日記':'notebook-pen',
+  '運動':'dumbbell','運動健身':'dumbbell','散步':'footprints','跳舞':'music','游泳':'droplet','戶外活動':'compass',
+  '咖啡':'coffee','茶':'cup-soda','做飯':'cooking-pot','飯後':'utensils','甜點':'apple','零食':'package',
+  '睡眠':'bed','補眠':'bed','失眠':'moon','洗澡':'droplets','冥想':'flower-2','健康':'heart-pulse',
+  '玩手機':'phone','不玩手機':'wifi-off','打掃':'spray-can','清潔':'spray-can','化妝':'brush','購物':'shopping-bag',
+  '追劇':'film','追劇集':'film','看電影':'video','聽音樂':'headphones','唱歌':'mic','遊戲':'target',
+  '旅遊':'plane','生病':'stethoscope','家庭活動':'house','家人':'users','朋友聚會':'handshake','和朋友':'handshake',
+  '獨處放鬆':'armchair','興趣':'palette','其他':'sparkles'
+};
+const ACTIVITY_ICON_CHOICES = ['sparkles','dumbbell','coffee','briefcase','book-open','graduation-cap','bed','moon','utensils','cooking-pot','apple','cup-soda','plane','stethoscope','phone','wifi-off','music','headphones','mic','film','video','brush','spray-can','shopping-bag','shopping-cart','armchair','users','handshake','heart','compass','footprints','droplets','flower-2','notebook-pen','play','palette','bike','car','house','laptop','target','sun','sprout'];
+function actIcon(name){ return ACT_ICON[name] || 'sparkles'; }
+/* ---------- P29：狀態標籤分類 ---------- */
+const STATE_CATS = {
+  mental:{ name:'精神狀態', items:['焦慮','情緒低落','疲憊','壓力大','專注','分心'] },
+  body:  { name:'身體不適', items:['頭痛','腰痛','鼻敏感','發燒','喉嚨痛','眼睛乾'] },
+  gut:   { name:'消化系統', items:['腸胃不適','噁心','便秘','腹瀉'] },
+  sleep: { name:'睡眠',     items:['睡眠不足','失眠','嗜睡'] },
+  other: { name:'其他',     items:[] }
+};
+const STATE_CAT_ORDER = ['mental','body','gut','sleep','other'];
+function stateCat(name){
+  for (const k of STATE_CAT_ORDER) if (STATE_CATS[k].items.indexOf(name) >= 0) return k;
+  return 'other';
+}
+
+/* ---------- P29：摺疊面板狀態 ---------- */
+const recAcc = { detail:false, state:false, vitals:true };
+function setAcc(key, open){
+  recAcc[key] = open;
+  var el = document.getElementById('acc' + key.charAt(0).toUpperCase() + key.slice(1));
+  if (el) el.classList.toggle('open', !!open);
+  if (key === 'vitals') {
+    var bars = document.getElementById('vitalsBars');
+    if (bars) bars.style.display = open ? 'none' : 'block';
+  }
+}
+function toggleAcc(key){ setAcc(key, !recAcc[key]); }
+
+/* ---------- P29：詳細情緒 pill ---------- */
+function renderDetailEmotions(){
+  var host = document.getElementById('detailEmotions'); if(!host) return;
+  /* P30：從 emotion 標籤讀取（可自行增刪），依 quad 分組；未分組的標籤歸到「其他」*/
+  var all = (state.allEmotion || []).slice();
+  var buckets = { energized:[], calm:[], low:[], anxious:[], other:[] };
+  all.forEach(function(t){
+    var nm = typeof t === 'string' ? t : t.name;
+    var q  = (typeof t === 'object' && t.quad) ? t.quad : 'other';
+    if (!buckets[q]) q = 'other';
+    buckets[q].push(nm);
+  });
+  var html = '';
+  DETAIL_ORDER.forEach(function(q){
+    if (!buckets[q].length) return;
+    html += '<div class="emo-grp"><div class="emo-dim">' + DETAIL_EMOTIONS[q].name + '<small>' + DETAIL_EMOTIONS[q].en + '</small></div><div class="emo-pills">';
+    buckets[q].forEach(function(nm){
+      html += '<button type="button" class="mpill' + (state.detailMoods.has(nm)?' on':'') + '" data-dm="' + esc(nm) + '" aria-pressed="' + (state.detailMoods.has(nm)?'true':'false') + '">' + esc(nm) + '</button>';
     });
     html += '</div></div>';
   });
+  if (buckets.other.length) {
+    html += '<div class="emo-grp"><div class="emo-dim">其他</div><div class="emo-pills">';
+    buckets.other.forEach(function(nm){
+      html += '<button type="button" class="mpill' + (state.detailMoods.has(nm)?' on':'') + '" data-dm="' + esc(nm) + '">' + esc(nm) + '</button>';
+    });
+    html += '</div></div>';
+  }
+  if (!html) html = '<div style="font-size:11px;color:var(--muted);font-weight:700">尚無情緒標籤，可到左側選單「標籤管理」新增。</div>';
   host.innerHTML = html;
 }
-function renderMoodQuad(){
-  const sel = normMood(state.mood);
-  $$('#moodQuad .mood-opt').forEach(b=>{
-    const on = b.dataset.mood === sel;
-    b.classList.toggle('on', !!on);
-    b.setAttribute('aria-checked', on ? 'true' : 'false');
+function toggleDetailMood(nm){
+  if (state.detailMoods.has(nm)) state.detailMoods.delete(nm); else state.detailMoods.add(nm);
+  renderDetailEmotions();
+}
+
+/* ---------- P29：活動 emoji 網格 ---------- */
+function renderActivityGrid(){
+  var host = document.getElementById('activityGrid'); if(!host) return;
+  var acts = (state.allActivity || []).slice();   /* 全部可用標籤（選擇用），不是只渲染已選 */
+  /* 依 ACT_ICON 順序排，未定義的放最後 */
+  var keys = Object.keys(ACT_ICON);
+  acts.sort(function(a,b){
+    var ia = keys.indexOf(a), ib = keys.indexOf(b);
+    return (ia<0?999:ia) - (ib<0?999:ib);
   });
-  const note = $('#moodNote');
-  if (note) {
-    if (sel && MOODS[sel]) note.innerHTML = '<b>' + MOODS[sel].name + '</b> · ' + MOODS[sel].note;
-    else note.textContent = '心情沒有好壞，只是今天落在哪一格。';
+  if (!acts.length) { host.innerHTML = '<div style="font-size:11px;color:var(--muted);font-weight:700">尚無活動標籤，可到左側選單「標籤管理」新增。</div>'; return; }
+  host.innerHTML = acts.map(function(nm){
+    return '<button type="button" class="act-cell' + (state.selecting.activity.has(nm)?' on':'') + '" data-act="' + esc(nm) + '" aria-pressed="' + (state.selecting.activity.has(nm)?'true':'false') + '">' +
+      '<span class="ac-em"><i data-lucide="' + ((state.activityIconMap || {})[nm] || actIcon(nm)) + '"></i></span><span class="ac-nm">' + esc(nm) + '</span></button>';
+  }).join('');
+  if (window.lucide) lucide.createIcons(host);
+}
+
+/* ---------- P29：狀態標籤分組 pill ---------- */
+function renderStateGroups(){
+  var host = document.getElementById('stateGroups'); if(!host) return;
+  var states = (state.allState || []).slice();   /* 全部可用標籤（選擇用） */
+  var buckets = { mental:[], body:[], gut:[], sleep:[], other:[] };
+  states.forEach(function(nm){ buckets[stateCat(nm)].push(nm); });
+  var html = '';
+  STATE_CAT_ORDER.forEach(function(k){
+    if (!buckets[k].length) return;
+    html += '<div class="pill-grp"><div class="pill-gt">' + STATE_CATS[k].name + '</div><div class="pill-row">';
+    buckets[k].forEach(function(nm){
+      html += '<button type="button" class="mpill' + (state.selecting.state.has(nm)?' on':'') + '" data-st="' + esc(nm) + '" aria-pressed="' + (state.selecting.state.has(nm)?'true':'false') + '">' + esc(nm) + '</button>';
+    });
+    html += '</div></div>';
+  });
+  if (!html) html = '<div style="font-size:11px;color:var(--muted);font-weight:700">尚無狀態標籤，可到左側選單「標籤管理」新增。</div>';
+  host.innerHTML = html;
+}
+
+/* ---------- P29：2D Vitals 滑板 ---------- */
+function vitalsDescText(x, y){
+  /* x: 0 左(緊繃) → 1 右(平靜); y: 0 下(力竭) → 1 上(元氣)**
+     用 3x3 九宮格給大白話 */
+  var e = y >= .66 ? '元氣滿滿' : (y >= .34 ? '能量尚可' : '能量見底');
+  var p = x >= .66 ? '平靜放鬆' : (x >= .34 ? '情緒平穩' : '有點緊繃');
+  if (y < .34 && x < .34) return '⚡ 能量耗盡，壓力也滿，今晚適合完全放空。';
+  if (y >= .66 && x < .34) return '🔥 能量還在，但心裡繃著，先深呼吸、留點空間給自己。';
+  if (y >= .66 && x >= .66) return '☀️ 能量充沛又平靜，很適合挑戰困難任務！';
+  if (y < .34 && x >= .66) return '🌙 能量慢慢降下來，放鬆地窩著就很好。';
+  if (y < .34) return '🪫 ' + e + '，' + p + '，今天溫柔一點也沒關係。';
+  if (y >= .66) return '🌱 ' + e + '，' + p + '，延著這股節奏走就不錯。';
+  return '🙂 ' + e + '，' + p + '，剛剛好的狀態。';
+}
+function vitalsFromXY(x, y){
+  x = Math.max(0, Math.min(1, x)); y = Math.max(0, Math.min(1, y));
+  return {
+    x: Math.round(x*1000)/1000,
+    y: Math.round(y*1000)/1000,
+    energy: Math.round(y*10),
+    stress: Math.round((1-x)*10),
+    focus:  Math.round((y*0.55 + x*0.45)*10)
+  };
+}
+function renderVitals(){
+  var pad = document.getElementById('vitalsPad'); if(!pad) return;
+  var v = state.vitals || {x:.5, y:.5, energy:5, stress:5, focus:5};
+  var knob = document.getElementById('vitalsKnob');
+  var desc = document.getElementById('vitalsDesc');
+  /* knob 定位：left=x%, top=(1-y)%（y=1 在上）*/
+  if (knob){
+    knob.style.left = (v.x*100) + '%'; knob.style.top = ((1-v.y)*100) + '%';
+    var kq = knobQuadStyle(v.x, v.y);
+    knob.style.setProperty('--kc', kq[0]);
+    knob.style.setProperty('--kg', kq[1]);
+  }
+  if (desc) desc.innerHTML = vitalsDescText(v.x, v.y);
+  /* 四象限底色：靠近控制點的象限更亮 */
+  var qs = pad.querySelectorAll('.vq');
+  var opac = [ /* tl,tr,bl,br */
+    (v.x<0.5 && (1-v.y)<0.5) ? .85 : .28,
+    (v.x>=0.5 && (1-v.y)<0.5) ? .85 : .28,
+    (v.x<0.5 && (1-v.y)>=0.5) ? .85 : .28,
+    (v.x>=0.5 && (1-v.y)>=0.5) ? .85 : .28
+  ];
+  qs.forEach(function(q,i){ q.style.opacity = opac[i]; });
+  pad.setAttribute('aria-valuenow', String(v.energy));
+  /* 分數條（折疊後顯示）*/
+  var bars = document.getElementById('vitalsBars');
+  if (bars){
+    var fN = Math.max(1, Math.min(5, state.focus || 4));
+    bars.innerHTML =
+      [['energy','能量',v.energy,10],['stress','壓力',v.stress,10],['focus','專注',fN,5]].map(function(r){
+        var seg = '';
+        for (var i=0;i<r[3];i++) seg += '<i class="' + (i<r[2]?'on':'') + '"></i>';
+        return '<div class="vb-row"><span class="vb-lb">' + r[1] + '</span><div class="vb-track ' + r[0] + '">' + seg + '</div><span class="vb-val">' + r[2] + '</span></div>';
+      }).join('');
   }
 }
-function pickMood(key){
-  state.mood = (normMood(state.mood) === key) ? null : key;   /* 再點一次取消 */
-  renderMoodQuad();
+function setVitalsXY(x, y){
+  state.vitals = vitalsFromXY(x, y);
+  renderVitals();
 }
+
+/* ---------- P41：Focus 專注度 ---------- */
+const FOCUS_LEVELS = [
+  {n:'分心', en:'Distracted', c:'#A9A9BC'},
+  {n:'游移', en:'Wandering',  c:'#F0A868'},
+  {n:'穩定', en:'Steady',     c:'#EBC16B'},
+  {n:'專注', en:'Focused',    c:'#7FC4D2'},
+  {n:'心流', en:'Laser focus',c:'#7C8BE0'}
+];
+function renderFocus(){
+  var host = document.getElementById('focusScale'); if(!host) return;
+  var cur = Math.max(1, Math.min(5, state.focus || 4));
+  host.innerHTML = FOCUS_LEVELS.map(function(f, i){
+    var on = (i+1) === cur;
+    return '<button type="button" class="focus-cell' + (on?' on':'') + '" data-focus="' + (i+1) +
+      '" role="radio" aria-checked="' + (on?'true':'false') + '" title="' + f.n + ' · ' + f.en + '"' +
+      (on?' style="background:' + f.c + '"':'') + '>✓</button>';
+  }).join('');
+  var badge = document.getElementById('focusBadge'), f = FOCUS_LEVELS[cur-1];
+  if (badge){ badge.textContent = cur + ' · ' + f.n; badge.style.background = f.c; }
+}
+function setFocus(v){ state.focus = Math.max(1, Math.min(5, v)); renderFocus(); }
+/* P41：knob 內圈色隨所在象限（與 .vq 底色對應的實心版）*/
+function knobQuadStyle(x, y){
+  if (x >= .5 && y >= .5) return ['#7BA8DE','rgba(123,168,222,.26)'];  /* 右上：藍 charged */
+  if (x <  .5 && y >= .5) return ['#E28A8A','rgba(226,138,138,.26)'];  /* 左上：粉紅 tense */
+  if (x <  .5 && y <  .5) return ['#D66E6E','rgba(214,110,110,.26)'];  /* 左下：深紅 running low */
+  return ['#F0C478','rgba(240,196,120,.26)'];                            /* 右下：橘黃 winding down */
+}
+
+function normMood(k){ if(!k) return null; if(MOODS[k]) return k; return MOOD_LEGACY[k] || null; }
 async function renderTagGroups() {
-  const states = await getTags('state');
+  /* P29：從 tags 表拿全部標籤，渲染活動 emoji 網格 + 狀態分組 pill。
+     記錄頁只負責選擇，不負責新增（新增移到設定 → 標籤管理）。 */
   const acts = await getTags('activity');
-  $('#stateTags').innerHTML = tagChips('state', states);
-  $('#activityTags').innerHTML = tagChips('activity', acts);
-}
-function tagChips(type, tags) {
-  const sel = state.selecting[type];
-  let html = tags.map(t =>
-    '<span class="tag-chip' + (sel.has(t.name) ? ' on' : '') + '" data-type="' + type + '" data-name="' + esc(t.name) + '">' + esc(t.name) + '</span>'
-  ).join('');
-  html += '<span class="tag-chip add" data-type="' + type + '" data-add="1">＋</span>';
-  return html;
+  const states = await getTags('state');
+  const emotions = await getTags('emotion');
+  state.allActivity = acts.map(function(t){ return t.name; });
+  state.activityIconMap = {};
+  acts.forEach(function(t){ if (t.icon) state.activityIconMap[t.name] = t.icon; });
+  state.allState = states.map(function(t){ return t.name; });
+  state.allEmotion = emotions.map(function(t){ return {name:t.name, quad:t.quad || 'other'}; });
+  renderActivityGrid();
+  renderStateGroups();
+  renderDetailEmotions();
 }
 function toggleTag(type, name) {
   const sel = state.selecting[type];
   if (sel.has(name)) sel.delete(name); else sel.add(name);
-  renderTagGroups();
-}
-async function addTag(type) {
-  const name = prompt('輸入新標籤名稱：');
-  if (!name || !name.trim()) return;
-  const n = name.trim();
-  await ldb.tags.put({ type, name: n, useCount: 0, lastUsedAt: Date.now(), pinned: 0, updatedAt: Date.now() });
-  state.selecting[type].add(n);
-  renderTagGroups();
-  CloudSync.notifyLocalChange('tags', null);
-  toast('已新增標籤「' + n + '」');
+  renderActivityGrid();
+  renderStateGroups();
 }
 
 /* 睡眠：就寢/起床時間 <i data-lucide="arrow-right"></i> 自動算時長（支援跨午夜） */
@@ -4179,9 +4746,612 @@ function calcSleepHours(start, end) {
   if (mins <= 0) mins += 24 * 60;
   return Math.round(mins / 30) / 2;
 }
-function renderSleepCalc() {
-  const h = calcSleepHours($('#sleepStart').value, $('#sleepEnd').value);
-  $('#sleepCalc').textContent = h != null ? h + ' 小時' : '—';
+/* ================= P43：24 小時睡眠記錄器 =================
+   圓環：頂部 00:00、右 06:00、底 12:00、左 18:00，順時針遞增。
+   角度一律用 Math.atan2(x, -y) 取得，分鐘吸附 5 分鐘；跨午夜以 mod 1440 計算。 */
+const SL_C = 150, SL_R = 112;
+const SL_MIN_DUR = 30, SL_MAX_DUR = 16 * 60;
+
+const SLEEP_Q = [
+  { v: 1, name: '極疲憊', en: 'Very tired', tone: '#8E8AA5', bg: '#EDEBF2' },
+  { v: 2, name: '有點累', en: 'Tired', tone: '#B78A62', bg: '#F5E6D8' },
+  { v: 3, name: '一般', en: 'Okay', tone: '#A08E52', bg: '#F5EDD4' },
+  { v: 4, name: '精神不錯', en: 'Rested', tone: '#5E8E7C', bg: '#DDECE4' },
+  { v: 5, name: '完全恢復', en: 'Fully rested', tone: '#5C7FA8', bg: '#DCE8F4' }
+];
+
+const SLEEP_TAGS = [
+  { n: '睡得很好', i: 'sparkles' }, { n: '做夢', i: 'cloud-sun' }, { n: '半夜醒', i: 'alarm-clock' },
+  { n: '晚睡', i: 'moon' }, { n: '早起', i: 'sun' }, { n: '睡前咖啡', i: 'coffee' },
+  { n: '睡前手機', i: 'phone' }, { n: '睡前運動', i: 'dumbbell' }, { n: '睡前閱讀', i: 'book-open' },
+  { n: '睡足 8 小時', i: 'clock' }, { n: '需要補眠', i: 'bed' }, { n: '睡不好', i: 'meh' }
+];
+
+const sleepUI = {
+  open: false, date: null, bed: null, wake: null, avg: 7.5, last: null,
+  quality: 3, tags: new Set(), napMin: 0, napStart: 840,
+  dragging: null, prevOverflow: '', arcTimer: null
+};
+const napUI = { min: 30, start: 840 };
+
+function slMod(m) { return ((m % 1440) + 1440) % 1440; }
+function slSnap(m) { return slMod(Math.round(m / 5) * 5); }
+function slAngle(min) { return (slMod(min) / 1440) * Math.PI * 2; }
+function slPoint(min, r) {
+  const a = slAngle(min);
+  return { x: SL_C + r * Math.sin(a), y: SL_C - r * Math.cos(a) };
+}
+function slHm(min) {
+  const m = slMod(min);
+  return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+}
+function slHm2min(hm) {
+  if (!hm || typeof hm !== 'string') return null;
+  const p = hm.split(':');
+  if (p.length < 2) return null;
+  const h = parseInt(p[0], 10), m = parseInt(p[1], 10);
+  if (isNaN(h) || isNaN(m)) return null;
+  return slMod(h * 60 + m);
+}
+function sl12(min) {
+  const m = slMod(min);
+  const h24 = Math.floor(m / 60);
+  const ap = h24 < 12 ? 'AM' : 'PM';
+  let h = h24 % 12; if (h === 0) h = 12;
+  return h + ':' + String(m % 60).padStart(2, '0') + ' ' + ap;
+}
+function slDur(min) {
+  const m = Math.max(0, Math.round(min));
+  const h = Math.floor(m / 60), r = m % 60;
+  if (h && r) return h + ' h ' + r + ' min';
+  if (h) return h + ' h';
+  return r + ' min';
+}
+function slDurShort(min) {
+  const m = Math.max(0, Math.round(min));
+  const h = Math.floor(m / 60), r = m % 60;
+  if (h && r) return h + 'h' + String(r).padStart(2, '0');
+  if (h) return h + 'h';
+  return r + 'm';
+}
+/* 任意 log → 分鐘（優先用 5 分鐘精度欄位，舊資料 fallback 小時 / 起訖） */
+function slLogMin(log) {
+  if (!log) return null;
+  if (log.sleepMin != null) return log.sleepMin;
+  if (log.sleepHours != null) return Math.round(Number(log.sleepHours) * 60);
+  const a = slHm2min(log.sleepStart), b = slHm2min(log.sleepEnd);
+  if (a != null && b != null) return ((b - a + 1440) % 1440) || 1440;
+  return null;
+}
+function slDuration() {
+  if (sleepUI.bed == null || sleepUI.wake == null) return 0;
+  return ((sleepUI.wake - sleepUI.bed + 1440) % 1440) || 1440;
+}
+
+/* 圓弧 path：順時針，>12h 用 large-arc */
+function slArcPath(bed, wake) {
+  const dur = ((wake - bed + 1440) % 1440) || 1440;
+  const a = slPoint(bed, SL_R), b = slPoint(bed + dur, SL_R);
+  const large = dur > 720 ? 1 : 0;
+  return 'M ' + a.x.toFixed(2) + ' ' + a.y.toFixed(2) +
+    ' A ' + SL_R + ' ' + SL_R + ' 0 ' + large + ' 1 ' + b.x.toFixed(2) + ' ' + b.y.toFixed(2);
+}
+
+function slClearDash() {
+  const arc = $('#sleepArc');
+  if (!arc) return;
+  arc.style.transition = 'none';
+  arc.style.strokeDasharray = 'none';
+  arc.style.strokeDashoffset = '0';
+  void arc.getBoundingClientRect();
+  arc.style.transition = '';
+}
+function slAnimateArc() {
+  const arc = $('#sleepArc');
+  if (!arc || !arc.getAttribute('d')) return;
+  let L = 0;
+  try { L = arc.getTotalLength(); } catch (e) { return; }
+  arc.style.transition = 'none';
+  arc.style.strokeDasharray = L + ' ' + L;
+  arc.style.strokeDashoffset = L;
+  void arc.getBoundingClientRect();
+  arc.style.transition = 'stroke-dashoffset .55s cubic-bezier(.4,0,.2,1)';
+  arc.style.strokeDashoffset = '0';
+  if (sleepUI.arcTimer) clearTimeout(sleepUI.arcTimer);
+  sleepUI.arcTimer = setTimeout(function () {
+    if (sleepUI.dragging) return;
+    arc.style.transition = 'none';
+    arc.style.strokeDasharray = 'none';
+    arc.style.strokeDashoffset = '0';
+    arc.style.transition = '';
+  }, 620);
+}
+
+function slPlace(el, min) {
+  if (!el) return;
+  const p = slPoint(min, SL_R);
+  el.style.left = (p.x / 300 * 100) + '%';
+  el.style.top = (p.y / 300 * 100) + '%';
+}
+
+function slRender(animate) {
+  const has = sleepUI.bed != null && sleepUI.wake != null;
+  const arc = $('#sleepArc');
+  if (!arc) return;
+  const dur = has ? slDuration() : 0;
+
+  if (!has) {
+    arc.setAttribute('d', '');
+    arc.style.transition = 'none';
+    arc.style.strokeDasharray = 'none';
+    arc.style.strokeDashoffset = '0';
+  } else {
+    arc.setAttribute('d', slArcPath(sleepUI.bed, sleepUI.wake));
+    if (animate) slAnimateArc();
+  }
+
+  $('#sleepBedBadge').hidden = !has;
+  $('#sleepWakeBadge').hidden = !has;
+  $('#sleepHint').hidden = has;
+  $('#sleepDur').hidden = !has;
+  $('#sleepRange').hidden = !has;
+  $('#sleepSave').disabled = !has;
+  const same = $('#sleepSame');
+  if (same) same.hidden = has || !sleepUI.last;
+  /* 月亮／太陽靠近某個刻度時淡出該標籤，避免圖標壓字 */
+  [['sdLab00', 0], ['sdLab06', 360], ['sdLab12', 720], ['sdLab18', 1080]].forEach(function (pair) {
+    const el = document.getElementById(pair[0]);
+    if (!el) return;
+    let near = false;
+    if (has) {
+      [sleepUI.bed, sleepUI.wake].forEach(function (h) {
+        const d = Math.abs(((h - pair[1] + 720) % 1440) - 720);
+        if (d < 48) near = true;
+      });
+    }
+    el.classList.toggle('dim', near);
+  });
+
+  if (has) {
+    slPlace($('#sleepBedBadge'), sleepUI.bed);
+    slPlace($('#sleepWakeBadge'), sleepUI.wake);
+    $('#sleepDur').textContent = slDur(dur);
+    $('#sleepRange').textContent = sl12(sleepUI.bed) + ' → ' + sl12(sleepUI.wake);
+    $('#sleepBedTxt').textContent = sl12(sleepUI.bed);
+    $('#sleepWakeTxt').textContent = sl12(sleepUI.wake);
+    ['sleepBedMinus', 'sleepBedPlus', 'sleepWakeMinus', 'sleepWakePlus'].forEach(function (id) {
+      const b = document.getElementById(id); if (b) b.disabled = false;
+    });
+    const b = $('#sleepBedBadge'), w = $('#sleepWakeBadge');
+    b.setAttribute('aria-valuenow', sleepUI.bed);
+    b.setAttribute('aria-valuetext', sl12(sleepUI.bed));
+    w.setAttribute('aria-valuenow', sleepUI.wake);
+    w.setAttribute('aria-valuetext', sl12(sleepUI.wake));
+  } else {
+    $('#sleepBedTxt').textContent = '—';
+    $('#sleepWakeTxt').textContent = '—';
+    ['sleepBedMinus', 'sleepBedPlus', 'sleepWakeMinus', 'sleepWakePlus'].forEach(function (id) {
+      const b = document.getElementById(id); if (b) b.disabled = true;
+    });
+  }
+}
+
+/* 拖曳時夾住 30 分鐘～16 小時，避免出現 24 小時或負數 */
+function slSetHandle(which, raw) {
+  let m = slSnap(raw);
+  if (sleepUI.bed == null || sleepUI.wake == null) { sleepUI.bed = m; sleepUI.wake = slSnap(m + Math.round(sleepUI.avg * 60)); return; }
+  if (which === 'bed') {
+    const d = ((sleepUI.wake - m + 1440) % 1440) || 1440;
+    if (d < SL_MIN_DUR) m = sleepUI.wake - SL_MIN_DUR;
+    else if (d > SL_MAX_DUR) m = sleepUI.wake - SL_MAX_DUR;
+    sleepUI.bed = slSnap(m);
+  } else {
+    const d = ((m - sleepUI.bed + 1440) % 1440) || 1440;
+    if (d < SL_MIN_DUR) m = sleepUI.bed + SL_MIN_DUR;
+    else if (d > SL_MAX_DUR) m = sleepUI.bed + SL_MAX_DUR;
+    sleepUI.wake = slSnap(m);
+  }
+}
+
+function slPointerToMin(ev) {
+  const el = $('#sleepDialWrap');
+  const r = el.getBoundingClientRect();
+  const x = ev.clientX - r.left - r.width / 2;
+  const y = ev.clientY - r.top - r.height / 2;
+  let a = Math.atan2(x, -y);
+  if (a < 0) a += Math.PI * 2;
+  return a / (Math.PI * 2) * 1440;
+}
+
+function slShowBubble(min) {
+  const b = $('#sleepBubble');
+  if (!b) return;
+  const p = slPoint(min, SL_R);
+  const left = Math.min(88, Math.max(12, p.x / 300 * 100));
+  const below = p.y < 92;
+  b.textContent = sl12(min);
+  b.classList.toggle('below', below);
+  b.style.left = left + '%';
+  b.style.top = ((below ? p.y + 14 : p.y - 14) / 300 * 100) + '%';
+  b.classList.add('show');
+}
+function slHideBubble() {
+  const b = $('#sleepBubble');
+  if (b) b.classList.remove('show');
+}
+
+function slStartDrag(which, ev, badge) {
+  sleepUI.dragging = which;
+  $('#sleepDialWrap').classList.add('dragging');
+  badge.classList.add('drag');
+  try { badge.setPointerCapture(ev.pointerId); } catch (e) { /* ignore */ }
+  if (ev.cancelable) ev.preventDefault();
+  slClearDash();
+  slShowBubble(which === 'bed' ? sleepUI.bed : sleepUI.wake);
+}
+function slEndDrag() {
+  if (!sleepUI.dragging) return;
+  $('#sleepDialWrap').classList.remove('dragging');
+  $('#sleepBedBadge').classList.remove('drag');
+  $('#sleepWakeBadge').classList.remove('drag');
+  slHideBubble();
+  sleepUI.dragging = null;
+}
+
+function slOnPointerDown(ev) {
+  if (!sleepUI.open) return;
+  const badge = ev.target.closest ? ev.target.closest('.sd-badge') : null;
+  if (badge) {
+    slStartDrag(badge.id === 'sleepBedBadge' ? 'bed' : 'wake', ev, badge);
+    return;
+  }
+  if (ev.button != null && ev.button !== 0) return;
+  const box = $('#sleepDialWrap').getBoundingClientRect();
+  const dx = ev.clientX - box.left - box.width / 2;
+  const dy = ev.clientY - box.top - box.height / 2;
+  if (Math.sqrt(dx * dx + dy * dy) < box.width * 0.27) return;  /* 中央時長區不誤觸 */
+  const raw = slPointerToMin(ev);
+
+  if (sleepUI.bed == null) {
+    /* 空白狀態：第一次點擊＝定錨，並依 7 天平均自動推算起床 */
+    sleepUI.bed = slSnap(raw);
+    sleepUI.wake = slSnap(sleepUI.bed + Math.round(sleepUI.avg * 60));
+    if (slDuration() < SL_MIN_DUR) sleepUI.wake = slSnap(sleepUI.bed + 450);
+    if (ev.cancelable) ev.preventDefault();
+    slRender(true);
+    return;
+  }
+
+  /* 已有值：圓環只負責定錨，拖曳請按住月亮／太陽，避免誤觸 */
+}
+
+function slOnPointerMove(ev) {
+  if (!sleepUI.dragging) return;
+  if (ev.cancelable) ev.preventDefault();
+  slSetHandle(sleepUI.dragging, slPointerToMin(ev));
+  slRender();
+  slShowBubble(sleepUI.dragging === 'bed' ? sleepUI.bed : sleepUI.wake);
+}
+
+/* 體感 5 級 */
+function slRenderQuality() {
+  const host = $('#sleepQScale');
+  if (!host) return;
+  const q = sleepUI.quality ? SLEEP_Q[Math.min(4, Math.max(0, sleepUI.quality - 1))] : null;
+  host.innerHTML = SLEEP_Q.map(function (item) {
+    const on = item.v === sleepUI.quality;
+    return '<button class="q-cell' + (on ? ' on' : '') + '" type="button" data-v="' + item.v + '"' +
+      ' role="radio" aria-checked="' + on + '" aria-label="' + item.name + ' / ' + item.en + '"' +
+      ' style="--qc:' + item.tone + ';--qbg:' + item.bg + '"><i data-lucide="check"></i></button>';
+  }).join('');
+  const chip = $('#sleepQChip');
+  chip.textContent = q ? q.name : '未評分';
+  chip.style.background = q ? q.bg : '#F3F1F7';
+  chip.style.color = q ? q.tone : '#9C96A8';
+  if (window.lucide) lucide.createIcons(host);
+}
+
+function slRenderTags() {
+  const host = $('#sleepTags');
+  if (!host) return;
+  host.innerHTML = SLEEP_TAGS.map(function (t) {
+    const on = sleepUI.tags.has(t.n);
+    return '<button class="stag' + (on ? ' on' : '') + '" type="button" data-tag="' + t.n + '" aria-pressed="' + on + '">' +
+      '<i data-lucide="' + t.i + '"></i>' + t.n + '</button>';
+  }).join('');
+  if (window.lucide) lucide.createIcons(host);
+}
+
+/* 午睡 */
+function slFillNapOptions() {
+  const sel = $('#napStartSel');
+  if (!sel || sel.options.length) return;
+  let html = '';
+  for (let m = 0; m < 1440; m += 15) html += '<option value="' + m + '">' + sl12(m) + '</option>';
+  sel.innerHTML = html;
+}
+function slRenderNapSheet() {
+  const end = slMod(napUI.start + napUI.min);
+  $('#napMinVal').textContent = napUI.min;
+  $('#napEndTxt').textContent = '結束 ' + sl12(end);
+  $('#napStartSel').value = String(napUI.start);
+  $('#napMinus').disabled = napUI.min <= 5;
+  $('#napPlus').disabled = napUI.min >= 180;
+}
+function slOpenNap() {
+  if (sleepUI.napMin > 0) { napUI.min = sleepUI.napMin; napUI.start = sleepUI.napStart; }
+  else { napUI.min = 30; napUI.start = 840; }
+  slFillNapOptions();
+  slRenderNapSheet();
+  $('#napSheet').classList.add('show');
+  $('#napSheet').setAttribute('aria-hidden', 'false');
+}
+function slCloseNap() {
+  $('#napSheet').classList.remove('show');
+  $('#napSheet').setAttribute('aria-hidden', 'true');
+}
+function slRenderNap() {
+  const has = sleepUI.napMin > 0;
+  const chip = $('#napChip');
+  if (chip) {
+    chip.hidden = !has;
+    if (has) {
+      chip.innerHTML = '<i data-lucide="bed"></i><span><b>午睡 ' + slDur(sleepUI.napMin) + '</b> · ' +
+        sl12(sleepUI.napStart) + '–' + sl12(sleepUI.napStart + sleepUI.napMin) + '</span>' +
+        '<button class="nx" id="napRemove" type="button" aria-label="移除午睡"><i data-lucide="x"></i></button>';
+      if (window.lucide) lucide.createIcons(chip);
+    }
+  }
+  const t = $('#napAddTxt');
+  if (t) t.textContent = has ? '編輯午睡' : '新增午睡';
+}
+
+async function slAvg7(ds) {
+  try {
+    const start = dateStr(addDays(parseDate(ds), -7));
+    const end = dateStr(addDays(parseDate(ds), -1));
+    const rows = await ldb.dailyLogs.where('date').between(start, end, true, true).toArray();
+    const vals = [];
+    rows.forEach(function (r) {
+      const m = slLogMin(r);
+      if (m != null && m >= 180 && m <= 840) vals.push(m / 60);
+    });
+    if (!vals.length) return 7.5;
+    return Math.round(vals.reduce(function (a, b) { return a + b; }, 0) / vals.length * 10) / 10;
+  } catch (e) { return 7.5; }
+}
+
+async function slFindLast(ds) {
+  try {
+    const rows = await ldb.dailyLogs.orderBy('date').reverse().limit(40).toArray();
+    for (let i = 0; i < rows.length; i++) {
+      const r = rows[i];
+      if (r.date < ds && r.sleepStart && r.sleepEnd) return r;
+    }
+    return null;
+  } catch (e) { return null; }
+}
+
+async function openSleepModal(ds) {
+  const date = ds || state.recordDate || recordMaxDate();
+  let log = null;
+  try { log = await ldb.dailyLogs.get(date); } catch (e) { log = null; }
+  sleepUI.date = date;
+  sleepUI.avg = await slAvg7(date);
+  sleepUI.last = await slFindLast(date);
+  sleepUI.bed = log && log.sleepStart ? slSnap(slHm2min(log.sleepStart)) : null;
+  sleepUI.wake = log && log.sleepEnd ? slSnap(slHm2min(log.sleepEnd)) : null;
+  if (sleepUI.bed != null && sleepUI.wake == null) sleepUI.wake = slSnap(sleepUI.bed + Math.round(sleepUI.avg * 60));
+  if (sleepUI.bed != null && sleepUI.wake != null && slDuration() < SL_MIN_DUR) sleepUI.wake = slSnap(sleepUI.bed + SL_MIN_DUR);
+  sleepUI.quality = log && log.sleepQuality ? Math.max(1, Math.min(5, log.sleepQuality)) : null;
+  sleepUI.tags = new Set(log && Array.isArray(log.sleepTags) ? log.sleepTags : []);
+  sleepUI.napMin = log && log.napMin ? log.napMin : 0;
+  sleepUI.napStart = log && log.napStart ? slHm2min(log.napStart) : 840;
+  sleepUI.dragging = null;
+  sleepUI.open = true;
+
+  const d = parseDate(date);
+  $('#sleepDateLabel').textContent = mdStr(d) + ' ' + weekDayStr(d) + (date === todayStr() ? ' · 今天' : '');
+  const sameTxt = $('#sleepSameTxt');
+  if (sleepUI.last && sameTxt) {
+    sameTxt.textContent = '沿用上次 ' + sl12(slHm2min(sleepUI.last.sleepStart)) + ' → ' + sl12(slHm2min(sleepUI.last.sleepEnd));
+  }
+  $('#sleepSame').hidden = sleepUI.bed != null || !sleepUI.last;
+
+  slRenderQuality();
+  slRenderTags();
+  slRenderNap();
+  await slRenderAutoHint(log);
+
+  sleepUI.prevOverflow = document.body.style.overflow || '';
+  document.body.style.overflow = 'hidden';
+  $('#sleepRoot').classList.add('show');
+  $('#sleepBody').scrollTop = 0;
+  slRender();
+  if (window.lucide) lucide.createIcons($('#sleepRoot'));
+}
+
+async function slRenderAutoHint(log) {
+  const el = $('#sleepAutoHint');
+  if (!el) return;
+  const a = log && log.autoSleep;
+  if (!a) { el.hidden = true; el.textContent = ''; return; }
+  const bits = [];
+  if (a.deepMin != null) bits.push('深睡 ' + Math.round(a.deepMin) + ' 分');
+  if (a.remMin != null) bits.push('REM ' + Math.round(a.remMin) + ' 分');
+  el.textContent = '已從小米運動健康同步' + (bits.length ? ' · ' + bits.join(' · ') : '');
+  el.hidden = false;
+}
+
+function closeSleepModal() {
+  sleepUI.open = false;
+  slEndDrag();
+  $('#sleepRoot').classList.remove('show');
+  slCloseNap();
+  document.body.style.overflow = sleepUI.prevOverflow || '';
+}
+
+function slSameAsUsual() {
+  if (!sleepUI.last) return;
+  sleepUI.bed = slSnap(slHm2min(sleepUI.last.sleepStart));
+  sleepUI.wake = slSnap(slHm2min(sleepUI.last.sleepEnd));
+  if (slDuration() < SL_MIN_DUR) sleepUI.wake = slSnap(sleepUI.bed + Math.round(sleepUI.avg * 60));
+  slRender(true);
+}
+
+async function saveSleepModal() {
+  if (sleepUI.bed == null) { toast('先點圓環設定入睡時間'); return; }
+  const ds = sleepUI.date;
+  const dur = slDuration();
+  let prev = null;
+  try { prev = await ldb.dailyLogs.get(ds); } catch (e) { prev = null; }
+  const rec = Object.assign({}, prev || {}, {
+    date: ds,
+    sleepStart: slHm(sleepUI.bed),
+    sleepEnd: slHm(sleepUI.wake),
+    sleepMin: dur,
+    sleepHours: Math.round(dur / 60 * 100) / 100,
+    sleepQuality: sleepUI.quality || null,
+    sleepTags: Array.from(sleepUI.tags),
+    napMin: sleepUI.napMin || 0,
+    napStart: sleepUI.napMin ? slHm(sleepUI.napStart) : null,
+    napEnd: sleepUI.napMin ? slHm(sleepUI.napStart + sleepUI.napMin) : null,
+    updatedAt: Date.now()
+  });
+  await ldb.dailyLogs.put(rec);
+  CloudSync.notifyLocalChange('dailyLogs', ds);
+  if (state.recordDate === ds) {
+    state.sleep = {
+      start: rec.sleepStart, end: rec.sleepEnd, hours: rec.sleepHours, min: rec.sleepMin,
+      quality: rec.sleepQuality, tags: rec.sleepTags,
+      napMin: rec.napMin, napStart: rec.napStart, napEnd: rec.napEnd
+    };
+    await renderSleepSummary();
+  }
+  closeSleepModal();
+  renderQuick();
+  renderEnergyMeta();
+  if (state.tab === 'review') renderReview();
+  toast('已記錄睡眠 ' + slDur(dur));
+}
+
+async function renderSleepSummary() {
+  const main = $('#sleepSumMain'), sub = $('#sleepSumSub');
+  if (!main || !sub) return;
+  const ds = state.recordDate || recordMaxDate();
+  let log = null;
+  try { log = await ldb.dailyLogs.get(ds); } catch (e) { log = null; }
+  const mins = slLogMin(log);
+  if (mins != null) {
+    main.textContent = slDur(mins);
+    main.classList.remove('empty');
+    if (log.sleepStart && log.sleepEnd) {
+      sub.innerHTML = '<i data-lucide="moon" class="m"></i>' + sl12(slHm2min(log.sleepStart)) +
+        '<span class="ar">→</span><i data-lucide="sun" class="s"></i>' + sl12(slHm2min(log.sleepEnd));
+      if (window.lucide) lucide.createIcons(sub);
+    } else {
+      sub.textContent = '已記錄時長';
+    }
+  } else {
+    main.textContent = '尚未記錄';
+    main.classList.add('empty');
+    sub.textContent = '點一下，記下昨晚的睡眠';
+  }
+}
+
+function slBuildTicks() {
+  const g = $('#sleepTicks');
+  if (!g || g.childNodes.length) return;
+  let html = '';
+  for (let m = 0; m < 1440; m += 30) {
+    const major = m % 360 === 0;
+    const a = slAngle(m), r1 = major ? 119 : 122, r2 = 127;
+    html += '<line class="sd-tick' + (major ? ' hour' : '') + '"' +
+      ' x1="' + (SL_C + r1 * Math.sin(a)).toFixed(1) + '" y1="' + (SL_C - r1 * Math.cos(a)).toFixed(1) + '"' +
+      ' x2="' + (SL_C + r2 * Math.sin(a)).toFixed(1) + '" y2="' + (SL_C - r2 * Math.cos(a)).toFixed(1) + '"/>';
+  }
+  g.innerHTML = html;
+}
+
+function initSleepUI() {
+  if (!$('#sleepRoot')) return;
+  slBuildTicks();
+
+  $('#sleepClose').addEventListener('click', closeSleepModal);
+  $('#sleepBackdrop').addEventListener('click', closeSleepModal);
+  $('#sleepSave').addEventListener('click', saveSleepModal);
+  $('#sleepSame').addEventListener('click', slSameAsUsual);
+  $('#sleepSum').addEventListener('click', function () { openSleepModal(state.recordDate || recordMaxDate()); });
+
+  $('#sleepBedMinus').addEventListener('click', function () {
+    if (sleepUI.bed == null) return; slSetHandle('bed', sleepUI.bed - 5); slClearDash(); slRender();
+  });
+  $('#sleepBedPlus').addEventListener('click', function () {
+    if (sleepUI.bed == null) return; slSetHandle('bed', sleepUI.bed + 5); slClearDash(); slRender();
+  });
+  $('#sleepWakeMinus').addEventListener('click', function () {
+    if (sleepUI.bed == null) return; slSetHandle('wake', sleepUI.wake - 5); slClearDash(); slRender();
+  });
+  $('#sleepWakePlus').addEventListener('click', function () {
+    if (sleepUI.bed == null) return; slSetHandle('wake', sleepUI.wake + 5); slClearDash(); slRender();
+  });
+
+  ['bed', 'wake'].forEach(function (k) {
+    const el = k === 'bed' ? $('#sleepBedBadge') : $('#sleepWakeBadge');
+    el.addEventListener('keydown', function (e) {
+      if (sleepUI.bed == null) return;
+      const cur = k === 'bed' ? sleepUI.bed : sleepUI.wake;
+      let d = 0;
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') d = -5;
+      else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') d = 5;
+      if (!d) return;
+      e.preventDefault();
+      slSetHandle(k, cur + d);
+      slClearDash();
+      slRender();
+    });
+  });
+
+  $('#sleepDialWrap').addEventListener('pointerdown', slOnPointerDown);
+  window.addEventListener('pointermove', slOnPointerMove, { passive: false });
+  window.addEventListener('pointerup', slEndDrag);
+  window.addEventListener('pointercancel', slEndDrag);
+
+  $('#sleepQScale').addEventListener('click', function (e) {
+    const c = e.target.closest('.q-cell');
+    if (!c) return;
+    sleepUI.quality = parseInt(c.dataset.v, 10) || 3;
+    slRenderQuality();
+  });
+
+  $('#sleepTags').addEventListener('click', function (e) {
+    const t = e.target.closest('.stag');
+    if (!t) return;
+    const n = t.dataset.tag;
+    if (sleepUI.tags.has(n)) sleepUI.tags.delete(n); else sleepUI.tags.add(n);
+    slRenderTags();
+  });
+
+  $('#napAdd').addEventListener('click', slOpenNap);
+  $('#napMinus').addEventListener('click', function () { napUI.min = Math.max(5, napUI.min - 5); slRenderNapSheet(); });
+  $('#napPlus').addEventListener('click', function () { napUI.min = Math.min(180, napUI.min + 5); slRenderNapSheet(); });
+  $('#napStartSel').addEventListener('change', function () { napUI.start = parseInt(this.value, 10) || 0; slRenderNapSheet(); });
+  $('#napSaveBtn').addEventListener('click', function () {
+    sleepUI.napMin = napUI.min; sleepUI.napStart = napUI.start;
+    slRenderNap(); slCloseNap();
+  });
+  $('#napBackdrop').addEventListener('click', slCloseNap);
+  $('#napChip').addEventListener('click', function (e) {
+    if (e.target.closest('#napRemove')) {
+      sleepUI.napMin = 0; slRenderNap(); return;
+    }
+    slOpenNap();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sleepUI.open) { closeSleepModal(); return; }
+    if (e.key === 'Escape' && $('#napSheet').classList.contains('show')) slCloseNap();
+  });
 }
 
 /* 排便：步進器 − 數字 ＋ */
@@ -4228,7 +5398,10 @@ async function cupClick(i) {
 /* 首頁快速記錄：與記錄頁共用同一筆 dailyLogs，自動同步 */
 async function renderQuick() {
   const log = await ldb.dailyLogs.get(todayStr());
-  if ($('#qSleepV')) $('#qSleepV').textContent = (log && log.sleepHours != null) ? log.sleepHours + 'h' : '—';
+  if ($('#qSleepV')) {
+    const sm = slLogMin(log);
+    $('#qSleepV').textContent = sm != null ? slDurShort(sm) : '—';
+  }
   if ($('#qWaterV')) $('#qWaterV').textContent = (log && log.waterCups != null) ? log.waterCups : 0;
   if ($('#qBowelV')) $('#qBowelV').textContent = (log && log.bowelCount != null) ? log.bowelCount : 0;
 }
@@ -4243,26 +5416,37 @@ async function saveLog() {
   const ds = state.recordDate || todayStr();
   const isToday = ds === todayStr();
   const note = $('#logNote').value.trim();
-  const sleepStart = $('#sleepStart').value;
-  const sleepEnd = $('#sleepEnd').value;
-  const sleepHours = calcSleepHours(sleepStart, sleepEnd);
+  const prevLog = await ldb.dailyLogs.get(ds);
+  const sl = state.sleep || {};
+  const sleepStart = sl.start || (prevLog && prevLog.sleepStart) || '';
+  const sleepEnd = sl.end || (prevLog && prevLog.sleepEnd) || '';
+  const sleepHours = sl.hours != null ? sl.hours : calcSleepHours(sleepStart, sleepEnd);
   const pressure = meterValue($('#logPressure'));
   const exercise = $('#logExercise').dataset.v === '1';
   const stateTags = Array.from(state.selecting.state);
   const activityTags = Array.from(state.selecting.activity);
+  const detailMoods = Array.from(state.detailMoods || []);
+  const vitals = state.vitals || {x:.5, y:.5, energy:5, stress:5, focus:5};
   // 當日整體能量流向：由該日最後一條完成記錄的流向推導（無則留空）
   const dayStart = parseDate(ds).getTime();
   const dayRecs = await ldb.records.where('ts').between(dayStart, dayStart + 86399999, true, true).toArray();
   const energyMode = dayRecs.length ? dayRecs[dayRecs.length - 1].energyMode : null;
   const now = Date.now();
-  const prevLog = await ldb.dailyLogs.get(ds);
   await ldb.dailyLogs.put({
     date: ds, note, sleepStart, sleepEnd, sleepHours,
+    sleepMin: sl.min != null ? sl.min : (prevLog ? prevLog.sleepMin : undefined),
+    sleepQuality: sl.quality != null ? sl.quality : (prevLog ? prevLog.sleepQuality : undefined),
+    sleepTags: (sl.tags && sl.tags.length) ? sl.tags : (prevLog ? prevLog.sleepTags : undefined),
+    napMin: sl.napMin != null ? sl.napMin : (prevLog ? prevLog.napMin : undefined),
+    napStart: sl.napStart != null ? sl.napStart : (prevLog ? prevLog.napStart : undefined),
+    napEnd: sl.napEnd != null ? sl.napEnd : (prevLog ? prevLog.napEnd : undefined),
     pressure, exercise, energyMode,
     /* 只有「今天」才把目前能量環寫進當日；補記保留原值 */
     energy: isToday ? state.energy : (prevLog ? prevLog.energy : undefined),
     bowelCount: state.bowelCount, waterCups: state.waterCups,
     stateTags, activityTags, mood: state.mood || null, updatedAt: now,
+    detailMoods, vitals, focus: state.focus || 4,
+    pressure: vitals.stress >= 7 ? '高' : (vitals.stress >= 4 ? '中' : '低'),
     cloudId: prevLog ? prevLog.cloudId : undefined,
   });
   const allTags = stateTags.concat(activityTags);
@@ -4375,14 +5559,19 @@ async function s2WheelCompute(weekOffset) {
     reasons: [ R('家庭活動', family + ' 天', family, '標記「家庭活動」') ],
   };
 
-  // 心靈：獨處放鬆 + 情緒低落/焦慮（負向）
+  // 心靈：獨處放鬆 + 負向詳細情緒（低能量／高能量）
   const alone = tagCount(logs, 'activityTags', ['獨處放鬆']);
-  const lowMood = tagCount(logs, 'stateTags', ['情緒低落', '焦慮']);
+  const negEmotionDays = logs.filter(function (l) {
+    return (l.detailMoods || []).some(function (nm) {
+      var q = (typeof emotionQuadOf === 'function') ? emotionQuadOf(nm) : null;
+      return q === 'low' || q === 'anxious';
+    });
+  }).length;
   dims.mind = {
-    score: clamp10((alone / 4) * 6 + Math.max(0, (1 - lowMood / days)) * 4),
+    score: clamp10((alone / 4) * 6 + Math.max(0, (1 - negEmotionDays / days)) * 4),
     reasons: [
       R('獨處放鬆', alone + ' 天', alone, '標記「獨處放鬆」'),
-      R('情緒低落', lowMood + ' 天', lowMood, '越少越好'),
+      R('負向情緒', negEmotionDays + ' 天', negEmotionDays, '詳細情緒偏負向，越少越好'),
     ],
   };
 
@@ -4525,7 +5714,8 @@ async function renderReview() {
   const logs = await ldb.dailyLogs.where('date').between(mStr, sStr, true, true).toArray();
   const records = await ldb.records.where('ts').between(monday.getTime(), sunday.getTime() + 86399999, true, true).toArray();
   const done = records.filter(r => r.completed).length;
-  const focus = records.reduce((s, r) => s + (r.duration || 0), 0);
+  const focusLogs = logs.filter(l => l.focus != null);
+  const focus = focusLogs.length ? (focusLogs.reduce((s, l) => s + l.focus, 0) / focusLogs.length) : null;
   $('#reviewStats').innerHTML =
     '<div class="wstat">' +
     '<div class="b' + (logs.length ? ' on' : '') + '"><div class="num">' + logs.length + '</div><div class="lb">已記錄（天）</div></div>' +
@@ -4533,7 +5723,7 @@ async function renderReview() {
     '<div class="b"><div class="num">' + done + '</div><div class="lb">完成（次）</div></div>' +
     '</div>';
   $('#reviewBody').innerHTML =
-    '<div class="deepcard"><span class="l">本週小結<br>' + rangeTxt + '</span><span class="r">完成 ' + done + ' · 專注 <i>' + focus + ' 分</i></span></div>' +
+    '<div class="deepcard"><span class="l">本週小結<br>' + rangeTxt + '</span><span class="r">完成 ' + done + ' · 專注 <i>' + (focus != null ? focus.toFixed(1) + ' /5' : '—') + '</i></span></div>' +
     '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="trending-up"></i></span><b>本週高光與低谷</b></div>' +
       '<div class="rv-sub">跟本週自己的平均比，不是跟別人比</div><div id="s2Highlight"></div></div>' +
     '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-butter"><i data-lucide="moon"></i></span><b>睡眠作息</b>' +
@@ -4628,9 +5818,11 @@ async function renderCalDetail() {
   const modeStr = (log && log.energyMode) ? modeLabel(log.energyMode) : (recs.length ? modeLabel(recs[recs.length - 1].energyMode) : '未記錄');
   const rows = [];
   rows.push(dk('c-pink', 'message-circle', '一句話', log && log.note ? log.note : '—'));
-  rows.push(dk('c-violet', 'smile', '心情', (function(){ var k=normMood(log&&log.mood); return k ? MOODS[k].name : '未記錄'; })()));
+  rows.push(dk('c-violet', 'smile', '情緒', (log && Array.isArray(log.detailMoods) && log.detailMoods.length)
+    ? log.detailMoods.join('、')
+    : (function(){ var k=normMood(log&&log.mood); return k ? MOODS[k].name : '未記錄'; })()));
   rows.push(dk('c-butter', 'zap', '能量', (energyVal != null ? energyVal + ' / 10' : '未記錄') + ' · ' + modeStr));
-  rows.push(dk('c-night', 'moon', '睡眠', log && log.sleepHours != null ? log.sleepHours + ' 小時' : '未記錄'));
+  rows.push(dk('c-night', 'moon', '睡眠', slLogMin(log) != null ? slDur(slLogMin(log)) + (log.sleepQuality ? ' · ' + SLEEP_Q[Math.max(0, Math.min(4, log.sleepQuality - 1))].name : '') : '未記錄'));
   rows.push(dk('c-green', 'activity', '運動', log ? (log.exercise ? '有' : '無') : '未記錄'));
   rows.push(dk('c-butter', 'check', '排便', log && log.bowelCount != null ? log.bowelCount + ' 次' : '未記錄'));
   rows.push(dk('c-mint', 'droplets', '喝水', log && log.waterCups != null ? log.waterCups + ' 杯（' + (log.waterCups * 400) + 'mL）' : '未記錄'));
@@ -4733,6 +5925,99 @@ async function openSettings() {
   renderSyncStatus(); // 彈窗內新建的 sync-row 需要重新填充
   await renderHealthStatus();
 }
+/* ---------- P29：標籤管理（設定頁）---------- */
+var tagMgrType = 'emotion';
+var tagMgrIcon = 'sparkles';   /* P42 活動自訂圖標 */
+async function openTagManager(type){
+  closeDrawer();
+  tagMgrType = type || tagMgrType || 'emotion';
+  openModal('<div class="m-head"><h2><i data-lucide="tag"></i> 標籤管理</h2><button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>' +
+    '<div id="tagMgrBody" class="tag-mgr"></div>' +
+    '<div class="row"><button class="save" onclick="closeModal()">完成</button></div>');
+  if (window.lucide) lucide.createIcons(document.getElementById('modalRoot'));
+  await renderTagManager();
+}
+async function renderTagManager(){
+  var host = document.getElementById('tagMgrBody'); if(!host) return;
+  var states = await getTags('state');
+  var acts = await getTags('activity');
+  var emotions = await getTags('emotion');
+  var list = tagMgrType === 'state' ? states : (tagMgrType === 'activity' ? acts : emotions);
+  var tabs = '<div class="tag-tabs">' +
+    '<button type="button" class="' + (tagMgrType==='emotion'?'on':'') + '" onclick="tagMgrType=\'emotion\';renderTagManager()">情緒</button>' +
+    '<button type="button" class="' + (tagMgrType==='state'?'on':'') + '" onclick="tagMgrType=\'state\';renderTagManager()">狀態</button>' +
+    '<button type="button" class="' + (tagMgrType==='activity'?'on':'') + '" onclick="tagMgrType=\'activity\';renderTagManager()">活動</button>' +
+    '</div>';
+  var hint = tagMgrType === 'emotion'
+    ? '<div class="imp-hint">情緒用來訓練自我覺察。新增時選一個維度；記錄頁可橫滑選取。</div>' : '';
+  /* 情緒頁：維度下拉；其他頁：一般輸入 */
+  var quadSel = '';
+  if (tagMgrType === 'emotion') {
+    quadSel = '<select class="input" id="tagMgrQuad" style="flex:0 0 auto;width:118px;">' +
+      DETAIL_ORDER.map(function(q){ return '<option value="' + q + '">' + DETAIL_EMOTIONS[q].name + '</option>'; }).join('') +
+      '</select>';
+  }
+  var iconPick = '';
+  if (tagMgrType === 'activity') {
+    iconPick = '<div class="tag-ic-pick"><div class="tag-ic-tip">選一個圖標</div><div class="tag-ic-row">' +
+      ACTIVITY_ICON_CHOICES.map(function(ic){
+        return '<button type="button" class="tag-ic' + (tagMgrIcon === ic ? ' on' : '') + '" data-ic="' + ic + '" title="' + ic + '"><i data-lucide="' + ic + '"></i></button>';
+      }).join('') + '</div></div>';
+  }
+  var rows = list.length ? list.map(function(t){
+    var badge = '';
+    if (tagMgrType === 'emotion' && t.quad && DETAIL_EMOTIONS[t.quad]) {
+      badge = '<span class="tag-quad" style="margin-right:6px;font-size:9.5px;color:var(--primary);font-weight:800;">' + DETAIL_EMOTIONS[t.quad].name + '</span>';
+    }
+    if (tagMgrType === 'activity') {
+      badge = '<span class="tag-ic-mini"><i data-lucide="' + (t.icon || actIcon(t.name)) + '"></i></span>';
+    }
+    return '<div class="tag-mgr-row"><span>' + badge + esc(t.name) + '</span>' +
+      '<button type="button" class="tag-del" data-del="' + esc(t.name) + '" aria-label="刪除 ' + esc(t.name) + '">✕</button></div>';
+  }).join('') : '<div class="imp-hint">這一類還沒有標籤。</div>';
+  var ph = tagMgrType === 'emotion' ? '輸入新情緒（如：感恩）' : (tagMgrType === 'state' ? '輸入新狀態（如：肩頸痠痛）' : '輸入新活動（如：瑜伽）');
+  host.innerHTML = tabs + hint + iconPick +
+    '<div class="tag-add-row"><input type="text" class="input" id="tagMgrInput" placeholder="' + ph + '" maxlength="12">' + quadSel + '<button class="bt-mini" onclick="addTagFromManager()">新增</button></div>' +
+    '<div class="tag-mgr-list">' + rows + '</div>';
+  host.querySelectorAll('.tag-del').forEach(function(b){
+    b.addEventListener('click', function(){ delTagFromManager(b.dataset.del); });
+  });
+  var inp = document.getElementById('tagMgrInput');
+  if (inp) inp.addEventListener('keydown', function(e){ if(e.key==='Enter') addTagFromManager(); });
+  host.querySelectorAll('.tag-ic').forEach(function(b){
+    b.addEventListener('click', function(){
+      tagMgrIcon = b.dataset.ic;
+      host.querySelectorAll('.tag-ic').forEach(function(x){ x.classList.toggle('on', x.dataset.ic === tagMgrIcon); });
+    });
+  });
+  if (window.lucide) lucide.createIcons(host);
+}
+async function addTagFromManager(){
+  var inp = document.getElementById('tagMgrInput'); if(!inp) return;
+  var n = (inp.value||'').trim(); if(!n){ toast('先輸入標籤名稱'); return; }
+  var t = await ldb.tags.get([tagMgrType, n]);
+  if (t){ toast('這個標籤已經存在'); return; }
+  var extra = {};
+  if (tagMgrType === 'emotion') {
+    var qs = document.getElementById('tagMgrQuad');
+    extra.quad = qs ? qs.value : 'other';
+  }
+  if (tagMgrType === 'activity') extra.icon = tagMgrIcon;
+  await ldb.tags.put(Object.assign({ type: tagMgrType, name: n, useCount:0, lastUsedAt:0, pinned:0, updatedAt:Date.now() }, extra));
+  CloudSync.notifyLocalChange('tags', null);
+  inp.value = '';
+  await renderTagManager();
+  if (state.tab === 'record') await renderTagGroups();
+  toast('已新增「' + n + '」');
+}
+async function delTagFromManager(name){
+  await ldb.tags.delete([tagMgrType, name]);
+  CloudSync.notifyLocalChange('tags', null);
+  await renderTagManager();
+  if (state.tab === 'record') await renderTagGroups();
+  toast('已刪除「' + name + '」');
+}
+
 async function saveThemes() {
   await setSetting('themeMonth', $('#sMonth').value.trim());
   await setSetting('themeWeek', $('#sWeek').value.trim());
@@ -4968,9 +6253,9 @@ async function exportCSV() {
   const records = await ldb.records.toArray();
   const lines = [];
   lines.push('【每日記錄】');
-  lines.push('日期,一句話記錄,睡眠(小時),工作壓力,運動,排便次數,喝水量(杯),能量流向,狀態標籤,活動標籤,心情');
+  lines.push('日期,一句話記錄,睡眠(小時),工作壓力,運動,排便次數,喝水量(杯),能量流向,狀態標籤,活動標籤,詳細情緒,專注(1-5),心情');
   logs.sort((a, b) => a.date.localeCompare(b.date)).forEach(l => {
-    lines.push([l.date, csvCell(l.note || ''), l.sleepHours != null ? l.sleepHours : '', l.pressure || '', l.exercise ? '有' : '無', l.bowelCount != null ? l.bowelCount : '', l.waterCups != null ? l.waterCups : '', l.energyMode || '', (l.stateTags || []).join('、'), (l.activityTags || []).join('、'), (function(){var k=normMood(l.mood);return k?MOODS[k].name:'';})()].join(','));
+    lines.push([l.date, csvCell(l.note || ''), l.sleepHours != null ? l.sleepHours : '', l.pressure || '', l.exercise ? '有' : '無', l.bowelCount != null ? l.bowelCount : '', l.waterCups != null ? l.waterCups : '', l.energyMode || '', (l.stateTags || []).join('、'), (l.activityTags || []).join('、'), (l.detailMoods || []).join('、'), l.focus != null ? l.focus : '', (function(){var k=normMood(l.mood);return k?MOODS[k].name:'';})()].join(','));
   });
   lines.push('');
   lines.push('【完成記錄】');
@@ -5226,6 +6511,7 @@ function bindEvents() {
     const k = it.dataset.drawer;
     if (k === 'achieve') openAchieve();
     else if (k === 'shop') openShop();
+    else if (k === 'tags') { closeDrawer(); openTagManager(); }
     else if (k === 'settings') openSettings();
   }));
 
@@ -5486,12 +6772,32 @@ function bindEvents() {
   $('#archKeep').addEventListener('click', () => { hideArchiveToast(); }); /* 僅完成今天：卡片留在卡庫 */
   $('#archDo').addEventListener('click', () => { if (archTargetId != null) archiveCard(archTargetId); });
 
-  $('#moodQuad').addEventListener('click', e => {
-    const opt = e.target.closest('.mood-opt');
-    if (opt) pickMood(opt.dataset.mood);
+  /* P29：摺疊面板 */
+  $$('#page-record .acc-hd').forEach(function(hd){
+    hd.addEventListener('click', function(){ toggleAcc(hd.dataset.acc); });
   });
-  $('#stateTags').addEventListener('click', tagClick);
-  $('#activityTags').addEventListener('click', tagClick);
+  /* P29：詳細情緒 pill */
+  var de = document.getElementById('detailEmotions');
+  if (de) de.addEventListener('click', function(e){
+    var b = e.target.closest('.mpill'); if (b) toggleDetailMood(b.dataset.dm);
+  });
+  /* P29：活動 emoji 網格 */
+  var ag = document.getElementById('activityGrid');
+  if (ag) ag.addEventListener('click', function(e){
+    var b = e.target.closest('.act-cell'); if (b) toggleTag('activity', b.dataset.act);
+  });
+  /* P29：狀態分組 pill */
+  var sg = document.getElementById('stateGroups');
+  if (sg) sg.addEventListener('click', function(e){
+    var b = e.target.closest('.mpill'); if (b) toggleTag('state', b.dataset.st);
+  });
+  /* P29：2D Vitals 滑板（touch + mouse，長按拖曳禁用頁面滾動） */
+  initVitalsPad();
+  /* P41：Focus 專注度刻度 */
+  var fsc = document.getElementById('focusScale');
+  if (fsc) fsc.addEventListener('click', function(e){
+    var b = e.target.closest('.focus-cell'); if (b) setFocus(parseInt(b.dataset.focus, 10));
+  });
   $('#logPressure').addEventListener('click', e => {
     const b = e.target.closest('i');
     if (!b) return;
@@ -5505,10 +6811,7 @@ function bindEvents() {
   });
   $('#saveLogBtn').addEventListener('click', saveLog);
 
-  $('#sleepStart').addEventListener('input', renderSleepCalc);
-  $('#sleepEnd').addEventListener('input', renderSleepCalc);
-  $('#sleepStart').addEventListener('change', renderSleepCalc);
-  $('#sleepEnd').addEventListener('change', renderSleepCalc);
+  initSleepUI();
 
   $('#bowelSeg').addEventListener('click', async e => {
     const b = e.target.closest('.sbtn');
@@ -5526,7 +6829,7 @@ function bindEvents() {
 
   $('#qWater').addEventListener('click', () => quickAdd('water', 1));
   $('#qBowel').addEventListener('click', () => quickAdd('bowel', 1));
-  $('#qSleep').addEventListener('click', () => switchTab('record'));
+  $('#qSleep').addEventListener('click', () => openSleepModal(todayStr()));
 
   /* 記錄頁：日期切換（補記） */
   $('#recPrev').addEventListener('click', () => shiftRecordDay(-1));
@@ -5581,6 +6884,46 @@ function bindEvents() {
   $('#wheelCancel').addEventListener('click', closeWheel);
   $('#wheelBackdrop').addEventListener('click', closeWheel);
   $('#wheelViewport').addEventListener('scroll', onWheelScroll);
+}
+
+/* ---------- P29：2D Vitals 滑板觸控/滑鼠共用 ---------- */
+function initVitalsPad(){
+  var pad = document.getElementById('vitalsPad'); if(!pad || pad._p29Bound) return;
+  pad._p29Bound = true;
+  var knob = document.getElementById('vitalsKnob');
+  var dragging = false;
+  function xyFromEvent(e){
+    var r = pad.getBoundingClientRect();
+    var cx = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
+    var cy = (e.touches && e.touches[0]) ? e.touches[0].clientY : e.clientY;
+    var x = (cx - r.left) / r.width;
+    var y = 1 - (cy - r.top) / r.height;   /* 畫面頂端 = y 1（元氣滿滿）*/
+    return { x: Math.max(0, Math.min(1, x)), y: Math.max(0, Math.min(1, y)) };
+  }
+  function start(e){
+    dragging = true;
+    if (knob) knob.classList.add('drag');
+    var p = xyFromEvent(e); setVitalsXY(p.x, p.y);
+    e.preventDefault();
+  }
+  function move(e){
+    if (!dragging) return;
+    var p = xyFromEvent(e); setVitalsXY(p.x, p.y);
+    e.preventDefault();   /* touch-action:none + preventDefault：不與頁面滾動衝突 */
+  }
+  function end(e){
+    if (!dragging) return;
+    dragging = false;
+    if (knob) knob.classList.remove('drag');
+    if (e && e.cancelable) e.preventDefault();
+  }
+  pad.addEventListener('mousedown', start);
+  window.addEventListener('mousemove', move);
+  window.addEventListener('mouseup', end);
+  pad.addEventListener('touchstart', start, { passive:false });
+  pad.addEventListener('touchmove', move, { passive:false });
+  pad.addEventListener('touchend', end, { passive:false });
+  pad.addEventListener('touchcancel', end, { passive:false });
 }
 
 function tagClick(e) {
@@ -6040,6 +7383,8 @@ async function init() {
   try { await ldb.open(); } catch (e) { /* ignore */ }
   await sweepLegacyLocalStorage(); // 兜底補搬（冪等；正常升級路徑 upgrade 已搬完，此處無鍵可掃）
   await seedTags();
+  await seedEmotions();
+  await seedActivityExtras();
   bindEvents();
   syncFab();
 
@@ -6363,14 +7708,23 @@ async function s2RenderTags(records) {
 function s2PickTag(t) { s2TagSel = t; Promise.resolve(s2RenderTags(s2LastRecords)).catch(function () {}); }
 var s2LastRecords = [];
 
-/* 復盤：心情地圖（本週每日心情分布） */
+/* 復盤：心情地圖（本週詳細情緒四維分布 · 方形 treemap） */
+function emotionQuadOf(name){
+  var all = state.allEmotion || [];
+  for (var i=0;i<all.length;i++){
+    var t = all[i], nm = (typeof t === 'string') ? t : t.name;
+    if (nm === name && t && t.quad) return t.quad;
+  }
+  for (var q in DETAIL_EMOTIONS){ if (DETAIL_EMOTIONS[q].items.indexOf(name) >= 0) return q; }
+  return null;
+}
 function s2TreemapNodes(items, horizontal) {
   if (!items.length) return '';
   if (items.length === 1) {
     var it = items[0], q = QUADRANTS[it.k], f = QUAD_FACE[it.k];
     return '<div class="mt-tile ' + q.cls + '" style="flex:' + it.v + '">' +
       '<span class="mt-emoji">' + (MOOD_SVG[f] || '') + '</span>' +
-      '<span class="mt-label"># ' + q.name + '</span>' +
+      '<span class="mt-label">' + (DETAIL_EMOTIONS[it.k] ? DETAIL_EMOTIONS[it.k].name : q.name) + '</span>' +
       '<span class="mt-val">' + it.v + ' 天</span></div>';
   }
   var total = 0; items.forEach(function (i) { total += i.v; });
@@ -6381,7 +7735,6 @@ function s2TreemapNodes(items, horizontal) {
     idx++;
   }
   var g1 = items.slice(0, idx), g2 = items.slice(idx);
-  function sum(g) { var t = 0; g.forEach(function (i) { t += i.v; }); return t; }
   var dir = horizontal ? 'row' : 'col';
   return '<div class="mt-node ' + dir + '" style="flex:' + total + '">' +
     s2TreemapNodes(g1, !horizontal) + s2TreemapNodes(g2, !horizontal) + '</div>';
@@ -6391,12 +7744,16 @@ async function s2RenderMoodMap(logs) {
   if (!host) return;
   var qcnt = { calm:0, energized:0, low:0, anxious:0 };
   (logs || []).forEach(function (l) {
-    var k = (typeof normMood === 'function') ? normMood(l.mood) : l.mood;
-    if (k && MOODS[k]) qcnt[MOODS[k].quad] += 1;
+    var dms = (l && l.detailMoods) || [];
+    var seen = {};   /* 同一天同一維度只算一次，維持「天」的意義 */
+    dms.forEach(function (nm) {
+      var q = emotionQuadOf(nm);
+      if (q && qcnt[q] != null && !seen[q]) { qcnt[q] += 1; seen[q] = 1; }
+    });
   });
   var days = qcnt.calm + qcnt.energized + qcnt.low + qcnt.anxious;
   if (!days) {
-    host.innerHTML = '<div class="rv-sub" style="margin:2px 0 0">這週還沒記下心情。到「記錄」頁最上面選一格，回頭就能看見自己的起伏。</div>';
+    host.innerHTML = '<div class="rv-sub" style="margin:2px 0 0">這週還沒記下情緒。到「記錄」頁的「詳細情緒」選幾個，回頭就能看見自己的起伏。</div>';
     return;
   }
   var items = QUAD_ORDER.filter(function (q) { return qcnt[q] > 0; })
@@ -6405,7 +7762,8 @@ async function s2RenderMoodMap(logs) {
   var html = '<div class="moodtree">' + s2TreemapNodes(items, true) + '</div>';
   var topQ = items[0].k;
   var lowish = qcnt.low + qcnt.anxious;
-  var insight = '這週最常落在 <b>' + QUADRANTS[topQ].name + '</b>（' + qcnt[topQ] + ' 天）';
+  var topName = DETAIL_EMOTIONS[topQ] ? DETAIL_EMOTIONS[topQ].name : QUADRANTS[topQ].name;
+  var insight = '這週最常記錄的是 <b>' + topName + '</b>（' + qcnt[topQ] + ' 天）';
   if (lowish > days / 2) insight += '。緊繃和低落加起來比較多——你這段時間不容易，記得對自己溫柔一點。';
   else insight += '。起起伏伏都正常，從來不需要每天都活力滿滿。';
   html += '<div class="mood-ins">' + insight + '</div>';
@@ -7704,6 +9062,8 @@ async function s2OpenApiModal() {
           '<button type="button" onclick="s2ApiPreset(\'deepseek\')">DeepSeek</button>' +
           '<button type="button" onclick="s2ApiPreset(\'openai\')">OpenAI</button>' +
           '<button type="button" onclick="s2ApiPreset(\'openrouter\')">OpenRouter 免費</button>' +
+          '<button type="button" onclick="s2ApiPreset(\'orling\')">OR 中文 Ling</button>' +
+          '<button type="button" onclick="s2ApiPreset(\'ornemotron\')">OR 快速 Nemotron</button>' +
           '<button type="button" onclick="s2ApiPreset(\'ollama\')">本機 Ollama</button>' +
         '</div><small>只帶入 Endpoint 與模型名，Key 要自己填。模型名以平台當下公告為準。</small></div>' +
       '<div class="fld"><label>Endpoint（OpenAI 相容 /chat/completions）</label>' +
@@ -7742,7 +9102,9 @@ function s2ApiPreset(p) {
     deepseek: ['https://api.deepseek.com/chat/completions', 'deepseek-flash'],
     openai:   ['https://api.openai.com/v1/chat/completions', 'gpt-4o-mini'],
     ollama:   ['http://localhost:11434/v1/chat/completions', 'llama3.2'],
-    openrouter: ['https://openrouter.ai/api/v1/chat/completions', 'google/gemma-4-26b-a4b-it:free']
+    openrouter: ['https://openrouter.ai/api/v1/chat/completions', 'google/gemma-4-26b-a4b-it:free'],
+    orling:     ['https://openrouter.ai/api/v1/chat/completions', 'inclusionai/ling-3.2-flash:free'],
+    ornemotron: ['https://openrouter.ai/api/v1/chat/completions', 'nvidia/nemotron-3.5-lightning:free']
   };
   var v = presets[p]; if (!v) return;
   var ep = document.getElementById('s2Endpoint'), md = document.getElementById('s2LlmModel');
@@ -7787,6 +9149,11 @@ async function s2ApiTest() {
         if (eo.message) bits.push(String(eo.message).slice(0, 120));
         if (eo.metadata && (eo.metadata.error_type || eo.metadata.provider_code))
           bits.push('[' + [eo.metadata.error_type, eo.metadata.provider_code].filter(Boolean).join('/') + ']');
+        if (eo.metadata && eo.metadata.provider_name) bits.push('provider=' + eo.metadata.provider_name);
+        if (eo.metadata && eo.metadata.raw) {
+          var rw = eo.metadata.raw;
+          bits.push('RAW: ' + (typeof rw === 'string' ? rw : JSON.stringify(rw)).slice(0, 320));
+        }
         var ra = r.headers.get('Retry-After'), rem = r.headers.get('X-RateLimit-Remaining');
         if (ra) bits.push('等 ' + ra + ' 秒');
         if (rem !== null && rem !== undefined) bits.push('剩餘 ' + rem);
