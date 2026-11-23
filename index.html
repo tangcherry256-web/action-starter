@@ -1100,16 +1100,18 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .cl-dot { width:16px; height:16px; border-radius:50%; flex:0 0 auto; background:var(--soft);
   box-shadow:0 0 0 1px rgba(58,53,71,.12); }
 
-/* ---------- P15：卡片「為什麼」史詩意義行（淡淡顯示，不搶視覺） ---------- */
-.why-line { display:flex; align-items:flex-start; gap:5px; margin-top:-2px;
-  font-size:10px; font-weight:700; font-style:italic; line-height:1.4;
-  color:var(--accent-quiet-ink); opacity:.9; }
-.why-line svg { width:11px; height:11px; flex:0 0 auto; margin-top:1px; opacity:.75; }
-.why-line span { display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+/* ---------- P48：卡面「為什麼」——啟動動作退場，留完整三行給它 ---------- */
+.c2why { flex:1; min-height:0; display:flex; align-items:flex-start; gap:5px; margin-top:-1px;
+  font-size:10.5px; font-weight:700; font-style:italic; line-height:1.45;
+  color:var(--accent-quiet-ink); opacity:.95; }
+.c2why svg { width:12px; height:12px; flex:0 0 auto; margin-top:0;
+  fill:currentColor; fill-opacity:.26; stroke-width:1.7; }
+.c2why span { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
 .dc-why { margin-top:6px; padding-top:5px; border-top:1px dashed rgba(58,53,71,.10);
   font-size:9px; font-weight:700; font-style:italic; line-height:1.3;
   color:#7A5C12; opacity:1; display:flex; align-items:center; gap:3px; width:100%; }
-.dc-why svg { width:10px; height:10px; flex:0 0 auto; margin-top:0; opacity:.8; }
+.dc-why svg { width:10px; height:10px; flex:0 0 auto; margin-top:0;
+  fill:currentColor; fill-opacity:.16; stroke-width:1.8; }
 .dc-why span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
 .pk-why { font-size:9px; font-weight:700; font-style:italic; color:var(--accent-quiet-ink); opacity:.8;
   margin-left:auto; margin-right:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:42%; }
@@ -1741,18 +1743,19 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .c2corner{display:flex;align-items:center;gap:4px;flex:0 0 auto}
 .c2corner .ci-rep,.c2corner .ci-dl{width:18px;height:18px}
 .c2corner .ci-dl svg,.c2corner .ci-rep svg{width:10px;height:10px}
-/* 膠囊統一：時間 / 能量 / 步數 一律 11px・高 20px・同一幾何 */
-.c2main .cpills{display:flex;align-items:center;gap:5px;flex-wrap:wrap;flex-shrink:0}
+/* 膠囊統一：時間 / 能量 / 步數 一律 10.5px・高 20px・同一幾何 */
+.c2main .cpills{display:flex;align-items:center;gap:4px;flex-wrap:wrap;flex-shrink:0}
 .c2main .cpills .tpil,.c2main .cpills .epil,.c2main .cpills .step-chip{
-  height:20px;padding:0 7px;font-size:11px;font-weight:800;line-height:1;border-radius:99px;
+  height:20px;padding:0 6px;font-size:10.5px;font-weight:800;line-height:1;border-radius:99px;
   display:inline-flex;align-items:center;justify-content:center;gap:0;white-space:nowrap;flex:0 0 auto}
 .c2main .step-chip{border:none;cursor:pointer;background:var(--soft);color:var(--primary-dark)}
-.c2desc{font-size:11px;font-weight:700;color:var(--muted);line-height:1.5;flex:1;min-height:0;
-  border-left:2px solid var(--accent);padding-left:8px;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.c2desc.c2desc-empty{border-left-color:transparent}
-/* P15b：同時有 why 的卡，action 收 1 行，避免在固定卡高內互相擠壓 */
-.c2main.has-why .c2desc{-webkit-line-clamp:1;line-height:1.4}
+/* P48：卡面不再顯示「啟動動作」，只留卡名・膠囊・為什麼 */
+
+/* 小螢幕（≤365）：膠囊勢必換行，why 收 2 行並收緊間距，避免文字被按鈕壓住 */
+@media (max-width:365px){
+  .c2card .c2main{gap:6px;padding:12px 12px 11px}
+  .c2why span{-webkit-line-clamp:2}
+}
 .c2acts{display:flex;gap:7px;margin-top:auto;flex-shrink:0;justify-content:flex-end}
 .c2btn{flex:0 0 auto;height:34px;padding:0 13px;border-radius:11px;font-family:inherit;font-size:12px;font-weight:900;
   display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;white-space:nowrap}
@@ -2802,7 +2805,7 @@ function initDB() {
   });
 }
 
-/* 兜底扫描：v3 升级后仍残留的旧 localStorage 键（升级中断、用户手动恢复旧键等极端情况）
+/* 兜底扫描：v3 升级后仍残留的旧 localStorage 键（升級中斷、使用者手動還原舊鍵等極端情況）
    → 补搬进 dayStates，成功才删键。与 upgrade 内迁移同规则、幂等，不覆蓋已有值 */
 async function sweepLegacyLocalStorage() {
   try {
@@ -3692,7 +3695,7 @@ function renderDrawn() {
       '<div class="dc-pills">' +
       '<span class="pc-time">' + esc(c.duration) + ' 分鐘</span>' +
       '<span class="pc-en">' + em.label + ' ' + (c.energyAmount != null ? c.energyAmount : 3) + '</span></div>' +
-      (c.why ? '<div class="dc-why"><i data-lucide="sparkles"></i><span>為什麼：' + esc(c.why) + '</span></div>' : '') + '</div>' +
+      (c.why ? '<div class="dc-why" title="' + esc(c.why) + '"><i data-lucide="star"></i><span>' + esc(c.why) + '</span></div>' : '') + '</div>' +
       '<div class="dc-foot">' +
       '<button class="dc-go" title="開始計時" onclick="startTimer(' + c.id + ')"><i data-lucide="play"></i>開始</button>' +
       '<button class="dc-sch" title="加入時間線" onclick="openAddTimeSheet(' + c.id + ')"><i data-lucide="calendar"></i></button>' +
@@ -4478,7 +4481,7 @@ async function renderCards() {
         }).join('');
       }
       return '<div class="c2card' + (steps.length ? ' has-steps' : ' flat') + '" data-card="' + c.id + '">' + ghosts +
-        '<div class="c2main' + (c.why ? ' has-why' : '') + '" style="--cb:var(--' + ci + '-ink)">' +
+        '<div class="c2main" style="--cb:var(--' + ci + '-ink)">' +
         '<div class="c2top"><span class="ic-circle ' + ci + '" style="background:var(--' + ci + '-bg);color:var(--' + ci + '-ink)"><i data-lucide="' + esc(c.icon || meta.icon) + '"></i></span>' +
         '<div class="c2head"><div class="cname">' + esc(c.name) + '</div>' +
         (c.projectName ? '<span class="c2proj" title="' + esc(c.projectName) + '">' + esc(c.projectName) + '</span>' : '') +
@@ -4491,8 +4494,7 @@ async function renderCards() {
         '<span class="tpil">' + esc(c.duration) + ' 分</span>' +
         '<span class="epil">' + esc(energyBadge(c)) + '</span>' + stepChip +
         '</div>' +
-        (c.action ? '<div class="c2desc">' + esc(c.action) + '</div>' : '<div class="c2desc c2desc-empty"></div>') +
-        (c.why ? '<div class="why-line"><i data-lucide="sparkles"></i><span>為什麼：' + esc(c.why) + '</span></div>' : '') +
+        (c.why ? '<div class="c2why" title="' + esc(c.why) + '"><i data-lucide="star"></i><span>' + esc(c.why) + '</span></div>' : '') +
         (steps.length ? '<div class="c2stepview" aria-hidden="true"></div>' : '') +
         '<div class="c2acts">' +
         '<button type="button" class="c2btn c2edit" onclick="editCard(' + c.id + ')"><i data-lucide="pencil"></i>編輯</button>' +
@@ -4561,7 +4563,7 @@ async function renderProjectCards(list) {
       return '<div class="pkid' + (kd ? ' done' : '') + '" data-card="' + c.id + '">' +
         '<span class="k-ic ' + ci + '" style="background:var(--' + ci + '-bg);color:var(--' + ci + '-ink)"><i data-lucide="' + esc(c.icon || meta.icon) + '"></i></span>' +
         '<span class="k-n">' + esc(c.name) + '</span>' +
-        (c.why ? '<span class="pk-why" title="為什麼：' + esc(c.why) + '">✦ ' + esc(c.why) + '</span>' : '') +
+        (c.why ? '<span class="pk-why" title="' + esc(c.why) + '">✦ ' + esc(c.why) + '</span>' : '') +
         '<span class="k-m">' + c.duration + ' 分' + (kd ? ' · ✓' : '') + '</span></div>';
     }).join('') + '</div>' : '';
     return '<div class="pcard' + (open ? ' open' : '') + '" data-proj="' + esc(name) + '">' +
@@ -4601,7 +4603,12 @@ function cardForm(card) {
   $('#formTitle').textContent = isEdit ? '編輯卡片' : '新增卡片';
   $('#formBody').innerHTML =
     '<div class="fld"><label>卡名</label><input type="text" id="fName" class="input" placeholder="例如：寫3句話" value="' + esc(c.name) + '"></div>' +
-    '<div class="fld"><label>啟動動作 <span class="hint">選填</span></label><input type="text" id="fAction" class="input" placeholder="例如：打開筆記本寫三句" value="' + esc(c.action) + '"></div>' +
+    '<div class="fld"><label>為什麼做這件事？ <span class="hint">選填</span></label>' +
+    '<input type="text" id="fWhy" class="input" placeholder="例如：學剪輯是為了紀錄生活" value="' + esc(c.why || '') + '">' +
+    '<div class="hint2">卡面會用 ★ 顯示在標題下方；想不到可以先空著</div></div>' +
+    '<div class="fld"><label>給 AI 的補充 <span class="hint">選填 · 只給 AI 看</span></label>' +
+    '<textarea class="input" id="fAction" rows="2" placeholder="例如：想做一支 3 分鐘的生活 vlog，先從整理素材開始，不要叫我買器材">' + esc(c.action) + '</textarea>' +
+    '<div class="hint2">卡名寫不下的細節寫這裡；AI 拆步驟會參考，卡面不會顯示</div></div>' +
     '<div class="fld"><div class="fld-label-row"><label>微步驟 <span class="hint">一行一步，背面可逐項勾選</span></label>' +
     '<button type="button" class="ai-split-btn" id="fAiSplit"><i data-lucide="sparkles"></i>AI 拆步驟</button></div>' +
     '<textarea class="input" id="fSteps" rows="4" placeholder="例如：&#10;打開筆記本&#10;寫三句話&#10;收尾">' + esc((c.steps || []).join('\n')) + '</textarea>' +
@@ -4620,9 +4627,6 @@ function cardForm(card) {
     '<button type="button" class="pselect" id="fColorBtn"><span class="psv" id="fColorVal" style="display:flex;align-items:center;gap:8px">' +
     '<span class="cl-dot" id="fColorDot"></span><span id="fColorTxt">' + (c.color ? colorName(c.color) : '跟隨類型') + '</span></span>' +
     '<span class="ps-chev"><i data-lucide="chevron-down"></i></span></button></div>' +
-    '<div class="fld"><label>為什麼做這件事？ <span class="hint">選填 · 淡淡提醒你，這不是打工，是為自己添磚</span></label>' +
-    '<input type="text" id="fWhy" class="input" placeholder="例如：學剪輯是為了紀錄生活" value="' + esc(c.why || '') + '">' +
-    '<div class="hint2">抽卡與專案裡會靜靜出現在標題下方</div></div>' +
     '<div class="fld"><label>截止日 <span class="hint">選填 · 僅作輔助提醒，不催不惱</span></label>' +
     '<div class="dl-row"><button type="button" class="dl-main" id="fDeadlineBtn"><i data-lucide="flag"></i>' +
     '<span class="dlv' + (c.deadline ? '' : ' unset') + '" id="fDeadlineVal">' + (c.deadline ? mdStr(parseDate(c.deadline)) : '未設定') + '</span>' +
@@ -9899,7 +9903,7 @@ async function s2ToggleMemory() {
 
 /* ---------- 三種 provider 的呼叫（Gemini / OpenAI 相容 / 無） ---------- */
 /* ---------- S2-P10：AI 一鍵拆微步驟（共用底層；s2CallLLM 維持原樣） ----------
-   只送卡名＋啟動動作給模型，不送筆記全文；沒接模型／Key 錯／429／離線都明說，不假裝拆好。 */
+   只送卡名＋給 AI 的補充給模型，不送筆記全文；沒接模型／Key 錯／429／離線都明說，不假裝拆好。 */
 async function s2LlmAsk(mode, system, user, maxTokens) {
   var ctl = new AbortController();
   var to = setTimeout(function () { ctl.abort(); }, 20000);
@@ -10139,7 +10143,7 @@ async function onC2TouchEnd(e) {
 }
 function s2StyleTone(style) {
   return ({
-    reason: '語氣簡潔理性、直述重點、不贅言，重視可执行性。',
+    reason: '語氣簡潔理性、直述重點、不贅言，重視可執行性。',
     gentle: '語氣溫柔支持，多給鼓勵與安全感，降低心理門檻。',
     game:   '語氣活潑有趣，用闖關／得分／小任務的比喻，強調即時進展感。'
   })[style] || '語氣簡潔理性、直述重點。';
@@ -10148,18 +10152,20 @@ function s2StyleTone(style) {
 async function s2BuildSplitPrompt(ctx) {
   var profile = await getSetting('aiProfile', '');
   var style = await getSetting('splitStyle', 'reason');
-  var sys = '你是一個專注零阻力啟動的微教練。請將用戶目標拆解成 5-7 張動作卡片。要求：' +
-    '第一步必須是物理動作（如打開軟件、拿出手機、站起來），必須在 1-5 分鐘內完成。' +
-    '每張卡片需要提供：卡名（動詞開頭極短）、啟動動作（一句降低門檻的引導語，如「30秒完成，立刻有進展感」）。' +
-    '為每張卡片評估並填入：時間需求（分鐘）、能量流向（恢復/不消耗/消耗）、能量量級（1-5）。' +
-    '強調即時可見的進展，絕對禁止包含複雜設置、安裝或長篇教學。' +
-    '在拆解結果的最末尾，提供一條簡短的「行動錦囊」（防卡殼技巧，如『卡住時先自查5分鐘，再查資料』）。' +
-    '\n\n【語氣要求】' + s2StyleTone(style) +
+  var sys = '你是一個專注零阻力啟動的微教練。請把使用者想做的事拆成 5-7 張動作卡片，每張都要能立刻動手。' +
+    '第一步必須是物理動作（例如打開軟體、拿出手機、站起來），1-5 分鐘內能完成。' +
+    '每張卡片只要三件事：卡名（動詞開頭、極短、具體到一看就知道要做什麼）、時間需求（分鐘）、能量流向與量級（1-5）。' +
+    '使用者可能附上「補充說明」描述他真正想做的樣子；請優先照它拆，不要換成一般化的通用做法；兩者衝突時以補充說明為準。' +
+    '強調立刻看得到的進展，不要出現複雜設定、安裝或長篇教學。' +
+    '最後給一句簡短的「行動錦囊」（卡住時的自救技巧）。' +
+    '\n\n【語言】一律使用繁體中文（台灣用語），不要出現簡體字。' +
+    '\n【語氣要求】' + s2StyleTone(style) +
     '\n【關於我】' + (profile || '（未填）') +
     '\n\n【輸出格式｜最高優先】只回一個 JSON 物件，不要 markdown fence、不要任何前後綴文字：' +
-    '{"cards":[{"name":"…","action":"…","duration":3,"energyMode":"drain","energyAmount":2}],"tip":"…"}。' +
-    'energyMode 只能用 "restore"(恢復)|"neutral"(不消耗)|"drain"(消耗) 或中文；共 5-7 張卡；type 不用回。';
-  var user = '任務名稱：' + ctx.name + '\n啟動動作：' + (ctx.action || '（未填）') +
+    '{"cards":[{"name":"…","duration":3,"energyMode":"drain","energyAmount":2}],"tip":"…"}。' +
+    'energyMode 只能用 "restore"(恢復)|"neutral"(不消耗)|"drain"(消耗) 或中文；共 5-7 張卡；不要回 action、type。';
+  var user = '任務名稱：' + ctx.name +
+    '\n補充說明：' + (ctx.action || '（未填）') +
     '\n類型：' + ctx.type + '\n預計時間：約 ' + ctx.duration + ' 分鐘';
   return { sys: sys, user: user };
 }
@@ -10169,14 +10175,13 @@ function s2NormalizeCard(x) {
   const pick = (o, keys) => { for (const k of keys) if (o[k] != null) return o[k]; return null; };
   const name = String(pick(x, ['name', '卡名', '標題', 'title', '名稱']) || '').trim().slice(0, 24);
   if (!name) return null;
-  const action = String(pick(x, ['action', '啟動動作', 'start', '引導語', 'lead']) || '').trim().slice(0, 60);
   const durRaw = parseInt(pick(x, ['duration', '時間', '時間需求', 'minutes', '分鐘']), 10);
   const amtRaw = parseInt(pick(x, ['energyAmount', '能量量級', 'amount', 'level', '量級']), 10);
   const mRaw = String(pick(x, ['energyMode', '能量流向', 'mode', '流向']) || 'neutral');
   const modeMap = { '恢復': 'restore', '不消耗': 'neutral', '無消耗': 'neutral', '消耗': 'drain',
     'restore': 'restore', 'neutral': 'neutral', 'drain': 'drain' };
   return {
-    name: name, action: action,
+    name: name,
     duration: isFinite(durRaw) ? Math.max(1, Math.min(60, durRaw)) : 5,
     energyMode: modeMap[mRaw] || 'neutral',
     energyAmount: isFinite(amtRaw) ? Math.max(1, Math.min(5, amtRaw)) : 3,
@@ -10316,7 +10321,6 @@ function s2RenderPlanResult() {
       return '<div class="pc-res-card" data-i="' + i + '">' +
         '<span class="pc-hint"><i data-lucide="more-horizontal"></i></span>' +
         '<div class="pc-n">' + esc(c.name) + '</div>' +
-        (c.action ? '<div class="pc-a">' + esc(c.action) + '</div>' : '') +
         '<div class="pc-tags">' +
           '<span class="pc-tag tm"><i data-lucide="clock"></i>' + c.duration + ' 分鐘</span>' +
           '<span class="pc-tag ' + c.energyMode + '">' + (modeLabel[c.energyMode] || '不消耗') + ' · ' + c.energyAmount + '</span>' +
@@ -10338,7 +10342,7 @@ async function s2BatchAddCards() {
   var d = pcResult.draft || {}, now = Date.now();
   var rows = pcResult.cards.map(function (c) {
     return {
-      name: c.name, action: c.action || '',
+      name: c.name, action: '',
       energyMode: c.energyMode, energyAmount: c.energyAmount, duration: c.duration,
       type: d.type || '自我成長', projectName: d.projectName || '', icon: d.icon || '',
       deadline: d.deadline || '', isRepeating: !!d.isRepeating,
@@ -10371,7 +10375,7 @@ function s2OpenTuneModal(target) {
   var head = '<div class="m-head"><h2><i data-lucide="pencil"></i> 你想怎麼改這張卡？</h2>' +
     '<button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>';
   var body = '<div class="imp-hint">用一句話說就好，例如「太難了，拆小一點」「第一步改成站起來」「卡名再短一點」。其他欄位我會盡量保留。</div>' +
-    '<div class="fld"><textarea class="input" id="pcTuneText" rows="3" placeholder="例如：第一步改成站起來，啟動動作更短"></textarea></div>' +
+    '<div class="fld"><textarea class="input" id="pcTuneText" rows="3" placeholder="例如：第一步改成站起來，只要 1 分鐘"></textarea></div>' +
     '<div class="row"><button class="cancel" onclick="closeModal()">取消</button>' +
     '<button class="save" id="pcTuneGo">交給 AI 改</button></div>';
   openModal(head + body);
@@ -10400,8 +10404,9 @@ async function s2ApplyTune(target) {
   if (go) { go.disabled = true; go.textContent = '改寫中…'; }
   var mode = await getSetting('geminiMode', 'off');
   var sys = '你是卡片微調助手。只回修改後的「單張卡」JSON 物件，不要 markdown fence、不要任何前後綴文字。' +
-    '格式：{"name":"…","action":"…","duration":3,"energyMode":"drain","energyAmount":2}。' +
-    '嚴格依照使用者的修改意見調整，其餘欄位盡量保留原值。能量流向只能是 restore|neutral|drain。';
+    '格式：{"name":"…","duration":3,"energyMode":"drain","energyAmount":2}。' +
+    '嚴格依照使用者的修改意見調整，其餘欄位盡量保留原值。能量流向只能是 restore|neutral|drain。' +
+    '一律使用繁體中文（台灣用語），不要簡體字。';
   var user = '原卡：' + JSON.stringify(oldCard) + '\n修改意見：' + opinion;
   var res = await s2LlmAsk(mode, sys, user, 400);
   if (go) { go.disabled = false; go.textContent = '交給 AI 改'; }
@@ -10415,7 +10420,7 @@ async function s2ApplyTune(target) {
 
   if (isExisting) {
     await ldb.cards.update(target.cardId, {
-      name: card.name, action: card.action, duration: card.duration,
+      name: card.name, duration: card.duration,
       energyMode: card.energyMode, energyAmount: card.energyAmount,
       steps: [card.name], updatedAt: Date.now()
     });
@@ -10567,7 +10572,8 @@ async function s2CallLLM(question) {
   var summary = await s2BuildSummary();
   var sys = '你是「下班後行動啟動器」裡的管家。語氣溫暖、簡短（150 字內）、不說教。' +
     '只能根據下面提供的紀錄摘要回答；摘要沒有的事就明說不知道，不要編造。' +
-    '最後給一個具體、今天就能做的小行動。不要要求使用者提供更多個資。';
+    '最後給一個具體、今天就能做的小行動。不要要求使用者提供更多個資。' +
+    '一律使用繁體中文（台灣用語）回覆，不要簡體字。';
   var q = '【本週紀錄摘要】\n' + summary + '\n\n【使用者提問】\n' + question;
   var ctl = new AbortController();
   var to = setTimeout(function () { ctl.abort(); }, 20000);
