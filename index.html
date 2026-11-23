@@ -392,6 +392,10 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 @media (prefers-reduced-motion:reduce){.rec-acc .acc-bd,.rec-acc .acc-chev,.act-cell,.mpill,.vitals-knob,.focus-cell,.focus-badge{transition:none !important;}}
 /* 復盤：心情地圖 */
 .moodtree{display:flex;gap:5px;width:100%;height:172px;}
+.moodtree.one{height:96px;}
+.moodtree.one .mt-tile{flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;padding:14px}
+.moodtree.one .mt-emoji{width:30px;height:30px}
+.moodtree.one .mt-val{margin-left:auto;font-size:13px}
 .mt-node{display:flex;gap:5px;min-width:0;min-height:0;}
 .mt-node.row{flex-direction:row;}
 .mt-node.col{flex-direction:column;}
@@ -406,17 +410,162 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .mt-tile .mt-val{flex:0 0 auto;line-height:1.25;font-size:12px;font-weight:900;color:var(--ink);opacity:.78;}
 .mood-ins{margin-top:9px;font-size:10.5px;font-weight:600;color:var(--ink);background:var(--soft);border-radius:12px;padding:9px 10px;line-height:1.6;}
 .mood-ins b{color:var(--primary);}
-.cups { display:flex; gap:4px; flex-wrap:wrap; justify-content:center; }
-.cup { cursor:pointer; }
-.cup svg { width:17px; height:17px; color:var(--tab-ink); }
-.cup.full svg { color:var(--green); }
-.water-txt { margin-top:5px; font-size:11px; font-weight:700; color:var(--muted); text-align:center; }
+/* ===== P44：飲品圖鑑 ===== */
+.drk-row { display:flex; align-items:center; gap:2px; overflow-x:auto; padding:1px 0 2px; scrollbar-width:none; }
+.drk-row::-webkit-scrollbar { display:none; }
+.drk-cup { flex:0 0 auto; width:28px; height:28px; border:none; background:transparent; border-radius:9px;
+  display:grid; place-items:center; cursor:pointer; padding:0; transition:transform .16s, background .16s;
+  -webkit-touch-callout:none; user-select:none; }
+.drk-cup:active { transform:scale(.9); }
+.drk-cup.press { background:var(--soft); transform:scale(1.08); }
+.drk-cup.out { animation:drkOut .24s ease-in forwards; }
+@keyframes drkOut { to { transform:scale(.25); opacity:0; width:0; margin-right:-4px; } }
+.drk-cup .liq { transform-box:fill-box; transform-origin:center top; }
+.drk-cup.in .liq { animation:drkRise .46s cubic-bezier(.34,1.1,.64,1); }
+@keyframes drkRise { from { transform:translateY(106%); } to { transform:translateY(0); } }
+.drk-add { flex:0 0 auto; width:26px; height:26px; margin-left:3px; border-radius:9px; border:1.5px dashed #D8D5E8;
+  background:transparent; color:#9A94B0; display:grid; place-items:center; cursor:pointer; padding:0; transition:.18s; }
+.drk-add svg { width:13px; height:13px; }
+.drk-add.on { border-color:var(--primary); background:var(--soft); color:var(--primary-dark); transform:rotate(90deg); }
+.drk-empty { flex:0 0 auto; font-size:10.5px; font-weight:700; color:var(--tab-ink); padding:6px 2px; }
+.drk-sub { margin-top:8px; font-size:10.5px; font-weight:700; color:var(--muted); line-height:1.5; }
+.drk-sub b { font-weight:900; color:var(--ink); }
+.drk-sub b.pure { color:#5C85AB; }
 
-/* 緊湊三列小卡（排便 / 壓力 / 運動） */
-.mini3 { display:flex; gap:8px; }
-.mini { flex:1; background:var(--card); border-radius:14px; box-shadow:var(--sh); padding:11px 4px 12px; display:flex; flex-direction:column; align-items:center; gap:7px; }
-.mini .ml { font-size:10.5px; font-weight:800; color:var(--muted); }
-.mini .ic-circle { width:30px; height:30px; border-radius:11px; }
+/* 飲品氣泡選單（全域，fixed 定位） */
+.drk-pop { position:fixed; z-index:96; background:#fff; border-radius:16px; padding:9px;
+  box-shadow:0 22px 52px -18px rgba(45,35,75,.46), 0 2px 6px -2px rgba(45,35,75,.12), 0 0 0 1px rgba(70,60,95,.09);
+  transform:scale(.62); transform-origin:top right; opacity:0; pointer-events:none;
+  transition:transform .24s cubic-bezier(.34,1.52,.64,1), opacity .15s; }
+.drk-pop.on { transform:scale(1); opacity:1; pointer-events:auto; }
+.drk-pop.up { transform-origin:bottom right; }
+.drk-pop .dg { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; }
+.drk-pi { border:none; background:transparent; display:flex; flex-direction:column; align-items:center; gap:4px;
+  padding:5px 2px 4px; border-radius:12px; cursor:pointer; font-family:inherit; transition:.14s; }
+.drk-pi:hover { background:#F8F8FE; }
+.drk-pi span.t { font-size:9.5px; font-weight:800; color:#6E6880; white-space:nowrap; }
+.drk-pb { width:32px; height:32px; border-radius:50%; display:grid; place-items:center; box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.045); }
+.drk-pop .tail { position:absolute; top:-5px; right:15px; width:10px; height:10px; background:#fff; border-radius:2px; transform:rotate(45deg); }
+.drk-pop.up .tail { top:auto; bottom:-5px; right:15px; }
+
+
+/* 復盤：飲品與小植物 */
+.drk-report .rb { display:flex; height:10px; border-radius:99px; overflow:hidden; background:#F4F3F7; margin:4px 0 10px; }
+.drk-report .rb i { height:100%; transition:width .5s cubic-bezier(.4,0,.2,1); }
+.drk-report .rl { display:flex; flex-wrap:wrap; gap:3px 12px; }
+.drk-report .ri { display:flex; align-items:center; gap:4px; font-size:10px; font-weight:800; color:#7A7488; }
+.drk-report .ri em { width:6px; height:6px; border-radius:50%; display:block; }
+.drk-report .ri b { color:#4A4458; font-weight:900; }
+.drk-plantrow { display:flex; gap:10px; align-items:center; background:#FBFAF7; border-radius:14px; padding:10px 12px; margin-top:12px; }
+.drk-plantrow .txt { font-size:10.8px; font-weight:600; line-height:1.68; color:#4A4458; }
+.drk-plantrow .txt b { color:var(--primary-dark); }
+.drk-plantrow .who { display:inline-block; font-size:9px; font-weight:900; color:#7C76AE; background:#F1EFFB;
+  border-radius:99px; padding:2px 7px; margin-right:5px; vertical-align:1px; }
+.wk-line { display:flex; align-items:center; flex-wrap:wrap; gap:6px; margin-top:12px; font-size:10.5px; font-weight:700; color:var(--muted); }
+.wk-line b { color:var(--ink); font-weight:900; }
+.wk-line .chipm { display:inline-flex; align-items:center; gap:3px; background:#EFF5F0; color:#527D62;
+  border-radius:99px; padding:3px 8px; font-weight:900; }
+.wk-line .chipm svg { width:11px; height:11px; }
+/* 復盤運動卡 */
+.wk-rep-top { display:flex; align-items:baseline; gap:5px; margin:1px 0 11px; }
+.wk-rep-top b { font-size:23px; font-weight:900; letter-spacing:-.035em; color:var(--ink);
+  font-variant-numeric:tabular-nums; line-height:1; }
+.wk-rep-top span { font-size:10px; font-weight:800; color:var(--muted); }
+.wk-rep-top i { font-style:normal; color:#DCD8E6; margin:0 3px; font-size:12px; }
+.wk-rep-types { display:flex; flex-wrap:wrap; gap:6px; margin-top:11px; }
+.wk-rep-types .chipm { display:inline-flex; align-items:center; gap:4px; background:#EFF5F0; color:#527D62;
+  border-radius:99px; padding:4px 9px; font-size:9.5px; font-weight:900; }
+.wk-rep-types .chipm b { font-weight:900; color:#3F6B51; }
+.wk-rep-types .chipm svg { width:11px; height:11px; }
+
+
+/* ---------- P45：腸道 / 運動追蹤卡 ---------- */
+.sec.tk { padding:13px 14px 14px; }
+.tk .inner { margin-top:11px; display:flex; flex-direction:column; gap:10px; }
+.tk .sec-h small { font-variant-numeric:tabular-nums; }
+/* 近 7 天節奏條 */
+.tk-strip { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+.tk-day { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.tk-day b { font-size:8.5px; font-weight:800; color:var(--muted); letter-spacing:.2px; }
+.tk-day.today b { color:var(--ink); }
+.tk-cell { width:100%; max-width:30px; height:30px; border-radius:9px; display:grid; place-items:center;
+  box-sizing:border-box; background:#FBFAFD; border:1.5px dashed #EAE6F1; cursor:pointer;
+  transition:transform .16s ease, background .16s ease, border-color .16s ease; }
+.tk-day.today .tk-cell { box-shadow:0 0 0 2px rgba(124,128,220,.16); }
+.tk-cell.normal { background:#EFF5F0; border:1.5px solid #CFE6D3; }
+.tk-cell.soft   { background:#FBF3E2; border:1.5px solid #EAD6AE; }
+.tk-cell.loose  { background:#FCEDE5; border:1.5px solid #EFCDB9; }
+.tk-cell.none   { background:#FCFBFD; border:1.5px dashed #E1DCEA; }
+.tk-cell.none::after { content:''; width:9px; height:1.6px; border-radius:2px; background:#D5D0DF; }
+.tk-cell .dot { width:8px; height:8px; border-radius:50%; }
+.tk-cell.normal .dot { background:#7FA089; }
+.tk-cell.soft .dot { background:#C9A15E; }
+.tk-cell.countonly { background:#F3F4F9; border:1.5px solid #E2E4EE; }
+.tk-cell.countonly .dot { background:#8E93AA; }
+.tk-cell.loose .ring { width:8px; height:8px; border-radius:50%; border:2px solid #D08457; box-sizing:border-box; }
+.tk-cell.wk-on { background:#EFF5F0; border:1.5px solid #CFE6D3; color:#527D62; }
+.tk-cell.wk-on svg { width:14px; height:14px; }
+.tk-cell:active { transform:scale(.94); }
+/* 次數四選一 */
+.bseg { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+.bseg button { height:38px; border-radius:11px; border:1.5px solid #EFEDF6; background:#fff; color:var(--muted);
+  font-size:11px; font-weight:800; font-family:inherit; cursor:pointer; transition:.16s; }
+.bseg button.on { border-color:#CFE6D3; background:#EFF5F0; color:#527D62; }
+.bseg button.on.zero { border-color:#DDE0EA; background:#F2F3F8; color:#6E7893; }
+/* 質地（正常 / 偏軟 / 腹瀉） */
+.btx { display:flex; align-items:center; gap:6px; }
+.btx[hidden] { display:none; }
+.btx .btx-l { font-size:9.5px; font-weight:800; color:var(--muted); flex:0 0 auto; margin-right:1px; }
+.btx-b { flex:1; height:31px; border-radius:99px; border:1.5px solid #EFEDF6; background:#fff; display:flex;
+  align-items:center; justify-content:center; gap:5px; font-size:10.5px; font-weight:800; color:var(--muted);
+  font-family:inherit; cursor:pointer; transition:.16s; padding:0 4px; }
+.btx-b em { width:7px; height:7px; border-radius:50%; display:block; flex:0 0 auto; }
+.btx-b.normal em { background:#7FA089; }
+.btx-b.soft em { background:#C9A15E; }
+.btx-b.loose em { background:transparent; border:2px solid #D08457; box-sizing:border-box; }
+.btx-b.on.normal { border-color:#CFE6D3; background:#EFF5F0; color:#527D62; }
+.btx-b.on.soft { border-color:#EAD6AE; background:#FBF3E2; color:#94702F; }
+.btx-b.on.loose { border-color:#EFCDB9; background:#FCEDE5; color:#A9613A; }
+.btx.pop { animation:tkIn .22s ease both; }
+@keyframes tkIn { from { opacity:0; transform:translateY(-3px); } to { opacity:1; transform:none; } }
+.tk-note { font-size:10.5px; font-weight:700; color:var(--muted); line-height:1.62; }
+.tk-note b { color:var(--ink); font-weight:900; }
+/* 運動 4×2 快速選 */
+.wk-quick { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; }
+.wq { height:50px; border-radius:12px; border:1.5px solid #EFEDF6; background:#fff; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:3px; cursor:pointer; font-family:inherit; transition:.16s; padding:0; }
+.wq svg { width:16px; height:16px; color:#8B86A3; }
+.wq span { font-size:9.5px; font-weight:800; color:var(--muted); }
+.wq.on { border-color:#CFE6D3; background:#F1F6F2; }
+.wq.on svg, .wq.on span { color:#527D62; }
+.wq:active { transform:scale(.95); }
+.wk-today { display:flex; align-items:center; gap:8px; font-size:10.5px; font-weight:700; color:var(--muted); line-height:1.5; }
+.wk-today b { color:var(--ink); font-weight:900; }
+.wk-today .wka { margin-left:auto; flex:0 0 auto; border:none; background:var(--soft); color:var(--primary-dark);
+  border-radius:99px; padding:6px 12px; font-size:10px; font-weight:900; font-family:inherit; cursor:pointer; }
+/* 復盤：腸道節奏 */
+.rv-bstat { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
+.rv-bstat span { background:#F7F5EF; border-radius:99px; padding:4px 9px; font-size:9.5px; font-weight:800; color:#7A7488; }
+.rv-bstat b { font-weight:900; color:var(--ink); }
+
+/* 運動抽屜 */
+.wk-root { z-index:78; }
+.wk-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; margin:6px 0 4px; }
+.wk-t { border:1.5px solid #EFEDF6; background:#fff; border-radius:13px; padding:11px 2px 9px; display:flex;
+  flex-direction:column; align-items:center; gap:5px; cursor:pointer; font-family:inherit; transition:.16s; }
+.wk-t svg { width:18px; height:18px; color:#8B86A3; }
+.wk-t span { font-size:10px; font-weight:800; color:var(--muted); }
+.wk-t.on { border-color:#CFE6D3; background:#F1F6F2; box-shadow:0 8px 18px -16px rgba(97,142,112,.7); }
+.wk-t.on svg, .wk-t.on span { color:#527D62; }
+.wk-dur { display:flex; align-items:center; justify-content:center; gap:16px; padding:12px 0 14px; }
+.wk-dur button { width:34px; height:34px; border-radius:11px; border:none; background:var(--soft);
+  color:var(--primary-dark); display:grid; place-items:center; cursor:pointer; }
+.wk-dur button svg { width:15px; height:15px; }
+.wk-dur button:disabled { opacity:.32; }
+.wk-dur .nv { display:flex; align-items:baseline; gap:3px; }
+.wk-dur .nv b { font-size:26px; font-weight:900; color:var(--ink); letter-spacing:-.02em; }
+.wk-dur .nv span { font-size:10.5px; font-weight:800; color:var(--muted); }
+
 .step { display:flex; align-items:center; gap:7px; }
 .sbtn { width:22px; height:22px; border-radius:8px; background:var(--soft); color:var(--primary); display:grid; place-items:center; font-weight:900; font-size:14px; border:none; line-height:1; cursor:pointer; }
 .step b { font-size:15px; font-weight:900; color:var(--ink); min-width:14px; text-align:center; }
@@ -462,6 +611,9 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .cal-cell.sel { width:30px; justify-self:center; background:var(--primary); color:#fff; border-radius:50%; }
 .cal-cell .pd { position:absolute; bottom:2px; left:50%; transform:translateX(-50%); width:4px; height:4px; border-radius:99px; background:var(--accent); }
 .cal-cell.sel .pd { background:var(--accent); }
+.cal-cell.period { background:#FBEDF2; color:#A95674; }
+.cal-cell.period.today { background:var(--soft); color:var(--primary); }
+.cal-cell.period.sel { background:var(--primary); color:#fff; }
 
 /* ---------- 通用元件 ---------- */
 .seg { display:flex; gap:5px; flex-wrap:wrap; }
@@ -1150,6 +1302,8 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 
 /* ========== S2-P2：復盤圖表 ========== */
 .rv-card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:14px;margin-top:10px}
+.pg-body > .rv-card, #reviewStats .rv-card, #reviewBody > .rv-card{margin-top:0}
+#reviewBody{display:flex;flex-direction:column;gap:12px}
 .rv-h{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:900;color:var(--ink)}
 .rv-h .ic-circle{width:24px;height:24px;font-size:11px}
 .slp-nav{margin-left:auto;display:flex;align-items:center;gap:5px}
@@ -1158,7 +1312,79 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .slp-nav button:disabled{opacity:.32;cursor:default}
 .slp-nav button:not(:disabled):active{background:var(--soft);color:var(--primary)}
 .slp-nav span{font-size:10.5px;font-weight:800;color:var(--ink2);min-width:66px;text-align:center}
-.rv-sub{font-size:10.5px;font-weight:600;color:var(--muted);margin:7px 0 9px;line-height:1.6}
+.rv-sub{font-size:10px;font-weight:600;color:var(--muted);margin:7px 0 9px;line-height:1.62}
+#wheelCard .rv-sub{font-size:9.5px}
+.rv-right{margin-left:auto;font-size:9.5px;font-weight:800;color:var(--muted)}
+.cy-set-hint{font-size:10px;font-weight:700;color:var(--muted);line-height:1.6;margin:8px 0 13px}
+/* 日曆卡（P46：移到復盤最上方） */
+.cal-card{padding:14px 14px 12px}
+.cal-month{margin-left:auto;font-size:11px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums}
+.cal-nav{display:flex;gap:4px;margin-left:6px}
+.cal-nav button{width:26px;height:26px;border-radius:9px;border:none;background:var(--bg);color:var(--muted);display:grid;place-items:center;cursor:pointer;padding:0;transition:background .16s,color .16s}
+.cal-nav button svg{width:13px;height:13px}
+.cal-nav button:active{background:var(--soft);color:var(--primary)}
+.cal-nav button[aria-expanded="true"] svg{transform:rotate(180deg)}
+.cal-card.closed .cal-nav #calPrev,.cal-card.closed .cal-nav #calNext{display:none}
+.cal-card.closed .cal-month{margin-left:auto}
+.cal-body{margin-top:10px;overflow:hidden}
+.cal-card.closed .cal-body{display:none}
+.cal-detail{margin-top:11px;padding-top:10px;border-top:1px solid #F4F2F8}
+.cal-detail[hidden]{display:none}
+.cd-h{font-size:10.5px;font-weight:900;color:var(--muted);margin-bottom:6px}
+/* 本週摘要：有色底，和下方的白卡分開 */
+#weekCard{background:linear-gradient(150deg,#E7E1F9 0%,#EFEAFA 58%,#F7F3FA 100%);
+  border-color:#DBD3F2;box-shadow:0 12px 26px -24px rgba(95,99,190,.6)}
+#weekCard .rv-sub{color:#7C7695}
+#weekCard .rv-right{color:#7A7492}
+#weekCard .wm{background:#fff;border:1px solid rgba(255,255,255,.9);box-shadow:0 4px 10px -9px rgba(95,99,190,.5)}
+#weekCard .wm-d{background:#fff}
+#weekCard .wk7 .d i{background:rgba(255,255,255,.92);box-shadow:inset 0 0 0 1px rgba(124,128,220,.1)}
+#weekCard .wk7 .d.on i{background:var(--primary)}
+#weekCard .wk7 .d span{color:#8B85A3}
+#weekCard .wk7 .d.today i{box-shadow:0 0 0 2px #fff}
+#weekCard .wk7 .d.today span{color:var(--primary-dark)}
+#weekCard .wk-foot{color:#8B85A3}
+.wm-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}
+.wm{position:relative;background:var(--bg);border-radius:14px;padding:10px 12px 9px}
+.wm-k{display:flex;align-items:center;gap:5px;font-size:9.5px;font-weight:800;color:var(--muted)}
+.wm-k svg{width:11px;height:11px}
+.wm-v{margin-top:2px;font-size:18px;font-weight:900;letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.15}
+.wm-v small{font-size:9.5px;font-weight:800;color:var(--muted);margin-left:2px}
+.wm-d{position:absolute;top:8px;right:9px;font-size:8.5px;font-weight:900;padding:2px 6px;border-radius:99px;background:#fff;color:var(--muted)}
+.wm-d.up{background:var(--c-mint-bg);color:var(--c-green-ink)}
+.wm-d.down{background:var(--c-slate-bg);color:var(--c-slate-ink)}
+.wk7{display:flex;gap:5px;margin-top:12px}
+.wk7 .d{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+.wk7 .d span{font-size:8.5px;font-weight:800;color:var(--muted)}
+.wk7 .d i{width:100%;height:6px;border-radius:99px;background:var(--track)}
+.wk7 .d.on i{background:var(--primary)}
+.wk7 .d.today span{color:var(--accent-quiet-ink)}
+.wk7 .d.today i{box-shadow:0 0 0 1.5px var(--accent)}
+.wk-foot{margin-top:9px;font-size:9.5px;font-weight:700;color:var(--muted);line-height:1.5}
+/* 復盤：經期卡 */
+.cy-top{display:flex;align-items:flex-end;gap:8px;margin-top:10px}
+.cy-big{font-size:13px;font-weight:900;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
+.cy-big b{font-size:19px;font-weight:900;color:#A95674;letter-spacing:-.02em}
+.cy-badge{margin-left:auto;font-size:9px;font-weight:900;padding:4px 9px;border-radius:99px;background:var(--c-pink-bg);color:#A95674;white-space:nowrap}
+.cy-badge.soft{background:var(--bg);color:var(--muted)}
+.cy-sub{font-size:9.5px;font-weight:700;color:var(--muted);margin-top:5px;line-height:1.5}
+.cy-cta{margin-top:9px;border:1.5px solid #E9B7C7;background:#FBEDF2;color:#A95674;font-family:inherit;font-size:10.5px;font-weight:900;padding:7px 13px;border-radius:99px;cursor:pointer}
+.cy-cta:active{transform:scale(.97)}
+.cy-track{position:relative;height:8px;border-radius:99px;background:var(--track);margin-top:13px}
+.cy-track .fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,#E9B7C7,#C4758F)}
+.cy-track .today{position:absolute;top:50%;width:13px;height:13px;border-radius:50%;background:#fff;border:3px solid #C4758F;transform:translate(-50%,-50%)}
+.cy-trk-lb{display:flex;justify-content:space-between;font-size:8.5px;font-weight:800;color:var(--muted);margin-top:6px}
+.cy-chart{margin-top:12px}
+.cy-chart svg{display:block;width:100%;height:auto;overflow:visible}
+.cy-stats{display:flex;gap:6px;margin-top:8px}
+.cy-stats span{flex:1;text-align:center;font-size:8.5px;font-weight:800;color:var(--muted);background:var(--bg);border-radius:9px;padding:6px 2px}
+.cy-stats b{display:block;font-size:12px;color:var(--ink);font-weight:900;font-variant-numeric:tabular-nums;margin-top:1px}
+.cy-empty{padding:6px 0 0;font-size:10.5px;font-weight:700;color:var(--muted);line-height:1.7}
+.cy-mood{margin-top:13px;padding-top:11px;border-top:1px solid #F4F2F8}
+.cy-mood-h{display:flex;align-items:center;font-size:10px;font-weight:900;color:var(--ink)}
+.cy-mood-h span{margin-left:auto;font-weight:800;color:var(--muted);font-size:8.5px}
+.cy-mood-lb{display:flex;font-size:8.5px;font-weight:800;color:var(--muted);margin-top:4px}
+.cy-mood-lb span{flex:1;text-align:center}
 .slp-wrap{position:relative;height:186px}
 .slp-wrap canvas{width:100%!important;height:100%!important}
 /* ---------- P16：生命之輪雷達圖 ---------- */
@@ -1168,10 +1394,10 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .wheel-legend .wl{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;color:var(--muted)}
 .wheel-legend .wl i{width:14px;height:0;border-top:3px solid var(--primary);border-radius:9px;display:inline-block}
 .wheel-legend .wl.prev i{border-top:2px dashed #C9C4D6}
-.wheel-insight{background:var(--soft);border-radius:12px;padding:10px 12px;margin-top:6px;
-  font-size:11px;font-weight:700;line-height:1.6;color:var(--primary-dark)}
+.wheel-insight{background:var(--soft);border-radius:12px;padding:9px 11px;margin-top:6px;
+  font-size:10.5px;font-weight:700;line-height:1.65;color:var(--primary-dark)}
 .wheel-insight b{font-weight:900}
-.wheel-insight .wi-emoji{font-size:14px;margin-right:3px}
+.wheel-insight .wi-emoji{font-size:13px;margin-right:3px}
 .wheel-detail{margin-top:8px;border-top:1px dashed var(--bd);padding-top:8px;display:none}
 .wheel-detail.show{display:block;animation:p15BubbleIn .28s ease}
 .wd-head{display:flex;align-items:center;gap:7px;margin-bottom:6px}
@@ -1600,7 +1826,7 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .sleep-sum:active{transform:scale(.985);}
 .sleep-sum .ss-txt{min-width:0;flex:1;}
 .sleep-sum .ss-main{display:block;font-size:14px;font-weight:900;color:var(--ink);letter-spacing:-.01em;font-variant-numeric:tabular-nums;}
-.sleep-sum .ss-main.empty{color:var(--muted);font-weight:800;font-size:12.5px;}
+.sleep-sum .ss-main.empty{color:var(--muted);font-weight:800;font-size:12.5px;text-align:left;padding:0;}
 .sleep-sum .ss-sub{display:flex;align-items:center;gap:5px;margin-top:3px;font-size:10.5px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;}
 .sleep-sum .ss-sub svg{width:11px;height:11px;}
 .sleep-sum .ss-sub .m{color:var(--c-violet-ink);}
@@ -1721,6 +1947,32 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .sel-wrap select{appearance:none;-webkit-appearance:none;border:none;background:var(--bg);border-radius:11px;padding:9px 30px 9px 12px;font-size:12px;font-weight:900;color:var(--ink);font-family:inherit;}
 .sel-wrap svg{position:absolute;right:10px;width:13px;height:13px;color:var(--muted);pointer-events:none;}
 
+/* 經期抽屜（P46） */
+.cy-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:9px}
+.cy-f{height:66px;border-radius:14px;border:1.5px solid var(--bd);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;font-family:inherit;padding:0;transition:background .16s,border-color .16s,transform .12s}
+.cy-f:active{transform:scale(.97)}
+.cy-f .drops{display:flex;gap:2px;color:#E3C3CE}
+.cy-f .drops svg{width:12px;height:12px}
+.cy-f .drops svg path{fill:currentColor;stroke:none}
+.cy-f .fn{font-size:9.5px;font-weight:900;color:var(--muted)}
+.cy-f.on{border-color:#E4AFC1;background:#FBEDF2}
+.cy-f.on .drops{color:#C4758F}
+.cy-f.on .fn{color:#A95674}
+.cy-sym{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.cy-sym .stag{padding:7px 11px}
+.cy-sym .stag.on{background:#FBEDF2;border-color:#E4AFC1;color:#A95674}
+.cy-pred{margin-top:14px;padding:11px 13px;border-radius:13px;background:var(--c-pink-bg);color:#8F5468;font-size:10.5px;font-weight:800;line-height:1.65}
+.cy-pred b{font-weight:900}
+.cy-status{margin-top:12px;font-size:11px;font-weight:800;color:var(--muted);line-height:1.6}
+.cy-status b{color:var(--ink);font-weight:900}
+.cy-foot2{display:flex;gap:8px;margin-top:7px}
+.cy-foot2 .btn{flex:1}
+.cy-del{color:#B4737C;border-color:#F0DDE1}
+.cy-del:disabled{opacity:.4}
+@media (max-width:390px){
+  .cy-sym{gap:6px}
+  .cy-sym .stag{padding:7px 9px;font-size:10px}
+}
 @media (max-height:740px){
   .sleep-dial-wrap{max-width:252px;}
   .sd-dur{font-size:21px;}
@@ -1825,7 +2077,10 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
         <div class="acc-bd"><div class="acc-in"><div id="detailEmotions"></div></div></div>
       </div>
       <div class="sec"><div class="sec-h">一句話記錄<small>限 200 字</small></div><div class="inner"><textarea class="input" id="logNote" rows="2" maxlength="200" placeholder="今天下班很累，但…"></textarea></div></div>
-      <div class="sec" id="actCard"><div class="sec-h"><span class="ic-circle c-sky"><i data-lucide="party-popper"></i></span>今日活動<small>可多選</small></div><div class="inner"><div class="act-grid" id="activityGrid"></div></div></div>
+      <div class="rec-acc" id="accActivity">
+        <div class="acc-hd" data-acc="activity"><span class="ic-circle c-sky"><i data-lucide="party-popper"></i></span><span class="acc-tt">今日活動</span><small id="actCount">選填 · 可多選</small><span class="acc-chev">▾</span></div>
+        <div class="acc-bd"><div class="acc-in"><div class="act-grid" id="activityGrid"></div></div></div>
+      </div>
       <div class="rec-acc" id="accState">
         <div class="acc-hd" data-acc="state"><span class="ic-circle c-violet"><i data-lucide="heart-pulse"></i></span><span class="acc-tt">身體與情緒狀態</span><small>選填 · 可多選</small><span class="acc-chev">▾</span></div>
         <div class="acc-bd"><div class="acc-in"><div id="stateGroups"></div></div></div>
@@ -1853,13 +2108,32 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
         </div></div>
         <div class="vitals-bars" id="vitalsBars" style="display:none"></div>
       </div>
-      <div class="sec"><div class="sec-h"><span class="ic-circle c-mint"><i data-lucide="droplets"></i></span>喝水量<small>每杯 400mL</small></div><div class="inner"><div class="cups" id="waterCups"></div><div class="water-txt" id="waterTxt">0 杯（0mL）</div></div></div>
+      <div class="sec"><div class="sec-h"><span class="ic-circle c-mint"><i data-lucide="droplets"></i></span>今日飲品<small>每杯 400mL</small></div><div class="inner"><div class="drk-row" id="drinkRow"></div><div class="drk-sub" id="drinkSub">點 <b>＋</b> 記下今天喝的每一杯</div></div></div>
       <div class="sec sleep-sec"><div class="sec-h"><span class="ic-circle c-night"><i data-lucide="moon"></i></span>睡眠<small>圓環記錄</small></div><div class="inner"><button class="sleep-sum" id="sleepSum" type="button"><span class="ss-txt"><span class="ss-main empty" id="sleepSumMain">尚未記錄</span><span class="ss-sub" id="sleepSumSub">點一下，記下昨晚的睡眠</span></span><i data-lucide="chevron-right" class="ss-chev"></i></button></div></div>
-      <div class="mini3">
-        <div class="mini"><span class="ic-circle c-butter"><i data-lucide="check"></i></span><span class="ml">排便</span><div class="step" id="bowelSeg"></div></div>
-        <div class="mini" style="display:none"><span class="ic-circle c-slate"><i data-lucide="gauge"></i></span><span class="ml">壓力</span><div class="meter" id="logPressure"><i data-v="低"></i><i data-v="中"></i><i data-v="高"></i></div></div>
-        <div class="mini"><span class="ic-circle c-green"><i data-lucide="activity"></i></span><span class="ml">運動</span><div class="tgl" id="logExercise" data-v="0" role="switch" aria-label="運動"></div></div>
+      <div class="sec cy-sec" id="cycleSec">
+        <div class="sec-h"><span class="ic-circle c-pink"><i data-lucide="droplet"></i></span>經期<small id="cyHead">—</small></div>
+        <div class="inner">
+          <button class="sleep-sum" id="cySum" type="button"><span class="ss-txt"><span class="ss-main empty" id="cySumMain">未記錄</span><span class="ss-sub" id="cySumSub">點一下，記下今天的經期</span></span><i data-lucide="chevron-right" class="ss-chev"></i></button>
+        </div>
       </div>
+      <div class="sec tk" id="bowelCard">
+        <div class="sec-h"><span class="ic-circle c-butter"><i data-lucide="check"></i></span>腸道<small id="bowelHead">近 7 天</small></div>
+        <div class="inner">
+          <div class="bseg" id="bowelSeg" role="group" aria-label="今天的排便次數"></div>
+          <div class="btx" id="bowelTexture" hidden></div>
+          <div class="tk-strip" id="bowelStrip" aria-label="近 7 天排便節奏"></div>
+          <div class="tk-note" id="bowelNote"></div>
+        </div>
+      </div>
+      <div class="sec tk" id="wkCard">
+        <div class="sec-h"><span class="ic-circle c-green"><i data-lucide="activity"></i></span>運動<small id="wkHead">近 7 天</small></div>
+        <div class="inner">
+          <div class="wk-quick" id="wkQuick" role="group" aria-label="運動類型"></div>
+          <div class="tk-strip" id="wkStrip" aria-label="近 7 天運動"></div>
+          <div class="wk-today" id="wkToday"></div>
+        </div>
+      </div>
+      <div hidden aria-hidden="true"><div class="meter" id="logPressure"><i data-v="低"></i><i data-v="中"></i><i data-v="高"></i></div></div>
       <div class="auto-hint" id="workoutAutoHint" hidden></div>
       <button class="btn btn-primary btn-big btn-block save2" id="saveLogBtn" style="margin-top:2px"><i data-lucide="save"></i>儲存今日記錄</button>
     </div>
@@ -1871,30 +2145,36 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
       <div class="tt">復盤</div>
     </div>
     <div class="pg-body">
+      <div class="rv-card cal-card closed" id="calCard">
+        <div class="rv-h"><span class="ic-circle c-sky"><i data-lucide="calendar"></i></span><b>日曆</b>
+          <span class="cal-month" id="calTitle">—</span>
+          <span class="cal-nav">
+            <button id="calPrev" type="button" aria-label="上個月"><i data-lucide="chevron-left"></i></button>
+            <button id="calNext" type="button" aria-label="下個月"><i data-lucide="chevron-right"></i></button>
+            <button id="calToggle" type="button" aria-label="展開日曆" aria-expanded="false"><i data-lucide="chevron-down"></i></button>
+          </span>
+        </div>
+        <div class="cal-body" id="calBody">
+          <div class="cal-dow"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+          <div class="cal-grid" id="calGrid"></div>
+          <div class="cal-detail" id="calDetailSec" hidden>
+            <div class="cd-h" id="calDetailTitle">當天詳情</div>
+            <div id="calDetail"></div>
+          </div>
+        </div>
+      </div>
       <div id="reviewStats"></div>
       <div class="rv-card" id="wheelCard">
         <div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="target"></i></span><b>生命之輪</b>
-          <span style="margin-left:auto;font-size:9.5px;font-weight:700;color:var(--muted)">你的生活平衡嗎？</span></div>
-        <div class="rv-sub">8 個面向，從你這一週的記錄自動算出來。沒有記錄不代表失敗，只是這週的留白。</div>
+          <span class="rv-right">你的生活平衡嗎？</span></div>
+        <div class="rv-sub">8 個面向，從這週的記錄自動算出。</div>
         <div id="wheelBody"></div>
       </div>
       <div class="rv-card" id="moodMapCard">
         <div class="rv-h"><span class="ic-circle c-butter"><i data-lucide="smile"></i></span><b>心情地圖</b>
-          <span style="margin-left:auto;font-size:9.5px;font-weight:700;color:var(--muted)">這週，你過得怎樣？</span></div>
+          <span class="rv-right">這週，你過得怎樣？</span></div>
         <div class="rv-sub">不看你做了多少事，只看你怎麼度過。區塊越大，代表那種心情陪你越久。</div>
         <div id="s2MoodMap"></div>
-      </div>
-      <div class="sec">
-        <div class="sec-h cal-toggle" id="calToggle" style="cursor:pointer"><span class="ic-circle c-sky"><i data-lucide="calendar"></i></span>日曆<span id="calChev" style="margin-left:auto;color:var(--muted);font-size:13px">▾</span></div>
-        <div class="inner" id="calBody" style="display:none;max-height:0;overflow:hidden">
-          <div class="cal-head"><span id="calTitle">—</span><span style="display:flex;gap:5px"><button class="nav" id="calPrev"><i data-lucide="chevron-left"></i></button><button class="nav" id="calNext"><i data-lucide="chevron-right"></i></button></span></div>
-          <div class="cal-dow"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
-          <div class="cal-grid" id="calGrid"></div>
-        </div>
-      </div>
-      <div class="sec" id="calDetailSec" style="display:none">
-        <div class="sec-h"><span class="ic-circle c-violet"><i data-lucide="calendar"></i></span><span id="calDetailTitle">當天詳情</span></div>
-        <div class="inner" id="calDetail"></div>
       </div>
       <div id="reviewBody"></div>
     </div>
@@ -2075,6 +2355,59 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   </div>
 </div>
 
+
+<div class="sm-root" id="cyRoot" aria-hidden="true">
+  <div class="sm-backdrop" id="cyBackdrop"></div>
+  <div class="sm-sheet" role="dialog" aria-modal="true" aria-labelledby="cyTitle">
+    <div class="sm-grab"></div>
+    <div class="sm-head">
+      <div><div class="sm-title" id="cyTitle">經期</div><div class="sm-date" id="cyDateLabel">—</div></div>
+      <button class="sm-x" id="cyClose" type="button" aria-label="關閉"><i data-lucide="x"></i></button>
+    </div>
+    <div class="sm-body">
+      <div class="cy-status" id="cyStatus"></div>
+      <div class="sm-sec">
+        <div class="sm-sec-h"><span>流量</span><span class="q-chip" id="cyFlowChip">未記錄</span></div>
+        <div class="cy-flow" id="cyFlow" role="group" aria-label="經期流量"></div>
+      </div>
+      <div class="sm-sec">
+        <div class="sm-sec-h"><span>今天的感覺</span><small>可多選</small></div>
+        <div class="cy-sym" id="cySym"></div>
+      </div>
+      <div class="cy-pred" id="cyPred"></div>
+    </div>
+    <div class="sm-foot">
+      <button class="btn btn-primary btn-big btn-block" id="cySaveBtn" type="button">儲存</button>
+      <div class="cy-foot2" id="cyFoot2">
+        <button class="btn btn-soft btn-block btn-sm" id="cyEndBtn" type="button">今天結束</button>
+        <button class="btn btn-ghost cy-del btn-block btn-sm" id="cyClearBtn" type="button">清除這天</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sm-root wk-root" id="wkRoot" aria-hidden="true">
+  <div class="sm-backdrop" id="wkBackdrop"></div>
+  <div class="sm-sheet" role="dialog" aria-modal="true" aria-labelledby="wkTitle">
+    <div class="sm-grab"></div>
+    <div class="sm-head">
+      <div><div class="sm-title" id="wkTitle">運動</div><div class="sm-date" id="wkDateLabel">今天</div></div>
+      <button class="sm-x" id="wkClose" type="button" aria-label="關閉"><i data-lucide="x"></i></button>
+    </div>
+    <div class="sm-body">
+      <div class="wk-grid" id="wkGrid"></div>
+      <div class="wk-dur">
+        <button id="wkMinus" type="button" aria-label="減少 5 分鐘"><i data-lucide="minus"></i></button>
+        <div class="nv"><b id="wkMinVal">30</b><span>min</span></div>
+        <button id="wkPlus" type="button" aria-label="增加 5 分鐘"><i data-lucide="plus"></i></button>
+      </div>
+    </div>
+    <div class="sm-foot">
+      <button class="btn btn-primary btn-big btn-block" id="wkSaveBtn" type="button">儲存</button>
+      <button class="btn btn-soft btn-block btn-sm" id="wkClearBtn" type="button" style="margin-top:6px">今天沒運動</button>
+    </div>
+  </div>
+</div>
 
 <!-- 計時器 -->
 <div class="timer-overlay" id="timerOverlay">
@@ -2672,6 +3005,389 @@ function calcPeriodStatus(cycle, today) {
   return { type: 'next', label: '下次經期預計還有 ' + remain + ' 天', remain };
 }
 
+/* ================= P46：經期（多筆週期、自動平均、預測範圍） =================
+   資料：menstrualCycles 一次經期一列 {startDate, endDate, endEstimated, cycleLength}
+        dailyLogs.periodFlow / periodSymptoms 記每天流量與症狀。
+   預測：週期長度取最近 6 次間隔平均；手動 predictedLength 可覆寫。
+   經期長度取最近 4 次「有明確結束」的平均，預設 5 天。 */
+const CYCLE_DEFAULT = 28;
+const CYCLE_PERIOD_DEFAULT = 5;
+const CYCLE_FLOW = {
+  light: { n: '少', d: 1 },
+  medium: { n: '中', d: 2 },
+  heavy: { n: '多', d: 3 }
+};
+const CYCLE_SYMPTOMS = [
+  ['cramps', '經痛'], ['bloat', '腹脹'], ['tired', '疲倦'],
+  ['headache', '頭痛'], ['back', '腰痠'], ['none', '沒什麼特別']
+];
+function cySymptomNames(list) {
+  return (list || []).map(function (k) {
+    const f = CYCLE_SYMPTOMS.find(function (x) { return x[0] === k; });
+    return f ? f[1] : '';
+  }).filter(Boolean);
+}
+const CYCLE_PHASES = [
+  { k: 'period', n: '經期中' },
+  { k: 'after', n: '經期後' },
+  { k: 'before', n: '經期前' }
+];
+
+async function getCycles() {
+  const all = await ldb.menstrualCycles.toArray();
+  return all.filter(function (c) { return c && c.startDate; })
+    .sort(function (a, b) { return a.startDate < b.startDate ? -1 : (a.startDate > b.startDate ? 1 : 0); });
+}
+
+function cycleStatsOf(cycles) {
+  const list = cycles || [];
+  const ints = [];
+  for (let i = 1; i < list.length; i++) {
+    const d = daysBetween(list[i - 1].startDate, list[i].startDate);
+    if (d >= 15 && d <= 90) ints.push({ from: list[i - 1].startDate, to: list[i].startDate, days: d });
+  }
+  const recent = ints.slice(-6);
+  const avg = recent.length ? recent.reduce(function (a, x) { return a + x.days; }, 0) / recent.length : null;
+
+  const lens = [];
+  list.forEach(function (c) {
+    if (c.endDate && !c.endEstimated) {
+      const n = daysBetween(c.startDate, c.endDate) + 1;
+      if (n >= 1 && n <= 14) lens.push(n);
+    }
+  });
+  const recentLens = lens.slice(-4);
+  const avgPeriod = recentLens.length
+    ? Math.round(recentLens.reduce(function (a, b) { return a + b; }, 0) / recentLens.length)
+    : CYCLE_PERIOD_DEFAULT;
+
+  const last = list.length ? list[list.length - 1] : null;
+  const auto = avg != null ? Math.round(avg) : null;
+  const useLen = (last && last.predictedLength) || auto || (last && last.cycleLength) || CYCLE_DEFAULT;
+  let spread = 2;
+  if (recent.length >= 3) {
+    const sd = Math.sqrt(recent.reduce(function (a, x) { return a + Math.pow(x.days - avg, 2); }, 0) / recent.length);
+    spread = Math.max(1, Math.min(4, Math.round(sd)));
+  }
+  const nextStart = last ? dateStr(addDays(parseDate(last.startDate), useLen)) : null;
+  return {
+    list: list, ints: recent, avg: avg, avgRounded: auto, avgPeriod: avgPeriod,
+    lens: recentLens, last: last, useLen: useLen, spread: spread, nextStart: nextStart
+  };
+}
+
+async function cycleModel() { return cycleStatsOf(await getCycles()); }
+
+function cycleStatusOf(m, ds) {
+  const t = ds || getLogicalDate();
+  if (!m || !m.list.length) return { kind: 'none' };
+  const hit = m.list.find(function (c) {
+    const end = c.endDate || dateStr(addDays(parseDate(c.startDate), (m.avgPeriod || CYCLE_PERIOD_DEFAULT) - 1));
+    return t >= c.startDate && t <= end;
+  });
+  if (hit) return { kind: 'in', day: daysBetween(hit.startDate, t) + 1, start: hit.startDate };
+  if (t < m.last.startDate) return { kind: 'none' };
+  if (m.nextStart && t < m.nextStart) return { kind: 'next', remain: daysBetween(t, m.nextStart) };
+  if (m.nextStart) return { kind: 'late', over: Math.max(0, daysBetween(m.nextStart, t)) };
+  return { kind: 'next', remain: 0 };
+}
+
+function cyCycleFor(m, ds) {
+  if (!m || !m.list.length) return null;
+  let c = null;
+  m.list.forEach(function (x) { if (x.startDate <= ds) c = x; });
+  return c;
+}
+
+function cyDayNumber(m, ds) {
+  const c = cyCycleFor(m, ds);
+  if (!c) return null;
+  const n = daysBetween(c.startDate, ds) + 1;
+  return n <= Math.max(8, (m.avgPeriod || CYCLE_PERIOD_DEFAULT) + 2) ? n : null;
+}
+
+function cycleStatusText(m, ds) {
+  const st = cycleStatusOf(m, ds);
+  if (st.kind === 'none') return '未設定經期';
+  if (st.kind === 'in') return '經期中第 ' + st.day + ' 天';
+  if (st.kind === 'next') return '下次經期還有 ' + st.remain + ' 天';
+  return '經期可能已推遲 ' + st.over + ' 天';
+}
+
+async function cyRecompute() {
+  const list = await getCycles();
+  for (let i = 1; i < list.length; i++) {
+    const d = daysBetween(list[i - 1].startDate, list[i].startDate);
+    if (d >= 15 && d <= 90 && list[i - 1].cycleLength !== d) {
+      await ldb.menstrualCycles.update(list[i - 1].id, { cycleLength: d });
+    }
+  }
+}
+
+/* 某天有經血 → 確保它落在一次經期裡；不在就開一個新週期。
+   已在現有經期（含預估結束後 2 天）內 → 只延長結束日，不新增。 */
+async function cyEnsureCycleFor(ds) {
+  const cycles = await getCycles();
+  const m = cycleStatsOf(cycles);
+  const last = m.last;
+  if (last) {
+    const end = last.endDate || dateStr(addDays(parseDate(last.startDate), (m.avgPeriod || CYCLE_PERIOD_DEFAULT) - 1));
+    if (ds >= last.startDate && ds <= dateStr(addDays(parseDate(end), 2))) {
+      if (ds > last.startDate && (!last.endDate || ds > last.endDate)) {
+        await ldb.menstrualCycles.update(last.id, { endDate: ds, updatedAt: Date.now() });
+      }
+      return false;
+    }
+    if (ds < last.startDate) {
+      const hit = cycles.find(function (c) {
+        const e = c.endDate || dateStr(addDays(parseDate(c.startDate), (m.avgPeriod || CYCLE_PERIOD_DEFAULT) - 1));
+        return ds >= c.startDate && ds <= e;
+      });
+      if (hit) return false;
+    }
+  }
+  await ldb.menstrualCycles.add({
+    startDate: ds,
+    endDate: dateStr(addDays(parseDate(ds), (m.avgPeriod || CYCLE_PERIOD_DEFAULT) - 1)),
+    endEstimated: true,
+    createdAt: Date.now(),
+    updatedAt: Date.now()
+  });
+  await cyRecompute();
+  return true;
+}
+
+/* 清掉開始日時：若整個週期都沒有其他流量，就刪掉這一列 */
+async function cyDropStartIfEmpty(ds) {
+  const list = await getCycles();
+  const last = list[list.length - 1];
+  if (!last || last.startDate !== ds) return false;
+  const end = last.endDate || dateStr(addDays(parseDate(last.startDate), 5));
+  const logs = await ldb.dailyLogs.where('date').between(last.startDate, end, true, true).toArray();
+  const others = logs.filter(function (l) { return l.date !== ds && l.periodFlow; });
+  if (others.length) return false;
+  await ldb.menstrualCycles.delete(last.id);
+  await cyRecompute();
+  return true;
+}
+
+let cyUI = { date: '', flow: null, symptoms: new Set(), model: null };
+
+async function renderCycle() {
+  const main = document.getElementById('cySumMain');
+  const sub = document.getElementById('cySumSub');
+  const head = document.getElementById('cyHead');
+  if (!main || !sub) return;
+  const ds = state.recordDate || recordMaxDate();
+  let log = null;
+  try { log = await ldb.dailyLogs.get(ds); } catch (e) { log = null; }
+  const m = await cycleModel();
+  const st = cycleStatusOf(m, ds);
+  const flow = log && log.periodFlow ? log.periodFlow : null;
+
+  if (flow) {
+    const dn = cyDayNumber(m, ds);
+    main.classList.remove('empty');
+    main.textContent = dn ? ('第 ' + dn + ' 天 · ' + CYCLE_FLOW[flow].n + '量') : ('有經血 · ' + CYCLE_FLOW[flow].n + '量');
+    const sy = cySymptomNames(log.periodSymptoms).join('、');
+    const bits = [];
+    if (sy) bits.push(sy);
+    if (m.avgPeriod) bits.push('經期平均 ' + m.avgPeriod + ' 天');
+    sub.textContent = bits.length ? bits.join(' · ') : '點一下可補症狀';
+  } else if (st.kind === 'in') {
+    main.classList.remove('empty');
+    main.textContent = '第 ' + st.day + ' 天';
+    sub.textContent = '今天還沒記流量';
+  } else if (ds === todayStr() && st.kind === 'next') {
+    main.classList.remove('empty');
+    main.textContent = '距下次 ' + st.remain + ' 天';
+    sub.textContent = '預計 ' + mdShort(m.nextStart) + (m.ints.length ? ' · 平均 ' + m.useLen + ' 天' : '');
+  } else if (ds === todayStr() && st.kind === 'late') {
+    main.classList.remove('empty');
+    main.textContent = '預計 ' + mdShort(m.nextStart) + ' · 已過 ' + st.over + ' 天';
+    sub.textContent = '來了就記一下，平均會自動更新';
+  } else {
+    main.classList.add('empty');
+    main.textContent = '未記錄';
+    sub.textContent = '點一下，記下這天的經期';
+  }
+  if (head) {
+    if (st.kind === 'late') head.textContent = '上次 ' + mdShort(m.last.startDate);
+    else if (m.last) head.textContent = '下次 ' + mdShort(m.nextStart);
+    else head.textContent = '未設定';
+  }
+}
+
+async function openCycleSheet(ds) {
+  const date = ds || state.recordDate || recordMaxDate();
+  let log = null;
+  try { log = await ldb.dailyLogs.get(date); } catch (e) { log = null; }
+  cyUI.date = date;
+  cyUI.flow = log && log.periodFlow ? log.periodFlow : null;
+  cyUI.symptoms = new Set(log && Array.isArray(log.periodSymptoms) ? log.periodSymptoms : []);
+  cyUI.model = await cycleModel();
+  document.getElementById('cyDateLabel').textContent =
+    mdStr(parseDate(date)) + ' ' + weekDayStr(parseDate(date)) + (date === todayStr() ? ' · 今天' : '');
+  cyRenderSheet();
+  document.body.style.overflow = 'hidden';
+  const root = document.getElementById('cyRoot');
+  root.classList.add('show');
+  root.setAttribute('aria-hidden', 'false');
+  if (window.lucide) lucide.createIcons(root);
+}
+
+function closeCycleSheet() {
+  const root = document.getElementById('cyRoot');
+  if (!root) return;
+  root.classList.remove('show');
+  root.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function cyRenderSheet() {
+  const m = cyUI.model || cycleStatsOf([]);
+  const st = cycleStatusOf(m, cyUI.date);
+
+  const status = document.getElementById('cyStatus');
+  const dn = cyDayNumber(m, cyUI.date);
+  const inRun = dn != null;
+  if (status) {
+    if (inRun) {
+      status.innerHTML = '這是<b>第 ' + dn + ' 天</b>。' +
+        (m.avgPeriod ? '你的經期平均 <b>' + m.avgPeriod + ' 天</b>。' : '');
+    } else if (cyUI.flow) {
+      status.innerHTML = '選了流量，這天會存成<b>新的經期第一天</b>。';
+    } else {
+      status.innerHTML = '還沒開始也沒關係。選了流量，就會從這天開始算一個新週期。';
+    }
+  }
+
+  const flowHost = document.getElementById('cyFlow');
+  if (flowHost) {
+    flowHost.innerHTML = Object.keys(CYCLE_FLOW).map(function (k) {
+      const f = CYCLE_FLOW[k];
+      let drops = '';
+      for (let i = 0; i < f.d; i++) drops += '<i data-lucide="droplet"></i>';
+      return '<button type="button" class="cy-f' + (cyUI.flow === k ? ' on' : '') + '" data-f="' + k + '" aria-pressed="' + (cyUI.flow === k) + '">' +
+        '<span class="drops">' + drops + '</span><span class="fn">' + f.n + '</span></button>';
+    }).join('');
+    if (window.lucide) lucide.createIcons(flowHost);
+  }
+  const chip = document.getElementById('cyFlowChip');
+  if (chip) chip.textContent = cyUI.flow ? CYCLE_FLOW[cyUI.flow].n + '量' : '未記錄';
+
+  const symHost = document.getElementById('cySym');
+  if (symHost) {
+    symHost.innerHTML = CYCLE_SYMPTOMS.map(function (x) {
+      const on = cyUI.symptoms.has(x[0]);
+      return '<button type="button" class="stag' + (on ? ' on' : '') + '" data-s="' + x[0] + '" aria-pressed="' + on + '">' + x[1] + '</button>';
+    }).join('');
+  }
+
+  const pred = document.getElementById('cyPred');
+  if (pred) {
+    pred.innerHTML = cyPredHTML(m);
+  }
+
+  const endBtn = document.getElementById('cyEndBtn');
+  const cyc = cyCycleFor(m, cyUI.date);
+  if (endBtn) endBtn.hidden = !(cyc && daysBetween(cyc.startDate, cyUI.date) <= 14);
+  const clearBtn = document.getElementById('cyClearBtn');
+  if (clearBtn) clearBtn.disabled = !cyUI.flow && !cyUI.symptoms.size;
+}
+
+function cyPredHTML(m) {
+  if (!m.last) return '還沒有紀錄。記下這次，之後就能預估下次來的時間。';
+  const when = mdStr(parseDate(m.nextStart));
+  if (!m.ints.length) {
+    return '下次預計 <b>' + when + '</b>，先以 28 天估算。多記 1–2 次，平均會更貼近你。';
+  }
+  return '以最近 <b>' + m.ints.length + ' 次</b>平均 <b>' + m.avgRounded + ' 天</b>估算，下次約 <b>' + when + '</b>（±' + m.spread + ' 天）。';
+}
+
+function cySetFlow(k) {
+  cyUI.flow = cyUI.flow === k ? null : k;
+  cyRenderSheet();
+}
+
+function cyToggleSym(k) {
+  if (k === 'none') {
+    const on = cyUI.symptoms.has('none');
+    cyUI.symptoms.clear();
+    if (!on) cyUI.symptoms.add('none');
+  } else {
+    cyUI.symptoms.delete('none');
+    if (cyUI.symptoms.has(k)) cyUI.symptoms.delete(k);
+    else cyUI.symptoms.add(k);
+  }
+  cyRenderSheet();
+}
+
+async function cySaveSheet() {
+  const ds = cyUI.date;
+  let prev = null;
+  try { prev = await ldb.dailyLogs.get(ds); } catch (e) { prev = null; }
+  const had = !!(prev && (prev.periodFlow || (Array.isArray(prev.periodSymptoms) && prev.periodSymptoms.length)));
+  if (!cyUI.flow && !cyUI.symptoms.size && !had) { closeCycleSheet(); return; }
+  const rec = Object.assign({}, prev || {}, { date: ds, updatedAt: Date.now() });
+  if (cyUI.flow) rec.periodFlow = cyUI.flow;
+  else delete rec.periodFlow;
+  const syms = Array.from(cyUI.symptoms);
+  if (syms.length) rec.periodSymptoms = syms;
+  else delete rec.periodSymptoms;
+  await ldb.dailyLogs.put(rec);
+  CloudSync.notifyLocalChange('dailyLogs', ds);
+
+  if (cyUI.flow) await cyEnsureCycleFor(ds);
+  else await cyDropStartIfEmpty(ds);
+
+  if (state.recordDate === ds) await renderCycle();
+  if (state.tab === 'review') renderReview();
+  renderQuick();
+  renderEnergyMeta();
+  closeCycleSheet();
+  if (cyUI.flow) toast('已記錄經期 · ' + CYCLE_FLOW[cyUI.flow].n + '量');
+  else toast('已清除這天的經期記錄');
+}
+
+async function cyEndCycle() {
+  const m = cyUI.model || await cycleModel();
+  const cyc = cyCycleFor(m, cyUI.date);
+  if (!cyc) { toast('先記錄一次經期開始'); return; }
+  const days = daysBetween(cyc.startDate, cyUI.date) + 1;
+  await ldb.menstrualCycles.update(cyc.id, { endDate: cyUI.date, endEstimated: false, updatedAt: Date.now() });
+  if (state.recordDate === cyUI.date) await renderCycle();
+  if (state.tab === 'review') renderReview();
+  renderEnergyMeta();
+  closeCycleSheet();
+  toast('已記錄結束 · 這次 ' + days + ' 天');
+}
+
+async function cyClearDay() {
+  cyUI.flow = null;
+  cyUI.symptoms.clear();
+  await cySaveSheet();
+}
+
+function initCycleUI() {
+  const sum = document.getElementById('cySum');
+  if (!sum) return;
+  sum.addEventListener('click', function () { openCycleSheet(); });
+  document.getElementById('cyClose').addEventListener('click', closeCycleSheet);
+  document.getElementById('cyBackdrop').addEventListener('click', closeCycleSheet);
+  document.getElementById('cySaveBtn').addEventListener('click', cySaveSheet);
+  document.getElementById('cyEndBtn').addEventListener('click', cyEndCycle);
+  document.getElementById('cyClearBtn').addEventListener('click', cyClearDay);
+  document.getElementById('cyFlow').addEventListener('click', function (e) {
+    const b = e.target.closest('.cy-f');
+    if (b) cySetFlow(b.dataset.f);
+  });
+  document.getElementById('cySym').addEventListener('click', function (e) {
+    const b = e.target.closest('.stag');
+    if (b) cyToggleSym(b.dataset.s);
+  });
+}
+
 /* ---------------- 導航 ---------------- */
 const TITLES = { today: '今日', cards: '卡庫', record: '記錄', review: '復盤', butler: '管家' };
 let state = {
@@ -2684,7 +3400,11 @@ let state = {
   filter: '全部',
   selecting: { state: new Set(), activity: new Set() },
   bowelCount: 0,
+  bowelLogged: false,       /* P45：是否真的記過（0 次＝沒拉，與未記錄區分） */
+  bowelType: null,          /* P45：normal / soft / loose */
   waterCups: 0,
+  drinks: [],                /* P44 今日飲品 [{t,ml,ts}] */
+  workout: null,             /* P44 今日運動 {type,min} */
   mood: null,               /* 今日心情四象限 key（P22） */
   detailMoods: new Set(),    /* P29 詳細情緒 pill（可多選） */
   allEmotion: [],            /* P30 全部情緒標籤（含 quad），由 tags 表讀取 */
@@ -2751,11 +3471,9 @@ async function getSuggestedEnergy() {
     else if (s >= 5) base = 4;
     else base = 3;
   }
-  const cycle = await getLatestCycle();
-  if (cycle) {
-    const st = calcPeriodStatus(cycle, parseDate(getLogicalDate()));
-    if (st.type === 'in' && st.day <= 3) base -= 1;
-  }
+  const cm = await cycleModel();
+  const cs = cycleStatusOf(cm, getLogicalDate());
+  if (cs.kind === 'in' && cs.day <= 3) base -= 1;
   return Math.max(1, Math.min(10, base));
 }
 
@@ -2799,9 +3517,8 @@ async function renderEnergyMeta() {
   const parts = [];
   if (log && slLogMin(log) != null) parts.push('昨晚睡 ' + slDur(slLogMin(log)));
   else parts.push('昨晚睡眠未記錄');
-  const cycle = await getLatestCycle();
-  if (cycle) parts.push(calcPeriodStatus(cycle, parseDate(getLogicalDate())).label);
-  else parts.push('未設定經期');
+  const cm = await cycleModel();
+  parts.push(cm.last ? cycleStatusText(cm, getLogicalDate()) : '未設定經期');
   $('#energyMeta').textContent = parts.join(' · ');
 }
 
@@ -4343,7 +5060,11 @@ async function renderRecord(date) {
   state.selecting.state = new Set(log && log.stateTags ? log.stateTags : []);
   state.selecting.activity = new Set(log && log.activityTags ? log.activityTags : []);
   state.bowelCount = log && log.bowelCount != null ? log.bowelCount : 0;
+  state.bowelLogged = !!(log && (log.bowelLogged || (log.bowelCount || 0) > 0 || log.bowelType));   /* P45 */
+  state.bowelType = log && log.bowelType ? log.bowelType : null;
   state.waterCups = log && log.waterCups != null ? log.waterCups : 0;
+  state.drinks = logDrinks(log);          /* P44：舊 waterCups 自動視為純水 */
+  state.workout = logWorkout(log);        /* P44：兼容健康同步與舊 exercise 布林 */
   state.mood = normMood(log && log.mood);   /* 保留舊資料相容（復盤 / 匯出仍會讀取） */
   state.detailMoods = new Set(log && Array.isArray(log.detailMoods) ? log.detailMoods : []);
   state.vitals = log && log.vitals ? log.vitals : {x:.5, y:.5, energy:5, stress:5, focus:5};  /* P29 */
@@ -4352,12 +5073,13 @@ async function renderRecord(date) {
   renderDetailEmotions();
   renderVitals();
   renderFocus();
-  setAcc('vitals', true); setAcc('detail', false); setAcc('state', false);
+  setAcc('vitals', true); setAcc('detail', false); setAcc('state', false); setAcc('activity', false);
   setMeter($('#logPressure'), log ? log.pressure : '中');
-  setTgl($('#logExercise'), log ? !!log.exercise : false);
+  renderWorkout();
   renderBowel();
   renderWater();
   await renderSleepSummary();
+  await renderCycle();
 
   const wa = $('#workoutAutoHint');
   if (wa) {
@@ -4535,7 +5257,7 @@ function stateCat(name){
 }
 
 /* ---------- P29：摺疊面板狀態 ---------- */
-const recAcc = { detail:false, state:false, vitals:true };
+const recAcc = { detail:false, state:false, vitals:true, activity:false };   /* P45：今日活動預設折疊 */
 function setAcc(key, open){
   recAcc[key] = open;
   var el = document.getElementById('acc' + key.charAt(0).toUpperCase() + key.slice(1));
@@ -4593,6 +5315,9 @@ function renderActivityGrid(){
     var ia = keys.indexOf(a), ib = keys.indexOf(b);
     return (ia<0?999:ia) - (ib<0?999:ib);
   });
+  const cnt = state.selecting.activity.size;
+  const chip = document.getElementById('actCount');
+  if (chip) chip.textContent = cnt ? ('已選 ' + cnt + ' 個') : '選填 · 可多選';
   if (!acts.length) { host.innerHTML = '<div style="font-size:11px;color:var(--muted);font-weight:700">尚無活動標籤，可到左側選單「標籤管理」新增。</div>'; return; }
   host.innerHTML = acts.map(function(nm){
     return '<button type="button" class="act-cell' + (state.selecting.activity.has(nm)?' on':'') + '" data-act="' + esc(nm) + '" aria-pressed="' + (state.selecting.activity.has(nm)?'true':'false') + '">' +
@@ -5354,45 +6079,883 @@ function initSleepUI() {
   });
 }
 
-/* 排便：步進器 − 數字 ＋ */
-function renderBowel() {
-  $('#bowelSeg').innerHTML =
-    '<button class="sbtn" data-step="-1" type="button">−</button>' +
-    '<b>' + (state.bowelCount || 0) + '</b>' +
-    '<button class="sbtn" data-step="1" type="button">＋</button>';
+/* ==================================================================
+   P44：飲品圖鑑 / 腸道節奏 / 運動類型
+   ================================================================== */
+const DRINK_TYPES = {
+  water:  { name:'水',   c:'#6C9BCB', ink:'#4E7CA8', bg:'#EAF3FB', caf:0 },
+  tea:    { name:'茶',   c:'#6F9379', ink:'#537A60', bg:'#EBF3EC', caf:1 },
+  coffee: { name:'咖啡', c:'#97754F', ink:'#7A5B39', bg:'#F7EFE6', caf:2 },
+  milk:   { name:'奶茶', c:'#B7738B', ink:'#9A5772', bg:'#FAEDF1', caf:1 }
+};
+const DRINK_KEYS = ['water', 'tea', 'coffee', 'milk'];
+let _drinkUid = 0;
+
+/* 同一杯型 + 液色 + 杯口小標記：水（氣泡）/ 茶（葉）/ 咖啡（熱氣）/ 奶茶（吸管） */
+function drinkCup(k, size) {
+  const d = DRINK_TYPES[k] || DRINK_TYPES.water;
+  const id = 'dcp' + (++_drinkUid);
+  let deco;
+  if (k === 'tea') {
+    deco = '<path d="M14.4 7c1.7-.3 2.8-1.3 3.2-2.9-1.7 0-2.9.8-3.6 2" fill="none" stroke="' + d.ink + '" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/>';
+  } else if (k === 'coffee') {
+    deco = '<path d="M10.3 5.6c-.75-.85.7-1.45 0-2.5M13.7 5.6c-.75-.85.7-1.45 0-2.5" fill="none" stroke="' + d.ink + '" stroke-width="1.15" stroke-linecap="round" opacity=".7"/>';
+  } else if (k === 'milk') {
+    deco = '<path d="M15.4 3.7 12 8.7" stroke="' + d.ink + '" stroke-width="1.7" stroke-linecap="round"/>';
+  } else {
+    deco = '<circle cx="11.7" cy="14.2" r="1.15" fill="#fff" opacity=".72"/><circle cx="13.9" cy="17" r=".8" fill="#fff" opacity=".5"/>';
+  }
+  return '<svg viewBox="0 0 24 24" width="' + size + '" height="' + size + '" aria-hidden="true">' +
+    '<defs><clipPath id="' + id + '"><path d="M6.2 7.4h11.6l-1.28 11.9a2.3 2.3 0 0 1-2.29 2.1H9.77a2.3 2.3 0 0 1-2.29-2.1Z"/></clipPath></defs>' +
+    '<g clip-path="url(#' + id + ')"><rect class="liq" x="0" y="9.4" width="24" height="24" fill="' + d.c + '"/></g>' +
+    '<path d="M6.2 7.4h11.6l-1.28 11.9a2.3 2.3 0 0 1-2.29 2.1H9.77a2.3 2.3 0 0 1-2.29-2.1Z" fill="none" stroke="' + d.ink + '" stroke-width="1.5" stroke-linejoin="round" opacity=".8"/>' +
+    '<path d="M5.2 7.4h13.6" stroke="' + d.ink + '" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>' +
+    deco + '</svg>';
 }
 
-/* 喝水：純點擊杯子（點第 N 個設 N 杯，再點同一杯取消到前一格） */
-function renderWater() {
-  let cups = '';
-  for (let i = 1; i <= 8; i++) {
-    cups += '<span class="cup' + (i <= state.waterCups ? ' full' : '') + '" data-i="' + i + '"><i data-lucide="cup-soda"></i></span>';
+/* 讀取：新格式 drinks 優先；舊資料只有 waterCups 數字 → 全部視為純水 */
+function logDrinks(log) {
+  if (log && Array.isArray(log.drinks)) {
+    return log.drinks.filter(function (d) { return d && DRINK_TYPES[d.t]; })
+      .map(function (d) { return { t: d.t, ml: d.ml || 400, ts: d.ts || null }; });
   }
-  $('#waterCups').innerHTML = cups;
-  $('#waterTxt').textContent = state.waterCups + ' 杯（' + (state.waterCups * 400) + 'mL）';
+  const n = (log && log.waterCups) || 0;
+  const out = [];
+  for (let i = 0; i < n; i++) out.push({ t: 'water', ml: 400, ts: null });
+  return out;
 }
-/* 每日計數器（喝水／排便）單一寫入點：寫 DB → 同步 state → 雙頁渲染 → 雲端通知 */
-async function setDailyCounter(field, value, date) {
+function drinkPure(list) { return list.filter(function (d) { return d.t === 'water'; }).length; }
+function drinkCaf(list) { return list.filter(function (d) { return DRINK_TYPES[d.t].caf > 0; }).length; }
+
+/* 記錄頁：一排飲品 + ＋ */
+function renderWater(animateLast) {
+  const host = $('#drinkRow');
+  if (!host) return;
+  const list = state.drinks || [];
+  let h = '';
+  if (!list.length) h += '<span class="drk-empty">今天還沒喝水</span>';
+  list.forEach(function (d, i) {
+    const on = animateLast && i === list.length - 1;
+    h += '<button class="drk-cup' + (on ? ' in' : '') + '" data-i="' + i + '" type="button" title="' +
+      DRINK_TYPES[d.t].name + '（長按可改）" aria-label="第 ' + (i + 1) + ' 杯 ' + DRINK_TYPES[d.t].name + '">' +
+      drinkCup(d.t, 19) + '</button>';
+  });
+  h += '<button class="drk-add" id="drinkAdd" type="button" aria-label="新增一杯"><i data-lucide="plus"></i></button>';
+  host.innerHTML = h;
+  if (window.lucide) lucide.createIcons(host);
+
+  const sub = $('#drinkSub');
+  if (sub) {
+    const n = list.length, ml = list.reduce(function (a, d) { return a + (d.ml || 400); }, 0);
+    const pure = drinkPure(list), caf = drinkCaf(list);
+    if (!n) sub.innerHTML = '點 <b>＋</b> 記下今天喝的每一杯';
+    else sub.innerHTML = '共 <b>' + n + '</b> 杯（' + ml + ' mL）· 純水 <b class="pure">' + pure + '</b> 杯' +
+      (caf ? ' · 含咖啡因 <b>' + caf + '</b> 杯' : '');
+  }
+}
+
+async function saveDrinks(date, list, animate) {
   const ds = date || todayStr();
   let log = await ldb.dailyLogs.get(ds);
-  if (!log) log = { date: ds, waterCups: 0, bowelCount: 0 };
-  if (field === 'water') log.waterCups = Math.max(0, value);
-  if (field === 'bowel') log.bowelCount = Math.max(0, value);
+  if (!log) log = { date: ds };
+  log.drinks = list.map(function (d) { return { t: d.t, ml: d.ml || 400, ts: d.ts || null }; });
+  log.waterCups = log.drinks.length;         /* 派生值：生命之輪 / CSV / 雲端仍讀它 */
   log.updatedAt = Date.now();
   await ldb.dailyLogs.put(log);
-  /* 記錄頁正在看這一天時，同步畫面 state */
-  if (ds === (state.recordDate || todayStr()) || ds === todayStr()) {
-    state.waterCups = log.waterCups || 0;
-    state.bowelCount = log.bowelCount || 0;
+  if (ds === (state.recordDate || todayStr())) {
+    state.drinks = log.drinks;
+    state.waterCups = log.waterCups;
   }
   renderQuick();
-  if (state.tab === 'record') { renderWater(); renderBowel(); }
-  CloudSync.notifyLocalChange('dailyLogs', log.date);
+  if (state.tab === 'record') renderWater(!!animate);
+  CloudSync.notifyLocalChange('dailyLogs', ds);
+  return log;
 }
-async function cupClick(i) {
-  const next = state.waterCups === i ? i - 1 : i;
-  await setDailyCounter('water', next, state.recordDate || todayStr());
-  renderWater();
+
+async function addDrinkAt(k, fromRect) {
+  const ds = state.recordDate || todayStr();
+  const list = logDrinks(await ldb.dailyLogs.get(ds));
+  list.push({ t: k, ml: 400, ts: Date.now() });
+  await saveDrinks(ds, list, true);
+  if (fromRect && state.tab === 'record') flyDrinkCup(k, fromRect);
+  toast(DRINK_TYPES[k].name + ' +1 杯');
+}
+
+async function replaceDrinkAt(i, k) {
+  const ds = state.recordDate || todayStr();
+  const list = logDrinks(await ldb.dailyLogs.get(ds));
+  if (!list[i]) return;
+  list[i] = { t: k, ml: list[i].ml || 400, ts: list[i].ts || Date.now() };
+  await saveDrinks(ds, list, false);
+  toast('改成 ' + DRINK_TYPES[k].name);
+}
+
+async function removeDrinkAt(i) {
+  const ds = state.recordDate || todayStr();
+  const list = logDrinks(await ldb.dailyLogs.get(ds));
+  if (!list[i]) return;
+  const cup = $('#drinkRow .drk-cup[data-i="' + i + '"]');
+  if (cup) cup.classList.add('out');
+  await new Promise(function (r) { setTimeout(r, 190); });
+  list.splice(i, 1);
+  await saveDrinks(ds, list, false);
+}
+
+/* 從選單飛進杯子列 */
+function flyDrinkCup(k, fromRect) {
+  try {
+    const last = $('#drinkRow .drk-cup:last-of-type');
+    if (!last) return;
+    const to = last.getBoundingClientRect();
+    const el = document.createElement('div');
+    el.style.cssText = 'position:fixed;z-index:99;pointer-events:none;left:0;top:0;width:20px;height:20px;';
+    el.innerHTML = drinkCup(k, 20);
+    document.body.appendChild(el);
+    const fx = fromRect.left + fromRect.width / 2 - 10, fy = fromRect.top + fromRect.height / 2 - 10;
+    const tx = to.left + to.width / 2 - 10, ty = to.top + to.height / 2 - 10;
+    const a = el.animate([
+      { transform: 'translate(' + fx + 'px,' + fy + 'px) scale(1)', opacity: 1 },
+      { transform: 'translate(' + (fx + (tx - fx) * .55) + 'px,' + (fy + (ty - fy) * .55 - 14) + 'px) scale(1.15)', opacity: 1, offset: .55 },
+      { transform: 'translate(' + tx + 'px,' + ty + 'px) scale(.85)', opacity: 0 }
+    ], { duration: 380, easing: 'cubic-bezier(.32,.9,.4,1)' });
+    a.onfinish = function () { el.remove(); };
+  } catch (e) { /* 動畫失敗不影響記錄 */ }
+}
+
+/* 氣泡選單：單一實例，fixed 定位，記錄頁與首頁共用 */
+let _drinkPopMode = 'add', _drinkPopIdx = -1, _drinkPopAnchor = null;
+
+function drinkPopEl() {
+  let el = document.getElementById('drinkPop');
+  if (el) return el;
+  el = document.createElement('div');
+  el.className = 'drk-pop';
+  el.id = 'drinkPop';
+  el.innerHTML = '<div class="dg">' + DRINK_KEYS.map(function (k) {
+    const d = DRINK_TYPES[k];
+    return '<button class="drk-pi" type="button" data-k="' + k + '"><span class="drk-pb" style="background:' +
+      d.bg + '">' + drinkCup(k, 20) + '</span><span class="t">' + d.name + '</span></button>';
+  }).join('') + '</div><i class="tail"></i>';
+  document.body.appendChild(el);
+  el.addEventListener('click', function (e) {
+    const b = e.target.closest('.drk-pi');
+    if (!b) return;
+    const k = b.dataset.k;
+    const from = b.getBoundingClientRect();
+    const mode = _drinkPopMode, idx = _drinkPopIdx;
+    closeDrinkPop();
+    if (mode === 'replace') replaceDrinkAt(idx, k);
+    else addDrinkAt(k, from);
+  });
+  return el;
+}
+
+function openDrinkPop(anchor, mode, idx) {
+  const pop = drinkPopEl();
+  _drinkPopAnchor = anchor;
+  _drinkPopMode = mode || 'add';
+  _drinkPopIdx = idx == null ? -1 : idx;
+  pop.classList.remove('on');
+  const r = anchor.getBoundingClientRect();
+  const w = 232, h = 74;
+  const left = Math.max(10, Math.min(window.innerWidth - w - 10, r.left + r.width / 2 - w / 2));
+  let top = r.bottom + 10, up = false;
+  if (top + h > window.innerHeight - 14) { top = Math.max(12, r.top - h - 10); up = true; }
+  pop.style.width = w + 'px';
+  pop.style.left = left + 'px';
+  pop.style.top = top + 'px';
+  pop.style.transformOrigin = Math.round(r.left + r.width / 2 - left) + 'px ' + (up ? '100%' : '0');
+  pop.classList.toggle('up', up);
+  const tail = pop.querySelector('.tail');
+  if (tail) tail.style.right = Math.max(8, Math.min(w - 22, r.left + r.width / 2 - left - 5)) + 'px';
+  requestAnimationFrame(function () { pop.classList.add('on'); });
+}
+
+function closeDrinkPop() {
+  const pop = document.getElementById('drinkPop');
+  if (pop) pop.classList.remove('on');
+  const add = document.getElementById('drinkAdd');
+  if (add) add.classList.remove('on');
+  _drinkPopAnchor = null;
+}
+
+/* ===== P45：腸道（便秘 / 腹瀉追蹤） =====
+   0 次＝「沒拉」也需要被記下來，才能看見便秘的日子；
+   質地只描述不評價，腹瀉用空心圓另外標記。 */
+const BOWEL_OPTS = [
+  { v: 0, label: '沒拉' },
+  { v: 1, label: '1 次' },
+  { v: 2, label: '2 次' },
+  { v: 3, label: '3+ 次' }
+];
+const BOWEL_TX = {
+  normal: { name: '正常', c: '#7FA089' },
+  soft:   { name: '偏軟', c: '#C9A15E' },
+  loose:  { name: '腹瀉', c: '#D08457' }
+};
+const WD_CN = ['日', '一', '二', '三', '四', '五', '六'];
+
+function bowelStateOf(log) {
+  if (!log) return { logged: false, count: 0, type: null };
+  const n = log.bowelCount || 0;
+  return {
+    logged: !!(log.bowelLogged || n > 0 || log.bowelType),
+    count: n,
+    type: log.bowelType || null
+  };
+}
+
+/* 以某天為終點（含）的近 7 天 */
+async function last7Logs(anchorDs) {
+  const endDs = anchorDs || todayStr();
+  const end = parseDate(endDs);
+  const start = addDays(end, -6);
+  const rows = await ldb.dailyLogs.where('date').between(dateStr(start), endDs, true, true).toArray();
+  const map = {};
+  rows.forEach(function (l) { map[l.date] = l; });
+  const out = [];
+  for (let i = 0; i < 7; i++) {
+    const d = addDays(start, i), ds = dateStr(d);
+    out.push({ d: d, ds: ds, log: map[ds] || null, today: ds === endDs });
+  }
+  return out;
+}
+
+function bowelDaysStats(days) {
+  const st = { logged: 0, active: 0, noPoo: 0, loose: 0, soft: 0 };
+  (days || []).forEach(function (d) {
+    const b = bowelStateOf(d.log);
+    d.b = b;
+    if (!b.logged) return;
+    st.logged++;
+    if (b.count > 0) st.active++; else st.noPoo++;
+    if (b.type === 'loose') st.loose++;
+    if (b.type === 'soft') st.soft++;
+  });
+  return st;
+}
+
+function bowelTip(d) {
+  const b = d.b || bowelStateOf(d.log);
+  if (!b.logged) return mdStr(d.d) + ' · 沒有紀錄';
+  if (!b.count) return mdStr(d.d) + ' · 沒排便';
+  return mdStr(d.d) + ' · ' + (b.count >= 3 ? '3+ 次' : b.count + ' 次') + (b.type ? ' · ' + BOWEL_TX[b.type].name : '');
+}
+
+function bowelStripHTML(days) {
+  return (days || []).map(function (d) {
+    const b = d.b || bowelStateOf(d.log);
+    let cls = 'tk-cell', inner = '';
+    if (!b.logged) cls += ' off';
+    else if (!b.count) cls += ' none';
+    else if (b.type === 'loose') { cls += ' loose'; inner = '<i class="ring"></i>'; }
+    else if (b.type === 'soft') { cls += ' soft'; inner = '<i class="dot"></i>'; }
+    else if (b.type === 'normal') { cls += ' normal'; inner = '<i class="dot"></i>'; }
+    else { cls += ' countonly'; inner = '<i class="dot"></i>'; }
+    return '<div class="tk-day' + (d.today ? ' today' : '') + '">' +
+      '<span class="' + cls + '" role="img" aria-label="' + esc(bowelTip(d)) + '" data-tip="' + esc(bowelTip(d)) + '">' + inner + '</span>' +
+      '<b>' + WD_CN[d.d.getDay()] + '</b></div>';
+  }).join('');
+}
+
+function bowelInsight(days, st) {
+  if (!st.logged) return '還沒有紀錄。點一個就好，沒拉也可以記。';
+  if (st.loose >= 2) return '這 7 天有 <b>' + st.loose + ' 天</b>腹瀉，腸胃還沒緩過來。';
+  if (!st.active) {
+    if (st.logged >= 4) return '這 7 天<b>都沒有排便</b>。記著，回診時可以給醫生看。';
+    return '這 7 天已記 <b>' + st.noPoo + ' 天</b>沒拉。持續記錄，才看得出節奏。';
+  }
+  let i = days.length - 1;
+  while (i >= 0 && !(days[i].b && days[i].b.logged)) i--;
+  let streak = 0;
+  while (i >= 0 && days[i].b && days[i].b.logged && !days[i].b.count) { streak++; i--; }
+  if (streak >= 2) return '已 <b>' + streak + ' 天</b>沒有排便紀錄。喝水、散步，讓腸胃動一動。';
+  if (st.loose === 1) return '這 7 天有 <b>1 天</b>腹瀉，其他天還算穩。';
+  if (st.active >= 4) return '這 7 天有 <b>' + st.active + ' 天</b>排便，節奏穩定。';
+  return '這 7 天有 <b>' + st.active + ' 天</b>排便' +
+    (st.noPoo ? '，另外 <b>' + st.noPoo + ' 天</b>沒拉。' : '。');
+}
+
+function renderBowelSeg() {
+  const host = $('#bowelSeg');
+  if (!host) return;
+  const c = state.bowelCount || 0;
+  const logged = !!state.bowelLogged;
+  host.innerHTML = BOWEL_OPTS.map(function (o) {
+    const on = logged && (o.v === 3 ? c >= 3 : c === o.v);
+    return '<button type="button" class="' + (on ? 'on' : '') + (o.v === 0 ? ' zero' : '') +
+      '" data-v="' + o.v + '" aria-pressed="' + on + '">' + o.label + '</button>';
+  }).join('');
+  const tx = $('#bowelTexture');
+  if (!tx) return;
+  const show = logged && c > 0;
+  tx.hidden = !show;
+  if (!show) { tx.innerHTML = ''; return; }
+  const html = '<span class="btx-l">質地</span>' + Object.keys(BOWEL_TX).map(function (k) {
+    const on = state.bowelType === k;
+    return '<button type="button" class="btx-b ' + k + (on ? ' on' : '') + '" data-tx="' + k +
+      '" aria-pressed="' + on + '"><em></em>' + BOWEL_TX[k].name + '</button>';
+  }).join('');
+  if (tx.innerHTML === html) return;
+  tx.innerHTML = html;
+  tx.classList.remove('pop'); void tx.offsetWidth; tx.classList.add('pop');
+}
+
+let _bowelTok = 0;
+async function renderBowel() {
+  renderBowelSeg();
+  const ds = state.recordDate || todayStr();
+  const tok = ++_bowelTok;
+  const days = await last7Logs(ds);
+  if (tok !== _bowelTok) return;
+  const st = bowelDaysStats(days);
+  const strip = $('#bowelStrip');
+  if (strip) strip.innerHTML = bowelStripHTML(days);
+  const head = $('#bowelHead');
+  if (head) head.textContent = st.logged
+    ? (st.active ? ('7 天 · 有排便 ' + st.active + ' 天' + (st.noPoo ? ' · 沒拉 ' + st.noPoo + ' 天' : ''))
+                 : ('7 天 · 沒拉 ' + st.noPoo + ' 天'))
+    : '近 7 天';
+  const note = $('#bowelNote');
+  if (note) note.innerHTML = bowelInsight(days, st);
+}
+
+async function setBowel(value, date) {
+  const ds = date || todayStr();
+  let log = await ldb.dailyLogs.get(ds);
+  if (!log) log = { date: ds };
+  log.bowelLogged = true;
+  log.bowelCount = Math.max(0, value);
+  if (!log.bowelCount) log.bowelType = null;
+  log.updatedAt = Date.now();
+  await ldb.dailyLogs.put(log);
+  if (ds === (state.recordDate || todayStr())) {
+    state.bowelLogged = true;
+    state.bowelCount = log.bowelCount;
+    if (!log.bowelCount) state.bowelType = null;
+  }
+  renderQuick();
+  if (state.tab === 'record') renderBowel();
+  CloudSync.notifyLocalChange('dailyLogs', ds);
+  return log;
+}
+
+async function clearBowel(date) {
+  const ds = date || todayStr();
+  let log = await ldb.dailyLogs.get(ds);
+  if (!log) return null;
+  log.bowelLogged = false;
+  log.bowelCount = 0;
+  log.bowelType = null;
+  log.updatedAt = Date.now();
+  await ldb.dailyLogs.put(log);
+  if (ds === (state.recordDate || todayStr())) {
+    state.bowelLogged = false; state.bowelCount = 0; state.bowelType = null;
+  }
+  renderQuick();
+  if (state.tab === 'record') renderBowel();
+  CloudSync.notifyLocalChange('dailyLogs', ds);
+  return log;
+}
+
+async function setBowelType(t, date) {
+  const ds = date || todayStr();
+  let log = await ldb.dailyLogs.get(ds);
+  if (!log) log = { date: ds, bowelCount: 0 };
+  log.bowelLogged = true;
+  log.bowelType = (log.bowelType === t) ? null : t;
+  log.updatedAt = Date.now();
+  await ldb.dailyLogs.put(log);
+  if (ds === (state.recordDate || todayStr())) {
+    state.bowelLogged = true;
+    state.bowelType = log.bowelType;
+    state.bowelCount = log.bowelCount || 0;
+  }
+  if (state.tab === 'record') renderBowel();
+  CloudSync.notifyLocalChange('dailyLogs', ds);
+  return log;
+}
+
+/* 運動類型 */
+const WORKOUT_TYPES = {
+  run:     { name:'跑步', icon:'footprints' },
+  gym:     { name:'重訓', icon:'dumbbell' },
+  fitness: { name:'健身', icon:'flame' },
+  yoga:    { name:'瑜伽', icon:'heart-pulse' },
+  bike:    { name:'單車', icon:'bike' },
+  swim:    { name:'游泳', icon:'droplet' },
+  dance:   { name:'舞蹈', icon:'music' },
+  other:   { name:'其他', icon:'more-horizontal' }
+};
+/* 4 欄 × 2 列：跑步 / 重訓 / 健身 / 瑜伽｜單車 / 游泳 / 舞蹈 / 其他 */
+const WORKOUT_KEYS = ['run', 'gym', 'fitness', 'yoga', 'bike', 'swim', 'dance', 'other'];
+
+function logWorkout(log) {
+  if (!log) return null;
+  if (log.workout && WORKOUT_TYPES[log.workout.type]) {
+    return { type: log.workout.type, min: log.workout.min || 0 };
+  }
+  /* 健康同步：小米 workoutTypes 陣列 → 對應到類型 */
+  if (Array.isArray(log.workoutTypes) && log.workoutTypes.length) {
+    const map = { '跑步':'run', '瑜伽':'yoga', '重訓':'gym', '健身':'fitness', '舞蹈':'dance', '單車':'bike', '騎行':'bike', '游泳':'swim' };
+    let t = 'other';
+    for (let i = 0; i < log.workoutTypes.length; i++) {
+      if (map[log.workoutTypes[i]]) { t = map[log.workoutTypes[i]]; break; }
+    }
+    return { type: t, min: log.workoutMinutes || 0 };
+  }
+  if (log.exercise) return { type: 'other', min: 0 };   /* 舊資料只有「有/無」 */
+  return null;
+}
+
+let _wkTok = 0;
+async function renderWorkout() {
+  const ds = state.recordDate || todayStr();
+  const wk = state.workout;
+  const grid = $('#wkQuick');
+  if (grid) {
+    grid.innerHTML = WORKOUT_KEYS.map(function (k) {
+      const t = WORKOUT_TYPES[k];
+      const on = !!(wk && wk.type === k);
+      return '<button type="button" class="wq' + (on ? ' on' : '') + '" data-k="' + k +
+        '" aria-pressed="' + on + '" aria-label="' + t.name + '">' +
+        '<i data-lucide="' + t.icon + '"></i><span>' + t.name + '</span></button>';
+    }).join('');
+    if (window.lucide) lucide.createIcons(grid);
+  }
+  const dayLbl = ds === todayStr() ? '今天' : mdStr(parseDate(ds));
+  const today = $('#wkToday');
+  if (today) {
+    const t = wk ? (WORKOUT_TYPES[wk.type] || WORKOUT_TYPES.other) : null;
+    today.innerHTML = wk
+      ? '<span>' + dayLbl + ' · <b>' + t.name + '</b>' + (wk.min ? ' · <b>' + wk.min + ' 分</b>' : '') + '</span>' +
+        '<button class="wka" id="wkAdjust" type="button">調整</button>'
+      : '<span>' + dayLbl + '還沒有運動紀錄</span><button class="wka" id="wkAdjust" type="button">記錄</button>';
+  }
+  const tok = ++_wkTok;
+  const days = await last7Logs(ds);
+  if (tok !== _wkTok) return;
+  let n = 0, min = 0;
+  days.forEach(function (d) { const w = logWorkout(d.log); if (w) { n++; min += w.min || 0; } });
+  const strip = $('#wkStrip');
+  if (strip) {
+    strip.innerHTML = wkStripHTML(days);
+    if (window.lucide) lucide.createIcons(strip);
+  }
+  const head = $('#wkHead');
+  if (head) head.textContent = n ? ('近 7 天 · ' + n + ' 次' + (min ? ' · ' + min + ' 分' : '')) : '近 7 天 · 還沒運動';
+}
+
+let _wkSel = null, _wkMin = 30;
+
+function renderWkSheet() {
+  const grid = $('#wkGrid');
+  if (!grid) return;
+  grid.innerHTML = WORKOUT_KEYS.map(function (k) {
+    const t = WORKOUT_TYPES[k];
+    return '<button class="wk-t' + (_wkSel === k ? ' on' : '') + '" data-k="' + k + '" type="button">' +
+      '<i data-lucide="' + t.icon + '"></i><span>' + t.name + '</span></button>';
+  }).join('');
+  if (window.lucide) lucide.createIcons(grid);
+  $('#wkMinVal').textContent = _wkMin;
+  $('#wkMinus').disabled = _wkMin <= 5;
+  $('#wkPlus').disabled = _wkMin >= 300;
+  $('#wkSaveBtn').disabled = !_wkSel;
+  $('#wkSaveBtn').style.opacity = _wkSel ? '' : '.45';
+  $('#wkSaveBtn').textContent = _wkSel ? ('儲存 · ' + WORKOUT_TYPES[_wkSel].name + ' ' + _wkMin + ' 分') : '選一個類型';
+}
+
+function openWorkoutSheet(type) {
+  const cur = state.workout;
+  if (type) {
+    _wkSel = type;
+    _wkMin = (cur && cur.type === type && cur.min) ? cur.min : 30;
+  } else {
+    _wkSel = cur ? cur.type : null;
+    _wkMin = (cur && cur.min) || 30;
+  }
+  const ds = state.recordDate || todayStr();
+  const lbl = $('#wkDateLabel');
+  if (lbl) lbl.textContent = ds === todayStr() ? '今天' : ds;
+  renderWkSheet();
+  $('#wkRoot').classList.add('show');
+  $('#wkRoot').setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  if (window.lucide) lucide.createIcons($('#wkRoot'));
+}
+
+function closeWorkoutSheet() {
+  $('#wkRoot').classList.remove('show');
+  $('#wkRoot').setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+async function saveWorkout(date, wk) {
+  const ds = date || todayStr();
+  let log = await ldb.dailyLogs.get(ds);
+  if (!log) log = { date: ds };
+  if (wk) { log.workout = { type: wk.type, min: wk.min || 0 }; log.exercise = true; }
+  else { log.workout = null; log.exercise = false; }
+  log.updatedAt = Date.now();
+  await ldb.dailyLogs.put(log);
+  if (ds === (state.recordDate || todayStr())) state.workout = wk ? { type: wk.type, min: wk.min || 0 } : null;
+  if (state.tab === 'record') renderWorkout();
+  CloudSync.notifyLocalChange('dailyLogs', ds);
+  return log;
+}
+
+/* ===== P47：復盤「運動」 ===== */
+function wkStripHTML(days) {
+  return (days || []).map(function (d) {
+    const w = logWorkout(d.log);
+    const t = w ? (WORKOUT_TYPES[w.type] || WORKOUT_TYPES.other) : null;
+    const tip = mdStr(d.d) + ' · ' + (w ? (t.name + (w.min ? ' ' + w.min + ' 分' : ''))
+      : (d.log ? '沒有運動' : '沒有紀錄'));
+    return '<div class="tk-day' + (d.today ? ' today' : '') + '">' +
+      '<span class="tk-cell' + (w ? ' wk-on' : ' off') + '" role="img" aria-label="' + esc(tip) + '" data-tip="' + esc(tip) + '">' +
+      (w ? '<i data-lucide="' + t.icon + '"></i>' : '') + '</span>' +
+      '<b>' + WD_CN[d.d.getDay()] + '</b></div>';
+  }).join('');
+}
+
+function wkDaysStats(days) {
+  const st = { n: 0, min: 0, cnt: {}, mins: {} };
+  (days || []).forEach(function (d) {
+    const w = logWorkout(d.log);
+    if (!w) return;
+    st.n++;
+    st.min += w.min || 0;
+    st.cnt[w.type] = (st.cnt[w.type] || 0) + 1;
+    st.mins[w.type] = (st.mins[w.type] || 0) + (w.min || 0);
+  });
+  return st;
+}
+
+function wkNote(days, st) {
+  if (!st.n) return '這 7 天還沒有運動紀錄。散步 10 分鐘也算，記錄頁點一下就好。';
+  let out = '這 7 天動了 <b>' + st.n + ' 天</b>' + (st.min ? '，共 <b>' + st.min + ' 分鐘</b>' : '');
+  if (st.min && st.n >= 2) out += '（平均每次 ' + Math.round(st.min / st.n) + ' 分鐘）';
+  out += '。';
+  let lastIdx = -1;
+  (days || []).forEach(function (d, i) { if (logWorkout(d.log)) lastIdx = i; });
+  const gap = days.length - 1 - lastIdx;
+  if (lastIdx >= 0 && gap >= 3) out += '最近 <b>' + gap + ' 天</b>沒動，今天散步 10 分鐘也好。';
+  return out;
+}
+
+async function s2RenderWorkoutReport() {
+  const host = document.getElementById('wkReportBody');
+  if (!host) return;
+  const days = await last7Logs(todayStr());
+  const st = wkDaysStats(days);
+  let h = '';
+  if (st.n) {
+    h += '<div class="wk-rep-top"><b>' + st.n + '</b><span>天</span>' +
+      (st.min ? '<i>·</i><b>' + st.min + '</b><span>分鐘</span>' : '') + '</div>';
+  }
+  h += '<div class="tk-strip">' + wkStripHTML(days) + '</div>';
+  if (st.n) {
+    const order = Object.keys(st.cnt).sort(function (a, b) { return st.mins[b] - st.mins[a]; });
+    h += '<div class="wk-rep-types">' + order.map(function (k) {
+      const t = WORKOUT_TYPES[k] || WORKOUT_TYPES.other;
+      return '<span class="chipm"><i data-lucide="' + t.icon + '"></i>' + t.name +
+        ' <b>' + st.cnt[k] + '</b> 次' + (st.mins[k] ? ' · ' + st.mins[k] + ' 分' : '') + '</span>';
+    }).join('') + '</div>';
+  }
+  h += '<div class="tk-note" style="margin-top:10px">' + wkNote(days, st) + '</div>';
+  host.innerHTML = h;
+  if (window.lucide) lucide.createIcons(host);
+  host.onclick = function (e) {
+    const c = e.target.closest('.tk-cell');
+    if (c && c.dataset.tip) toast(c.dataset.tip);
+  };
+}
+
+/* ===== P44：復盤「飲品與小植物」 ===== */
+function s2DrinkStats(logs) {
+  const st = { days:0, cups:0, pure:0, caf:0, lateCaf:0, pureDays:0, onlyDays:0,
+               by:{ water:0, tea:0, coffee:0, milk:0 } };
+  (logs || []).forEach(function (l) {
+    const list = logDrinks(l);
+    if (!list.length) return;
+    st.days++;
+    st.cups += list.length;
+    let pure = 0;
+    list.forEach(function (d) {
+      st.by[d.t] = (st.by[d.t] || 0) + 1;
+      if (d.t === 'water') { pure++; st.pure++; }
+      if (DRINK_TYPES[d.t] && DRINK_TYPES[d.t].caf) {
+        st.caf++;
+        if (d.ts) {
+          const h = new Date(d.ts).getHours();
+          if (h >= 15) st.lateCaf++;
+        }
+      }
+    });
+    if (pure > 0) st.pureDays++; else st.onlyDays++;
+  });
+  return st;
+}
+
+/* 小植物：葉數＝純水天數，缺水時垂葉 */
+function s2PlantSVG(leaves, wilt) {
+  let out = '<svg viewBox="0 0 40 48" fill="none" aria-hidden="true" style="width:38px;height:46px;flex:0 0 auto">';
+  out += '<path d="M20 35V16" stroke="#7FA089" stroke-width="2" stroke-linecap="round"/>';
+  const L = [
+    { d:'M20 27c-6.2.3-8.7-3.2-8.2-7.9 5.2-.4 8.2 2.8 8.2 7.9Z', f:'#CFE6D3' },
+    { d:'M20 22c5.7.2 8.2-3 7.8-7.5-5-.4-7.8 2.6-7.8 7.5Z', f:'#A9CDB0' },
+    { d:'M20 17c-4.3.2-6.1-2.2-5.7-5.5 3.7-.2 5.7 1.9 5.7 5.5Z', f:'#CFE6D3' }
+  ];
+  L.forEach(function (lv, i) {
+    if (leaves <= i) return;
+    out += '<path d="' + lv.d + '" fill="' + lv.f + '" style="transform-box:fill-box;transform-origin:bottom center;' +
+      (wilt ? 'transform:rotate(' + (i % 2 ? -24 : 26) + 'deg)' : '') + '"/>';
+  });
+  out += '<path d="M12 34h16l-1.8 7.6a2.2 2.2 0 0 1-2.1 1.6h-8.2a2.2 2.2 0 0 1-2.1-1.6Z" fill="#F5E9DC" stroke="#DFCBB6" stroke-width="1.3" stroke-linejoin="round"/>';
+  out += '</svg>';
+  return out;
+}
+
+async function s2RenderBowelReport() {
+  const host = document.getElementById('bowelReportBody');
+  if (!host) return;
+  const days = await last7Logs(todayStr());
+  const st = bowelDaysStats(days);
+  host.innerHTML = '<div class="tk-strip">' + bowelStripHTML(days) + '</div>' +
+    '<div class="rv-bstat">' +
+      '<span>有排便 <b>' + st.active + '</b> 天</span>' +
+      '<span>沒拉 <b>' + st.noPoo + '</b> 天</span>' +
+      '<span>腹瀉 <b>' + st.loose + '</b> 天</span>' +
+    '</div>' +
+    '<div class="tk-note" style="margin-top:10px">' + bowelInsight(days, st) + '</div>';
+  host.addEventListener('click', function (e) {
+    const c = e.target.closest('.tk-cell');
+    if (c && c.dataset.tip) toast(c.dataset.tip);
+  });
+}
+
+/* ---------- P46：經期洞察（復盤） ---------- */
+function cyMoodScore(l) {
+  const dms = (l && l.detailMoods) || [];
+  const qs = [];
+  dms.forEach(function (nm) { const q = emotionQuadOf(nm); if (q) qs.push(q); });
+  if (!qs.length) {
+    const k = normMood(l && l.mood);
+    if (k && MOODS[k]) qs.push(MOODS[k].quad);
+  }
+  if (!qs.length) return null;
+  const map = { energized: 5, calm: 4, low: 1, anxious: 2 };
+  return qs.reduce(function (a, q) { return a + (map[q] || 0); }, 0) / qs.length;
+}
+
+async function cyMoodByPhase(m) {
+  const today = todayStr();
+  const from = dateStr(addDays(parseDate(today), -150));
+  let logs = [];
+  try { logs = await ldb.dailyLogs.where('date').between(from, today, true, true).toArray(); } catch (e) { logs = []; }
+  const buckets = { period: [], after: [], before: [] };
+  logs.forEach(function (l) {
+    const sc = cyMoodScore(l);
+    if (sc == null) return;
+    const c = (m.list || []).filter(function (x) { return x.startDate <= l.date; }).pop();
+    if (!c) return;
+    const day = daysBetween(c.startDate, l.date) + 1;
+    const endLen = c.endDate ? daysBetween(c.startDate, c.endDate) + 1 : m.avgPeriod;
+    if (day <= Math.max(3, endLen)) buckets.period.push(sc);
+    else if (day <= endLen + 7) buckets.after.push(sc);
+    else if (day >= Math.max(endLen + 8, m.useLen - 7)) buckets.before.push(sc);
+  });
+  const avg = function (a) { return a.length ? a.reduce(function (x, y) { return x + y; }, 0) / a.length : null; };
+  return {
+    period: avg(buckets.period), after: avg(buckets.after), before: avg(buckets.before),
+    n: buckets.period.length + buckets.after.length + buckets.before.length
+  };
+}
+
+function cyLengthChart(m) {
+  const ints = m.ints || [];
+  if (!ints.length) return '';
+  const W = 300, H = 112, PL = 24, PR = 12, PT = 24, PB = 20;
+  const vals = ints.map(function (x) { return x.days; });
+  let lo = Math.min.apply(null, vals) - 2, hi = Math.max.apply(null, vals) + 2;
+  if (hi - lo < 6) { const mid = (hi + lo) / 2; lo = mid - 3; hi = mid + 3; }
+  const x = function (i) {
+    return ints.length === 1 ? (PL + W - PR) / 2 : PL + (W - PL - PR) * i / (ints.length - 1);
+  };
+  const y = function (v) { return PT + (H - PT - PB) * (1 - (v - lo) / (hi - lo)); };
+  let d = '', pts = '';
+  ints.forEach(function (it, i) {
+    const px = x(i), py = y(it.days);
+    d += (i ? ' L ' : 'M ') + px.toFixed(1) + ' ' + py.toFixed(1);
+    pts += '<circle cx="' + px.toFixed(1) + '" cy="' + py.toFixed(1) + '" r="3.2" fill="#7C80DC" stroke="#fff" stroke-width="2"/>';
+    pts += '<text x="' + px.toFixed(1) + '" y="' + (py - 8).toFixed(1) + '" text-anchor="middle" font-size="8.5" font-weight="800" fill="#3A3547">' + it.days + '</text>';
+    pts += '<text x="' + px.toFixed(1) + '" y="' + (H - 5) + '" text-anchor="middle" font-size="8" font-weight="700" fill="#9C96A8">' + mdShort(it.from) + '</text>';
+  });
+  const area = d + ' L ' + x(ints.length - 1).toFixed(1) + ' ' + (H - PB) + ' L ' + x(0).toFixed(1) + ' ' + (H - PB) + ' Z';
+  const ay = y(m.avg || vals[vals.length - 1]);
+  const avgLine = '<line x1="' + PL + '" y1="' + ay.toFixed(1) + '" x2="' + (W - PR) + '" y2="' + ay.toFixed(1) +
+    '" stroke="#CFC9DF" stroke-width="1" stroke-dasharray="3 3"/>';
+  return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="最近週期長度折線圖">' +
+    '<defs><linearGradient id="cyGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7C80DC" stop-opacity=".16"/><stop offset="100%" stop-color="#7C80DC" stop-opacity="0"/></linearGradient></defs>' +
+    '<path d="' + area + '" fill="url(#cyGrad)"/>' + avgLine +
+    '<path d="' + d + '" fill="none" stroke="#7C80DC" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' + pts + '</svg>';
+}
+
+function cyMoodChart(mm) {
+  const vals = [mm.period, mm.after, mm.before];
+  const has = vals.filter(function (v) { return v != null; });
+  if (has.length < 2) return '';
+  const W = 300, H = 88, PL = 34, PR = 34, PT = 20, PB = 22;
+  const x = function (i) { return PL + (W - PL - PR) * i / 2; };
+  const y = function (v) { return PT + (H - PT - PB) * (1 - (v - 1) / 4); };
+  let d = '', pts = '';
+  let prev = -2;
+  vals.forEach(function (v, i) {
+    if (v == null) return;
+    const px = x(i), py = y(v);
+    if (prev === i - 1) d += ' L ' + px.toFixed(1) + ' ' + py.toFixed(1);
+    else d += 'M ' + px.toFixed(1) + ' ' + py.toFixed(1);
+    prev = i;
+    pts += '<circle cx="' + px.toFixed(1) + '" cy="' + py.toFixed(1) + '" r="3.4" fill="#C4758F" stroke="#fff" stroke-width="2"/>';
+    pts += '<text x="' + px.toFixed(1) + '" y="' + (py - 9).toFixed(1) + '" text-anchor="middle" font-size="8.5" font-weight="800" fill="#3A3547">' + v.toFixed(1) + '</text>';
+  });
+  CYCLE_PHASES.forEach(function (p, i) {
+    pts += '<text x="' + x(i).toFixed(1) + '" y="' + (H - 4) + '" text-anchor="middle" font-size="8.5" font-weight="800" fill="#9C96A8">' + p.n + '</text>';
+  });
+  return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="心情與週期階段">' +
+    '<line x1="' + PL + '" y1="' + y(5) + '" x2="' + (W - PR) + '" y2="' + y(5) + '" stroke="#F2F0F7" stroke-width="1"/>' +
+    '<line x1="' + PL + '" y1="' + y(1) + '" x2="' + (W - PR) + '" y2="' + y(1) + '" stroke="#F2F0F7" stroke-width="1"/>' +
+    '<path d="' + d + '" fill="none" stroke="#C4758F" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' + pts + '</svg>';
+}
+
+function cyMoodInsight(mm) {
+  if (!mm.n) return '在記錄頁的「詳細情緒」選幾個，這裡就會出現經期前後的心情曲線。';
+  const arr = [
+    { k: 'period', v: mm.period, n: '經期中' },
+    { k: 'after', v: mm.after, n: '經期後' },
+    { k: 'before', v: mm.before, n: '經期前' }
+  ].filter(function (x) { return x.v != null; });
+  if (!arr.length) return '再記幾天的情緒，就能看出週期裡的心情起伏。';
+  arr.sort(function (a, b) { return b.v - a.v; });
+  if (arr.length === 1) return '目前只有<b>' + arr[0].n + '</b>有心情紀錄。再補幾天，就能比較前後差異。';
+  const hi = arr[0], lo = arr[arr.length - 1];
+  if (hi.v - lo.v < 0.2) {
+    return '這幾個階段的心情差不多（' + hi.v.toFixed(1) + '）。起伏不大，也是一種穩定。';
+  }
+  return '心情比較好的是<b>' + hi.n + '</b>（' + hi.v.toFixed(1) + '），最低是<b>' + lo.n + '</b>（' + lo.v.toFixed(1) + '）。只描述，不下結論。';
+}
+
+function cyGoRecord() {
+  switchTab('record');
+  setTimeout(function () {
+    const el = document.getElementById('cycleSec');
+    if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    if (window.lucide) lucide.createIcons();
+  }, 280);
+}
+
+async function s2RenderCycleCard() {
+  const host = document.getElementById('cycleBody');
+  if (!host) return;
+  const m = await cycleModel();
+  const today = todayStr();
+  if (!m.last) {
+    host.innerHTML = '<div class="cy-empty">還沒有經期紀錄。到「記錄」頁的經期卡按一下，記一次就會開始預估下次，也會長出週期長度的折線。</div>' +
+      '<button type="button" class="btn btn-soft btn-block btn-sm" style="margin-top:10px" onclick="cyGoRecord()">去記錄</button>';
+    return;
+  }
+  const st = cycleStatusOf(m, today);
+  const dayIdx = Math.max(1, Math.min(m.useLen, daysBetween(m.last.startDate, today) + 1));
+  const pct = Math.max(5, Math.min(100, Math.round(dayIdx / m.useLen * 100)));
+  const badge = st.kind === 'in' ? ('第 ' + st.day + ' 天') : (st.kind === 'next' ? ('還有 ' + st.remain + ' 天') : ('已過 ' + st.over + ' 天'));
+  const big = st.kind === 'late'
+    ? ('比預測晚 <b>' + st.over + '</b> 天')
+    : ('下次預計 <b>' + mdShort(m.nextStart) + '</b>');
+  let sub = '';
+  if (m.ints.length) {
+    sub = (st.kind === 'in' ? ('這次第 ' + st.day + ' 天 · ') : '') +
+      '上次 ' + mdShort(m.last.startDate) + ' · 最近 ' + m.ints.length + ' 次平均 ' + m.avgRounded + ' 天（±' + m.spread + '）';
+    if (m.last.predictedLength && m.last.predictedLength !== m.avgRounded) {
+      sub += ' · 以 ' + m.last.predictedLength + ' 天預測';
+    }
+  } else {
+    sub = (st.kind === 'in' ? ('這次第 ' + st.day + ' 天 · ') : '') +
+      '上次 ' + mdShort(m.last.startDate) + ' · 先以 ' + m.useLen + ' 天估算';
+  }
+
+  let stats = '';
+  if (m.ints.length) {
+    const vals = m.ints.map(function (x) { return x.days; });
+    stats = '<div class="cy-stats">' +
+      '<span>最短<b>' + Math.min.apply(null, vals) + '</b></span>' +
+      '<span>平均<b>' + m.avgRounded + '</b></span>' +
+      '<span>最長<b>' + Math.max.apply(null, vals) + '</b></span></div>';
+  }
+
+  let chart = '';
+  if (m.ints.length) {
+    chart = '<div class="cy-chart">' + cyLengthChart(m) + '</div>' + stats;
+  } else {
+    chart = '<div class="cy-empty">再記一次經期，這裡就會出現「週期長度」的折線——看得出來你的身體是穩定，還是在變動。</div>';
+  }
+
+  const mm = await cyMoodByPhase(m);
+  const mood = cyMoodChart(mm);
+  host.innerHTML =
+    '<div class="cy-top"><div class="cy-big">' + big + '</div><span class="cy-badge">' + badge + '</span></div>' +
+    '<div class="cy-sub">' + sub + '</div>' +
+    (st.kind === 'late' ? '<button type="button" class="cy-cta" onclick="cyGoRecord()">月經來了？記一下</button>' : '') +
+    '<div class="cy-track"><i class="fill" style="width:' + pct + '%"></i><span class="today" style="left:' + pct + '%"></span></div>' +
+    '<div class="cy-trk-lb"><span>' + mdShort(m.last.startDate) + '</span><span>' + mdShort(m.nextStart) + ' 預計</span></div>' +
+    chart +
+    '<div class="cy-mood"><div class="cy-mood-h">心情 × 週期階段<span>1–5 分</span></div>' +
+      (mood
+        ? (mood + '<div class="cy-empty" style="padding-top:6px">' + cyMoodInsight(mm) + '</div>')
+        : '<div class="cy-empty">心情紀錄還不夠。多記幾天，就會出現經期中／後／前的比較。</div>') + '</div>';
+}
+
+async function s2RenderDrinkReport(logs) {
+  const host = document.getElementById('drinkReportBody');
+  if (!host) return;
+  const st = s2DrinkStats(logs);
+  const total = st.cups || 1;
+
+  let h = '';
+  if (st.cups) {
+    h += '<div class="rb">' + DRINK_KEYS.map(function (k) {
+      return '<i style="width:' + (st.by[k] / total * 100) + '%;background:' + DRINK_TYPES[k].c + '" title="' + DRINK_TYPES[k].name + '"></i>';
+    }).join('') + '</div>';
+    h += '<div class="rl">' + DRINK_KEYS.filter(function (k) { return st.by[k] > 0; }).map(function (k) {
+      return '<span class="ri"><em style="background:' + DRINK_TYPES[k].c + '"></em>' + DRINK_TYPES[k].name +
+        ' <b>' + st.by[k] + '</b></span>';
+    }).join('') + '</div>';
+  }
+
+  /* 規則優先序：沒紀錄 → 只喝飲料 → 下午咖啡 → 純水達標 → 一般 */
+  const leaves = !st.cups ? 1 : (st.pureDays === 0 ? 0 : Math.min(3, st.pureDays));
+  let msg, wilt = false;
+  if (!st.cups) {
+    msg = '這週還沒有飲品紀錄。到記錄頁點 <b>＋</b>，一杯也算。';
+  } else if (st.lateCaf >= 2) {
+    msg = '這週 ' + st.cups + ' 杯裡有 <b>' + st.caf + ' 杯含咖啡因</b>，其中 <b>' + st.lateCaf +
+      ' 杯</b>是下午 3 點後記的。想早點睡，3 點後換成水或無咖啡因的茶。';
+  } else if (st.onlyDays >= 2) {
+    msg = '有 <b>' + st.onlyDays + ' 天</b>只喝了飲料，沒有純水。小植物有點垂——今天補一杯白開水就好。';
+    wilt = true;
+  } else if (st.pureDays >= 4) {
+    msg = '純水 <b>' + st.pureDays + ' 天</b>都有喝到，小植物長出新葉了。這週的節奏很穩。';
+  } else if (st.onlyDays === 1) {
+    msg = '有 <b>1 天</b>只喝了飲料，當天沒喝到純水。一天不算什麼，小植物提醒你一下。';
+    wilt = true;
+  } else {
+    msg = '這週 ' + st.cups + ' 杯，純水佔 <b>' + Math.round(st.pure / total * 100) + '%</b>。再多一兩杯純水，小植物會長得快一點。';
+  }
+
+  h += '<div class="drk-plantrow">' + s2PlantSVG(leaves, wilt) +
+    '<div class="txt">' + (wilt ? '' : '<span class="who">管家</span>') + msg + '</div></div>';
+
+  host.innerHTML = h;
+  if (window.lucide) lucide.createIcons(host);
 }
 
 /* 首頁快速記錄：與記錄頁共用同一筆 dailyLogs，自動同步 */
@@ -5403,13 +6966,15 @@ async function renderQuick() {
     $('#qSleepV').textContent = sm != null ? slDurShort(sm) : '—';
   }
   if ($('#qWaterV')) $('#qWaterV').textContent = (log && log.waterCups != null) ? log.waterCups : 0;
-  if ($('#qBowelV')) $('#qBowelV').textContent = (log && log.bowelCount != null) ? log.bowelCount : 0;
+  if ($('#qBowelV')) {
+    const bs = bowelStateOf(log);
+    $('#qBowelV').textContent = bs.logged ? (bs.count || '沒') : '—';
+  }
 }
-async function quickAdd(field, delta) {
-  let log = await ldb.dailyLogs.get(todayStr());
-  const cur = field === 'water' ? (log && log.waterCups || 0) : (log && log.bowelCount || 0);
-  await setDailyCounter(field, cur + delta, todayStr());
-  toast(field === 'water' ? '喝水 +1 杯' : '排便 +1');
+async function quickAddBowel(delta) {
+  const log = await ldb.dailyLogs.get(todayStr());
+  await setBowel(Math.max(0, ((log && log.bowelCount) || 0) + delta), todayStr());
+  toast(delta > 0 ? '排便 +1' : '已減少');
 }
 
 async function saveLog() {
@@ -5422,7 +6987,7 @@ async function saveLog() {
   const sleepEnd = sl.end || (prevLog && prevLog.sleepEnd) || '';
   const sleepHours = sl.hours != null ? sl.hours : calcSleepHours(sleepStart, sleepEnd);
   const pressure = meterValue($('#logPressure'));
-  const exercise = $('#logExercise').dataset.v === '1';
+  const exercise = !!state.workout;   /* P44：運動改由類型化資料推導 */
   const stateTags = Array.from(state.selecting.state);
   const activityTags = Array.from(state.selecting.activity);
   const detailMoods = Array.from(state.detailMoods || []);
@@ -5443,7 +7008,10 @@ async function saveLog() {
     pressure, exercise, energyMode,
     /* 只有「今天」才把目前能量環寫進當日；補記保留原值 */
     energy: isToday ? state.energy : (prevLog ? prevLog.energy : undefined),
-    bowelCount: state.bowelCount, waterCups: state.waterCups,
+    bowelCount: state.bowelCount, bowelLogged: !!state.bowelLogged, bowelType: state.bowelType || null, waterCups: state.waterCups,
+    drinks: state.drinks || [], workout: state.workout || null,   /* P44 */
+    periodFlow: prevLog ? (prevLog.periodFlow || null) : null,   /* P46：由經期抽屜獨立寫入，儲存記錄時不可清掉 */
+    periodSymptoms: prevLog && Array.isArray(prevLog.periodSymptoms) ? prevLog.periodSymptoms : undefined,
     stateTags, activityTags, mood: state.mood || null, updatedAt: now,
     detailMoods, vitals, focus: state.focus || 4,
     pressure: vitals.stress >= 7 ? '高' : (vitals.stress >= 4 ? '中' : '低'),
@@ -5620,7 +7188,7 @@ async function s2RenderWheel() {
       '<span class="wl prev"><i></i>上週</span>' +
     '</div>' +
     '<div class="wheel-wrap"><canvas id="wheelChart"></canvas></div>' +
-    '<div id="wheelInsight"></div>' +
+    '<div class="wheel-insight" id="wheelInsight"></div>' +
     '<div class="wheel-detail" id="wheelDetail"></div>' +
     '<div class="wheel-tip">點下面的維度，看分數是怎麼算出來的</div>' +
     '<div class="wheel-chips" id="wheelChips" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px">' +
@@ -5705,53 +7273,128 @@ function s2WheelRenderDetail() {
 }
 
 /* ---------------- 復盤頁（本週數據 + 可收起日曆） ---------------- */
-let calState = { year: null, month: null, selected: null, open: false };  /* 未點日期前不顯示詳情 */
+let calState = { year: null, month: null, selected: null, open: false };  /* P47：日曆仍在最上方，但預設收合，先看這週 */
+
+function s2WeekMetrics(logs) {
+  const list = logs || [];
+  const sl = list.filter(function (l) { return slLogMin(l) != null; });
+  const fo = list.filter(function (l) { return l.focus != null; });
+  return {
+    days: list.length,
+    sleep: sl.length ? sl.reduce(function (a, l) { return a + slLogMin(l); }, 0) / sl.length / 60 : null,
+    focus: fo.length ? fo.reduce(function (a, l) { return a + l.focus; }, 0) / fo.length : null,
+    ex: list.filter(function (l) { return !!logWorkout(l); }).length,
+    cups: list.reduce(function (a, l) { return a + logDrinks(l).length; }, 0)
+  };
+}
+
+/* P46：本週 vs 上週，四項量化指標。不比任務完成數，只比身體與節奏。 */
+function s2RenderWeekCard(cur, prev, monday, sunday) {
+  const host = document.getElementById('reviewStats');
+  if (!host) return;
+  const defs = [
+    { k: '睡眠', icon: 'moon', v: cur.sleep, p: prev.sleep, unit: 'h', fix: 1, step: 0.1, label: function (v) { return v.toFixed(1); } },
+    { k: '專注', icon: 'target', v: cur.focus, p: prev.focus, unit: '/5', fix: 1, step: 0.1, label: function (v) { return v.toFixed(1); } },
+    { k: '運動', icon: 'activity', v: cur.ex, p: prev.ex, unit: '次', fix: 0, step: 1, label: function (v) { return String(v); } },
+    { k: '喝水', icon: 'droplets', v: cur.cups, p: prev.cups, unit: '杯', fix: 0, step: 1, label: function (v) { return String(v); } }
+  ];
+  let tiles = '';
+  defs.forEach(function (d) {
+    let delta = '';
+    if (d.v != null && d.p != null) {
+      const diff = d.v - d.p;
+      const shown = Math.abs(diff) >= d.step ? Math.abs(diff).toFixed(d.fix) : '0';
+      if (shown === '0') delta = '<span class="wm-d">＝</span>';
+      else delta = '<span class="wm-d ' + (diff > 0 ? 'up' : 'down') + '">' + (diff > 0 ? '↑' : '↓') + shown + '</span>';
+    }
+    const val = d.v == null ? '—' : d.label(d.v);
+    tiles += '<div class="wm"><span class="wm-k"><i data-lucide="' + d.icon + '"></i>' + d.k + '</span>' +
+      delta + '<div class="wm-v">' + val + (d.v != null && d.unit ? '<small>' + d.unit + '</small>' : '') + '</div></div>';
+  });
+
+  const DOW = ['一', '二', '三', '四', '五', '六', '日'];
+  const today = todayStr();
+  let strip = '';
+  for (let i = 0; i < 7; i++) {
+    const ds = dateStr(addDays(monday, i));
+    const on = !!(ds <= today && cur.daySet && cur.daySet[ds]);
+    strip += '<div class="d' + (on ? ' on' : '') + (ds === today ? ' today' : '') + '"><span>' + DOW[i] + '</span><i></i></div>';
+  }
+
+  let foot = '這週記了 <b>' + cur.days + '/7</b> 天';
+  if (prev.days != null) {
+    const dd = cur.days - prev.days;
+    if (dd > 0) foot += '，比上週多 ' + dd + ' 天';
+    else if (dd < 0) foot += '，比上週少 ' + Math.abs(dd) + ' 天';
+    else foot += '，和上週一樣';
+  }
+
+  host.innerHTML = '<div class="rv-card" id="weekCard">' +
+    '<div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="activity"></i></span><b>本週摘要</b>' +
+    '<span class="rv-right">' + mdShort(dateStr(monday)) + ' – ' + mdShort(dateStr(sunday)) + '</span></div>' +
+    '<div class="rv-sub" style="margin:7px 0 0">睡眠、專注、運動、喝水，跟自己的上週比。</div>' +
+    '<div class="wm-grid" style="margin-top:10px">' + tiles + '</div>' +
+    '<div class="wk7">' + strip + '</div>' +
+    '<div class="wk-foot">' + foot + '</div></div>';
+  if (window.lucide) lucide.createIcons(host);
+}
 
 async function renderReview() {
   const { monday, sunday } = weekRange();
-  const rangeTxt = mdStr(monday) + ' - ' + mdStr(sunday);
   const mStr = dateStr(monday), sStr = dateStr(sunday);
   const logs = await ldb.dailyLogs.where('date').between(mStr, sStr, true, true).toArray();
   const records = await ldb.records.where('ts').between(monday.getTime(), sunday.getTime() + 86399999, true, true).toArray();
-  const done = records.filter(r => r.completed).length;
-  const focusLogs = logs.filter(l => l.focus != null);
-  const focus = focusLogs.length ? (focusLogs.reduce((s, l) => s + l.focus, 0) / focusLogs.length) : null;
-  $('#reviewStats').innerHTML =
-    '<div class="wstat">' +
-    '<div class="b' + (logs.length ? ' on' : '') + '"><div class="num">' + logs.length + '</div><div class="lb">已記錄（天）</div></div>' +
-    '<div class="b"><div class="num">' + records.length + '</div><div class="lb">開始（次）</div></div>' +
-    '<div class="b"><div class="num">' + done + '</div><div class="lb">完成（次）</div></div>' +
-    '</div>';
+
+  /* 上週（週一到週日） */
+  const pm = addDays(monday, -7), ps = addDays(sunday, -7);
+  const prevLogs = await ldb.dailyLogs.where('date').between(dateStr(pm), dateStr(ps), true, true).toArray();
+
+  const cur = s2WeekMetrics(logs);
+  cur.daySet = {};
+  logs.forEach(function (l) { cur.daySet[l.date] = true; });
+  s2RenderWeekCard(cur, s2WeekMetrics(prevLogs), monday, sunday);
+
   $('#reviewBody').innerHTML =
-    '<div class="deepcard"><span class="l">本週小結<br>' + rangeTxt + '</span><span class="r">完成 ' + done + ' · 專注 <i>' + (focus != null ? focus.toFixed(1) + ' /5' : '—') + '</i></span></div>' +
-    '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="trending-up"></i></span><b>本週高光與低谷</b></div>' +
-      '<div class="rv-sub">跟本週自己的平均比，不是跟別人比</div><div id="s2Highlight"></div></div>' +
+    '<div class="rv-card" id="cycleCard"><div class="rv-h"><span class="ic-circle c-pink"><i data-lucide="droplet"></i></span><b>經期</b>' +
+      '<span class="rv-right">週期與心情</span></div><div id="cycleBody"></div></div>' +
     '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-butter"><i data-lucide="moon"></i></span><b>睡眠作息</b>' +
       '<div class="slp-nav"><button onclick="s2SleepShift(-1)" title="上個月">‹</button><span id="slpTitle">—</span>' +
       '<button id="slpNextBtn" onclick="s2SleepShift(1)" title="下個月">›</button></div></div>' +
       '<div class="rv-sub">一根長條＝當天幾點睡到幾點起，越長睡越久；條寬固定不撐滿</div>' +
       '<div class="slp-wrap"><canvas id="slpChart"></canvas><div class="slp-empty" id="slpEmpty" style="display:none"></div></div>' +
       '<div class="slp-cmp" id="slpCmp"></div></div>' +
+    '<div class="rv-card" id="wkReport"><div class="rv-h"><span class="ic-circle c-sage-l"><i data-lucide="footprints"></i></span><b>運動</b>' +
+      '<span class="rv-right">近 7 天</span></div>' +
+      '<div class="rv-sub">動了哪幾天、動了什麼。散步 10 分鐘也算。</div><div id="wkReportBody"></div></div>' +
+    '<div class="rv-card drk-report" id="drinkReport"><div class="rv-h"><span class="ic-circle c-mint"><i data-lucide="droplets"></i></span><b>飲品與小植物</b>' +
+      '<span class="rv-right">這週喝了什麼</span></div>' +
+      '<div class="rv-sub">只描述，不評價。小植物的葉子，是這週的純水天數。</div><div id="drinkReportBody"></div></div>' +
+    '<div class="rv-card" id="bowelReportCard"><div class="rv-h"><span class="ic-circle c-butter"><i data-lucide="check"></i></span><b>腸道節奏</b>' +
+      '<span class="rv-right">近 7 天</span></div>' +
+      '<div class="rv-sub">只記有沒有、順不順。便秘或腹瀉，都值得被看見。</div><div id="bowelReportBody"></div></div>' +
+    '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="trending-up"></i></span><b>本週高光與低谷</b></div>' +
+      '<div class="rv-sub">跟本週自己的平均比，不是跟別人比</div><div id="s2Highlight"></div></div>' +
     '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-mint"><i data-lucide="tag"></i></span><b>最常做的事</b></div>' +
       '<div id="s2Tags"></div></div>';
+
   renderCalendar();
   Promise.resolve(s2RenderWheel()).catch(function (e) { console.warn('[s2] wheel', e); });
   Promise.resolve(s2RenderMoodMap(logs)).catch(function (e) { console.warn('[s2] moodmap', e); });
+  Promise.resolve(s2RenderCycleCard()).catch(function (e) { console.warn('[s2] cycle', e); });
+  Promise.resolve(s2RenderDrinkReport(logs)).catch(function (e) { console.warn('[s2] drinkReport', e); });
+  Promise.resolve(s2RenderWorkoutReport()).catch(function (e) { console.warn('[s2] wkReport', e); });
+  Promise.resolve(s2RenderBowelReport()).catch(function (e) { console.warn('[s2] bowelReport', e); });
   Promise.resolve(s2RenderReviewExtras(logs, records)).catch(function (e) { console.warn('[s2] review extras', e); });
 }
 
 function toggleCalendar() {
   calState.open = !calState.open;
-  const body = $('#calBody');
-  const chev = $('#calChev');
-  if (calState.open) {
-    body.style.display = 'block';
-    requestAnimationFrame(() => { body.style.maxHeight = body.scrollHeight + 'px'; });
-    chev.textContent = '▴';
-  } else {
-    body.style.maxHeight = '0px';
-    chev.textContent = '▾';
-    setTimeout(() => { if (!calState.open) body.style.display = 'none'; }, 260);
+  const card = document.getElementById('calCard');
+  const btn = document.getElementById('calToggle');
+  if (card) card.classList.toggle('closed', !calState.open);
+  if (btn) {
+    btn.setAttribute('aria-expanded', calState.open ? 'true' : 'false');
+    btn.setAttribute('aria-label', calState.open ? '收合日曆' : '展開日曆');
   }
   s2SyncCalDetail();
 }
@@ -5779,6 +7422,7 @@ async function renderCalendar() {
   const mEnd = dateStr(new Date(y, m, daysInMonth));
   const logs = await ldb.dailyLogs.where('date').between(mStart, mEnd, true, true).toArray();
   const recorded = new Set(logs.map(l => l.date));
+  const periodSet = new Set(logs.filter(l => l.periodFlow).map(l => l.date));
   let cells = '';
   for (let i = 0; i < startDow; i++) cells += '<div class="cal-cell empty"></div>';
   for (let d = 1; d <= daysInMonth; d++) {
@@ -5786,7 +7430,7 @@ async function renderCalendar() {
     const isToday = ds === todayStr();
     const isSel = ds === calState.selected;
     const hasLog = recorded.has(ds);
-    cells += '<div class="cal-cell' + (isToday ? ' today' : '') + (isSel ? ' sel' : '') + '" data-date="' + ds + '">' + d + (hasLog ? '<span class="pd"></span>' : '') + '</div>';
+    cells += '<div class="cal-cell' + (isToday ? ' today' : '') + (isSel ? ' sel' : '') + (periodSet.has(ds) ? ' period' : '') + '" data-date="' + ds + '">' + d + (hasLog ? '<span class="pd"></span>' : '') + '</div>';
   }
   $('#calGrid').innerHTML = cells;
   s2SyncCalDetail();
@@ -5808,6 +7452,8 @@ async function renderCalDetail() {
     el.innerHTML = '<div class="empty" style="padding:14px;">當天尚無記錄</div>' + editBtn;
     return;
   }
+  const cm = await cycleModel();
+  const cst = cycleStatusOf(cm, ds);
   let energyVal = (log && log.energy != null) ? log.energy : null;
   if (energyVal == null) {
     try {
@@ -5823,9 +7469,38 @@ async function renderCalDetail() {
     : (function(){ var k=normMood(log&&log.mood); return k ? MOODS[k].name : '未記錄'; })()));
   rows.push(dk('c-butter', 'zap', '能量', (energyVal != null ? energyVal + ' / 10' : '未記錄') + ' · ' + modeStr));
   rows.push(dk('c-night', 'moon', '睡眠', slLogMin(log) != null ? slDur(slLogMin(log)) + (log.sleepQuality ? ' · ' + SLEEP_Q[Math.max(0, Math.min(4, log.sleepQuality - 1))].name : '') : '未記錄'));
-  rows.push(dk('c-green', 'activity', '運動', log ? (log.exercise ? '有' : '無') : '未記錄'));
-  rows.push(dk('c-butter', 'check', '排便', log && log.bowelCount != null ? log.bowelCount + ' 次' : '未記錄'));
-  rows.push(dk('c-mint', 'droplets', '喝水', log && log.waterCups != null ? log.waterCups + ' 杯（' + (log.waterCups * 400) + 'mL）' : '未記錄'));
+  rows.push(dk('c-green', 'activity', '運動', (function () {
+    const w = logWorkout(log);
+    if (!w) return log ? '無' : '未記錄';
+    const t = WORKOUT_TYPES[w.type] || WORKOUT_TYPES.other;
+    return t.name + (w.min ? ' · ' + w.min + ' 分鐘' : '');
+  })()));
+  rows.push(dk('c-butter', 'check', '排便', (function () {
+    const b = bowelStateOf(log);
+    if (!b.logged) return '未記錄';
+    if (!b.count) return '沒排便';
+    return (b.count >= 3 ? '3+ 次' : b.count + ' 次') + (b.type ? ' · ' + BOWEL_TX[b.type].name : '');
+  })()));
+  rows.push(dk('c-pink', 'droplet', '經期', (function () {
+    const flow = log && log.periodFlow;
+    const dn = cyDayNumber(cm, ds);
+    const sy = cySymptomNames(log && log.periodSymptoms).join('、');
+    if (flow) {
+      return (dn ? '第 ' + dn + ' 天 · ' : '') + CYCLE_FLOW[flow].n + '量' + (sy ? ' · ' + sy : '');
+    }
+    if (dn) return '第 ' + dn + ' 天 · 未記流量';
+    return '—';
+  })()));
+  rows.push(dk('c-mint', 'droplets', '飲品', (function () {
+    const list = logDrinks(log);
+    if (!list.length) return log ? '未喝' : '未記錄';
+    const parts = [];
+    DRINK_KEYS.forEach(function (k) {
+      const c = list.filter(function (d) { return d.t === k; }).length;
+      if (c) parts.push(DRINK_TYPES[k].name + ' ' + c);
+    });
+    return list.length + ' 杯（' + list.reduce(function (a, d) { return a + (d.ml || 400); }, 0) + 'mL）· ' + parts.join('、');
+  })()));
   rows.push(dk('c-violet', 'heart-pulse', '狀態', log && log.stateTags && log.stateTags.length ? log.stateTags.join('、') : '—'));
   rows.push(dk('c-sky', 'party-popper', '活動', log && log.activityTags && log.activityTags.length ? log.activityTags.join('、') : '—'));
   if (recs.length) rows.push(dk('c-green', 'check-circle-2', '完成', recs.length + ' 次（' + recs.map(r => r.cardName).join('、') + '）'));
@@ -5854,10 +7529,14 @@ async function openSettings() {
   closeDrawer();
   const month = await getSetting('themeMonth', '');
   const week = await getSetting('themeWeek', '');
-  const cyc = await getLatestCycle();
+  const cm = await cycleModel();
+  const cyc = cm.last;
   const start = cyc ? cyc.startDate : '';
-  const end = cyc ? cyc.endDate : '';
-  const cycleLen = cyc ? (cyc.cycleLength || 28) : 28;
+  const end = cyc && cyc.endDate ? cyc.endDate : '';
+  const cycleLen = (cyc && cyc.predictedLength) ? cyc.predictedLength : (cm.avgRounded || (cyc && cyc.cycleLength) || 28);
+  const cyHint = cm.ints.length
+    ? ('最近 ' + cm.ints.length + ' 次平均 ' + cm.avgRounded + ' 天 · 經期約 ' + cm.avgPeriod + ' 天')
+    : ('還沒有足夠歷史，先用 ' + cycleLen + ' 天預估');
   const hUrl = await getSetting('healthSyncUrl', '');
   const hOn = await getSetting('healthSyncOn', false);
   openModal(
@@ -5873,10 +7552,12 @@ async function openSettings() {
 
     '<div class="set-sec">' +
       '<div class="section-label"><i data-lucide="droplet"></i> 經期設定</div>' +
-      '<div class="field"><label>上次經期開始日</label><input type="date" class="input" id="sStart" value="' + esc(start) + '"></div>' +
-      '<div class="field"><label>上次經期結束日</label><input type="date" class="input" id="sEnd" value="' + esc(end) + '"></div>' +
-      '<div class="field"><label>平均週期（天） <span id="sCycleVal" style="color:var(--primary);font-weight:700;">' + cycleLen + '</span></label>' +
+      '<div class="imp-hint">每次新經期只要改「開始日」，會自動多一筆並重算平均；改最近 7 天內的日期則視為修正。</div>' +
+      '<div class="field"><label>最近一次經期開始日</label><input type="date" class="input" id="sStart" value="' + esc(start) + '"></div>' +
+      '<div class="field"><label>最近一次經期結束日</label><input type="date" class="input" id="sEnd" value="' + esc(end) + '"></div>' +
+      '<div class="field"><label>預測用平均週期（天） <span id="sCycleVal" style="color:var(--primary);font-weight:700;">' + cycleLen + '</span></label>' +
       '<input type="range" id="sCycle" min="15" max="60" step="1" value="' + cycleLen + '" oninput="document.getElementById(\'sCycleVal\').textContent=this.value"></div>' +
+      '<div class="cy-set-hint" id="sCycleHint">' + esc(cyHint) + '。拖動可手動指定，下次記錄新經期後會重新估算。</div>' +
       '<button class="btn btn-primary btn-block btn-sm" onclick="savePeriod()">儲存經期</button>' +
     '</div>' +
 
@@ -6029,15 +7710,42 @@ async function savePeriod() {
   const start = $('#sStart').value;
   const end = $('#sEnd').value;
   const cycleLength = parseInt($('#sCycle').value, 10) || 28;
-  if (!start) { toast('請填上次經期開始日'); return; }
-  if (!end) { toast('請填上次經期結束日'); return; }
+  if (!start) { toast('請填最近一次經期開始日'); return; }
+  if (!end) { toast('請填最近一次經期結束日'); return; }
   if (end < start) { toast('結束日必須大於或等於開始日'); return; }
-  const latest = await getLatestCycle();
-  if (latest) await ldb.menstrualCycles.update(latest.id, { startDate: start, endDate: end, cycleLength, updatedAt: Date.now() });
-  else await ldb.menstrualCycles.add({ startDate: start, endDate: end, cycleLength, updatedAt: Date.now() });
+
+  const before = await getCycles();
+  let target = before.find(function (c) { return c.startDate === start; });
+  if (!target && before.length) {
+    const lastRow = before[before.length - 1];
+    if (Math.abs(daysBetween(lastRow.startDate, start)) <= 7) target = lastRow;
+  }
+  if (target) {
+    await ldb.menstrualCycles.update(target.id, {
+      startDate: start, endDate: end, endEstimated: false, updatedAt: Date.now()
+    });
+  } else {
+    await ldb.menstrualCycles.add({
+      startDate: start, endDate: end, endEstimated: false,
+      createdAt: Date.now(), updatedAt: Date.now()
+    });
+  }
+  await cyRecompute();
+
+  const after = await getCycles();
+  const m = cycleStatsOf(after);
+  if (m.last) {
+    if (m.avgRounded != null && cycleLength === m.avgRounded) {
+      if (m.last.predictedLength) await ldb.menstrualCycles.update(m.last.id, { predictedLength: null });
+    } else {
+      await ldb.menstrualCycles.update(m.last.id, { predictedLength: cycleLength });
+    }
+  }
   CloudSync.notifyLocalChange('menstrualCycles', null);
   closeModal();
+  await renderCycle();
   renderEnergyMeta();
+  if (state.tab === 'review') renderReview();
   toast('經期設定已儲存');
 }
 
@@ -6253,9 +7961,16 @@ async function exportCSV() {
   const records = await ldb.records.toArray();
   const lines = [];
   lines.push('【每日記錄】');
-  lines.push('日期,一句話記錄,睡眠(小時),工作壓力,運動,排便次數,喝水量(杯),能量流向,狀態標籤,活動標籤,詳細情緒,專注(1-5),心情');
+  lines.push('日期,一句話記錄,睡眠(小時),工作壓力,運動,排便次數,排便質地,喝水量(杯),能量流向,狀態標籤,活動標籤,詳細情緒,專注(1-5),心情,飲品明細,經期');
   logs.sort((a, b) => a.date.localeCompare(b.date)).forEach(l => {
-    lines.push([l.date, csvCell(l.note || ''), l.sleepHours != null ? l.sleepHours : '', l.pressure || '', l.exercise ? '有' : '無', l.bowelCount != null ? l.bowelCount : '', l.waterCups != null ? l.waterCups : '', l.energyMode || '', (l.stateTags || []).join('、'), (l.activityTags || []).join('、'), (l.detailMoods || []).join('、'), l.focus != null ? l.focus : '', (function(){var k=normMood(l.mood);return k?MOODS[k].name:'';})()].join(','));
+    lines.push([l.date, csvCell(l.note || ''), l.sleepHours != null ? l.sleepHours : '', l.pressure || '',
+      (function () { const w = logWorkout(l); if (!w) return l.exercise ? '有' : '無';
+        const t = WORKOUT_TYPES[w.type] || WORKOUT_TYPES.other; return t.name + (w.min ? ' ' + w.min + '分' : ''); })(),
+      l.bowelCount != null ? l.bowelCount : '', (l.bowelType && BOWEL_TX[l.bowelType] ? BOWEL_TX[l.bowelType].name : ''), l.waterCups != null ? l.waterCups : '', l.energyMode || '',
+      (l.stateTags || []).join('、'), (l.activityTags || []).join('、'), (l.detailMoods || []).join('、'),
+      l.focus != null ? l.focus : '', (function(){var k=normMood(l.mood);return k?MOODS[k].name:'';})(),
+      logDrinks(l).map(function (d) { return DRINK_TYPES[d.t].name; }).join('、'),
+      (l.periodFlow && CYCLE_FLOW[l.periodFlow] ? (CYCLE_FLOW[l.periodFlow].n + '量' + (cySymptomNames(l.periodSymptoms).length ? '·' + cySymptomNames(l.periodSymptoms).join('、') : '')) : '')].join(','));
   });
   lines.push('');
   lines.push('【完成記錄】');
@@ -6806,29 +8521,112 @@ function bindEvents() {
     if (idx < 0) return;
     setMeter($('#logPressure'), PRESSURE_LEVELS[idx]);
   });
-  $('#logExercise').addEventListener('click', () => {
-    setTgl($('#logExercise'), $('#logExercise').dataset.v !== '1');
+  $('#wkQuick').addEventListener('click', e => {
+    const b = e.target.closest('.wq'); if (!b) return;
+    openWorkoutSheet(b.dataset.k);
+  });
+  $('#wkToday').addEventListener('click', e => {
+    if (e.target.closest('#wkAdjust')) openWorkoutSheet();
+  });
+  $('#wkClose').addEventListener('click', closeWorkoutSheet);
+  $('#wkBackdrop').addEventListener('click', closeWorkoutSheet);
+  $('#wkGrid').addEventListener('click', e => {
+    const b = e.target.closest('.wk-t');
+    if (!b) return;
+    _wkSel = (_wkSel === b.dataset.k) ? null : b.dataset.k;
+    renderWkSheet();
+  });
+  $('#wkMinus').addEventListener('click', () => { _wkMin = Math.max(5, _wkMin - 5); renderWkSheet(); });
+  $('#wkPlus').addEventListener('click', () => { _wkMin = Math.min(300, _wkMin + 5); renderWkSheet(); });
+  $('#wkSaveBtn').addEventListener('click', async () => {
+    if (!_wkSel) return;
+    await saveWorkout(state.recordDate || todayStr(), { type: _wkSel, min: _wkMin });
+    closeWorkoutSheet();
+    toast(WORKOUT_TYPES[_wkSel].name + ' ' + _wkMin + ' 分鐘已記錄');
+  });
+  $('#wkClearBtn').addEventListener('click', async () => {
+    await saveWorkout(state.recordDate || todayStr(), null);
+    closeWorkoutSheet();
+    toast('已清除今日運動');
   });
   $('#saveLogBtn').addEventListener('click', saveLog);
 
   initSleepUI();
+  initCycleUI();
 
   $('#bowelSeg').addEventListener('click', async e => {
-    const b = e.target.closest('.sbtn');
+    const b = e.target.closest('button[data-v]');
     if (!b) return;
-    state.bowelCount = Math.max(0, (state.bowelCount || 0) + parseInt(b.dataset.step, 10));
-    await setDailyCounter('bowel', state.bowelCount, state.recordDate || todayStr());
-    renderBowel();
+    const v = parseInt(b.dataset.v, 10);
+    const cur = state.bowelLogged ? (state.bowelCount || 0) : -1;
+    if (cur === v) { await clearBowel(state.recordDate || todayStr()); toast('已清除排便紀錄'); return; }
+    await setBowel(v, state.recordDate || todayStr());
+  });
+  $('#bowelTexture').addEventListener('click', async e => {
+    const b = e.target.closest('.btx-b'); if (!b) return;
+    await setBowelType(b.dataset.tx, state.recordDate || todayStr());
+  });
+  ['bowelStrip', 'wkStrip'].forEach(function (id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', function (e) {
+      const c = e.target.closest('.tk-cell');
+      if (c && c.dataset.tip) toast(c.dataset.tip);
+    });
   });
 
-  $('#waterCups').addEventListener('click', async e => {
-    const c = e.target.closest('.cup');
-    if (!c) return;
-    await cupClick(parseInt(c.dataset.i, 10));
+  /* 飲品：點杯子＝移除、長按＝改種類、點＋＝開氣泡選單 */
+  const drinkRow = $('#drinkRow');
+  let drinkPressT = null, drinkPressCup = null;
+
+  drinkRow.addEventListener('pointerdown', e => {
+    const cup = e.target.closest('.drk-cup');
+    if (!cup) return;
+    drinkPressCup = cup;
+    clearTimeout(drinkPressT);
+    drinkPressT = setTimeout(() => {
+      if (!drinkPressCup) return;
+      drinkPressCup._skip = true;
+      drinkPressCup.classList.add('press');
+      openDrinkPop(drinkPressCup, 'replace', parseInt(drinkPressCup.dataset.i, 10));
+    }, 460);
+  });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(ev => {
+    drinkRow.addEventListener(ev, () => {
+      clearTimeout(drinkPressT);
+      if (drinkPressCup) drinkPressCup.classList.remove('press');
+      drinkPressCup = null;
+    });
   });
 
-  $('#qWater').addEventListener('click', () => quickAdd('water', 1));
-  $('#qBowel').addEventListener('click', () => quickAdd('bowel', 1));
+  drinkRow.addEventListener('click', e => {
+    const add = e.target.closest('#drinkAdd');
+    if (add) {
+      const on = !document.getElementById('drinkPop') || !document.getElementById('drinkPop').classList.contains('on');
+      if (on) { add.classList.add('on'); openDrinkPop(add, 'add'); } else closeDrinkPop();
+      return;
+    }
+    const cup = e.target.closest('.drk-cup');
+    if (!cup) return;
+    if (cup._skip) { cup._skip = false; return; }
+    removeDrinkAt(parseInt(cup.dataset.i, 10));
+  });
+
+  document.addEventListener('click', e => {
+    const pop = document.getElementById('drinkPop');
+    if (!pop || !pop.classList.contains('on')) return;
+    if (pop.contains(e.target)) return;
+    if (_drinkPopAnchor && _drinkPopAnchor.contains(e.target)) return;
+    closeDrinkPop();
+  });
+  window.addEventListener('scroll', () => closeDrinkPop(), true);
+  window.addEventListener('resize', () => closeDrinkPop());
+
+  $('#qWater').addEventListener('click', e => {
+    e.stopPropagation();
+    openDrinkPop($('#qWater'), 'add');
+  });
+  $('#qBowel').addEventListener('click', () => quickAddBowel(1));
   $('#qSleep').addEventListener('click', () => openSleepModal(todayStr()));
 
   /* 記錄頁：日期切換（補記） */
@@ -7759,7 +9557,7 @@ async function s2RenderMoodMap(logs) {
   var items = QUAD_ORDER.filter(function (q) { return qcnt[q] > 0; })
     .map(function (q) { return { k:q, v:qcnt[q] }; })
     .sort(function (a, b) { return b.v - a.v; });
-  var html = '<div class="moodtree">' + s2TreemapNodes(items, true) + '</div>';
+  var html = '<div class="moodtree' + (items.length === 1 ? ' one' : '') + '">' + s2TreemapNodes(items, true) + '</div>';
   var topQ = items[0].k;
   var lowish = qcnt.low + qcnt.anxious;
   var topName = DETAIL_EMOTIONS[topQ] ? DETAIL_EMOTIONS[topQ].name : QUADRANTS[topQ].name;
