@@ -57,7 +57,8 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 /* ---------- 總體佈局 ---------- */
 #app { position:fixed; inset:0; display:flex; flex-direction:column; background:var(--bg); overflow:hidden; }
 .page { display:none; flex:1; min-height:0; flex-direction:column; }
-.page.active { display:flex; }
+.page.active { display:flex; animation:pgIn .2s ease-out both; }
+@keyframes pgIn { from { opacity:0; } to { opacity:1; } }
 .scroll { flex:1; overflow-y:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
 .scroll::-webkit-scrollbar { display:none; }
 
@@ -389,25 +390,25 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .vb-track.stress i.on{background:#D98A94;}
 .vb-track.focus i.on{background:#6FB6C4;}
 .vb-val{width:26px;text-align:right;font-size:11px;font-weight:900;color:var(--ink);}
-@media (prefers-reduced-motion:reduce){.rec-acc .acc-bd,.rec-acc .acc-chev,.act-cell,.mpill,.vitals-knob,.focus-cell,.focus-badge{transition:none !important;}}
-/* 復盤：心情地圖 */
-.moodtree{display:flex;gap:5px;width:100%;height:172px;}
-.moodtree.one{height:96px;}
-.moodtree.one .mt-tile{flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;padding:14px}
-.moodtree.one .mt-emoji{width:30px;height:30px}
-.moodtree.one .mt-val{margin-left:auto;font-size:13px}
-.mt-node{display:flex;gap:5px;min-width:0;min-height:0;}
+@media (prefers-reduced-motion:reduce){.rec-acc .acc-bd,.rec-acc .acc-chev,.act-cell,.mpill,.vitals-knob,.focus-cell,.focus-badge{transition:none !important;}.mt-tile{animation:none !important;}.page.active{animation:none !important;}}
+/* 復盤：心情地圖（純色塊 + 文字，不用表情圖） */
+.moodtree{display:flex;gap:6px;width:100%;height:150px;}
+.moodtree.one{height:84px;}
+.moodtree.one .mt-tile{flex-direction:row;align-items:center;justify-content:space-between;padding:0 16px;}
+.moodtree.one .mt-label{font-size:12px;}
+.moodtree.one .mt-day{font-size:26px;}
+.mt-node{display:flex;gap:6px;min-width:0;min-height:0;}
 .mt-node.row{flex-direction:row;}
 .mt-node.col{flex-direction:column;}
-.mt-tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:2px;border-radius:14px;padding:7px 9px;overflow:hidden;min-width:0;min-height:0;}
+.mt-tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;border-radius:15px;padding:8px 10px;overflow:hidden;min-width:0;min-height:0;animation:mtIn .4s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--i,0) * 55ms);}
 .mt-tile.mq-energized{background:var(--c-ochre-l-bg);}
 .mt-tile.mq-calm{background:var(--c-sage-l-bg);}
 .mt-tile.mq-anxious{background:var(--c-clay-l-bg);}
 .mt-tile.mq-low{background:var(--c-azure-l-bg);}
-.mt-tile .mt-emoji{width:22px;height:22px;flex:0 1 auto;min-height:0;}
-.mt-tile .mt-emoji svg{width:100%;height:100%;display:block;}
-.mt-tile .mt-label{flex:0 0 auto;line-height:1.25;font-size:10px;font-weight:900;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
-.mt-tile .mt-val{flex:0 0 auto;line-height:1.25;font-size:12px;font-weight:900;color:var(--ink);opacity:.78;}
+.mt-tile .mt-label{line-height:1.2;font-size:10.5px;font-weight:900;color:var(--ink);opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+.mt-tile .mt-day{line-height:1;font-size:20px;font-weight:900;color:var(--ink);letter-spacing:-.02em;}
+.mt-tile .mt-day small{font-size:9.5px;font-weight:800;margin-left:2px;opacity:.55;}
+@keyframes mtIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
 .mood-ins{margin-top:9px;font-size:10.5px;font-weight:600;color:var(--ink);background:var(--soft);border-radius:12px;padding:9px 10px;line-height:1.6;}
 .mood-ins b{color:var(--primary);}
 /* ===== P44：飲品圖鑑 ===== */
@@ -449,29 +450,30 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .drk-pop.up .tail { top:auto; bottom:-5px; right:15px; }
 
 
-/* 復盤：飲品與小植物 */
-.drk-report .rb { display:flex; height:10px; border-radius:99px; overflow:hidden; background:#F4F3F7; margin:4px 0 10px; }
-.drk-report .rb i { height:100%; transition:width .5s cubic-bezier(.4,0,.2,1); }
-.drk-report .rl { display:flex; flex-wrap:wrap; gap:3px 12px; }
-.drk-report .ri { display:flex; align-items:center; gap:4px; font-size:10px; font-weight:800; color:#7A7488; }
-.drk-report .ri em { width:6px; height:6px; border-radius:50%; display:block; }
-.drk-report .ri b { color:#4A4458; font-weight:900; }
-.drk-plantrow { display:flex; gap:10px; align-items:center; background:#FBFAF7; border-radius:14px; padding:10px 12px; margin-top:12px; }
-.drk-plantrow .txt { font-size:10.8px; font-weight:600; line-height:1.68; color:#4A4458; }
-.drk-plantrow .txt b { color:var(--primary-dark); }
-.drk-plantrow .who { display:inline-block; font-size:9px; font-weight:900; color:#7C76AE; background:#F1EFFB;
-  border-radius:99px; padding:2px 7px; margin-right:5px; vertical-align:1px; }
+/* 復盤：飲品（半圓環 + 盆栽，不用進度條） */
+.dk-hero{position:relative;width:206px;height:110px;margin:2px auto 0;}
+.dk-hero svg.dk-ring{width:100%;height:100%;display:block;}
+.dk-plant{position:absolute;left:50%;top:24px;transform:translateX(-50%);line-height:0;}
+.dk-total{position:absolute;left:0;right:0;bottom:0;text-align:center;font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.01em;}
+.dk-total b{font-size:13px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;}
+.dk-leg{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 18px;margin-top:9px;}
+.dk-leg span{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;color:#7A7488;}
+.dk-leg b{font-size:12px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;}
+.dk-tip{display:flex;align-items:flex-start;justify-content:center;gap:5px;margin-top:11px;
+  font-size:10px;font-weight:600;line-height:1.55;color:var(--muted);text-align:left;}
+.dk-tip svg{width:11px;height:11px;flex:0 0 auto;margin-top:2px;color:#C3BDD6;}
+.dk-tip b{color:var(--ink);font-weight:800;}
 .wk-line { display:flex; align-items:center; flex-wrap:wrap; gap:6px; margin-top:12px; font-size:10.5px; font-weight:700; color:var(--muted); }
 .wk-line b { color:var(--ink); font-weight:900; }
 .wk-line .chipm { display:inline-flex; align-items:center; gap:3px; background:#EFF5F0; color:#527D62;
   border-radius:99px; padding:3px 8px; font-weight:900; }
 .wk-line .chipm svg { width:11px; height:11px; }
-/* 復盤運動卡 */
-.wk-rep-top { display:flex; align-items:baseline; gap:5px; margin:1px 0 11px; }
-.wk-rep-top b { font-size:23px; font-weight:900; letter-spacing:-.035em; color:var(--ink);
-  font-variant-numeric:tabular-nums; line-height:1; }
-.wk-rep-top span { font-size:10px; font-weight:800; color:var(--muted); }
-.wk-rep-top i { font-style:normal; color:#DCD8E6; margin:0 3px; font-size:12px; }
+/* 復盤運動卡：主看總時長，天數/平均退到副行 */
+.wk-hero{display:flex;align-items:baseline;gap:7px;margin:1px 0 3px;}
+.wk-hero b{font-size:34px;font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums;}
+.wk-hero span{font-size:11px;font-weight:800;color:var(--muted);}
+.wk-sub2{font-size:10.5px;font-weight:700;color:var(--muted);margin-bottom:12px;}
+.wk-sub2 b{color:var(--ink);font-weight:900;font-variant-numeric:tabular-nums;}
 .wk-rep-types { display:flex; flex-wrap:wrap; gap:6px; margin-top:11px; }
 .wk-rep-types .chipm { display:inline-flex; align-items:center; gap:4px; background:#EFF5F0; color:#527D62;
   border-radius:99px; padding:4px 9px; font-size:9.5px; font-weight:900; }
@@ -543,10 +545,12 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .wk-today b { color:var(--ink); font-weight:900; }
 .wk-today .wka { margin-left:auto; flex:0 0 auto; border:none; background:var(--soft); color:var(--primary-dark);
   border-radius:99px; padding:6px 12px; font-size:10px; font-weight:900; font-family:inherit; cursor:pointer; }
+/* 復盤頁的 7 天格：沒紀錄的日子安靜一點 */
+.rv-card .tk-cell.off { background:#F8F7FC; border-color:transparent; }
+.rv-card .tk-cell.none { background:#FAF9FD; border-style:solid; border-color:#EFECF6; }
 /* 復盤：腸道節奏 */
-.rv-bstat { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
-.rv-bstat span { background:#F7F5EF; border-radius:99px; padding:4px 9px; font-size:9.5px; font-weight:800; color:#7A7488; }
-.rv-bstat b { font-weight:900; color:var(--ink); }
+.bowel-sum { font-size:11px; font-weight:700; color:var(--ink); line-height:1.6; margin-top:12px; }
+.bowel-sum b { font-weight:900; }
 
 /* 運動抽屜 */
 .wk-root { z-index:78; }
@@ -702,8 +706,27 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .modal.pc-modal .pc-res-list{flex:1 1 auto;min-height:110px;max-height:none}
 .pc-undo{display:flex;align-items:center;gap:6px;margin:0 0 8px;padding:8px 11px;border-radius:11px;background:#FDF2F3;color:#A45D66;font-size:11px;font-weight:800}
 .pc-undo button{margin-left:auto;border:none;background:#fff;color:#A45D66;border-radius:8px;padding:5px 9px;font-family:inherit;font-size:11px;font-weight:900;cursor:pointer}
-.pc-tip{margin-top:12px;padding:11px 12px;border-radius:14px;background:var(--accent-quiet);border:1px dashed var(--accent-quiet-ink);font-size:11.5px;font-weight:700;color:var(--accent-quiet-ink);line-height:1.6;display:flex;gap:7px}
-.pc-tip svg{width:15px;height:15px;flex-shrink:0}
+.pc-tip{margin-top:12px;padding:11px 12px;border-radius:14px;background:var(--accent-quiet);border:1px dashed var(--accent-quiet-ink);font-size:11.5px;font-weight:700;color:var(--accent-quiet-ink);line-height:1.6}
+.pc-tip-h{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:900;letter-spacing:.02em}
+.pc-tip-h .lbl{display:inline-flex;align-items:center;gap:5px;flex:0 0 auto}
+.pc-tip-h .lbl svg{width:14px;height:14px}
+.pc-tip-n{font-size:9.5px;font-weight:900;opacity:.72;background:rgba(255,255,255,.6);border-radius:99px;padding:2px 6px;line-height:1.3}
+.pc-tip-nav{margin-left:auto;display:flex;align-items:center;gap:3px}
+.pc-tip-nav button{border:none;background:rgba(255,255,255,.72);color:var(--accent-quiet-ink);border-radius:8px;height:23px;min-width:23px;padding:0 6px;
+  display:inline-flex;align-items:center;justify-content:center;gap:4px;font-family:inherit;font-size:10px;font-weight:900;cursor:pointer;line-height:1}
+.pc-tip-nav button svg{width:12px;height:12px}
+.pc-tip-nav button:disabled{opacity:.32}
+.pc-tip-nav button.gen{background:var(--accent-quiet-ink);color:#fff;padding:0 8px}
+.pc-tip-nav button.loading svg{animation:aispin .9s linear infinite}
+.pc-tip-txt{margin-top:6px;line-height:1.65}
+.pc-tip-empty{opacity:.72;font-weight:700}
+/* S2-P51：未套用拆解的提示條 */
+.pc-draftbar{display:flex;align-items:center;gap:6px;margin:-3px 0 10px;padding:8px 10px;border-radius:11px;
+  background:var(--accent-quiet);color:var(--accent-quiet-ink);font-size:10.5px;font-weight:800;line-height:1.4}
+.pc-draftbar svg{width:13px;height:13px;flex:0 0 auto}
+.pc-draftbar .d-txt{flex:1;min-width:0}
+.pc-draftbar button{flex:0 0 auto;border:none;border-radius:8px;padding:5px 9px;background:#fff;color:var(--accent-quiet-ink);
+  font-family:inherit;font-size:10.5px;font-weight:900;cursor:pointer}
 .pc-res-foot{margin-top:12px}
 .pc-res-foot .save2{margin-top:0;width:100%}
 .pc-res-sub{margin-top:7px;text-align:center;font-size:10px;font-weight:700;color:var(--muted);line-height:1.5}
@@ -802,14 +825,11 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 
 /* ---------- 底部 tabbar + FAB ---------- */
 .tabbar { flex:0 0 auto; margin:6px 14px 12px; background:var(--card); border-radius:24px; box-shadow:var(--sh); padding:9px 10px; display:flex; align-items:center; justify-content:space-around; }
-.tab { color:var(--tab-ink); display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; font-size:10px; font-weight:800; }
-.tab svg { width:20px; height:20px; }
-.tab span { font-size:10px; font-weight:800; }
-.tab.on { color:var(--primary); }
-.fab { position:absolute; right:16px; bottom:84px; width:50px; height:50px; border-radius:18px; border:none; background:var(--accent); color:var(--accent-ink); display:grid; place-items:center; box-shadow:none; cursor:pointer; z-index:30; transition:opacity .18s ease, transform .18s ease; }
-.fab svg { width:21px; height:21px; }
-/* 今日頁頂端時隱藏浮球，避免遮住第一條時間線的完成／刪除按鈕（主題卡與抽屜仍可進入快速面板） */
-#app.fab-off .fab { opacity:0; pointer-events:none; transform:scale(.8); }
+.tab { color:var(--tab-ink); display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; font-size:10px; font-weight:800; transition:color .18s, transform .16s; }
+.tab svg { width:20px; height:20px; transition:transform .24s cubic-bezier(.34,1.56,.64,1); }
+.tab.active { color:var(--primary); }
+.tab.active svg { transform:translateY(-1px) scale(1.08); }
+.tab:active { transform:scale(.92); }
 
 /* ---------- 側抽屜 ---------- */
 .overlay { position:fixed; inset:0; background:rgba(30,28,60,.35); opacity:0; pointer-events:none; transition:opacity .25s; z-index:40; }
@@ -875,11 +895,22 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .t-name { text-align:center; font-size:25px; font-weight:900; color:var(--ink); margin-top:2px; }
 .t-range { text-align:center; margin-top:2px; font-size:13px; font-weight:700; color:var(--muted); display:flex; align-items:center; justify-content:center; gap:5px; }
 .t-range svg { width:13px; height:13px; }
+/* S2-P51：倒數 / 正計時 切換 */
+.t-mode { display:flex; justify-content:center; gap:2px; margin:9px auto 0; padding:3px; width:max-content;
+  background:#fff; border:1px solid var(--bd); border-radius:99px; box-shadow:var(--sh); }
+.t-mode button { border:none; background:transparent; border-radius:99px; padding:6px 12px; display:inline-flex; align-items:center; gap:5px;
+  font-family:inherit; font-size:11.5px; font-weight:900; color:var(--muted); cursor:pointer; line-height:1.2; transition:color .15s, background .15s; }
+.t-mode button svg { width:12px; height:12px; }
+.t-mode button.on { background:var(--deep); color:#fff; }
+.t-mode button:active { transform:scale(.97); }
+.t-mode + .bigface { margin-top:10px; }
 .bigface { position:relative; width:206px; height:206px; margin:14px auto 0; }
 .bigface .face { position:absolute; inset:12px; border-radius:50%; background:var(--soft); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; }
 .bigface .fic { width:50px; height:50px; border-radius:18px; background:#fff; color:var(--primary); display:grid; place-items:center; box-shadow:0 8px 18px -8px rgba(40,30,60,.25); }
 .bigface .fic svg { width:24px; height:24px; }
 .bigface .tbig { font-size:36px; font-weight:900; color:var(--ink); letter-spacing:.01em; line-height:1; }
+.bigface .t-sub { font-size:10.5px; font-weight:800; color:var(--muted); letter-spacing:.06em; margin-top:-1px; }
+.bigface .t-sub[hidden] { display:none; }
 .bigface .tadj { display:flex; align-items:center; gap:9px; font-size:12px; font-weight:900; color:var(--muted); }
 .bigface .tadj svg { width:12px; height:12px; }
 .tadj-b { border:none; background:none; color:var(--muted); display:grid; place-items:center; cursor:pointer; padding:3px; border-radius:8px; }
@@ -1296,9 +1327,6 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 
 /* ========== S2-P1：蜜糖黃層級（v22） ==========
    實心 --accent 只留給主 CTA / 進行中 / 不可逆確認；其餘降級。 */
-.fab{background:#FFFFFF;color:#6B6580;
-     box-shadow:0 0 0 1px #EFEBE3,0 8px 20px -14px rgba(80,72,60,.5)}
-.fab svg{color:#6B6580}
 .epil{background:var(--accent-quiet);color:var(--accent-quiet-ink)}
 .dcard .pc-en{background:var(--accent-quiet);color:var(--accent-quiet-ink)}
 .upd-banner .u-go{background:var(--accent-quiet);color:var(--accent-quiet-ink)}
@@ -1358,11 +1386,12 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .bfoot .bhint{font-size:9.5px;font-weight:800;color:var(--muted);text-align:center;line-height:1.4}
 
 /* ========== S2-P2：復盤圖表 ========== */
-.rv-card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:14px;margin-top:10px}
+.rv-card{background:#fff;border:1px solid var(--bd);border-radius:18px;padding:17px 16px;margin-top:10px}
 .pg-body > .rv-card, #reviewStats .rv-card, #reviewBody > .rv-card{margin-top:0}
-#reviewBody{display:flex;flex-direction:column;gap:12px}
-.rv-h{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:900;color:var(--ink)}
-.rv-h .ic-circle{width:24px;height:24px;font-size:11px}
+#page-review .pg-body{gap:16px}
+#reviewBody{display:flex;flex-direction:column;gap:16px}
+.rv-h{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:900;color:var(--ink);letter-spacing:.01em}
+.rv-h .ic-circle{width:22px;height:22px;font-size:10px}
 .slp-nav{margin-left:auto;display:flex;align-items:center;gap:5px}
 .slp-nav button{width:24px;height:24px;border-radius:8px;border:1px solid var(--bd);
   background:#fff;color:var(--ink2);display:grid;place-items:center;cursor:pointer;font-size:15px;line-height:1;padding:0}
@@ -1744,6 +1773,11 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .s2api .mcard .tagf.paid{background:var(--accent-quiet);color:var(--accent-quiet-ink)}
 .s2api .verified{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;font-weight:900;color:#6E8A75;margin-top:8px}
 .s2api .verified svg{width:12px;height:12px}
+.s2api .usage{margin-top:10px;padding:8px 11px;border:1px dashed var(--bd);border-radius:11px;
+  font-size:10.5px;font-weight:800;color:var(--ink2);line-height:1.45}
+.s2api .usage b{color:var(--ink);font-weight:900;margin-right:3px}
+.s2api .usage .u-sub{display:block;margin-top:2px;font-size:9.5px;font-weight:700;color:var(--muted)}
+.s2api .usage .u-tip{display:block;margin-top:4px;padding-top:4px;border-top:1px dashed var(--bd);font-size:9.5px;font-weight:700;color:var(--accent-quiet-ink)}
 .s2api .quota{margin-top:12px;background:var(--accent-quiet);border:1px solid var(--bd);border-radius:14px;padding:12px 13px}
 .s2api .quota .qh{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:900;color:var(--accent-quiet-ink)}
 .s2api .quota .qh svg{width:13px;height:13px}
@@ -1817,6 +1851,13 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .c2btn svg{width:14px;height:14px;flex:0 0 auto}
 .c2edit{border:1.5px solid var(--bd);background:#fff;color:var(--muted)}
 .c2split{border:1.5px solid var(--primary);background:var(--primary);color:#fff}
+.c2split.has-draft{border-color:var(--accent-quiet-ink);background:var(--accent-quiet);color:var(--accent-quiet-ink)}
+/* P51：兩顆按鈕在 390 以下收緊，避免「繼續拆解」把編輯擠出卡片 */
+@media (max-width:390px){
+  .c2acts{gap:5px}
+  .c2btn{height:32px;padding:0 7px;font-size:11px;gap:4px;border-radius:9px}
+  .c2btn svg{width:12px;height:12px}
+}
 .c2card .cproj{max-width:100%}
 /* S2-P14：勾選完成 → 自動翻到下一步的方向滑入動畫 */
 .c2sv-body.in-next{animation:c2svNext .34s cubic-bezier(.22,1,.36,1)}
@@ -2365,13 +2406,13 @@ body.c2-dragmode .tabbar{pointer-events:none}
       <div class="rv-card" id="wheelCard">
         <div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="target"></i></span><b>生命之輪</b>
           <span class="rv-right">你的生活平衡嗎？</span></div>
-        <div class="rv-sub">8 個面向，從這週的記錄自動算出。</div>
+        
         <div id="wheelBody"></div>
       </div>
       <div class="rv-card" id="moodMapCard">
-        <div class="rv-h"><span class="ic-circle c-butter"><i data-lucide="smile"></i></span><b>心情地圖</b>
+        <div class="rv-h"><span class="ic-circle c-butter"><i data-lucide="layout-grid"></i></span><b>心情地圖</b>
           <span class="rv-right">這週，你過得怎樣？</span></div>
-        <div class="rv-sub">不看你做了多少事，只看你怎麼度過。區塊越大，代表那種心情陪你越久。</div>
+        <div class="rv-sub">區塊越大，那種心情陪你越久</div>
         <div id="s2MoodMap"></div>
       </div>
       <div id="reviewBody"></div>
@@ -2434,7 +2475,6 @@ body.c2-dragmode .tabbar{pointer-events:none}
   <div class="tab" data-tab="butler"><i data-lucide="bot"></i>管家</div>
 </nav>
 
-<button class="fab" id="fabBtn"><i data-lucide="settings"></i></button>
 
 <!-- 左側抽屜 -->
 <div class="overlay" id="drawerOverlay"></div>
@@ -2614,10 +2654,15 @@ body.c2-dragmode .tabbar{pointer-events:none}
     <div class="t-name" id="tName">—</div>
     <div class="t-tip" id="tTip" hidden><i data-lucide="sparkles"></i><span></span></div>
     <div class="t-range" id="tRange">—</div>
+    <div class="t-mode" id="tMode" role="group" aria-label="計時方式">
+      <button type="button" data-tm="down" class="on"><i data-lucide="timer"></i>倒數</button>
+      <button type="button" data-tm="up"><i data-lucide="clock"></i>正計時</button>
+    </div>
     <div class="bigface">
       <svg class="arc" viewBox="0 0 206 206"><circle class="t-track" cx="103" cy="103" r="97" fill="none" stroke-width="9"/><circle class="t-prog" id="tProgress" cx="103" cy="103" r="97" fill="none" stroke-width="9" stroke-linecap="round" transform="rotate(-90 103 103)"/></svg>
       <div class="face"><div class="fic" id="tEmoji" onclick="s2OpenFocus()" style="cursor:pointer" title="進專注畫面"><i data-lucide="target"></i></div><div class="tbig" id="tDisplay">00:00</div>
-        <div class="tadj"><button class="tadj-b" id="tMinus" title="減少 1 分鐘"><i data-lucide="minus"></i></button><span id="tAdjV">0m</span><button class="tadj-b" id="tPlus" title="增加 1 分鐘"><i data-lucide="plus"></i></button></div>
+        <div class="t-sub" id="tSub" hidden>已經過了</div>
+        <div class="tadj" id="tAdj"><button class="tadj-b" id="tMinus" title="減少 1 分鐘"><i data-lucide="minus"></i></button><span id="tAdjV">0m</span><button class="tadj-b" id="tPlus" title="增加 1 分鐘"><i data-lucide="plus"></i></button></div>
       </div>
     </div>
     <div class="ctrl">
@@ -2653,7 +2698,7 @@ body.c2-dragmode .tabbar{pointer-events:none}
         <div class="frow"><span class="u">分</span><div class="pair" data-u="m"></div></div>
         <div class="frow"><span class="u">秒</span><div class="pair" data-u="s"></div></div>
       </div>
-      <div class="foc-cap">剩餘時間 · 只翻變動的那一位</div>
+      <div class="foc-cap" id="focFlipCap">剩餘時間 · 只翻變動的那一位</div>
     </div>
     <div class="foc-pane" id="focPaneDots">
       <div class="dots3"><div class="grid" id="focGrid"></div></div>
@@ -3188,22 +3233,6 @@ async function getLatestCycle() {
   all.sort((a, b) => (a.startDate < b.startDate ? 1 : -1));
   return all[0];
 }
-function calcPeriodStatus(cycle, today) {
-  const t = dateStr(today);
-  if (t >= cycle.startDate && t <= cycle.endDate) {
-    const day = daysBetween(cycle.startDate, t) + 1;
-    return { type: 'in', label: '經期中第 ' + day + ' 天', day };
-  }
-  if (t > cycle.endDate) {
-    const next = addDays(new Date(cycle.startDate), parseInt(cycle.cycleLength) || 28);
-    const remain = daysBetween(t, dateStr(next));
-    if (remain > 0) return { type: 'next', label: '下次經期預計還有 ' + remain + ' 天', remain };
-    return { type: 'late', label: '經期可能已推遲，請更新設定' };
-  }
-  const remain = daysBetween(t, cycle.startDate);
-  return { type: 'next', label: '下次經期預計還有 ' + remain + ' 天', remain };
-}
-
 /* ================= P46：經期（多筆週期、自動平均、預測範圍） =================
    資料：menstrualCycles 一次經期一列 {startDate, endDate, endEstimated, cycleLength}
         dailyLogs.periodFlow / periodSymptoms 記每天流量與症狀。
@@ -3627,15 +3656,10 @@ function switchTab(tab) {
   if (tab === 'butler') Promise.resolve(s2RenderButler()).catch(function (e) { console.warn('[s2] butler', e); });
   if (tab === 'today') { renderQuick(); renderWeek(); renderSchedule(); } /* 回到今日頁時從 DB 刷新，避免顯示舊值 */
   window.scrollTo({ top: 0 });
-  syncFab();
 }
 
 /* 浮動設定齒輪已退役：主題月／週在首頁主題卡直接點，完整設定從左上抽屜進。
    卡庫、管家兩頁不再出現浮球；保留 DOM 與 openSheet 供既有入口呼叫。 */
-function syncFab() {
-  $('#app').classList.add('fab-off');
-}
-
 function openDrawer() { $('#drawer').classList.add('show'); $('#drawerOverlay').classList.add('show'); }
 function closeDrawer() { $('#drawer').classList.remove('show'); $('#drawerOverlay').classList.remove('show'); }
 async function openSheet(focus) {
@@ -3905,6 +3929,37 @@ function renderDrawn() {
 let timer = null;
 const T_ARC_C = 2 * Math.PI * 97;
 function fmtHM(d) { return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+function pcTimerModePref() {
+  try { return localStorage.getItem('pcTimerMode') === 'up' ? 'up' : 'down'; } catch (e) { return 'down'; }
+}
+function pcTimerSetPref(m) {
+  try { localStorage.setItem('pcTimerMode', m === 'up' ? 'up' : 'down'); } catch (e) { /* 無痕模式忽略 */ }
+}
+function fmtClock(sec) {
+  sec = Math.max(0, Math.round(sec || 0));
+  var h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+  return h > 0 ? h + ':' + pad(m) + ':' + pad(s) : pad(m) + ':' + pad(s);
+}
+function timerShownSec() {
+  if (!timer) return 0;
+  return timer.mode === 'up' ? timer.elapsed : Math.max(0, timer.target - timer.elapsed);
+}
+/* S2-P51：倒數 / 正計時 UI 同步 */
+function s2SyncTimerModeUI() {
+  var box = document.getElementById('tMode');
+  if (box) [].slice.call(box.querySelectorAll('[data-tm]')).forEach(function (b) {
+    b.classList.toggle('on', b.dataset.tm === (timer ? timer.mode : 'down'));
+  });
+  var big = document.querySelector('.bigface');
+  if (big) big.classList.toggle('up', !!timer && timer.mode === 'up');
+  var up = !!timer && timer.mode === 'up';
+  var sub = document.getElementById('tSub'), adj = document.getElementById('tAdj');
+  if (sub) sub.hidden = !up;
+  if (adj) adj.style.display = up ? 'none' : 'flex';
+  var mi = document.getElementById('tMinus'), pl = document.getElementById('tPlus');
+  if (mi) mi.title = '減少 1 分鐘';
+  if (pl) pl.title = '增加 1 分鐘';
+}
 function setPauseIcon(paused) {
   $('#tPause').innerHTML = '<i data-lucide="' + (paused ? 'play' : 'pause') + '"></i>';
   $('#tPause').title = paused ? '繼續' : '暫停';
@@ -3913,11 +3968,14 @@ async function startTimer(cardId, source) {
   const c = await ldb.cards.get(cardId);
   if (!c) return;
   await autoAddToTimeline(c);
-  const total = (c.duration || 5) * 60;
+  const target = (c.duration || 5) * 60;
   timer = {
     card: c,
-    total: total,
-    left: total,
+    target: target,
+    total: target,          /* 專注頁沿用 total 當「參考目標」 */
+    left: target,
+    elapsed: 0,
+    mode: pcTimerModePref(),
     paused: false,
     iv: null,
     source: source || { type: 'card' },
@@ -3932,6 +3990,7 @@ async function startTimer(cardId, source) {
     else { tipEl.hidden = true; }
   }
   setPauseIcon(false);
+  s2SyncTimerModeUI();
   $('#tProgress').style.strokeDasharray = '0 ' + T_ARC_C.toFixed(1);
   updateTimerRange();
   Promise.resolve(updateNextInfo()).catch(function () { /* 計時器 tick 中靜默失敗 */ });
@@ -3940,10 +3999,33 @@ async function startTimer(cardId, source) {
   updateTimerDisplay();
   timer.iv = setInterval(tick, 1000);
 }
+function s2SetTimerMode(mode) {
+  if (!timer) return;
+  mode = mode === 'up' ? 'up' : 'down';
+  if (timer.mode === mode) return;
+  timer.mode = mode;
+  pcTimerSetPref(mode);
+  /* 切回倒數時，保證還有一段可走的時間；不重設計時，已過的時間照算 */
+  if (mode === 'down' && timer.target <= timer.elapsed) {
+    timer.target = Math.ceil((timer.elapsed + 60) / 60) * 60;
+  }
+  timer.total = timer.target;
+  timer.left = Math.max(0, timer.target - timer.elapsed);
+  s2SyncTimerModeUI();
+  updateTimerDisplay();
+  updateTimerRange();
+  const e = Math.min(1, timer.elapsed / Math.max(1, timer.target));
+  $('#tProgress').style.strokeDasharray = (e * T_ARC_C).toFixed(1) + ' ' + T_ARC_C.toFixed(1);
+  toast(mode === 'up' ? '正計時：從 0 開始累加，不會自動結束' : '倒數計時：時間到會提醒你');
+}
 function updateTimerRange() {
   if (!timer) return;
   const st = new Date(timer.startedAt);
-  const en = new Date(Date.now() + timer.left * 1000);
+  if (timer.mode === 'up') {
+    $('#tRange').innerHTML = fmtHM(st) + ' <i data-lucide="arrow-right"></i> 現在';
+    return;
+  }
+  const en = new Date(Date.now() + Math.max(0, timer.target - timer.elapsed) * 1000);
   $('#tRange').innerHTML = fmtHM(st) + ' <i data-lucide="arrow-right"></i> ' + fmtHM(en);
 }
 async function updateNextInfo() {
@@ -3958,7 +4040,7 @@ async function updateNextInfo() {
     }
   }
   $('#tNext').textContent = next ? next.text : '今晚安排已完成';
-  let remainSec = timer.left;
+  let remainSec = timer.mode === 'up' ? 0 : Math.max(0, timer.target - timer.elapsed);
   if (next) {
     for (let i = list.indexOf(next); i < list.length; i++) {
       const it = list[i];
@@ -3968,27 +4050,29 @@ async function updateNextInfo() {
   $('#tEnd').textContent = fmtHM(new Date(Date.now() + remainSec * 1000));
 }
 function updateTimerDisplay() {
-  const m = Math.floor(timer.left / 60);
-  const s = timer.left % 60;
-  const txt = pad(m) + ':' + pad(s);
+  if (!timer) return;
+  const txt = fmtClock(timerShownSec());
   $('#tDisplay').textContent = txt;
   $('#timerMiniTxt').textContent = txt;
-  $('#tAdjV').textContent = Math.ceil(timer.left / 60) + 'm';
+  $('#tAdjV').textContent = Math.ceil(timer.target / 60) + 'm';
 }
 function tick() {
-  if (timer.paused) return;
-  timer.left--;
-  if (timer.left < 0) timer.left = 0;
+  if (!timer || timer.paused) return;
+  timer.elapsed++;
+  timer.left = Math.max(0, timer.target - timer.elapsed);
   updateTimerDisplay();
-  const e = Math.min(1, Math.max(0, 1 - timer.left / timer.total));
+  const e = Math.min(1, timer.elapsed / Math.max(1, timer.target));
   $('#tProgress').style.strokeDasharray = (e * T_ARC_C).toFixed(1) + ' ' + T_ARC_C.toFixed(1);
-  if (timer.left <= 0) finishTimer();
+  if (timer.mode === 'down' && timer.elapsed >= timer.target) finishTimer();
 }
 function adjustTimer(sec) {
   if (!timer) return;
-  timer.left = Math.max(0, Math.min(timer.total + 30 * 60, timer.left + sec));
+  const lo = timer.mode === 'down' ? timer.elapsed + 60 : 60;
+  timer.target = Math.max(lo, Math.min(180 * 60, timer.target + sec));
+  timer.total = timer.target;
+  timer.left = Math.max(0, timer.target - timer.elapsed);
   updateTimerDisplay();
-  const e = Math.min(1, Math.max(0, 1 - timer.left / timer.total));
+  const e = Math.min(1, timer.elapsed / Math.max(1, timer.target));
   $('#tProgress').style.strokeDasharray = (e * T_ARC_C).toFixed(1) + ' ' + T_ARC_C.toFixed(1);
   updateTimerRange();
 }
@@ -4005,6 +4089,7 @@ function minimizeTimer() {
 function finishTimer() {
   if (!timer) return;
   stopTimerClock();
+  timer.finishedMin = Math.max(1, Math.round(timer.elapsed / 60));
   $('#timerOverlay').classList.remove('show');
   $('#timerMini').classList.remove('show');
   showCompletionModal(timer.card);
@@ -4021,9 +4106,10 @@ function stopTimerClock() { if (timer && timer.iv) clearInterval(timer.iv); }
 
 function showCompletionModal(card) {
   const defMode = card.energyMode || 'neutral';
+  const doneMin = (timer && timer.finishedMin) ? timer.finishedMin : (card.duration || 0);
   openModal(
     '<div class="m-head"><h2><i data-lucide="party-popper"></i> 完成！</h2><button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>' +
-    '<div style="text-align:center;font-size:15px;margin-bottom:14px;">「' + esc(card.name) + '」做完了！<br>這次活動對你的能量是？</div>' +
+    '<div style="text-align:center;font-size:15px;margin-bottom:14px;">「' + esc(card.name) + '」做完了！<br><span style="font-size:12px;color:var(--muted);font-weight:800">這次 ' + doneMin + ' 分鐘</span><br>這次活動對你的能量是？</div>' +
     '<div class="seg" id="cMode">' + ENERGY_MODE_KEYS.map(k =>
       '<span class="opt' + (k === defMode ? ' active' : '') + '" data-m="' + k + '">' + ENERGY_MODES[k].emoji + ' ' + ENERGY_MODES[k].label + '</span>'
     ).join('') + '</div>' +
@@ -4043,7 +4129,7 @@ async function confirmCompletion(cardId) {
     cardName: card.name,
     type: card.type,
     energy: state.energy,
-    duration: card.duration,
+    duration: (timer && timer.card && timer.card.id === cardId && timer.finishedMin) ? timer.finishedMin : card.duration,
     completed: true,
     energyMode: mode,
     updatedAt: Date.now(),
@@ -4673,6 +4759,7 @@ async function renderCards(beforeRects) {
       const steps = Array.isArray(c.steps) ? c.steps : [];
       const done = Array.isArray(c.stepDone) ? c.stepDone : [];
       const doneN = steps.reduce((n, _t, i) => n + (done[i] ? 1 : 0), 0);
+      const hasDraft = !!pcDraftForCard(c.id);
       const stepChip = steps.length
         ? '<button type="button" class="step-n step-chip" data-act="c2flip" data-card="' + c.id + '" title="翻開步驟卡">' + doneN + '/' + steps.length + ' 步</button>' : '';
       /* 只有拆過步驟的卡才墊一疊；色系統一用主題紫（深→淺），错开收斂避免擁擠 */
@@ -4704,7 +4791,7 @@ async function renderCards(beforeRects) {
         (c.why ? '<div class="c2why" title="' + esc(c.why) + '"><i data-lucide="star"></i><span>' + esc(c.why) + '</span></div>' : '') +
         '<div class="c2acts">' +
         '<button type="button" class="c2btn c2edit" onclick="editCard(' + c.id + ')"><i data-lucide="pencil"></i>編輯</button>' +
-        '<button type="button" class="c2btn c2split" onclick="s2SplitFromCard(' + c.id + ')"><i data-lucide="list-checks"></i>拆步驟</button>' +
+        '<button type="button" class="c2btn c2split' + (hasDraft ? ' has-draft' : '') + '" onclick="s2SplitFromCard(' + c.id + ')"><i data-lucide="' + (hasDraft ? 'rotate-ccw' : 'list-checks') + '"></i>' + (hasDraft ? '繼續拆解' : '拆步驟') + '</button>' +
         '</div></div>' +
         (steps.length ? '<div class="c2stepview" aria-hidden="true"></div>' : '') +
         '</div>';
@@ -4716,34 +4803,6 @@ async function renderCards(beforeRects) {
   /* 重渲染後節點已換新，重置翻牌與手勢引用 */
   c2OpenCard = null; c2StepIdx = 0; c2Swipe = null; c2FlippedEl = null;
   c2UpdateTipBar();
-}
-/* S2-P6：卡牌背面（微步驟）。無步驟時只留一句話，不多放底部提示（v21 第 1 節） */
-function s2CardBackHtml(c, steps, done) {
-  const total = steps.length;
-  const doneN = steps.reduce((n, _t, i) => n + (done[i] ? 1 : 0), 0);
-  const pct = total ? Math.round(doneN / total * 100) : 0;
-  let body;
-  if (!total) {
-    body = '<div class="bempty"><span class="be-ic"><i data-lucide="sparkles"></i></span>' +
-           '<p>這是一張簡單的小卡，<br>直接去正面點擊開始吧！</p></div>';
-  } else {
-    var miniN = Math.min(3, total);
-    body = '<div class="pc-stack" data-n="' + total + '">' +
-      steps.slice(0, miniN).map((t, i) =>
-        '<div class="pc-mini' + (done[i] ? ' done' : '') + '" data-step="' + i + '" data-spread="' + c.id + '" style="--k:' + i + '">' +
-        '<span class="mdot"></span><span class="bt">' + esc(t) + '</span></div>'
-      ).join('') +
-      '<button type="button" class="pc-spread-btn" data-act="spread" data-card="' + c.id + '">' +
-        '<i data-lucide="maximize"></i> 攤開全部 ' + total + ' 步</button>' +
-      '</div>' +
-      '<div class="bfoot"><div class="bhint">' +
-      (doneN < total ? '點「攤開」看全部步驟' : '步驟都完成了，回正面按「做」開始吧') +
-      '</div></div>';
-  }
-  return '<div class="face back">' +
-    '<div class="bhead"><span class="bn">' + esc(c.name) + '</span>' +
-    '<button type="button" class="bback" data-act="flip" title="翻回正面"><i data-lucide="refresh-cw"></i></button></div>' +
-    '<div class="bprog"><i style="width:' + pct + '%"></i></div>' + body + '</div>';
 }
 /* 長期專案模式：寬卡片 + 進度條 + 狀態標籤 + 點擊展開下屬行動卡 */
 async function renderProjectCards(list) {
@@ -5169,17 +5228,6 @@ async function deleteCard(id) {
   await drawCards();
   CloudSync.notifyLocalChange('cards', null);
 }
-function openCardMenu(id) {
-  ldb.cards.get(id).then(c => {
-    if (!c) return;
-    openModal(
-      '<div class="m-head"><h2>' + esc(c.name) + '</h2><button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>' +
-      '<button class="btn btn-ghost btn-block" onclick="closeModal();editCard(' + c.id + ')"><i data-lucide="pencil"></i> 編輯</button>' +
-      '<button class="btn btn-soft btn-block" style="margin-top:10px;background:#FBE3DD;color:var(--danger);" onclick="deleteCard(' + c.id + ')"><i data-lucide="trash-2"></i> 刪除</button>'
-    );
-  });
-}
-
 /* ---------------- 完成任務：歸檔提示卡（底部滑出） ----------------
    恢復原本的底部提示卡，不用置中對話框。
    一次性與循環任務都問——循環任務也有結束的一天。
@@ -5376,31 +5424,15 @@ function meterValue(el) {
   const n = el.querySelectorAll('i.on').length;
   return PRESSURE_LEVELS[Math.min(2, Math.max(0, n - 1))];
 }
-/* 運動：開關 */
-function setTgl(el, on) { el.classList.toggle('on', !!on); el.dataset.v = on ? '1' : '0'; }
 /* ---------- P24：情緒四象限（10 個 Doodle 手繪表情） ---------- */
 /* 表情風格：Figma Community「Doodle Emoji set」— 圓臉 + 黑色手繪線條五官，手繪重繪後內聯，離線可用 */
-const MOOD_SVG = {
-  excited:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#FFD35E"/><path d="M70 78 L75 91 L88 96 L75 101 L70 114 L65 101 L52 96 L65 91 Z" fill="#3A2E1E"/><path d="M130 78 L135 91 L148 96 L135 101 L130 114 L125 101 L112 96 L125 91 Z" fill="#3A2E1E"/><path d="M62 120 Q100 164 138 120 Z" fill="#3A2E1E"/><path d="M86 146 Q100 158 116 146" stroke="#F79AA8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M152 38 L155 48 L165 51 L155 54 L152 64 L149 54 L139 51 L149 48 Z" fill="#fff" opacity=".9"/><path d="M44 44 L46 51 L53 53 L46 55 L44 62 L42 55 L35 53 L42 51 Z" fill="#fff" opacity=".85"/></svg>',
-  happy:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#FFD35E"/><path d="M56 88 Q70 71 85 88" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M115 88 Q130 71 145 88" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M68 122 Q100 154 133 121" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><ellipse cx="50" cy="112" rx="12" ry="7" fill="#F79AA8" opacity=".55"/><ellipse cx="150" cy="112" rx="12" ry="7" fill="#F79AA8" opacity=".55"/></svg>',
-  love:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#FFD35E"/><path d="M72 110 C52 97 57 77 72 86 C87 77 92 97 72 110 Z" fill="#E8556E"/><path d="M128 110 C108 97 113 77 128 86 C143 77 148 97 128 110 Z" fill="#E8556E"/><path d="M80 130 Q100 148 120 130" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><ellipse cx="50" cy="120" rx="11" ry="6" fill="#F79AA8" opacity=".55"/><ellipse cx="150" cy="120" rx="11" ry="6" fill="#F79AA8" opacity=".55"/></svg>',
-  cool:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#FFD35E"/><rect x="38" y="76" width="56" height="32" rx="13" fill="#3A2E1E"/><rect x="106" y="76" width="56" height="32" rx="13" fill="#3A2E1E"/><path d="M94 88 Q100 83 106 88" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M48 82 L62 82" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".35"/><path d="M116 82 L130 82" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".35"/><path d="M80 134 Q104 149 128 128" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/></svg>',
-  surprised:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#FFD35E"/><circle cx="70" cy="90" r="17" fill="#fff"/><circle cx="70" cy="90" r="8" fill="#3A2E1E"/><circle cx="130" cy="90" r="17" fill="#fff"/><circle cx="130" cy="90" r="8" fill="#3A2E1E"/><path d="M50 62 Q66 54 82 62" stroke="#3A2E1E" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M118 62 Q134 54 150 62" stroke="#3A2E1E" stroke-width="6" fill="none" stroke-linecap="round"/><ellipse cx="100" cy="142" rx="13" ry="18" fill="#3A2E1E"/></svg>',
-  sad:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#7FB6EA"/><path d="M54 90 Q70 105 86 90" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M114 90 Q130 105 146 90" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M70 100 C64 113 62 122 70 127 C78 122 76 113 70 100 Z" fill="#3E86CC"/><path d="M130 100 C124 113 122 122 130 127 C138 122 136 113 130 100 Z" fill="#3E86CC"/><path d="M72 144 Q100 120 128 144" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/></svg>',
-  sleepy:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#FFD35E"/><path d="M54 92 Q70 100 86 92" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M114 92 Q130 100 146 92" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M90 138 Q100 145 110 138" stroke="#3A2E1E" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M150 48 L170 48 L150 68 L170 68" stroke="#3A2E1E" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/></svg>',
-  angry:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#EB746C"/><path d="M48 72 L88 86" stroke="#3A2E1E" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M152 72 L112 86" stroke="#3A2E1E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="70" cy="100" r="7" fill="#3A2E1E"/><circle cx="130" cy="100" r="7" fill="#3A2E1E"/><path d="M72 142 Q100 122 128 142" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M96 44 L90 32 M108 44 L114 32" stroke="#3A2E1E" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/></svg>',
-  nervous:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#8FC0EC"/><circle cx="70" cy="92" r="8" fill="#3A2E1E"/><circle cx="130" cy="92" r="8" fill="#3A2E1E"/><path d="M68 138 Q82 127 96 138 Q110 149 124 138" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M162 58 C162 58 152 74 162 82 C172 74 162 58 162 58 Z" fill="#3E86CC"/><ellipse cx="50" cy="116" rx="11" ry="6" fill="#F79AA8" opacity=".5"/><ellipse cx="150" cy="116" rx="11" ry="6" fill="#F79AA8" opacity=".5"/></svg>',
-  disgusted:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M100 18 C146 16 183 52 184 100 C185 147 149 183 100 184 C51 185 16 148 18 100 C20 53 55 20 100 18 Z" fill="#86C98A"/><path d="M54 84 L84 96 M146 84 L116 96" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M68 136 Q82 124 96 136 Q110 148 126 134" stroke="#3A2E1E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M88 150 Q100 158 112 148" stroke="#E8556E" stroke-width="6" fill="none" stroke-linecap="round"/></svg>'
-
-};
 const QUADRANTS = {
-  calm:{name:'平靜滿足',cls:'mq-calm'},
-  energized:{name:'活力充沛',cls:'mq-energized'},
-  low:{name:'低落疲憊',cls:'mq-low'},
-  anxious:{name:'焦慮煩躁',cls:'mq-anxious'}
+  calm:{name:'平靜滿足',short:'平靜',cls:'mq-calm'},
+  energized:{name:'活力充沛',short:'活力',cls:'mq-energized'},
+  low:{name:'低落疲憊',short:'低落',cls:'mq-low'},
+  anxious:{name:'焦慮煩躁',short:'焦慮',cls:'mq-anxious'}
 };
 const QUAD_ORDER = ['calm','energized','low','anxious'];
-const QUAD_FACE = {energized:'happy', calm:'cool', low:'sad', anxious:'nervous'};
 const MOODS = {
   excited:{name:'興奮',quad:'energized',note:'能量滿滿的一天，記得把這股勁留一點給自己。'},
   happy:{name:'開心',quad:'energized',note:'快樂值得被記下來，讓它多留一會兒。'},
@@ -6302,10 +6334,10 @@ function initSleepUI() {
    P44：飲品圖鑑 / 腸道節奏 / 運動類型
    ================================================================== */
 const DRINK_TYPES = {
-  water:  { name:'水',   c:'#6C9BCB', ink:'#4E7CA8', bg:'#EAF3FB', caf:0 },
-  tea:    { name:'茶',   c:'#6F9379', ink:'#537A60', bg:'#EBF3EC', caf:1 },
-  coffee: { name:'咖啡', c:'#97754F', ink:'#7A5B39', bg:'#F7EFE6', caf:2 },
-  milk:   { name:'奶茶', c:'#B7738B', ink:'#9A5772', bg:'#FAEDF1', caf:1 }
+  water:  { name:'水',   c:'#4FA3E3', ink:'#3479AF', bg:'#E8F4FE', caf:0 },
+  tea:    { name:'茶',   c:'#45BD97', ink:'#2E8F71', bg:'#E7F7F0', caf:1 },
+  coffee: { name:'咖啡', c:'#A9744F', ink:'#7E5232', bg:'#F8EFE7', caf:2 },
+  milk:   { name:'奶茶', c:'#D98BA6', ink:'#AE6280', bg:'#FBEFF4', caf:1 }
 };
 const DRINK_KEYS = ['water', 'tea', 'coffee', 'milk'];
 let _drinkUid = 0;
@@ -6850,28 +6882,16 @@ function wkDaysStats(days) {
   return st;
 }
 
-function wkNote(days, st) {
-  if (!st.n) return '這 7 天還沒有運動紀錄。散步 10 分鐘也算，記錄頁點一下就好。';
-  let out = '這 7 天動了 <b>' + st.n + ' 天</b>' + (st.min ? '，共 <b>' + st.min + ' 分鐘</b>' : '');
-  if (st.min && st.n >= 2) out += '（平均每次 ' + Math.round(st.min / st.n) + ' 分鐘）';
-  out += '。';
-  let lastIdx = -1;
-  (days || []).forEach(function (d, i) { if (logWorkout(d.log)) lastIdx = i; });
-  const gap = days.length - 1 - lastIdx;
-  if (lastIdx >= 0 && gap >= 3) out += '最近 <b>' + gap + ' 天</b>沒動，今天散步 10 分鐘也好。';
-  return out;
-}
-
 async function s2RenderWorkoutReport() {
   const host = document.getElementById('wkReportBody');
   if (!host) return;
   const days = await last7Logs(todayStr());
   const st = wkDaysStats(days);
-  let h = '';
-  if (st.n) {
-    h += '<div class="wk-rep-top"><b>' + st.n + '</b><span>天</span>' +
-      (st.min ? '<i>·</i><b>' + st.min + '</b><span>分鐘</span>' : '') + '</div>';
-  }
+  const avg = st.n ? Math.round(st.min / st.n) : 0;
+  let h = '<div class="wk-hero"><b>' + (st.min || 0) + '</b><span>分鐘</span></div>' +
+    '<div class="wk-sub2">' + (st.n
+      ? '本週共 <b>' + st.n + '</b> 天有運動' + (avg ? ' · 平均每次 ' + avg + ' 分鐘' : '')
+      : '本週還沒有紀錄') + '</div>';
   h += '<div class="tk-strip">' + wkStripHTML(days) + '</div>';
   if (st.n) {
     const order = Object.keys(st.cnt).sort(function (a, b) { return st.mins[b] - st.mins[a]; });
@@ -6881,7 +6901,6 @@ async function s2RenderWorkoutReport() {
         ' <b>' + st.cnt[k] + '</b> 次' + (st.mins[k] ? ' · ' + st.mins[k] + ' 分' : '') + '</span>';
     }).join('') + '</div>';
   }
-  h += '<div class="tk-note" style="margin-top:10px">' + wkNote(days, st) + '</div>';
   host.innerHTML = h;
   if (window.lucide) lucide.createIcons(host);
   host.onclick = function (e) {
@@ -6917,9 +6936,10 @@ function s2DrinkStats(logs) {
 }
 
 /* 小植物：葉數＝純水天數，缺水時垂葉 */
-function s2PlantSVG(leaves, wilt) {
-  let out = '<svg viewBox="0 0 40 48" fill="none" aria-hidden="true" style="width:38px;height:46px;flex:0 0 auto">';
-  out += '<path d="M20 35V16" stroke="#7FA089" stroke-width="2" stroke-linecap="round"/>';
+function s2PlantSVG(leaves, wilt, h) {
+  h = h || 46;
+  let out = '<svg viewBox="0 0 40 48" fill="none" aria-hidden="true" style="width:' + Math.round(h * 40 / 48) + 'px;height:' + h + 'px;flex:0 0 auto">';
+  let inner = '<path d="M20 35V16" stroke="#7FA089" stroke-width="2" stroke-linecap="round"/>';
   const L = [
     { d:'M20 27c-6.2.3-8.7-3.2-8.2-7.9 5.2-.4 8.2 2.8 8.2 7.9Z', f:'#CFE6D3' },
     { d:'M20 22c5.7.2 8.2-3 7.8-7.5-5-.4-7.8 2.6-7.8 7.5Z', f:'#A9CDB0' },
@@ -6927,9 +6947,10 @@ function s2PlantSVG(leaves, wilt) {
   ];
   L.forEach(function (lv, i) {
     if (leaves <= i) return;
-    out += '<path d="' + lv.d + '" fill="' + lv.f + '" style="transform-box:fill-box;transform-origin:bottom center;' +
+    inner += '<path d="' + lv.d + '" fill="' + lv.f + '" style="transform-box:fill-box;transform-origin:bottom center;' +
       (wilt ? 'transform:rotate(' + (i % 2 ? -24 : 26) + 'deg)' : '') + '"/>';
   });
+  out += '<g' + (wilt ? ' style="transform-box:fill-box;transform-origin:bottom center;transform:rotate(20deg)"' : '') + '>' + inner + '</g>';
   out += '<path d="M12 34h16l-1.8 7.6a2.2 2.2 0 0 1-2.1 1.6h-8.2a2.2 2.2 0 0 1-2.1-1.6Z" fill="#F5E9DC" stroke="#DFCBB6" stroke-width="1.3" stroke-linejoin="round"/>';
   out += '</svg>';
   return out;
@@ -6941,12 +6962,7 @@ async function s2RenderBowelReport() {
   const days = await last7Logs(todayStr());
   const st = bowelDaysStats(days);
   host.innerHTML = '<div class="tk-strip">' + bowelStripHTML(days) + '</div>' +
-    '<div class="rv-bstat">' +
-      '<span>有排便 <b>' + st.active + '</b> 天</span>' +
-      '<span>沒拉 <b>' + st.noPoo + '</b> 天</span>' +
-      '<span>腹瀉 <b>' + st.loose + '</b> 天</span>' +
-    '</div>' +
-    '<div class="tk-note" style="margin-top:10px">' + bowelInsight(days, st) + '</div>';
+    '<div class="bowel-sum">' + bowelInsight(days, st) + '</div>';
   host.addEventListener('click', function (e) {
     const c = e.target.closest('.tk-cell');
     if (c && c.dataset.tip) toast(c.dataset.tip);
@@ -7133,46 +7149,64 @@ async function s2RenderCycleCard() {
         : '<div class="cy-empty">心情紀錄還不夠。多記幾天，就會出現經期中／後／前的比較。</div>') + '</div>';
 }
 
+/* 半圓環：用 pathLength=100 讓每段以比例算，兩端補圓頭 */
+function s2DrinkArc(st) {
+  const keys = DRINK_KEYS.filter(function (k) { return st.by[k] > 0; });
+  const D = 'M22 100A78 78 0 0 1 178 100';
+  let out = '<svg class="dk-ring" viewBox="0 0 200 108" aria-hidden="true">' +
+    '<path d="' + D + '" fill="none" stroke="#F2EFF8" stroke-width="12"/>';
+  if (st.cups) {
+    const gap = 1.1, total = st.cups;
+    let acc = 0;
+    keys.forEach(function (k, i) {
+      const pct = st.by[k] / total * 100;
+      const from = acc + (i === 0 ? 0 : gap / 2);
+      const to = acc + pct - (i === keys.length - 1 ? 0 : gap / 2);
+      out += '<path d="' + D + '" pathLength="100" fill="none" stroke="' + DRINK_TYPES[k].c +
+        '" stroke-width="12" stroke-dasharray="' + (to - from).toFixed(2) + ' 100" stroke-dashoffset="' +
+        (-from).toFixed(2) + '"/>';
+      acc += pct;
+    });
+    out += '<circle cx="22" cy="100" r="6" fill="' + DRINK_TYPES[keys[0]].c + '"/>' +
+      '<circle cx="178" cy="100" r="6" fill="' + DRINK_TYPES[keys[keys.length - 1]].c + '"/>';
+  }
+  return out + '</svg>';
+}
+
 async function s2RenderDrinkReport(logs) {
   const host = document.getElementById('drinkReportBody');
   if (!host) return;
   const st = s2DrinkStats(logs);
-  const total = st.cups || 1;
+  const total = st.cups;
+  const leaves = !total ? 0 : (st.pureDays === 0 ? 0 : Math.min(3, st.pureDays));
+  const wilt = total > 0 && (st.pureDays === 0 || st.pure / total < 0.3);
 
-  let h = '';
-  if (st.cups) {
-    h += '<div class="rb">' + DRINK_KEYS.map(function (k) {
-      return '<i style="width:' + (st.by[k] / total * 100) + '%;background:' + DRINK_TYPES[k].c + '" title="' + DRINK_TYPES[k].name + '"></i>';
-    }).join('') + '</div>';
-    h += '<div class="rl">' + DRINK_KEYS.filter(function (k) { return st.by[k] > 0; }).map(function (k) {
-      return '<span class="ri"><em style="background:' + DRINK_TYPES[k].c + '"></em>' + DRINK_TYPES[k].name +
-        ' <b>' + st.by[k] + '</b></span>';
-    }).join('') + '</div>';
-  }
-
-  /* 規則優先序：沒紀錄 → 只喝飲料 → 下午咖啡 → 純水達標 → 一般 */
-  const leaves = !st.cups ? 1 : (st.pureDays === 0 ? 0 : Math.min(3, st.pureDays));
-  let msg, wilt = false;
-  if (!st.cups) {
-    msg = '這週還沒有飲品紀錄。到記錄頁點 <b>＋</b>，一杯也算。';
+  let msg;
+  if (!total) {
+    msg = '還沒有紀錄，一杯也算。';
   } else if (st.lateCaf >= 2) {
-    msg = '這週 ' + st.cups + ' 杯裡有 <b>' + st.caf + ' 杯含咖啡因</b>，其中 <b>' + st.lateCaf +
-      ' 杯</b>是下午 3 點後記的。想早點睡，3 點後換成水或無咖啡因的茶。';
+    msg = '有 <b>' + st.lateCaf + ' 杯</b>是下午三點後喝的，睡前換成水會更好睡。';
   } else if (st.onlyDays >= 2) {
-    msg = '有 <b>' + st.onlyDays + ' 天</b>只喝了飲料，沒有純水。小植物有點垂——今天補一杯白開水就好。';
-    wilt = true;
+    msg = '有 <b>' + st.onlyDays + ' 天</b>沒喝到純水，小植物有點垂。';
+  } else if (st.pure === total) {
+    msg = '全是<b>純水</b>，這週補得很穩。';
   } else if (st.pureDays >= 4) {
-    msg = '純水 <b>' + st.pureDays + ' 天</b>都有喝到，小植物長出新葉了。這週的節奏很穩。';
+    msg = '純水 <b>' + st.pureDays + ' 天</b>，小植物長出新葉了。';
   } else if (st.onlyDays === 1) {
-    msg = '有 <b>1 天</b>只喝了飲料，當天沒喝到純水。一天不算什麼，小植物提醒你一下。';
-    wilt = true;
+    msg = '有 <b>1 天</b>只喝飲料，補一杯白開水就好。';
   } else {
-    msg = '這週 ' + st.cups + ' 杯，純水佔 <b>' + Math.round(st.pure / total * 100) + '%</b>。再多一兩杯純水，小植物會長得快一點。';
+    msg = '純水佔 <b>' + Math.round(st.pure / total * 100) + '%</b>，再多一兩杯會更好。';
   }
 
-  h += '<div class="drk-plantrow">' + s2PlantSVG(leaves, wilt) +
-    '<div class="txt">' + (wilt ? '' : '<span class="who">管家</span>') + msg + '</div></div>';
-
+  let h = '<div class="dk-hero">' + s2DrinkArc(st) +
+    '<div class="dk-plant">' + s2PlantSVG(leaves, wilt, 64) + '</div>' +
+    '<div class="dk-total">' + (total ? '總計 <b>' + total + '</b> 杯' : '本週 0 杯') + '</div></div>';
+  if (total) {
+    h += '<div class="dk-leg">' + DRINK_KEYS.filter(function (k) { return st.by[k] > 0; }).map(function (k) {
+      return '<span>' + drinkCup(k, 15) + DRINK_TYPES[k].name + '<b>' + st.by[k] + '</b></span>';
+    }).join('') + '</div>';
+  }
+  h += '<div class="dk-tip"><i data-lucide="sparkles"></i><div>' + msg + '</div></div>';
   host.innerHTML = h;
   if (window.lucide) lucide.createIcons(host);
 }
@@ -7551,7 +7585,7 @@ function s2RenderWeekCard(cur, prev, monday, sunday) {
   host.innerHTML = '<div class="rv-card" id="weekCard">' +
     '<div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="activity"></i></span><b>本週摘要</b>' +
     '<span class="rv-right">' + mdShort(dateStr(monday)) + ' – ' + mdShort(dateStr(sunday)) + '</span></div>' +
-    '<div class="rv-sub" style="margin:7px 0 0">睡眠、專注、運動、喝水，跟自己的上週比。</div>' +
+    '' +
     '<div class="wm-grid" style="margin-top:10px">' + tiles + '</div>' +
     '<div class="wk7">' + strip + '</div>' +
     '<div class="wk-foot">' + foot + '</div></div>';
@@ -7579,20 +7613,17 @@ async function renderReview() {
     '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-butter"><i data-lucide="moon"></i></span><b>睡眠作息</b>' +
       '<div class="slp-nav"><button onclick="s2SleepShift(-1)" title="上個月">‹</button><span id="slpTitle">—</span>' +
       '<button id="slpNextBtn" onclick="s2SleepShift(1)" title="下個月">›</button></div></div>' +
-      '<div class="rv-sub">一根長條＝當天幾點睡到幾點起，越長睡越久；條寬固定不撐滿</div>' +
+      '<div class="rv-sub">一條＝當天幾點睡到幾點起，越長睡越久</div>' +
       '<div class="slp-wrap"><canvas id="slpChart"></canvas><div class="slp-empty" id="slpEmpty" style="display:none"></div></div>' +
       '<div class="slp-cmp" id="slpCmp"></div></div>' +
+    '<div class="rv-card drk-report" id="drinkReport"><div class="rv-h"><span class="ic-circle c-mint"><i data-lucide="droplets"></i></span><b>飲品</b>' +
+      '<span class="rv-right">近 7 天</span></div><div id="drinkReportBody"></div></div>' +
     '<div class="rv-card" id="wkReport"><div class="rv-h"><span class="ic-circle c-sage-l"><i data-lucide="footprints"></i></span><b>運動</b>' +
-      '<span class="rv-right">近 7 天</span></div>' +
-      '<div class="rv-sub">動了哪幾天、動了什麼。散步 10 分鐘也算。</div><div id="wkReportBody"></div></div>' +
-    '<div class="rv-card drk-report" id="drinkReport"><div class="rv-h"><span class="ic-circle c-mint"><i data-lucide="droplets"></i></span><b>飲品與小植物</b>' +
-      '<span class="rv-right">這週喝了什麼</span></div>' +
-      '<div class="rv-sub">只描述，不評價。小植物的葉子，是這週的純水天數。</div><div id="drinkReportBody"></div></div>' +
-    '<div class="rv-card" id="bowelReportCard"><div class="rv-h"><span class="ic-circle c-butter"><i data-lucide="check"></i></span><b>腸道節奏</b>' +
-      '<span class="rv-right">近 7 天</span></div>' +
-      '<div class="rv-sub">只記有沒有、順不順。便秘或腹瀉，都值得被看見。</div><div id="bowelReportBody"></div></div>' +
+      '<span class="rv-right">近 7 天</span></div><div id="wkReportBody"></div></div>' +
+    '<div class="rv-card" id="bowelReportCard"><div class="rv-h"><span class="ic-circle c-butter"><i data-lucide="check"></i></span><b>腸道</b>' +
+      '<span class="rv-right">近 7 天</span></div><div id="bowelReportBody"></div></div>' +
     '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="trending-up"></i></span><b>本週高光與低谷</b></div>' +
-      '<div class="rv-sub">跟本週自己的平均比，不是跟別人比</div><div id="s2Highlight"></div></div>' +
+      '<div id="s2Highlight"></div></div>' +
     '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-mint"><i data-lucide="tag"></i></span><b>最常做的事</b></div>' +
       '<div id="s2Tags"></div></div>';
 
@@ -8412,8 +8443,6 @@ function bindEvents() {
   $('#menuBtn').addEventListener('click', openDrawer);
   $('#drawerOverlay').addEventListener('click', closeDrawer);
   $('#sheetOverlay').addEventListener('click', closeSheet);
-  $('#fabBtn').addEventListener('click', openSheet);
-  $('#page-today .body').addEventListener('scroll', syncFab, { passive: true });
   $('#modalBackdrop').addEventListener('click', function(){ if (Date.now() < pcSuppressClickUntil) return; closeModal(); });
   /* S2-P11b：結果頁/專案卡長按手勢（绑在常駐 modalRoot 與 cardGrid） */
   var mr = document.getElementById('modalRoot');
@@ -8918,6 +8947,11 @@ function bindEvents() {
   $('#tQuitTop').addEventListener('click', minimizeTimer);
   $('#tMinus').addEventListener('click', () => adjustTimer(-60));
   $('#tPlus').addEventListener('click', () => adjustTimer(60));
+  const tMode = $('#tMode');
+  if (tMode) tMode.addEventListener('click', function (e) {
+    const b = e.target.closest('[data-tm]');
+    if (b) s2SetTimerMode(b.dataset.tm);
+  });
   $('#timerMini').addEventListener('click', () => {
     $('#timerOverlay').classList.add('show');
     $('#timerMini').classList.remove('show');
@@ -8968,15 +9002,6 @@ function initVitalsPad(){
   pad.addEventListener('touchend', end, { passive:false });
   pad.addEventListener('touchcancel', end, { passive:false });
 }
-
-function tagClick(e) {
-  const chip = e.target.closest('.tag-chip');
-  if (!chip) return;
-  const type = chip.dataset.type;
-  if (chip.dataset.add === '1') { addTag(type); return; }
-  toggleTag(type, chip.dataset.name);
-}
-
 /* ============================================================
    雲端同步（WorkBuddy 資料庫 · 輕應用資料底座）
    - IndexedDB 永遠是本地唯一真相；雲端表是鏡像/樞紐
@@ -9332,9 +9357,6 @@ function cloudFilterFieldOf(name) {
   if (name === 'settings') return '鍵';
   return '鍵'; // tags
 }
-function cloudFilterTypeOf(name) {
-  return (name === 'cards' || name === 'records' || name === 'menstrualCycles') ? 'number' : 'text';
-}
 function cloudFilterValueOf(name, r) {
   const def = SYNC_DEFS[name];
   if (name === 'cards' || name === 'records' || name === 'menstrualCycles') return r.id;
@@ -9429,7 +9451,6 @@ async function init() {
   await seedEmotions();
   await seedActivityExtras();
   bindEvents();
-  syncFab();
 
   (function () {
     const ld = parseDate(getLogicalDate());
@@ -9480,7 +9501,11 @@ function closeTopLayer() {
   if (__layerOn('focusOverlay')) { s2CloseFocus(); return true; }
   if (__layerOn('napSheet')) { slCloseNap(); return true; }
   if (__layerOn('sleepRoot')) { closeSleepModal(); return true; }
-  if (__layerOn('modalRoot')) { closeModal(); return true; }
+  if (__layerOn('modalRoot')) {
+    if (document.getElementById('pcTuneText') && typeof s2TuneBack === 'function' && pcResult) { s2TuneBack(); return true; }
+    if (document.getElementById('pcResultBody') && typeof s2LeavePlanResult === 'function') { s2LeavePlanResult(); return true; }
+    closeModal(); return true;
+  }
   if (c2FlippedEl) { c2HideStepView(c2FlippedEl); return true; }
   if (__layerOn('cyRoot')) { closeCycleSheet(); return true; }
   if (__layerOn('wkRoot')) { closeWorkoutSheet(); return true; }
@@ -9811,7 +9836,7 @@ async function s2RenderTags(records) {
 function s2PickTag(t) { s2TagSel = t; Promise.resolve(s2RenderTags(s2LastRecords)).catch(function () {}); }
 var s2LastRecords = [];
 
-/* 復盤：心情地圖（本週詳細情緒四維分布 · 方形 treemap） */
+/* 復盤：心情地圖（本週詳細情緒四維分布 · 純色塊 treemap） */
 function emotionQuadOf(name){
   var all = state.allEmotion || [];
   for (var i=0;i<all.length;i++){
@@ -9821,14 +9846,19 @@ function emotionQuadOf(name){
   for (var q in DETAIL_EMOTIONS){ if (DETAIL_EMOTIONS[q].items.indexOf(name) >= 0) return q; }
   return null;
 }
+const MT_NOTE = {
+  calm:'多數時候你是<b>平靜</b>的。這種安靜的理所當然，其實很難得。',
+  energized:'多數時候你很有<b>活力</b>。記得把這股勁留一點給自己。',
+  low:'這週<b>低落</b>比較多。沒力氣的日子，允許自己慢一點也沒關係。',
+  anxious:'這週<b>焦慮</b>比較多。緊繃的時候，先深呼吸一口氣，你已經撐很久了。'
+};
 function s2TreemapNodes(items, horizontal) {
   if (!items.length) return '';
   if (items.length === 1) {
-    var it = items[0], q = QUADRANTS[it.k], f = QUAD_FACE[it.k];
+    var it = items[0], q = QUADRANTS[it.k];
     return '<div class="mt-tile ' + q.cls + '" style="flex:' + it.v + '">' +
-      '<span class="mt-emoji">' + (MOOD_SVG[f] || '') + '</span>' +
-      '<span class="mt-label">' + (DETAIL_EMOTIONS[it.k] ? DETAIL_EMOTIONS[it.k].name : q.name) + '</span>' +
-      '<span class="mt-val">' + it.v + ' 天</span></div>';
+      '<span class="mt-label">' + q.short + '</span>' +
+      '<span class="mt-day">' + it.v + '<small>天</small></span></div>';
   }
   var total = 0; items.forEach(function (i) { total += i.v; });
   var half = total / 2, acc = 0, idx = 1;
@@ -9849,6 +9879,11 @@ async function s2RenderMoodMap(logs) {
   (logs || []).forEach(function (l) {
     var dms = (l && l.detailMoods) || [];
     var seen = {};   /* 同一天同一維度只算一次，維持「天」的意義 */
+    if (!dms.length) {
+      /* 舊資料只有 4 象限的 mood，也該算進地圖 */
+      var lq = normMood(l && l.mood);
+      if (lq) { var qq = MOODS[lq].quad; qcnt[qq] += 1; return; }
+    }
     dms.forEach(function (nm) {
       var q = emotionQuadOf(nm);
       if (q && qcnt[q] != null && !seen[q]) { qcnt[q] += 1; seen[q] = 1; }
@@ -9862,15 +9897,14 @@ async function s2RenderMoodMap(logs) {
   var items = QUAD_ORDER.filter(function (q) { return qcnt[q] > 0; })
     .map(function (q) { return { k:q, v:qcnt[q] }; })
     .sort(function (a, b) { return b.v - a.v; });
-  var html = '<div class="moodtree' + (items.length === 1 ? ' one' : '') + '">' + s2TreemapNodes(items, true) + '</div>';
-  var topQ = items[0].k;
-  var lowish = qcnt.low + qcnt.anxious;
-  var topName = DETAIL_EMOTIONS[topQ] ? DETAIL_EMOTIONS[topQ].name : QUADRANTS[topQ].name;
-  var insight = '這週最常記錄的是 <b>' + topName + '</b>（' + qcnt[topQ] + ' 天）';
-  if (lowish > days / 2) insight += '。緊繃和低落加起來比較多——你這段時間不容易，記得對自己溫柔一點。';
-  else insight += '。起起伏伏都正常，從來不需要每天都活力滿滿。';
-  html += '<div class="mood-ins">' + insight + '</div>';
-  host.innerHTML = html;
+  /* 並列時不硬選一個「最多」，改成平均的描述 */
+  var note = (items.length > 1 && items[0].v === items[1].v)
+    ? '這週的心情很平均，沒有哪一種特別多。起起伏伏都正常，不用每天都活力滿滿。'
+    : MT_NOTE[items[0].k];
+  host.innerHTML = '<div class="moodtree' + (items.length === 1 ? ' one' : '') + '">' +
+    s2TreemapNodes(items, true) + '</div><div class="mood-ins">' + note + '</div>';
+  var ts = host.querySelectorAll('.mt-tile');
+  for (var i = 0; i < ts.length; i++) ts[i].style.setProperty('--i', i);
 }
 
 async function s2RenderReviewExtras(logs, records) {
@@ -9972,19 +10006,22 @@ function s2DotsSync(passedMin) {
 
 function s2FocusSync() {
   if (!timer) return;
-  var left = Math.max(0, timer.left | 0);
-  var total = Math.max(1, timer.total | 0);
-  var animate = s2FlipLast >= 0 && s2FlipLast !== left;
-  if (left === s2FlipLast) return;
-  s2FlipLast = left;
-  s2FlipRender(left, animate);
-  s2DotsSync(Math.floor((total - left) / 60));
-  var pct = Math.min(100, Math.round((total - left) / total * 100));
+  var total = Math.max(1, timer.target | 0);
+  var main = timer.mode === 'up' ? Math.max(0, timer.elapsed | 0) : Math.max(0, total - (timer.elapsed | 0));
+  var animate = s2FlipLast >= 0 && s2FlipLast !== main;
+  if (main === s2FlipLast) return;
+  s2FlipLast = main;
+  s2FlipRender(main, animate);
+  var passedMin = Math.floor((timer.elapsed | 0) / 60);
+  s2DotsSync(passedMin);
+  var pct = Math.min(100, Math.round((timer.elapsed | 0) / total * 100));
   var disc = document.getElementById('focPieDisc');
   if (disc) disc.style.background = 'conic-gradient(#8B8FE8 ' + pct + '%, #37333F 0)';
   var pn = document.getElementById('focPieNum');
   if (pn) pn.textContent = pct + '%';
-  if (left <= 0) setTimeout(s2StopFocusOnly, 900);   /* finishTimer 已處理計時頁，這裡只收專注頁 */
+  var cap = document.getElementById('focFlipCap');
+  if (cap) cap.textContent = timer.mode === 'up' ? '已經過 · 只翻變動的那一位' : '剩餘時間 · 只翻變動的那一位';
+  if (timer.mode === 'down' && main <= 0) setTimeout(s2StopFocusOnly, 900);   /* finishTimer 已處理計時頁，這裡只收專注頁 */
 }
 
 function s2OpenFocus() {
@@ -9994,7 +10031,7 @@ function s2OpenFocus() {
   var nm = document.getElementById('focName');
   if (nm) nm.textContent = (timer.card && timer.card.name) || '專注中';
   s2FlipInit();
-  s2DotsBuild(Math.ceil((timer.total || 300) / 60));
+  s2DotsBuild(Math.ceil((timer.target || 300) / 60));
   s2FlipLast = -1;
   s2FocusSync();
   fo.classList.add('show');
@@ -10205,7 +10242,42 @@ async function s2ToggleMemory() {
 /* ---------- 三種 provider 的呼叫（Gemini / OpenAI 相容 / 無） ---------- */
 /* ---------- S2-P10：AI 一鍵拆微步驟（共用底層；s2CallLLM 維持原樣） ----------
    只送卡名＋給 AI 的補充給模型，不送筆記全文；沒接模型／Key 錯／429／離線都明說，不假裝拆好。 */
-async function s2LlmAsk(mode, system, user, maxTokens) {
+/* S2-P52：省 token 的呼叫層
+   ① Gemini 2.5／3 預設關閉「思考」——思考 token 按輸出價計費，拆步驟這種任務用不到
+   ② 要 JSON 的請求開原生 JSON 模式，少廢話、少解析失敗重試
+   ③ 每次呼叫記下 usage，設定頁看得到近 30 天用量
+   ④ 舊模型不認得上述參數時自動降級重試一次（400 不計費），並記住不再試 */
+var PC_USAGE_KEY = 'pcLlmUsage';
+function pcUsageLoad() {
+  try { var a = JSON.parse(localStorage.getItem(PC_USAGE_KEY) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; }
+}
+function pcUsageAdd(rec) {
+  try {
+    var a = pcUsageLoad();
+    a.push(rec);
+    if (a.length > 80) a = a.slice(-80);
+    localStorage.setItem(PC_USAGE_KEY, JSON.stringify(a));
+  } catch (e) { /* 無痕模式忽略 */ }
+}
+function pcUsageNum(n) {
+  n = n || 0;
+  return n >= 10000 ? Math.round(n / 1000) + 'k' : n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
+}
+function s2UsageHtml(mode, ep) {
+  var a = pcUsageLoad();
+  if (!a.length) return '<div class="usage"><b>AI 用量</b>：還沒有呼叫紀錄。一次拆解約 0.5k–1k tokens。</div>';
+  var since = Date.now() - 30 * 86400000;
+  var m = a.filter(function (x) { return (x.t || 0) >= since; });
+  var pin = 0, pout = 0, cache = 0;
+  m.forEach(function (x) { pin += x.p || 0; pout += x.o || 0; cache += x.c || 0; });
+  var peak = (mode === 'openai' && /deepseek/.test(ep || ''))
+    ? '<span class="u-tip">DeepSeek 尖峰費率約兩倍（台灣 09–12、14–18 點），其餘時段與週末較省。</span>' : '';
+  return '<div class="usage"><b>近 30 天</b>' + m.length + ' 次 · 合計 ' + pcUsageNum(pin + pout) + ' tokens' +
+    '<span class="u-sub">輸入 ' + pcUsageNum(pin) + ' · 輸出 ' + pcUsageNum(pout) +
+    (cache ? ' · 快取命中 ' + pcUsageNum(cache) : '') + '</span>' + peak + '</div>';
+}
+async function s2LlmAsk(mode, system, user, maxTokens, opts) {
+  opts = opts || {};
   var ctl = new AbortController();
   var to = setTimeout(function () { ctl.abort(); }, 20000);
   try {
@@ -10214,27 +10286,84 @@ async function s2LlmAsk(mode, system, user, maxTokens) {
       var key = await getSetting('geminiKey', '');
       if (!key) return { err: 'nokey' };
       var model = await getSetting('geminiModel', 'gemini-2.5-flash');
-      r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' +
-        encodeURIComponent(model) + ':generateContent?key=' + encodeURIComponent(key),
-        { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctl.signal,
-          body: JSON.stringify({ contents: [{ parts: [{ text: system + '\n\n' + user }] }],
-            generationConfig: { temperature: 0.4, maxOutputTokens: maxTokens || 320 } }) });
+      var url = 'https://generativelanguage.googleapis.com/v1beta/models/' +
+        encodeURIComponent(model) + ':generateContent?key=' + encodeURIComponent(key);
+      var gc = { temperature: opts.temp != null ? opts.temp : 0.4, maxOutputTokens: maxTokens || 320 };
+      var jsonKey = 'pcJsonNo:' + model, jsonOk = true;
+      try { jsonOk = localStorage.getItem(jsonKey) !== '1'; } catch (e) { /* ignore */ }
+      if (opts.json && jsonOk) gc.responseMimeType = 'application/json';
+      var wantThink = (await getSetting('pcThink', 'off')) === 'on';
+      var thinkKey = 'pcThinkNo:' + model, thinkOk = true;
+      try { thinkOk = localStorage.getItem(thinkKey) !== '1'; } catch (e) { /* ignore */ }
+      if (thinkOk && /gemini-3/.test(model)) gc.thinkingConfig = { thinkingLevel: wantThink ? 'high' : 'low' };
+      else if (!wantThink && thinkOk && /gemini-2\.5/.test(model)) gc.thinkingConfig = { thinkingBudget: 0 };
+      if (wantThink) gc.maxOutputTokens = Math.max(gc.maxOutputTokens, 2048);   /* 思考會吃掉輸出額度 */
+      var mk = function () {
+        return JSON.stringify({ contents: [{ parts: [{ text: system + '\n\n' + user }] }], generationConfig: gc });
+      };
+      r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctl.signal, body: mk() });
+      if (!r.ok && r.status === 400 && (gc.thinkingConfig || gc.responseMimeType)) {
+        if (gc.thinkingConfig) { delete gc.thinkingConfig; try { localStorage.setItem(thinkKey, '1'); } catch (e) { /* ignore */ } }
+        if (gc.responseMimeType) { delete gc.responseMimeType; try { localStorage.setItem(jsonKey, '1'); } catch (e) { /* ignore */ } }
+        r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctl.signal, body: mk() });
+      }
       if (!r.ok) return { err: r.status === 429 ? 'rate' : (r.status === 401 || r.status === 403) ? 'key' : 'http', status: r.status };
       var j = await r.json();
       var parts = (j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts) || [];
       text = parts.map(function (x) { return x.text || ''; }).join('').trim();
+      var u = j.usageMetadata || {};
+      pcUsageAdd({ t: Date.now(), m: model, p: u.promptTokenCount || 0,
+        o: (u.candidatesTokenCount || 0) + (u.thoughtsTokenCount || 0) });
     } else if (mode === 'openai') {
       var ep = await getSetting('llmEndpoint', 'https://api.openai.com/v1/chat/completions');
       var md = await getSetting('llmModel', 'gpt-4o-mini');
       var k2 = await getSetting('llmKey', '');
       if (!k2) return { err: 'nokey' };
+      var isDeep = /deepseek/.test(ep);
+      var wantThink = (await getSetting('pcThink', 'off')) === 'on';
+      var dThinkKey = 'pcThinkNo:' + md + ':' + ep, dThinkOk = true;
+      var dJsonKey = 'pcJsonNo:' + md + ':' + ep, dJsonOk = true;
+      try { dThinkOk = localStorage.getItem(dThinkKey) !== '1'; } catch (e) { /* ignore */ }
+      try { dJsonOk = localStorage.getItem(dJsonKey) !== '1'; } catch (e) { /* ignore */ }
+      var body = { model: md, temperature: opts.temp != null ? opts.temp : 0.4, max_tokens: maxTokens || 320,
+        messages: [{ role: 'system', content: system }, { role: 'user', content: user }] };
+      /* DeepSeek flash 的 thinking 預設為 enabled / effort high，思考token 按輸出計費；關掉才真的省 */
+      if (isDeep) {
+        body.thinking = { type: wantThink ? 'enabled' : 'disabled' };
+        if (wantThink) { body.reasoning_effort = 'low'; body.max_tokens = Math.max(body.max_tokens, 2048); }
+      }
+      /* 只對確定支援 JSON 模式的通路開啟，其餘靠提示詞約束，避免自架服務直接 400 */
+      if (opts.json && dJsonOk && /openai\.com|deepseek/.test(ep)) {
+        body.response_format = { type: 'json_object' };
+        /* DeepSeek 的 JSON 模式要求 prompt 裡出現字面 "json"，否則可能吐空白 */
+        if (isDeep) body.messages[0].content += '\nOutput valid json only.';
+      }
+      if (!dThinkOk) delete body.thinking;
+      var sendBody = function () {
+        return JSON.stringify(body);
+      };
       r = await fetch(ep, { method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + k2 }, signal: ctl.signal,
-        body: JSON.stringify({ model: md, temperature: 0.4, max_tokens: maxTokens || 320,
-          messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }) });
+        body: sendBody() });
+      if (!r.ok && r.status === 400 && (body.thinking || body.response_format)) {
+        var failedThinking = !!body.thinking, failedJson = !!body.response_format;
+        delete body.thinking; delete body.response_format; delete body.reasoning_effort;
+        try {
+          if (failedThinking) localStorage.setItem(dThinkKey, '1');
+          if (failedJson) localStorage.setItem(dJsonKey, '1');
+        } catch (e) { /* ignore */ }
+        r = await fetch(ep, { method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + k2 }, signal: ctl.signal,
+          body: sendBody() });
+      }
       if (!r.ok) return { err: r.status === 429 ? 'rate' : (r.status === 401 || r.status === 403) ? 'key' : 'http', status: r.status };
       var j2 = await r.json();
       text = ((j2.choices && j2.choices[0] && j2.choices[0].message && j2.choices[0].message.content) || '').trim();
+      var u2 = j2.usage || {};
+      var pd = u2.prompt_tokens_details || {}, cd = u2.completion_tokens_details || {};
+      pcUsageAdd({ t: Date.now(), m: md, p: u2.prompt_tokens || 0,
+        o: (u2.completion_tokens || 0) + (cd.reasoning_tokens || 0),
+        c: (pd.cached_tokens || 0) || (u2.prompt_cache_hit_tokens || 0) });
     } else return { err: 'off' };
     return text ? { text: text } : { err: 'empty' };
   } catch (e) { return { err: 'net' }; }
@@ -10272,6 +10401,16 @@ async function s2ToggleStep(id, idx, bitemEl, scopeEl) {
 
 var stpCtx = null;   // { id, name, steps[], done[], deleted }
 var stpGesture = null, stpLong = false, stpLongTimer = 0, stpDrag = null, stpSwipe = null, stpSuppressUntil = 0;
+var stpUndoTimer = 0;
+function stpArmUndoHide() {
+  clearTimeout(stpUndoTimer);
+  stpUndoTimer = setTimeout(function () {
+    if (!stpCtx || !stpCtx.deleted) return;
+    stpCtx.deleted = null;
+    var u = document.querySelector('#modalBox .pc-undo');
+    if (u) u.remove();
+  }, 5500);
+}
 
 async function s2OpenSpread(id) {
   var c = await ldb.cards.get(id);
@@ -10338,7 +10477,7 @@ function s2RenderSpread() {
 
 function s2CloseSpread() {
   stpCtx = null; stpGesture = null; stpDrag = null; stpSwipe = null;
-  clearTimeout(stpLongTimer);
+  clearTimeout(stpLongTimer); clearTimeout(stpUndoTimer);
   closeModal();
   Promise.resolve(renderCards()).then(function () { return drawCards(); }).catch(function () {});
 }
@@ -10381,12 +10520,14 @@ function s2StpDelete(i) {
   stpCtx.steps.splice(i, 1);
   stpCtx.done.splice(i, 1);
   stpCtx.deleted = { text: text, done: wasDone, index: i };
+  stpArmUndoHide();
   s2StpPersist();
   s2RenderSpread();
 }
 
 function s2StpUndo() {
   if (!stpCtx || !stpCtx.deleted) return;
+  clearTimeout(stpUndoTimer);
   var d = stpCtx.deleted;
   var at = Math.max(0, Math.min(d.index, stpCtx.steps.length));
   stpCtx.steps.splice(at, 0, d.text);
@@ -10499,21 +10640,6 @@ function finishStpDrag() {
     s2RenderSpread();
   }
 }
-
-function s2CleanSteps(raw) {
-  return String(raw || '').split(/\r?\n/).map(function (s) {
-    return s.trim()
-      .replace(/^\s*(?:\d+[\.、\)）]|[一二三四五六七八九十]+[\.、\)）]|[①-⑳]|[a-dA-D][\.、\)）]|[-•*·—])\s*/, '')
-      .replace(/^\s*step\s*\d*\s*[:：]?\s*/i, '')
-      .replace(/^["'「『]|["'」』]$/g, '')
-      .trim();
-  }).filter(function (s) {
-    if (!s || s.length < 2 || s.length > 40) return false;
-    if (/^(以下是|步驟如下|以下為|好的|Sure|Here are)/i.test(s)) return false;
-    return true;
-  }).slice(0, 6);
-}
-
 /* ---------- S2-P11a/b/c：PlanCoach 零阻力微教練（AI 拆解） ---------- */
 let pcResult = null;   // { cards:[{name,duration,energyMode,energyAmount,_i}], tip, ctx, draft }
 let pcTarget = null;   // {kind:'form'} | {kind:'card', id, name}
@@ -11109,21 +11235,21 @@ function s2StyleTone(style) {
 }
 
 async function s2BuildSplitPrompt(ctx) {
-  var profile = await getSetting('aiProfile', '');
+  var profile = String((await getSetting('aiProfile', '')) || '').slice(0, 400);
   var style = await getSetting('splitStyle', 'reason');
-  var sys = '你是一個專注零阻力啟動的微教練。請把使用者想做的事拆成 5-7 張動作卡片，每張都要能立刻動手。' +
-    '第一步必須是物理動作（例如打開軟體、拿出手機、站起來），1-5 分鐘內能完成。' +
-    '每張卡片只要三件事：卡名（動詞開頭、極短、具體到一看就知道要做什麼）、時間需求（分鐘）、能量流向與量級（1-5）。' +
-    '使用者可能附上「補充說明」描述他真正想做的樣子；請優先照它拆，不要換成一般化的通用做法；兩者衝突時以補充說明為準。' +
-    '強調立刻看得到的進展，不要出現複雜設定、安裝或長篇教學。' +
-    '最後給一句簡短的「行動錦囊」（卡住時的自救技巧）。' +
-    '\n\n【語言】一律使用繁體中文（台灣用語），不要出現簡體字。' +
-    '\n【語氣要求】' + s2StyleTone(style) +
+  var sys = '你是專注零阻力啟動的微教練。把使用者想做的事拆成 5-7 張能立刻動手的動作卡。' +
+    '第一步必須是 1-5 分鐘可完成的物理動作（打開軟體、拿手機、站起來）。' +
+    '每張卡只給：卡名（動詞開頭、極短、具體）、時間（分鐘）、能量流向與量級（1-5）。' +
+    '「補充說明」是使用者真正想做的樣子，優先照它拆、不要換成通用做法，衝突時以它為準。' +
+    '要立刻看得到進展，不要複雜設定、安裝或長篇教學。最後給一句行動錦囊。' +
+    '\n【語言】繁體中文（台灣用語），不得出現簡體字。' +
+    '\n【語氣】' + s2StyleTone(style) +
     '\n【關於我】' + (profile || '（未填）') +
-    '\n\n【輸出格式｜最高優先】只回一個 JSON 物件，不要 markdown fence、不要任何前後綴文字：' +
+    '\n【輸出】只回 JSON，不要 fence、不要任何文字：' +
     '{"cards":[{"name":"…","duration":3,"energyMode":"drain","energyAmount":2}],"tip":"…"}。' +
-    'energyMode 只能用 "restore"(恢復)|"neutral"(不消耗)|"drain"(消耗) 或中文；共 5-7 張卡；不要回 action、type。';
-  var user = '任務名稱：' + ctx.name +
+    'energyMode 只用 restore|neutral|drain；5-7 張；不要 action、type。';
+  var user = '任務：' + ctx.name +
+    '\n為什麼想做：' + (ctx.why || '（未填）') +
     '\n補充說明：' + (ctx.action || '（未填）') +
     '\n類型：' + ctx.type + '\n預計時間：約 ' + ctx.duration + ' 分鐘';
   return { sys: sys, user: user };
@@ -11169,7 +11295,7 @@ async function s2RunSplitCore(ctx) {
   var mode = await getSetting('geminiMode', 'off');
   if (mode !== 'gemini' && mode !== 'openai') return { err: 'off' };
   var p = await s2BuildSplitPrompt(ctx);
-  var res = await s2LlmAsk(mode, p.sys, p.user, 1600);
+  var res = await s2LlmAsk(mode, p.sys, p.user, 1000, { json: true });
   if (res.err) return res;
   var parsed = s2ParsePlanJson(res.text);
   if (parsed.err) return { err: 'parse' };
@@ -11180,6 +11306,8 @@ async function s2RunSplitCore(ctx) {
 async function s2SplitFromCard(id) {
   var c = await ldb.cards.get(id);
   if (!c) return;
+  var d0 = pcDraftRead({ kind: 'card', id: id });
+  if (d0 && s2ResumePlanDraft(d0)) { toast('接續上次的拆解'); return; }
   var mode0 = await getSetting('geminiMode', 'off');
   if (mode0 !== 'gemini' && mode0 !== 'openai') {
     openModal('<div class="m-head"><h2><i data-lucide="sparkles"></i> 先接一顆腦袋</h2>' +
@@ -11193,7 +11321,7 @@ async function s2SplitFromCard(id) {
   pcDraft = { type: c.type, projectName: c.projectName || '', icon: c.icon || '',
     deadline: c.deadline || '', isRepeating: !!c.isRepeating,
     energyMode: c.energyMode, energyAmount: c.energyAmount, duration: c.duration };
-  var ctx = { name: c.name, action: c.action || '', type: c.type || '自我成長', duration: c.duration || 10 };
+  var ctx = { name: c.name, action: c.action || '', why: c.why || '', type: c.type || '自我成長', duration: c.duration || 10 };
   toast('正在拆解「' + c.name + '」…');
   var res = await s2RunSplitCore(ctx);
   if (res.err) {
@@ -11204,6 +11332,7 @@ async function s2SplitFromCard(id) {
     toast(msg, 3200); return;
   }
   pcResult = { cards: res.data.cards, tip: res.data.tip, ctx: ctx, draft: Object.assign({}, pcDraft) };
+  pcDeleted = null; clearTimeout(pcUndoTimer);
   s2OpenPlanResult();
 }
 
@@ -11216,6 +11345,8 @@ async function s2AiSplitSteps(silent) {
     if (!nameEl) return;
     var name = (nameEl.value || '').trim();
     if (!name) { toast('先填卡名，我才知道要拆什麼'); nameEl.focus(); return; }
+    var df = pcDraftRead({ kind: 'form', name: name });
+    if (df && s2ResumePlanDraft(df)) { toast('接續上次的拆解'); return; }
     var mode0 = await getSetting('geminiMode', 'off');
     if (mode0 !== 'gemini' && mode0 !== 'openai') {
       openModal('<div class="m-head"><h2><i data-lucide="sparkles"></i> 先接一顆腦袋</h2>' +
@@ -11227,7 +11358,8 @@ async function s2AiSplitSteps(silent) {
     }
     pcDraft = Object.assign({}, window._cardDraft || {});
     pcTarget = { kind: 'form', name: name };
-    ctx = { name: name, action: actEl ? (actEl.value || '').trim() : '',
+    var whyEl = document.getElementById('fWhy');
+    ctx = { name: name, action: actEl ? (actEl.value || '').trim() : '', why: whyEl ? (whyEl.value || '').trim() : '',
       type: pcDraft.type || '自我成長', duration: pcDraft.duration || 10 };
   } else {
     if (!pcResult) return;
@@ -11257,18 +11389,241 @@ async function s2AiSplitSteps(silent) {
     return;
   }
   pcResult = { cards: res.data.cards, tip: res.data.tip, ctx: ctx, draft: Object.assign({}, pcDraft || {}) };
+  pcDeleted = null; clearTimeout(pcUndoTimer);
   s2OpenPlanResult();
   if (!silent) toast('拆好 ' + pcResult.cards.length + ' 張卡');
 }
 
-function s2OpenPlanResult() {
+/* ---------- S2-P51：拆解草稿（返回不丟失） ---------- */
+var PC_DRAFT_KEY = 'pcSplitDrafts_v1';
+var PC_DRAFT_DAYS = 7;
+var pcTipBusy = false, pcUndoTimer = 0;
+
+function pcDraftKeyOf(t) {
+  if (!t) return '';
+  if (t.kind === 'card') return 'card:' + t.id;
+  return 'form:' + String(t.name || '').trim();
+}
+function pcDraftAll() {
+  try {
+    var o = JSON.parse(localStorage.getItem(PC_DRAFT_KEY) || '{}');
+    return (o && typeof o === 'object') ? o : {};
+  } catch (e) { return {}; }
+}
+function pcDraftStore(map) {
+  try { localStorage.setItem(PC_DRAFT_KEY, JSON.stringify(map)); } catch (e) { /* 容量滿就放棄草稿，不影響主流程 */ }
+}
+function pcDraftRead(target) {
+  var k = pcDraftKeyOf(target);
+  if (!k) return null;
+  var map = pcDraftAll(), d = map[k];
+  if (!d) return null;
+  if (!d.ts || Date.now() - d.ts > PC_DRAFT_DAYS * 86400000) {
+    delete map[k]; pcDraftStore(map); return null;
+  }
+  return d;
+}
+function pcDraftForCard(id) { return pcDraftRead({ kind: 'card', id: id }); }
+function pcDraftClear(target) {
+  var k = pcDraftKeyOf(target);
+  if (!k) return;
+  var map = pcDraftAll();
+  if (map[k]) { delete map[k]; pcDraftStore(map); }
+}
+function pcSaveDraft() {
+  if (!pcResult || !pcTarget) return;
+  var k = pcDraftKeyOf(pcTarget);
+  if (!k) return;
+  if (!Array.isArray(pcResult.cards) || !pcResult.cards.length) { pcDraftClear(pcTarget); return; }
+  pcEnsureTip();
+  var map = pcDraftAll();
+  map[k] = {
+    v: 1, ts: Date.now(),
+    target: { kind: pcTarget.kind, id: pcTarget.id, name: pcTarget.name },
+    cards: pcResult.cards.map(function (c) {
+      return { name: c.name, duration: c.duration, energyMode: c.energyMode, energyAmount: c.energyAmount };
+    }),
+    tip: pcResult.tip || '',
+    tipHistory: (pcResult.tipHistory || []).slice(0, 8),
+    tipIndex: pcResult.tipIndex,
+    ctx: pcResult.ctx || null,
+    draft: pcDraft || null
+  };
+  var keys = Object.keys(map).sort(function (a, b) { return (map[b].ts || 0) - (map[a].ts || 0); });
+  keys.slice(3).forEach(function (x) { delete map[x]; });   /* 只留最近 3 份 */
+  pcDraftStore(map);
+}
+function pcAgo(ts) {
+  var d = Date.now() - (ts || 0);
+  if (d < 60000) return '剛剛';
+  if (d < 3600000) return Math.floor(d / 60000) + ' 分鐘前';
+  if (d < 86400000) return Math.floor(d / 3600000) + ' 小時前';
+  var dt = new Date(ts);
+  return (dt.getMonth() + 1) + '月' + dt.getDate() + '日';
+}
+function s2ResumePlanDraft(d) {
+  if (!d || !Array.isArray(d.cards) || !d.cards.length) return false;
+  pcTarget = d.target;
+  pcDraft = d.draft || {};
+  pcResult = {
+    cards: d.cards.filter(function (c) { return c && c.name; }).slice(0, 7).map(function (c, i) { return Object.assign({}, c, { _i: i }); }),
+    tip: d.tip || '',
+    tipHistory: Array.isArray(d.tipHistory) ? d.tipHistory.slice() : (d.tip ? [d.tip] : []),
+    tipIndex: (typeof d.tipIndex === 'number') ? d.tipIndex : 0,
+    ctx: d.ctx || { name: (d.target && d.target.name) || '', type: '自我成長', duration: 10 }
+  };
+  pcDeleted = null;
+  s2OpenPlanResult({ resumed: d.ts });
+  return true;
+}
+function s2LeavePlanResult() {
+  if (!pcResult) { closeModal(); return; }
+  var keep = (pcResult.cards && pcResult.cards.length) ? true : false;
+  var cid = (pcTarget && pcTarget.kind === 'card') ? pcTarget.id : null;
+  if (keep) {
+    pcSaveDraft();
+    toast((pcTarget && pcTarget.kind === 'form') ? '已幫你留著，再按「AI 拆步驟」就能接上' : '已幫你留著，回卡庫點「繼續拆解」就能接上');
+  }
+  closeModal();
+  clearTimeout(pcUndoTimer);
+  pcResult = null; pcTarget = null; pcDraft = null; pcDeleted = null; pcTipBusy = false;
+  if (cid != null) setTimeout(function () { Promise.resolve(renderCards()).catch(function () { /* 回到卡庫失敗不影響 */ }); }, 80);
+}
+
+function s2OpenPlanResult(opts) {
+  var resumed = (opts && opts.resumed) ? opts.resumed : 0;
   openModal('<div class="m-head"><h2><i data-lucide="sparkles"></i> 拆成步驟</h2>' +
-    '<button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>' +
+    '<button class="m-close" onclick="s2LeavePlanResult()" aria-label="關閉"><i data-lucide="x"></i></button></div>' +
     '<div class="pc-target">套用到「<b>' + esc(pcTargetLabel()) + '</b>」</div>' +
+    (resumed ? '<div class="pc-draftbar"><i data-lucide="rotate-ccw"></i><span class="d-txt">上次的拆解還在（' + esc(pcAgo(resumed)) + '），先幫你接著</span><button type="button" id="pcDraftDrop">丟棄</button></div>' : '') +
     '<div id="pcResultBody"></div>');
   $('#modalBox').classList.add('pc-modal');
   s2RenderPlanResult();
+  var drop = document.getElementById('pcDraftDrop');
+  if (drop) drop.onclick = function () {
+    var cid = (pcTarget && pcTarget.kind === 'card') ? pcTarget.id : null;
+    pcDraftClear(pcTarget);
+    closeModal();
+    pcResult = null; pcTarget = null; pcDraft = null; pcDeleted = null; pcTipBusy = false;
+    clearTimeout(pcUndoTimer);
+    toast('已丟棄上次的拆解');
+    if (cid != null) setTimeout(function () { Promise.resolve(renderCards()).catch(function () { /* ignore */ }); }, 80);
+  };
   if (window.lucide) lucide.createIcons(document.getElementById('modalRoot'));
+}
+
+/* ---------- S2-P51：錦囊（可單獨生成、前後翻） ---------- */
+function pcEnsureTip() {
+  if (!pcResult) return;
+  if (!Array.isArray(pcResult.tipHistory)) pcResult.tipHistory = pcResult.tip ? [pcResult.tip] : [];
+  if (typeof pcResult.tipIndex !== 'number' || pcResult.tipIndex < 0 || pcResult.tipIndex >= pcResult.tipHistory.length) {
+    pcResult.tipIndex = pcResult.tipHistory.length - 1;
+  }
+  pcResult.tip = pcResult.tipHistory[pcResult.tipIndex] || '';
+}
+function pcTipHtml() {
+  pcEnsureTip();
+  var h = pcResult.tipHistory, i = pcResult.tipIndex;
+  var cur = h[i] || '';
+  return '<div class="pc-tip" id="pcTipBox">' +
+    '<div class="pc-tip-h"><span class="lbl"><i data-lucide="sparkles"></i>行動錦囊</span>' +
+      (h.length ? '<span class="pc-tip-n">' + (i + 1) + '/' + h.length + '</span>' : '') +
+      '<span class="pc-tip-nav">' +
+        '<button type="button" data-tip="prev" aria-label="上一個錦囊"' + (i <= 0 ? ' disabled' : '') + '><i data-lucide="chevron-left"></i></button>' +
+        '<button type="button" data-tip="next" aria-label="下一個錦囊"' + (i >= h.length - 1 ? ' disabled' : '') + '><i data-lucide="chevron-right"></i></button>' +
+        '<button type="button" class="gen" data-tip="gen"><i data-lucide="rotate-ccw"></i>' + (cur ? '換一句' : '生成') + '</button>' +
+      '</span></div>' +
+    '<div class="pc-tip-txt">' + (cur ? esc(cur) : '<span class="pc-tip-empty">還沒有錦囊，可以單獨讓 AI 給一句。</span>') + '</div>' +
+  '</div>';
+}
+function pcRenderTipOnly() {
+  var box = document.getElementById('pcTipBox');
+  if (!box || !pcResult) return;
+  var wrap = document.createElement('div');
+  wrap.innerHTML = pcTipHtml();
+  var nb = wrap.firstElementChild;
+  if (!nb) return;
+  box.replaceWith(nb);
+  if (window.lucide) lucide.createIcons(nb);
+}
+function pcTipAction(a) {
+  if (!pcResult || pcTipBusy) return;
+  pcEnsureTip();
+  if (a === 'gen') { s2GenTip(); return; }
+  var h = pcResult.tipHistory, i = pcResult.tipIndex;
+  if (a === 'prev' && i > 0) pcResult.tipIndex = i - 1;
+  else if (a === 'next' && i < h.length - 1) pcResult.tipIndex = i + 1;
+  else return;
+  pcResult.tip = h[pcResult.tipIndex] || '';
+  pcSaveDraft();
+  pcRenderTipOnly();
+}
+function s2CleanTip(raw) {
+  var t = String(raw || '').trim().split('\n')[0].trim();
+  t = t.replace(/^```[a-z]*\s*/i, '').replace(/```$/, '').trim();
+  t = t.replace(/^(行動)?錦囊\s*[:：]\s*/, '');
+  t = t.replace(/^[「『“"'\s]+|[」』”"'\s]+$/g, '').trim();
+  return t.slice(0, 80);
+}
+async function s2GenTip() {
+  if (!pcResult || pcTipBusy) return;
+  var r0 = pcResult;
+  var mode = await getSetting('geminiMode', 'off');
+  if (mode !== 'gemini' && mode !== 'openai') {
+    toast('錦囊需要一顆腦袋，先到管家接模型');
+    return;
+  }
+  pcTipBusy = true;
+  pcEnsureTip();
+  var box = document.getElementById('pcTipBox');
+  if (box) {
+    var gen = box.querySelector('[data-tip="gen"]');
+    if (gen) {
+      gen.disabled = true; gen.classList.add('loading');
+      gen.innerHTML = '<i data-lucide="rotate-ccw"></i>想句中';
+      if (window.lucide) lucide.createIcons(gen);
+    }
+  }
+  var names = pcResult.cards.map(function (c) { return c.name; });
+  var ctx = pcResult.ctx || {};
+  var prev = (pcResult.tipHistory || []).filter(Boolean).slice(-4);
+  var sys = '你是「行動錦囊」顧問。使用者卡住時，你要給一句能立刻照做的自救提醒。' +
+    '規則：25 字內、具體可執行、像朋友在旁邊提醒、不要空泛鼓勵、不要引號、不要 emoji、不要用「你可以」開頭。' +
+    '只回那一句話，不要任何前綴或解釋。一律使用繁體中文（台灣用語），不要簡體字。';
+  var user = '任務：' + (ctx.name || pcTargetLabel()) +
+    (ctx.why ? '\n為什麼想做：' + ctx.why : '') +
+    (ctx.action ? '\n補充：' + ctx.action : '') +
+    '\n目前的步驟：' + names.map(function (x, i) { return (i + 1) + '. ' + x; }).join(' / ') +
+    (prev.length ? '\n不要和這幾句重複：' + prev.join(' ｜ ') : '');
+  var res = await s2LlmAsk(mode, sys, user, 100, { temp: 0.8 });
+  pcTipBusy = false;
+  /* 生成途中按了返回或換了目標：這一句就丟掉，不要寫進新的結果 */
+  if (!pcResult || pcResult !== r0 || !document.getElementById('pcTipBox')) return;
+  if (res.err) {
+    toast(res.err === 'rate' ? '額度用完了，稍後再想' : res.err === 'net' ? '連不上模型，錦囊沒換' : '這次沒拿到錦囊，再試一次');
+    pcRenderTipOnly();
+    return;
+  }
+  var tip = s2CleanTip(res.text);
+  if (!tip) { toast('AI 這次沒給出錦囊，再試一次'); pcRenderTipOnly(); return; }
+  if (!Array.isArray(pcResult.tipHistory)) pcResult.tipHistory = [];
+  pcResult.tipHistory.push(tip);
+  if (pcResult.tipHistory.length > 8) pcResult.tipHistory.shift();
+  pcResult.tipIndex = pcResult.tipHistory.length - 1;
+  pcResult.tip = tip;
+  pcSaveDraft();
+  pcRenderTipOnly();
+  toast('換了一句錦囊');
+}
+function pcArmUndoHide() {
+  clearTimeout(pcUndoTimer);
+  pcUndoTimer = setTimeout(function () {
+    if (!pcDeleted) return;
+    pcDeleted = null;
+    var u = document.querySelector('#pcResultBody .pc-undo');
+    if (u) u.remove();
+    pcSaveDraft();
+  }, 5500);
 }
 
 function pcTargetLabel() {
@@ -11291,6 +11646,7 @@ function s2RenderPlanResult() {
     var u2 = document.getElementById('pcUndo2');
     if (u2) u2.onclick = function (e) { e.stopPropagation(); s2UndoDeletePlanCard(); };
     if (window.lucide) lucide.createIcons(host);
+    pcSaveDraft();
     return;
   }
   host.innerHTML =
@@ -11314,7 +11670,7 @@ function s2RenderPlanResult() {
         '<button type="button" class="pc-more" data-more="' + i + '" aria-label="更多操作"><i data-lucide="more-vertical"></i></button>' +
       '</div>';
     }).join('') + '</div>' +
-    (pcResult.tip ? '<div class="pc-tip"><i data-lucide="sparkles"></i><span><b>行動錦囊：</b>' + esc(pcResult.tip) + '</span></div>' : '') +
+    pcTipHtml() +
     '<div class="pc-res-foot">' +
       '<button class="save2" id="pcApply"><i data-lucide="check"></i>套用為步驟（' + n + '）</button>' +
       '<div class="pc-res-sub">套用後可在卡片背面逐項勾選；行動錦囊會顯示在計時頁</div>' +
@@ -11329,6 +11685,12 @@ function s2RenderPlanResult() {
   if (ub) ub.onclick = function (e) { e.stopPropagation(); s2UndoDeletePlanCard(); };
   /* 點空白處收起行內選單；點三點開選單 */
   host.onclick = function (e) {
+    var tb = e.target.closest('[data-tip]');
+    if (tb) {
+      e.stopPropagation();
+      if (!tb.disabled) pcTipAction(tb.dataset.tip);
+      return;
+    }
     var more = e.target.closest('.pc-more');
     if (more && !e.target.closest('.pc-menu')) {
       e.stopPropagation();
@@ -11340,6 +11702,7 @@ function s2RenderPlanResult() {
     if (!e.target.closest('.pc-menu')) closePcMenu();
   };
   if (window.lucide) lucide.createIcons(host);
+  pcSaveDraft();
 }
 
 function openPcMenu(cardEl, i) {
@@ -11390,6 +11753,7 @@ function s2DeletePlanCard(i) {
   var el = document.querySelector('#pcResList .pc-res-card[data-i="' + i + '"]');
   var apply = function () {
     pcDeleted = { card: card, index: i };
+    pcArmUndoHide();
     pcResult.cards.splice(i, 1);
     pcResult.cards.forEach(function (c, k) { c._i = k; });
     s2RenderPlanResult();
@@ -11401,6 +11765,7 @@ function s2DeletePlanCard(i) {
 
 function s2UndoDeletePlanCard() {
   if (!pcDeleted || !pcResult) return;
+  clearTimeout(pcUndoTimer);
   var at = Math.max(0, Math.min(pcDeleted.index, pcResult.cards.length));
   pcResult.cards.splice(at, 0, pcDeleted.card);
   pcResult.cards.forEach(function (c, k) { c._i = k; });
@@ -11413,7 +11778,9 @@ async function s2ApplyPlanToSteps() {
   if (!pcResult || !pcResult.cards.length) return;
   var names = pcResult.cards.map(function (c) { return c.name; }).filter(Boolean);
   if (!names.length) { toast('沒有可套用的步驟'); return; }
+  pcEnsureTip();
   var tip = pcResult.tip || '';
+  var tgt = pcTarget ? { kind: pcTarget.kind, id: pcTarget.id, name: pcTarget.name } : null;
   var btn = document.getElementById('pcApply');
   if (btn) btn.disabled = true;
 
@@ -11431,6 +11798,7 @@ async function s2ApplyPlanToSteps() {
         updatedAt: Date.now()
       });
       CloudSync.notifyLocalChange('cards', null);
+      if (tgt) pcDraftClear(tgt);
       closeModal(); pcResult = null; pcTarget = null; pcDraft = null; pcDeleted = null;
       await renderCards(); await drawCards(); switchTab('cards');
       toast('已套用 ' + names.length + ' 個步驟');
@@ -11446,7 +11814,8 @@ async function s2ApplyPlanToSteps() {
   if (ta) ta.value = names.join('\n');
   var ti = document.getElementById('fTip');
   if (ti && tip && !ti.value.trim()) ti.value = tip;
-  closeModal(); pcResult = null; pcTarget = null; pcDeleted = null;
+  if (tgt) pcDraftClear(tgt);
+  closeModal(); pcResult = null; pcTarget = null; pcDraft = null; pcDeleted = null;
   toast('已填入 ' + names.length + ' 個步驟');
   setTimeout(function () {
     var el = document.getElementById('fSteps');
@@ -11461,14 +11830,19 @@ function s2CardToPlan(c) {
     energyMode: c.energyMode || 'neutral', energyAmount: c.energyAmount || 3 };
 }
 
+function s2TuneBack() {
+  if (pcResult && pcTarget) { s2OpenPlanResult(); return; }
+  closeModal();
+}
 function s2OpenTuneModal(target) {
   var isExisting = target && target.cardId != null;
   var old = isExisting ? (ldb.cards.get(target.cardId)) : null;
+  var back = (!isExisting && pcResult) ? 's2TuneBack()' : 'closeModal()';
   var head = '<div class="m-head"><h2><i data-lucide="wand-2"></i> 想怎麼改這一步？</h2>' +
-    '<button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>';
+    '<button class="m-close" onclick="' + back + '"><i data-lucide="x"></i></button></div>';
   var body = '<div class="imp-hint">用一句話說就好，例如「太難了，拆小一點」「第一步改成站起來」「只要 1 分鐘」。其他欄位我會盡量保留。</div>' +
     '<div class="fld"><textarea class="input" id="pcTuneText" rows="3" placeholder="例如：第一步改成站起來，只要 1 分鐘"></textarea></div>' +
-    '<div class="tu-foot"><button class="btn btn-ghost" onclick="closeModal()">取消</button>' +
+    '<div class="tu-foot"><button class="btn btn-ghost" onclick="' + back + '">取消</button>' +
     '<button class="btn btn-primary" id="pcTuneGo"><i data-lucide="sparkles"></i>交給 AI 改</button></div>';
   openModal(head + body);
   var go = document.getElementById('pcTuneGo');
@@ -11500,7 +11874,7 @@ async function s2ApplyTune(target) {
     '嚴格依照使用者的修改意見調整，其餘欄位盡量保留原值。能量流向只能是 restore|neutral|drain。' +
     '一律使用繁體中文（台灣用語），不要簡體字。';
   var user = '原卡：' + JSON.stringify(oldCard) + '\n修改意見：' + opinion;
-  var res = await s2LlmAsk(mode, sys, user, 400);
+  var res = await s2LlmAsk(mode, sys, user, 300, { json: true });
   if (go) { go.disabled = false; go.textContent = '交給 AI 改'; }
   if (res.err) { toast(res.err === 'rate' ? '額度用完了，稍後再試' : '微調失敗，原卡還在'); return; }
   var raw = String(res.text || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
@@ -11543,14 +11917,13 @@ function s2ParseOrder(raw, n) {
 
 async function s2AiReorder() {
   if (!pcResult || pcResult.cards.length < 2) return;
-  var sys = '你是排序助手。把下面的動作卡按「零阻力啟動 → 逐步推進 → 收尾」的邏輯先後順序重排。' +
-    '只回 {"order":[0,2,1,…]}，order 是卡片的 _i 索引（從 0 開始），包含全部索引且不重複。' +
-    '不要 markdown fence、不要任何文字。';
-  var user = JSON.stringify(pcResult.cards.map(function (c) { return { _i: c._i, name: c.name, action: c.action }; }));
+  var sys = '你是排序助手。把動作卡按「零阻力啟動 → 逐步推進 → 收尾」重排。' +
+    '使用者會給 [[索引, 卡名], …]。只回 {"order":[0,2,1,…]}，包含全部索引、不重複，不要其他文字。';
+  var user = JSON.stringify(pcResult.cards.map(function (c) { return [c._i, c.name]; }));
   var btn = document.getElementById('pcAiSort');
   if (btn) { btn.disabled = true; }
   var mode = await getSetting('geminiMode', 'off');
-  var res = await s2LlmAsk(mode, sys, user, 200);
+  var res = await s2LlmAsk(mode, sys, user, 120, { json: true });
   if (btn) { btn.disabled = false; }
   if (res.err) { toast('排序失敗，順序不變'); return; }
   var order = s2ParseOrder(res.text, pcResult.cards.length);
@@ -11698,49 +12071,16 @@ function finishPcDrag() {
 
 async function s2CallLLM(question) {
   var mode = await getSetting('geminiMode', 'off');
+  if (mode !== 'gemini' && mode !== 'openai') return { err: 'nokey' };
   var summary = await s2BuildSummary();
   var sys = '你是「下班後行動啟動器」裡的管家。語氣溫暖、簡短（150 字內）、不說教。' +
     '只能根據下面提供的紀錄摘要回答；摘要沒有的事就明說不知道，不要編造。' +
     '最後給一個具體、今天就能做的小行動。不要要求使用者提供更多個資。' +
     '一律使用繁體中文（台灣用語）回覆，不要簡體字。';
   var q = '【本週紀錄摘要】\n' + summary + '\n\n【使用者提問】\n' + question;
-  var ctl = new AbortController();
-  var to = setTimeout(function () { ctl.abort(); }, 20000);
-  try {
-    var r, text = '';
-    if (mode === 'gemini') {
-      var key = await getSetting('geminiKey', '');
-      if (!key) return { err: 'nokey' };
-      var model = await getSetting('geminiModel', 'gemini-2.5-flash');
-      r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' +
-        encodeURIComponent(model) + ':generateContent?key=' + encodeURIComponent(key),
-        { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctl.signal,
-          body: JSON.stringify({ contents: [{ parts: [{ text: sys + '\n\n' + q }] }],
-            generationConfig: { temperature: 0.7, maxOutputTokens: 500 } }) });
-      if (!r.ok) return { err: r.status === 429 ? 'rate' : (r.status === 401 || r.status === 403) ? 'key' : 'http', status: r.status };
-      var j = await r.json();
-      var parts = (j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts) || [];
-      text = parts.map(function (x) { return x.text || ''; }).join('').trim();
-    } else if (mode === 'openai') {
-      var ep = await getSetting('llmEndpoint', 'https://api.openai.com/v1/chat/completions');
-      var md = await getSetting('llmModel', 'gpt-4o-mini');
-      var k2 = await getSetting('llmKey', '');
-      if (!k2) return { err: 'nokey' };
-      r = await fetch(ep, { method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + k2 },
-        signal: ctl.signal,
-        body: JSON.stringify({ model: md, temperature: 0.7, max_tokens: 500,
-          messages: [{ role: 'system', content: sys }, { role: 'user', content: q }] }) });
-      if (!r.ok) return { err: r.status === 429 ? 'rate' : (r.status === 401 || r.status === 403) ? 'key' : 'http', status: r.status };
-      var j2 = await r.json();
-      text = ((j2.choices && j2.choices[0] && j2.choices[0].message && j2.choices[0].message.content) || '').trim();
-    } else {
-      return { err: 'nokey' };
-    }
-    return text ? { text: text } : { err: 'empty' };
-  } catch (e) {
-    return { err: 'net', mode: mode };
-  } finally { clearTimeout(to); }
+  var res = await s2LlmAsk(mode, sys, q, 480, { temp: 0.7 });
+  if (res.err === 'net') res.mode = mode;
+  return res;
 }
 
 async function s2ButlerSend() {
@@ -11964,6 +12304,8 @@ async function s2OpenApiModal() {
   var kk = await getSetting('llmKey', '');
   var prof = await getSetting('aiProfile', '');
   var sty = await getSetting('splitStyle', 'reason');
+  var think = await getSetting('pcThink', 'off');
+  var usage = s2UsageHtml(mode, ep);
   s2ApiMode = mode;
   var html = '<div class="m-head"><h2><i data-lucide="bot"></i> 接上一顆腦袋</h2>' +
     '<button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>' +
@@ -11985,7 +12327,7 @@ async function s2OpenApiModal() {
         '<input type="password" id="s2Key" placeholder="AIza…（存於本機）" value="' + esc(key) + '"></div>' +
       '<div class="fld"><label>模型</label><select id="s2Model">' +
         '<option value="gemini-2.5-flash"' + (model === 'gemini-2.5-flash' ? ' selected' : '') + '>gemini-2.5-flash（免費層）</option>' +
-        '<option value="gemini-2.5-flash-lite"' + (model === 'gemini-2.5-flash-lite' ? ' selected' : '') + '>gemini-2.5-flash-lite（額度更寬）</option>' +
+        '<option value="gemini-2.5-flash-lite"' + (model === 'gemini-2.5-flash-lite' ? ' selected' : '') + '>gemini-2.5-flash-lite（最省、額度更寬）</option>' +
       '</select></div>' +
       '<button class="bt-mini" style="margin-top:8px" onclick="s2ApiClearKey()"><i data-lucide="trash-2"></i> 清除本機 Key</button>' +
     '</div>' +
@@ -12018,7 +12360,12 @@ async function s2OpenApiModal() {
         '<option value="reason"' + (sty === 'reason' ? ' selected' : '') + '>🤖 理性直接</option>' +
         '<option value="gentle"' + (sty === 'gentle' ? ' selected' : '') + '>🌿 溫柔鼓勵</option>' +
         '<option value="game"' + (sty === 'game' ? ' selected' : '') + '>🎮 遊戲化</option>' +
-      '</select></div></div>' +
+      '</select></div>' +
+      '<div class="fld"><label>深度思考 <span class="hint">省 token</span></label><select id="pcThink">' +
+        '<option value="off"' + (think !== 'on' ? ' selected' : '') + '>關（拆解更快、更省）</option>' +
+        '<option value="on"' + (think === 'on' ? ' selected' : '') + '>開（多花 2–4 倍 token 換推理）</option>' +
+      '</select><small>Gemini 2.5 與 DeepSeek flash 預設都會先「想」再回答，思考也按輸出計費。拆步驟、換錦囊這類任務關掉就夠用。</small></div></div>' +
+    '<div class="usage" id="s2Usage">' + usage + '</div>' +
     '<div class="quota" id="s2Quota">' + s2QuotaHtml(mode) + '</div>' +
     '<div class="priv"><b>隱私</b>：Key 只存在這台裝置的 IndexedDB。我們只送統計摘要，' +
       '不送密碼、合約或筆記內容；純前端存放請勿在共用裝置上留存。<br>' +
@@ -12136,6 +12483,7 @@ async function s2ApiQuota() {
 async function s2ApiSave() {
   if (document.getElementById('pcProfile')) await setSetting('aiProfile', ((document.getElementById('pcProfile') || {}).value || '').trim());
   if (document.getElementById('pcStyle')) await setSetting('splitStyle', (document.getElementById('pcStyle') || {}).value || 'reason');
+  if (document.getElementById('pcThink')) await setSetting('pcThink', (document.getElementById('pcThink') || {}).value || 'off');
   var m = s2ApiMode;
   if (m === 'gemini') {
     var k = ((document.getElementById('s2Key') || {}).value || '').trim();
