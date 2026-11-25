@@ -281,6 +281,7 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .tag-chip { padding:6px 11px; border-radius:99px; background:var(--card); color:var(--muted); font-size:11px; font-weight:800; box-shadow:var(--sh); cursor:pointer; }
 .tag-chip.on { background:var(--primary); color:#fff; }
 .tag-chip.add { color:var(--primary); font-weight:900; background:var(--soft); box-shadow:none; }
+.tag-chips button.tag-chip { border:0; font-family:inherit; }
 #cardCount { font-size:11px; font-weight:800; color:var(--muted); margin-bottom:2px; }
 /* P29：標籤管理 */
 .tag-tabs{display:flex;gap:6px;margin-bottom:10px;}
@@ -301,10 +302,11 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .tag-add-row select{flex:0 0 auto;padding-left:8px;padding-right:8px;font-size:12px;}
 .tag-mgr-list{display:flex;flex-direction:column;gap:6px;max-height:50vh;overflow-y:auto;}
 .tag-mgr-row{display:flex;align-items:center;justify-content:space-between;background:var(--bg);border-radius:10px;padding:9px 12px;font-size:12.5px;font-weight:800;color:var(--ink);}
+.tag-mgr-row em{font-style:normal;font-size:10px;font-weight:700;color:var(--muted);margin-left:6px;}
 .tag-del{width:26px;height:26px;border-radius:8px;border:none;background:#FBE3DD;color:var(--danger);font-weight:900;cursor:pointer;font-size:11px;}
 /* ---------- P29：記錄頁重構（折疊 / 活動網格 / pill / 2D Vitals） ---------- */
 /* 修復標題被手機狀態欄遮擋 */
-.pg-head.rec-head{padding-top:calc(16px + env(safe-area-inset-top));}
+.pg-head.rec-head{padding-top:calc(12px + env(safe-area-inset-top));padding-bottom:32px;}
 /* 折疊面板 */
 .rec-acc{background:var(--card);border-radius:16px;box-shadow:var(--sh);overflow:hidden;flex:0 0 auto;}
 .rec-acc .acc-hd{display:flex;align-items:center;gap:9px;padding:13px 14px;cursor:pointer;font-size:13.5px;font-weight:900;color:var(--ink);user-select:none;}
@@ -451,15 +453,15 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 
 
 /* 復盤：飲品（半圓環 + 盆栽，不用進度條） */
-.dk-hero{position:relative;width:206px;height:110px;margin:2px auto 0;}
-.dk-hero svg.dk-ring{width:100%;height:100%;display:block;}
-.dk-plant{position:absolute;left:50%;top:24px;transform:translateX(-50%);line-height:0;}
-.dk-total{position:absolute;left:0;right:0;bottom:0;text-align:center;font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.01em;}
+.dk-hero{position:relative;width:206px;height:134px;margin:6px auto 0;}
+.dk-hero svg.dk-ring{position:absolute;left:0;top:0;width:100%;height:auto;display:block;}
+.dk-plant{position:absolute;left:50%;top:42px;transform:translateX(-50%);line-height:0;}
+.dk-total{position:absolute;left:0;right:0;top:118px;text-align:center;font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.01em;}
 .dk-total b{font-size:13px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;}
-.dk-leg{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 18px;margin-top:9px;}
+.dk-leg{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 18px;margin-top:14px;}
 .dk-leg span{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;color:#7A7488;}
 .dk-leg b{font-size:12px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;}
-.dk-tip{display:flex;align-items:flex-start;justify-content:center;gap:5px;margin-top:11px;
+.dk-tip{display:flex;align-items:flex-start;justify-content:center;gap:5px;margin-top:14px;
   font-size:10px;font-weight:600;line-height:1.55;color:var(--muted);text-align:left;}
 .dk-tip svg{width:11px;height:11px;flex:0 0 auto;margin-top:2px;color:#C3BDD6;}
 .dk-tip b{color:var(--ink);font-weight:800;}
@@ -469,15 +471,15 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   border-radius:99px; padding:3px 8px; font-weight:900; }
 .wk-line .chipm svg { width:11px; height:11px; }
 /* 復盤運動卡：主看總時長，天數/平均退到副行 */
-.wk-hero{display:flex;align-items:baseline;gap:7px;margin:1px 0 3px;}
+.wk-hero{display:flex;align-items:baseline;justify-content:center;gap:7px;margin:2px 0 8px;}
 .wk-hero b{font-size:34px;font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums;}
 .wk-hero span{font-size:11px;font-weight:800;color:var(--muted);}
-.wk-sub2{font-size:10.5px;font-weight:700;color:var(--muted);margin-bottom:12px;}
+.wk-sub2{font-size:10.5px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:0;}
 .wk-sub2 b{color:var(--ink);font-weight:900;font-variant-numeric:tabular-nums;}
-.wk-rep-types { display:flex; flex-wrap:wrap; gap:6px; margin-top:11px; }
+.wk-rep-types { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; justify-content:center; }
 .wk-rep-types .chipm { display:inline-flex; align-items:center; gap:4px; background:#EFF5F0; color:#527D62;
-  border-radius:99px; padding:4px 9px; font-size:9.5px; font-weight:900; }
-.wk-rep-types .chipm b { font-weight:900; color:#3F6B51; }
+  border-radius:99px; padding:4px 9px; font-size:9.5px; font-weight:900; line-height:1; }
+.wk-rep-types .chipm b { font-weight:900; color:#3F6B51; font-variant-numeric:tabular-nums; }
 .wk-rep-types .chipm svg { width:11px; height:11px; }
 
 
@@ -546,10 +548,11 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .wk-today .wka { margin-left:auto; flex:0 0 auto; border:none; background:var(--soft); color:var(--primary-dark);
   border-radius:99px; padding:6px 12px; font-size:10px; font-weight:900; font-family:inherit; cursor:pointer; }
 /* 復盤頁的 7 天格：沒紀錄的日子安靜一點 */
+#page-review .tk-strip { margin:16px 0 0; }
 .rv-card .tk-cell.off { background:#F8F7FC; border-color:transparent; }
 .rv-card .tk-cell.none { background:#FAF9FD; border-style:solid; border-color:#EFECF6; }
 /* 復盤：腸道節奏 */
-.bowel-sum { font-size:11px; font-weight:700; color:var(--ink); line-height:1.6; margin-top:12px; }
+.bowel-sum { font-size:11px; font-weight:700; color:var(--ink); line-height:1.6; margin-top:16px; }
 .bowel-sum b { font-weight:900; }
 
 /* 運動抽屜 */
@@ -624,6 +627,7 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .opt { padding:7px 11px; border-radius:99px; background:var(--bg); color:var(--muted); font-size:11.5px; font-weight:800; white-space:nowrap; display:inline-flex; align-items:center; gap:6px; cursor:pointer; border:none; font-family:inherit; }
 .opt svg { width:12px; height:12px; }
 .opt.active { background:var(--primary); color:#fff; }
+.opt.on { background:var(--primary); color:#fff; }
 /* ---------- 新增卡片頁（.fld / .amounts / .save2） ---------- */
 .fld { margin-bottom:4px; }
 .fld label { font-size:11px; font-weight:900; color:var(--muted); display:block; margin-bottom:5px; letter-spacing:.02em; }
@@ -954,7 +958,7 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .wheel-fade-bottom { bottom:0; background:linear-gradient(transparent,var(--card)); }
 
 /* ---------- Toast ---------- */
-.toast-root { position:fixed; left:50%; bottom:120px; transform:translateX(-50%); z-index:80; }
+.toast-root { position:fixed; left:50%; bottom:120px; transform:translateX(-50%); z-index:80; pointer-events:none; }
 .toast { background:var(--deep); color:#fff; font-size:13px; font-weight:800; padding:10px 16px; border-radius:14px; box-shadow:0 12px 30px -10px rgba(40,28,60,.5); }
 .energy-delta { display:none; position:absolute; top:-12px; right:-6px; font-size:12px; font-weight:900; padding:2px 8px; border-radius:99px; background:#fff; color:var(--primary); box-shadow:0 6px 16px -6px rgba(30,34,70,.45); z-index:2; }
 .energy-delta.show { display:block; }
@@ -1025,9 +1029,6 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .psheet-new-box .input { flex:1; }
 
 /* ---------- 今日頁：抽卡豎版塔羅卡（160×240 橫向滑動 · 置中對齊） ---------- */
-#drawGrid { display:flex; flex:0 0 auto; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:2px 0 8px; margin:0 -16px 0 0; scrollbar-width:none; }
-#drawGrid::-webkit-scrollbar { display:none; }
-#drawGrid .empty { flex:1; min-width:0; }
 .dcard { flex:0 0 160px; width:160px; height:240px; scroll-snap-align:start; border-radius:20px; padding:13px; display:flex; flex-direction:column; align-items:center; justify-content:space-between; position:relative; overflow:hidden; box-shadow:0 20px 36px -22px rgba(70,60,140,.45); color:var(--ink); text-align:center; }
 .dcard::before { content:''; position:absolute; inset:0; background:radial-gradient(130% 95% at 50% -10%, rgba(255,255,255,.6), rgba(255,255,255,0) 55%); pointer-events:none; }
 .dcard.c-violet { background:linear-gradient(168deg,#F1EFFC 0%, var(--c-violet-bg) 58%, #E2DEF5 100%); }
@@ -1386,10 +1387,13 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .bfoot .bhint{font-size:9.5px;font-weight:800;color:var(--muted);text-align:center;line-height:1.4}
 
 /* ========== S2-P2：復盤圖表 ========== */
-.rv-card{background:#fff;border:1px solid var(--bd);border-radius:18px;padding:17px 16px;margin-top:10px}
+.rv-card{background:#fff;border:1px solid var(--bd);border-radius:18px;padding:24px 20px;margin-top:10px}
 .pg-body > .rv-card, #reviewStats .rv-card, #reviewBody > .rv-card{margin-top:0}
 #page-review .pg-body{gap:16px}
-#reviewBody{display:flex;flex-direction:column;gap:16px}
+#reviewBody{display:flex;flex-direction:column;gap:20px}
+#page-review .pg-body{gap:20px}
+#page-review .rv-h{margin-bottom:18px}
+#page-review .rv-sub{margin:0 0 14px}
 .rv-h{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:900;color:var(--ink);letter-spacing:.01em}
 .rv-h .ic-circle{width:22px;height:22px;font-size:10px}
 .slp-nav{margin-left:auto;display:flex;align-items:center;gap:5px}
@@ -1402,11 +1406,11 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 #wheelCard .rv-sub{font-size:9.5px}
 .rv-right{margin-left:auto;font-size:9.5px;font-weight:800;color:var(--muted)}
 .cy-set-hint{font-size:10px;font-weight:700;color:var(--muted);line-height:1.6;margin:8px 0 13px}
-/* 日曆卡（P46：移到復盤最上方） */
+/* 日曆卡（P56：記錄頁頂部，預設收起） */
 .cal-card{padding:14px 14px 12px}
 .cal-month{margin-left:auto;font-size:11px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums}
 .cal-nav{display:flex;gap:4px;margin-left:6px}
-.cal-nav button{width:26px;height:26px;border-radius:9px;border:none;background:var(--bg);color:var(--muted);display:grid;place-items:center;cursor:pointer;padding:0;transition:background .16s,color .16s}
+.cal-nav button{width:26px;height:26px;border-radius:9px;border:none;background:#F4F2F9;color:#7A7490;display:grid;place-items:center;cursor:pointer;padding:0;transition:background .16s,color .16s}
 .cal-nav button svg{width:13px;height:13px}
 .cal-nav button:active{background:var(--soft);color:var(--primary)}
 .cal-nav button[aria-expanded="true"] svg{transform:rotate(180deg)}
@@ -1414,9 +1418,6 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .cal-card.closed .cal-month{margin-left:auto}
 .cal-body{margin-top:10px;overflow:hidden}
 .cal-card.closed .cal-body{display:none}
-.cal-detail{margin-top:11px;padding-top:10px;border-top:1px solid #F4F2F8}
-.cal-detail[hidden]{display:none}
-.cd-h{font-size:10.5px;font-weight:900;color:var(--muted);margin-bottom:6px}
 /* 本週摘要：有色底，和下方的白卡分開 */
 #weekCard{background:linear-gradient(150deg,#E7E1F9 0%,#EFEAFA 58%,#F7F3FA 100%);
   border-color:#DBD3F2;box-shadow:0 12px 26px -24px rgba(95,99,190,.6)}
@@ -1474,7 +1475,7 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .slp-wrap{position:relative;height:186px}
 .slp-wrap canvas{width:100%!important;height:100%!important}
 /* ---------- P16：生命之輪雷達圖 ---------- */
-.wheel-wrap{position:relative;height:300px;margin:2px 0 4px}
+#wheelCard .wheel-wrap{position:relative;height:300px;margin:2px 0 4px}
 .wheel-wrap canvas{width:100%!important;height:100%!important}
 .wheel-legend{display:flex;align-items:center;justify-content:center;gap:16px;margin:2px 0 8px;flex-wrap:wrap}
 .wheel-legend .wl{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;color:var(--muted)}
@@ -1484,25 +1485,45 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   font-size:10.5px;font-weight:700;line-height:1.65;color:var(--primary-dark)}
 .wheel-insight b{font-weight:900}
 .wheel-insight .wi-emoji{font-size:13px;margin-right:3px}
-.wheel-detail{margin-top:8px;border-top:1px dashed var(--bd);padding-top:8px;display:none}
+.wheel-detail{margin-top:12px;border-top:1px solid #F1EFF7;padding-top:4px;display:none}
 .wheel-detail.show{display:block;animation:p15BubbleIn .28s ease}
-.wd-head{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+.wd-head{display:flex;align-items:center;gap:8px;padding:10px 0 4px}
 .wd-head .wd-ic{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;font-size:14px;flex:0 0 auto}
-.wd-head .wd-nm{font-size:12px;font-weight:900;color:var(--ink)}
-.wd-head .wd-score{margin-left:auto;font-size:15px;font-weight:900;color:var(--primary)}
-.wd-head .wd-score small{font-size:10px;color:var(--muted);font-weight:800}
-.wd-rows{display:flex;flex-direction:column;gap:5px}
-.wd-row{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;color:var(--ink)}
-.wd-row .bar{flex:1;height:6px;border-radius:99px;background:var(--track);overflow:hidden}
-.wd-row .bar i{display:block;height:100%;background:var(--primary);border-radius:99px}
-.wd-row .v{width:52px;text-align:right;color:var(--muted);font-weight:800;flex:0 0 auto}
-.wd-empty{font-size:10.5px;font-weight:700;color:var(--muted);line-height:1.6}
+.wd-head .wd-nm{font-size:12.5px;font-weight:900;color:var(--ink)}
+.wd-head .wd-score{margin-left:auto;font-size:17px;font-weight:900;color:var(--primary);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.wd-head .wd-score small{font-size:9.5px;color:var(--muted);font-weight:800;margin-left:1px}
+.wd-head .wd-score.t-good{color:#3E8E63}
+.wd-head .wd-score.t-low{color:#C86B6B}
+.wd-head .wd-score.t-zero{color:#B7B2C4}
+.wd-rows{display:flex;flex-direction:column}
+.wd-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid #F4F2F9}
+.wd-row .wd-lb{font-size:12px;font-weight:800;color:var(--ink);line-height:1.2}
+.wd-row .wd-rt{display:flex;align-items:baseline;gap:2px;flex:0 0 auto}
+.wd-row .wd-rt b{font-size:18px;font-weight:900;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
+.wd-row .wd-rt small{font-size:9.5px;font-weight:800;color:var(--muted);margin-right:9px}
+.wd-tr{display:inline-flex;align-items:center;gap:2px;font-size:9.5px;font-weight:900;line-height:1;
+  padding:4px 7px;border-radius:99px;background:#F5F4FA;color:#9A94B0;font-variant-numeric:tabular-nums}
+.wd-tr svg{width:9px;height:9px;flex:0 0 auto}
+.wd-tr .em{font-size:9px}
+.wd-tr.good{background:#EEF6F0;color:#3E8E63}
+.wd-tr.soft{background:#FDF3EB;color:#C0803F}
+.wd-tr.alert{background:#FBEEEC;color:#C4696A}
+.wd-tr.flat{background:#F5F4FA;color:#9A94B0}
+.wd-tr.first{background:#F2F1FB;color:#7C80DC}
+.wd-row.zero .wd-lb,.wd-row.zero .wd-rt b,.wd-row.zero .wd-rt small{color:#B9B4C7}
 .wheel-tip{font-size:9.5px;font-weight:700;color:var(--muted);text-align:center;margin-top:6px;opacity:.8}
-.wchip{border:1.5px solid var(--bd);border-radius:99px;background:#fff;padding:5px 9px;cursor:pointer;
-  font-family:inherit;font-size:10.5px;font-weight:800;color:var(--ink);transition:transform .15s ease,background .15s ease,border-color .15s ease}
-.wchip b{color:var(--wc);font-weight:900;margin-left:2px}
+.wheel-chips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.wchip{border:1.5px solid var(--bd);border-radius:99px;background:#fff;padding:6px 2px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:3px;white-space:nowrap;overflow:hidden;
+  font-family:inherit;font-size:10px;font-weight:800;color:var(--wc);transition:transform .15s ease,background .15s ease,border-color .15s ease}
+.wchip b{color:var(--wc);font-weight:900;margin-left:0}
 .wchip:active{transform:scale(.95)}
 .wchip.on{background:var(--soft);border-color:var(--wc)}
+/* 分數語意：進行中＝紫／綠；已過週＝綠／柔紅；0＝灰 */
+.wchip.t-mid{--wc:#7C80DC}
+.wchip.t-good{--wc:#3E8E63}
+.wchip.t-low{--wc:#C86B6B}
+.wchip.t-zero{--wc:#B7B2C4}
 .wheel-empty{display:grid;place-items:center;text-align:center;min-height:230px;color:var(--muted);
   font-size:12px;font-weight:700;line-height:1.7}
 .wheel-empty .we-ic{font-size:38px;margin-bottom:8px}
@@ -1514,13 +1535,20 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
 .slp-cmp b{color:var(--ink);font-weight:900}
 .slp-cmp .up{color:var(--green);font-weight:900}
 .slp-cmp .down{color:var(--primary-dark);font-weight:900}
-.hl-row{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap}
-.hl-b{flex:1;min-width:130px;background:var(--bg);border-radius:13px;padding:10px 11px}
-.hl-b .k{font-size:9.5px;font-weight:800;color:var(--muted)}
-.hl-b .v{font-size:14px;font-weight:900;color:var(--ink);margin-top:3px}
-.hl-b .d{display:inline-block;margin-left:6px;font-size:11px;font-weight:900;
-  border-radius:99px;padding:1px 8px;background:var(--accent-quiet);color:var(--accent-quiet-ink)}
-.hl-b.low .d{background:var(--soft);color:var(--primary-dark)}
+/* 高光／低谷：兩欄等高，字級對齊復盤其他卡 */
+.hl-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:2px}
+.hl-row.one{grid-template-columns:1fr}
+.hl-b{background:var(--bg);border-radius:16px;padding:12px 13px 13px;display:flex;flex-direction:column;min-width:0}
+.hl-b .k{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:99px;
+  font-size:12px;font-weight:900;line-height:1;align-self:flex-start;
+  background:var(--accent-quiet);color:var(--accent-quiet-ink)}
+.hl-b.low .k{background:var(--soft);color:var(--primary-dark)}
+.hl-b .v{display:flex;align-items:baseline;gap:4px;margin-top:10px}
+.hl-b .v b{font-size:24px;font-weight:900;line-height:1;color:var(--ink);
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.hl-b .v span{font-size:11px;font-weight:800;color:var(--muted)}
+.hl-b .d{margin-top:auto;padding-top:10px;font-size:10.5px;font-weight:700;color:var(--muted)}
+.hl-note{margin-top:12px}
 .tg-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
 .tg-chip{font-size:11px;font-weight:800;border-radius:99px;padding:6px 11px;
   background:var(--bg);color:var(--ink2);border:1px solid var(--bd);cursor:pointer}
@@ -1838,6 +1866,28 @@ body { font-family:'Nunito',system-ui,sans-serif; background:var(--bg); color:va
   height:20px;padding:0 6px;font-size:10.5px;font-weight:800;line-height:1;border-radius:99px;
   display:inline-flex;align-items:center;justify-content:center;gap:0;white-space:nowrap;flex:0 0 auto}
 .c2main .step-chip{border:none;cursor:pointer;background:var(--soft);color:var(--primary-dark)}
+/* 非完美啟動：1 分鐘草稿膠囊 */
+.c2main .draft-pil{height:20px;padding:0 6px;font-size:10.5px;font-weight:800;line-height:1;border-radius:99px;
+  display:inline-flex;align-items:center;justify-content:center;gap:2px;white-space:nowrap;flex:0 0 auto;
+  border:1px solid var(--bd);background:#fff;color:var(--primary-dark);cursor:pointer}
+.c2main .draft-pil svg{width:10px;height:10px}
+.c2main .draft-pil.started{border-color:var(--accent-quiet-ink);color:var(--accent-quiet-ink);background:var(--accent-quiet)}
+/* 卡片標籤（只在表單與後台使用，絕對不出現在卡面） */
+.tag-field{display:flex;flex-direction:column;gap:8px}
+.tag-chips{display:flex;flex-wrap:wrap;gap:6px;min-height:4px}
+.tag-chip{display:inline-flex;align-items:center;gap:2px;height:26px;padding:0 5px 0 10px;border-radius:99px;
+  background:var(--soft);color:var(--primary-dark);font-size:11.5px;font-weight:800;line-height:1}
+.tag-chip button{border:none;background:none;color:var(--primary);font-size:15px;line-height:1;cursor:pointer;padding:0 3px;font-family:inherit}
+.tag-none{font-size:11px;font-weight:700;color:var(--muted);line-height:26px}
+.tag-add{display:flex;gap:6px;align-items:center;margin-top:2px}
+.tag-add .input{flex:1;min-width:0}
+.tag-add-btn{flex:0 0 auto;width:38px;height:38px;border-radius:10px;border:1.5px solid var(--primary);
+  background:var(--primary);color:#fff;font-size:18px;font-weight:900;cursor:pointer;font-family:inherit;line-height:1}
+.tag-hist-lab{font-size:10px;font-weight:800;color:var(--muted);margin-bottom:5px}
+.tag-hist{display:flex;flex-wrap:wrap;gap:6px}
+.tag-hist-chip{border:1px dashed var(--bd);background:#fff;color:var(--muted);border-radius:99px;
+  padding:3px 9px;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit}
+.tag-hist-chip:active{background:var(--soft);color:var(--primary)}
 /* P48：卡面不再顯示「啟動動作」，只留卡名・膠囊・為什麼 */
 
 /* 小螢幕（≤365）：膠囊勢必換行，why 收 2 行並收緊間距，避免文字被按鈕壓住 */
@@ -2031,7 +2081,7 @@ body.c2-dragmode .tabbar{pointer-events:none}
 }
 
 
-.citem.arch .cdo.restore svg{width:12px;height:12px;vertical-align:-1px}
+.citem.arch .cdo.restore svg,.citem.sleep .cdo.restore svg{width:12px;height:12px;vertical-align:-1px}
 .s2api .trow button svg{width:12px;height:12px;vertical-align:-2px}
 .blist{-webkit-mask-image:linear-gradient(to bottom,#000 92%,transparent 100%);
   mask-image:linear-gradient(to bottom,#000 92%,transparent 100%);min-height:0}
@@ -2215,11 +2265,177 @@ body.c2-dragmode .tabbar{pointer-events:none}
 }
 @media (prefers-reduced-motion:reduce){.sd-arc,.sm-sheet,.nap-panel,.sm-backdrop,.nap-backdrop,.sd-badge,.q-cell,.stag{transition:none!important;}}
 
+/* ===== P56：復盤週次切換 ===== */
+.rv-pick-head{padding:calc(4px + env(safe-area-inset-top)) 12px 14px;gap:4px;justify-content:center}
+#page-review .pg-body,#page-record .pg-body{margin-top:-10px}
+.wk-nav{width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,.16);color:#fff;display:grid;place-items:center;cursor:pointer;flex:0 0 auto;transition:background .16s,transform .12s,opacity .16s}
+.wk-nav svg{width:17px;height:17px}
+.wk-nav:active{background:rgba(255,255,255,.3);transform:scale(.92)}
+.wk-nav.is-off{opacity:.3}
+.wk-mid{border:none;background:none;color:#fff;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:1px;padding:1px 10px;cursor:pointer;min-width:0}
+.wk-big{font-size:19px;font-weight:900;letter-spacing:-.01em;white-space:nowrap}
+.wk-sub{font-size:11px;font-weight:700;color:rgba(255,255,255,.68);font-variant-numeric:tabular-nums}
+.wk-mid:active .wk-big{opacity:.7}
+@media (max-width:360px){.wk-big{font-size:17px}.wk-mid{padding:1px 6px}}
+/* 記錄頁日曆 */
+#page-record .cal-card{margin-top:0}
+.cal-cell.future{color:#CBC7D8;cursor:default}
+.cal-nav button:disabled{opacity:.3;cursor:default}
+/* 三列聯動滾輪 */
+.wp-legend{display:flex;padding:0 6px 3px;font-size:9.5px;font-weight:900;color:var(--muted);letter-spacing:.08em}
+.wp-legend span{flex:1;text-align:center}
+.wp-cols{display:flex;height:240px}
+.wp-col{position:relative;flex:1;min-width:0;overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:y mandatory}
+.wp-col::-webkit-scrollbar{display:none}
+.wp-list{padding:96px 0}
+.wp-item{position:relative;z-index:1;height:48px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--muted);scroll-snap-align:center;cursor:pointer;white-space:nowrap;transition:color .12s,font-size .12s}
+.wp-item.active{color:var(--primary);font-size:19px;font-weight:900}
+.wp-item.dim{opacity:.25}
+.wheel-highlight.wp-hl{left:7px;right:7px;height:48px}
+
+/* ============ P57：抽卡入口 ============ */
+.de-btn{width:100%;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--bd);border-radius:18px;padding:15px 17px;cursor:pointer;font-family:inherit;text-align:left;box-shadow:var(--sh);transition:transform .16s ease}
+.de-btn:active{transform:scale(.985)}
+.de-l{display:flex;flex-direction:column;gap:3px;min-width:0}
+.de-t{font-size:15px;font-weight:900;color:var(--ink);letter-spacing:.01em}
+.de-s{font-size:10.5px;font-weight:700;color:var(--muted)}
+.de-go{margin-left:auto;width:34px;height:34px;border-radius:12px;background:var(--soft);color:var(--primary);display:grid;place-items:center;flex:0 0 auto}
+.de-go svg{width:17px;height:17px}
+.de-empty{background:#fff;border:1px dashed var(--bd);border-radius:16px;padding:18px;font-size:12px;font-weight:700;color:var(--muted);line-height:1.7;text-align:center}
+/* 卡庫：休眠 */
+.c2corner .ci-sleep{width:26px;height:26px;border:0;background:transparent;color:#8E88A6;
+  display:grid;place-items:center;border-radius:7px;padding:0}
+.c2corner .ci-sleep svg{width:14px;height:14px}
+.c2corner .ci-sleep:active{background:var(--soft);color:var(--primary)}
+
+/* ============ P57：塔羅半弧抽卡 overlay ============ */
+#tarotRoot{position:fixed;inset:0;z-index:120;display:none;overflow:hidden;touch-action:none;overscroll-behavior:none;
+  -webkit-user-select:none;user-select:none}
+#tarotRoot.show{display:block;animation:trFade .28s ease both}
+@keyframes trFade{from{opacity:0}to{opacity:1}}
+.tr-bg{position:absolute;inset:0;background:
+  radial-gradient(125% 78% at 50% 116%, rgba(124,128,220,.52), rgba(124,128,220,0) 64%),
+  radial-gradient(80% 50% at 8% 6%, rgba(242,174,46,.14), rgba(242,174,46,0) 62%),
+  linear-gradient(172deg, rgba(20,17,38,.985) 0%, rgba(30,26,54,.985) 38%, rgba(16,14,29,.99) 100%)}
+.tr-stars{position:absolute;inset:0;pointer-events:none;opacity:.9;
+  background-image:
+    radial-gradient(1.6px 1.6px at 12% 16%, rgba(255,255,255,.9), transparent 60%),
+    radial-gradient(1.2px 1.2px at 27% 9%, rgba(255,255,255,.65), transparent 60%),
+    radial-gradient(1.8px 1.8px at 44% 21%, rgba(255,255,255,.75), transparent 60%),
+    radial-gradient(1.1px 1.1px at 63% 12%, rgba(255,255,255,.6), transparent 60%),
+    radial-gradient(1.7px 1.7px at 78% 24%, rgba(255,255,255,.8), transparent 60%),
+    radial-gradient(1.2px 1.2px at 91% 14%, rgba(255,255,255,.55), transparent 60%),
+    radial-gradient(1.4px 1.4px at 8% 38%, rgba(255,255,255,.5), transparent 60%),
+    radial-gradient(1.1px 1.1px at 34% 33%, rgba(255,255,255,.45), transparent 60%),
+    radial-gradient(1.6px 1.6px at 69% 36%, rgba(255,255,255,.5), transparent 60%),
+    radial-gradient(1.2px 1.2px at 86% 44%, rgba(255,255,255,.4), transparent 60%),
+    radial-gradient(1.3px 1.3px at 19% 52%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(1.1px 1.1px at 55% 6%, rgba(255,255,255,.5), transparent 60%)}
+.tr-top{position:absolute;left:0;right:0;top:calc(12px + env(safe-area-inset-top));display:flex;align-items:center;gap:10px;padding:0 16px;z-index:9}
+.tr-close{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.08);
+  color:#EDEBFF;display:grid;place-items:center;flex:0 0 auto}
+.tr-close svg{width:16px;height:16px}
+.tr-title{font-size:13px;font-weight:900;color:#F2F0FF;letter-spacing:.05em}
+.tr-energy{margin-left:auto;font-size:10.5px;font-weight:800;color:#C9C5EE;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.13);padding:6px 11px;border-radius:99px;white-space:nowrap}
+.tr-hint{position:absolute;left:0;right:0;top:calc(62px + env(safe-area-inset-top));text-align:center;z-index:9;
+  font-size:11.5px;font-weight:700;color:#B4AFD8;letter-spacing:.02em;transition:opacity .3s ease}
+.tr-hint.off{opacity:0}
+.tr-theme{position:absolute;left:0;right:0;top:calc(88px + env(safe-area-inset-top));text-align:center;z-index:9;
+  font-size:10px;font-weight:800;color:rgba(255,255,255,.62);line-height:1.7;padding:0 22px;
+  pointer-events:none;transition:opacity .3s ease}
+.tt-tag{display:inline-block;margin:0 3px;padding:1px 8px;border-radius:99px;
+  background:rgba(255,225,150,.16);color:#FFE7A8;border:1px solid rgba(255,225,150,.3)}
+.tt-up{color:#FFD98A;margin-left:2px;letter-spacing:.02em}
+.tt-title{color:rgba(255,255,255,.78)}
+.de-up{font-size:10px;font-weight:800;line-height:1.7;color:#8B7B57;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.de-up .tt-tag{background:#FFF3D6;color:#9A7327;border-color:#F0D9A8;margin:0 2px;padding:0 6px}
+.de-up .tt-up{color:#C08A2E;margin-left:3px}
+.de-up .tt-title{color:#8B7B57}
+/* 抽卡入口下方的主題提示條：蜜糖黃底＋深字，和「本月主題」呼應 */
+.de-note{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-top:8px;padding:8px 11px;
+  border-radius:12px;background:#FFFBF0;border:1px solid #F3E7C9;
+  font-size:10.5px;font-weight:800;color:#8B7B57;line-height:1.5}
+.de-note .tt-tag{background:#F6E7BF;color:#8A6420;border-color:#EBD9A6;margin:0;padding:1px 7px;font-size:10px}
+.de-note .tt-up{color:#B5822A;margin-left:2px}
+.de-note .tt-title{color:#8B7B57}
+.tr-orn{position:absolute;left:50%;top:44%;width:250px;height:250px;margin:-125px 0 0 -125px;z-index:2;
+  pointer-events:none;opacity:.65;transition:opacity .4s ease}
+.tr-orn svg{width:100%;height:100%;display:block}
+.tr-orn.off{opacity:0}
+.tr-stage{position:absolute;inset:0;z-index:3}
+.tr-fan{position:absolute;left:0;right:0;bottom:132px;height:180px;z-index:3;
+  transition:opacity .32s ease}
+.tr-fan::after{content:'';position:absolute;left:50%;bottom:-14px;width:340px;height:80px;margin-left:-170px;
+  background:radial-gradient(closest-side,rgba(10,7,26,.55),rgba(10,7,26,0));filter:blur(5px);pointer-events:none;z-index:0}
+.tr-fan.dim{opacity:0;pointer-events:none}
+.tr-card{position:absolute;left:50%;bottom:0;width:102px;height:158px;cursor:pointer;
+  transition:transform .2s ease, opacity .18s ease;will-change:transform}
+.tr-fan.dragging .tr-card{transition:none}
+.tr-card.out{opacity:0;pointer-events:none}
+.tr-back{width:100%;height:100%;border-radius:13px;position:relative;overflow:hidden;
+  background:linear-gradient(158deg,#7F76DE 0%,#6259C8 42%,#3D3488 100%);
+  border:1px solid rgba(255,255,255,.34);
+  box-shadow:0 14px 24px -14px rgba(4,2,16,.9), inset 1px 0 0 rgba(255,255,255,.34);
+  transition:box-shadow .2s ease, filter .2s ease}
+.tr-fan.dragging .tr-back{transition:none}
+.tr-back svg{position:absolute;inset:0;width:100%;height:100%;opacity:.6}
+.tr-mark{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;
+  font-size:13px;color:rgba(255,255,255,.8)}
+.tr-hero{position:absolute;inset:0;display:grid;place-items:center;z-index:6;pointer-events:none;
+  opacity:0;transition:opacity .26s ease}
+.tr-hero.in{opacity:1}
+.tr-slot{position:relative;z-index:2;width:min(212px,60vw);aspect-ratio:.645;perspective:1100px;pointer-events:none}
+.tr-hero.in .tr-slot{pointer-events:auto}
+.tr-3d{width:100%;height:100%;position:relative;transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.4,.05,.2,1)}
+.tr-3d.flip{transform:rotateY(180deg)}
+.tr-face{position:absolute;inset:0;border-radius:18px;overflow:hidden;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.tr-face.back{border:1px solid rgba(255,255,255,.45);
+  background:linear-gradient(158deg,#9189E9 0%,#736AD6 41%,#4C43A2 100%);
+  box-shadow:0 32px 54px -22px rgba(6,4,22,.9), inset 0 0 0 1px rgba(255,255,255,.4)}
+.tr-face.back svg{position:absolute;inset:0;width:100%;height:100%;opacity:.62}
+.tr-face.front{transform:rotateY(180deg);display:flex;flex-direction:column;padding:24px 21px;
+  background:linear-gradient(168deg,#FCFBFF 0%,#F2F0FC 58%,#E6E2F8 100%);
+  box-shadow:0 32px 54px -22px rgba(6,4,22,.85), inset 0 0 0 1px rgba(255,255,255,.9)}
+.tf-top{display:flex;align-items:center;gap:6px}
+.tf-cat{font-size:9.5px;font-weight:900;color:var(--c-violet-ink);background:var(--c-violet-bg);padding:3px 8px;border-radius:99px}
+.tf-name{font-size:20px;font-weight:900;line-height:1.4;color:var(--ink);margin-top:13px;letter-spacing:-.01em}
+.tf-why{font-size:10.5px;font-weight:700;color:var(--muted);line-height:1.6;margin-top:7px}
+.tf-body{flex:1;display:flex;flex-direction:column;justify-content:center;font-size:10.5px;font-weight:700;color:#6D677E;
+  line-height:1.9;margin-top:12px;padding-top:11px;border-top:1px solid #E7E3F3;overflow:hidden}
+.tf-art{display:grid;place-items:center;color:#8F8AE0;opacity:.4;padding:6px 0}
+.tf-art svg{width:64px;height:64px;stroke-width:1.4}
+.tf-pills{display:flex;gap:6px;flex-wrap:wrap;padding-top:10px}
+.tf-pills span{font-size:9.5px;font-weight:900;padding:4px 9px;border-radius:99px;background:#fff;color:var(--muted);border:1px solid var(--bd)}
+.tf-foot{font-size:9.5px;font-weight:800;color:#ACA6BE;margin-top:8px}
+.tf-draft{align-self:flex-start;margin-top:8px;border:1px solid #DDD7EE;background:#fff;color:#6C63B8;
+  border-radius:99px;padding:5px 10px;font-family:inherit;font-size:9.5px;font-weight:900;cursor:pointer;
+  display:inline-flex;align-items:center;gap:4px}
+.tf-draft svg{width:11px;height:11px}
+.tr-acts{position:absolute;left:0;right:0;bottom:calc(24px + env(safe-area-inset-bottom));z-index:9;
+  display:flex;flex-direction:column;gap:9px;padding:0 30px;opacity:0;pointer-events:none;
+  transform:translateY(10px);transition:opacity .3s ease,transform .3s ease}
+.tr-acts.in{opacity:1;pointer-events:auto;transform:none}
+.tr-ok{height:50px;border:0;border-radius:16px;font-family:inherit;font-size:14.5px;font-weight:900;color:#3A2A05;
+  background:linear-gradient(160deg,#F7C563,#F2AE2E);box-shadow:0 14px 26px -14px rgba(242,174,46,.75)}
+.tr-ok:active{transform:scale(.99)}
+.tr-re{height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.08);
+  color:#DDD9F5;font-family:inherit;font-size:12.5px;font-weight:800}
+.tr-re:disabled{opacity:.42}
+.tr-note{position:absolute;left:0;right:0;bottom:calc(8px + env(safe-area-inset-bottom));text-align:center;z-index:9;
+  font-size:10px;font-weight:700;color:#8F8AB4;opacity:0;transition:opacity .3s ease}
+.tr-note.in{opacity:1}
+
 </style>
 </head>
 <body>
 <!-- PWA 更新提示橫幅 -->
 <div class="upd-banner" id="updBanner"><span class="u-txt">發現新版本<small>重新載入即可使用，现有資料不会丢失</small></span><button class="u-go" id="updGo">更新</button><button class="u-no" id="updNo">稍後</button></div>
+
+<div id="tarotRoot" aria-hidden="true"><div class="tr-bg"></div><div class="tr-stars"></div><div class="tr-top"><button class="tr-close" id="trClose" type="button" aria-label="關閉"><i data-lucide="x"></i></button><div class="tr-title">抽一張卡</div><div class="tr-energy" id="trEnergy"></div></div><div class="tr-hint" id="trHint">左右滑動選卡，向上拉出</div><div class="tr-theme" id="trTheme"></div><div class="tr-orn" aria-hidden="true"><svg viewBox="0 0 240 240" fill="none" stroke="#fff" stroke-width="1"><circle cx="120" cy="120" r="96" opacity=".3"/><circle cx="120" cy="120" r="74" stroke-dasharray="3 8" opacity=".22"/><path d="M120 42l9 69 69 9-69 9-9 69-9-69-69-9 69-9 9-69Z" opacity=".26"/></svg></div><div class="tr-stage" id="trStage"><div class="tr-fan" id="trFan" data-back="<svg viewBox=&quot;0 0 204 316&quot; fill=&quot;none&quot; stroke=&quot;rgba(255,255,255,.92)&quot; stroke-width=&quot;1.2&quot; aria-hidden=&quot;true&quot;><rect x=&quot;9&quot; y=&quot;9&quot; width=&quot;186&quot; height=&quot;298&quot; rx=&quot;12&quot; opacity=&quot;.26&quot;/><rect x=&quot;17&quot; y=&quot;17&quot; width=&quot;170&quot; height=&quot;282&quot; rx=&quot;8&quot; stroke-dasharray=&quot;4 5&quot; opacity=&quot;.3&quot;/><circle cx=&quot;102&quot; cy=&quot;158&quot; r=&quot;52&quot; opacity=&quot;.42&quot;/><circle cx=&quot;102&quot; cy=&quot;158&quot; r=&quot;38&quot; stroke-dasharray=&quot;2 6&quot; opacity=&quot;.5&quot;/><path d=&quot;M102 92l9 57 57 9-57 9-9 57-9-57-57-9 57-9 9-57Z&quot; opacity=&quot;.55&quot;/><path d=&quot;M102 118l4 36 36 4-36 4-4 36-4-36-36-4 36-4 4-36Z&quot; opacity=&quot;.35&quot;/><circle cx=&quot;102&quot; cy=&quot;158&quot; r=&quot;3.4&quot; fill=&quot;#fff&quot; stroke=&quot;none&quot; opacity=&quot;.85&quot;/><path d=&quot;M30 40l8 8-8 8-8-8 8-8ZM174 40l8 8-8 8-8-8 8-8ZM30 276l8 8-8 8-8-8 8-8ZM174 276l8 8-8 8-8-8 8-8Z&quot; opacity=&quot;.45&quot;/><path d=&quot;M52 30v10M148 30v10M52 276v10M148 276v10&quot; opacity=&quot;.3&quot;/></svg>"></div><div class="tr-hero" id="trHero"><div class="tr-slot" id="trSlot"><div class="tr-3d" id="tr3d"><div class="tr-face back"><svg viewBox="0 0 220 341" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.3" aria-hidden="true"><rect x="11" y="11" width="198" height="319" rx="14" opacity=".28"/><circle cx="110" cy="170" r="62" opacity=".45"/><circle cx="110" cy="170" r="46" stroke-dasharray="3 6" opacity=".5"/><path d="M110 96l11 63 63 11-63 11-11 63-11-63-63-11 63-11 11-63Z" opacity=".55"/><circle cx="110" cy="170" r="4" fill="#fff" stroke="none" opacity=".75"/><path d="M26 42h14M33 35v14M194 299h-14M187 292v14" opacity=".45"/></svg><span class="tr-mark">✦</span></div><div class="tr-face front" id="trFront"></div></div></div></div></div><div class="tr-acts" id="trActs"><button class="tr-ok" id="trOk" type="button">✅ 接受任務</button><button class="tr-re" id="trRe" type="button">🔄 換一批</button></div><div class="tr-note" id="trNote"></div></div>
 
 <div id="app">
 
@@ -2250,8 +2466,7 @@ body.c2-dragmode .tabbar{pointer-events:none}
 
       <div id="themeStrip" class="duo"></div>
 
-      <div class="lbl-row"><span class="l">抽三張卡</span><span class="r" id="drawBtn"><i data-lucide="refresh-cw"></i>換一批</span></div>
-      <div id="drawGrid"></div>
+      <div id="drawEntry"></div>
       <button type="button" class="blind-btn" id="blindBtn" aria-label="抽個五分鐘放鬆盲盒"><i data-lucide="sparkles"></i>無聊？抽個 5 分鐘放鬆盲盒</button>
 
       <div class="wk-head">
@@ -2311,6 +2526,20 @@ body.c2-dragmode .tabbar{pointer-events:none}
       </div>
     </div>
     <div class="pg-body">
+      <div class="rv-card cal-card closed" id="calCard">
+        <div class="rv-h"><span class="ic-circle c-sky"><i data-lucide="calendar"></i></span><b>日曆</b>
+          <span class="cal-month" id="calTitle">—</span>
+          <span class="cal-nav">
+            <button id="calPrev" type="button" aria-label="上個月"><i data-lucide="chevron-left"></i></button>
+            <button id="calNext" type="button" aria-label="下個月"><i data-lucide="chevron-right"></i></button>
+            <button id="calToggle" type="button" aria-label="展開日曆" aria-expanded="false"><i data-lucide="chevron-down"></i></button>
+          </span>
+        </div>
+        <div class="cal-body" id="calBody">
+          <div class="cal-dow"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
+      </div>
       <div class="rec-acc" id="accDetail">
         <div class="acc-hd" data-acc="detail"><span class="ic-circle c-violet"><i data-lucide="sparkles"></i></span><span class="acc-tt">詳細情緒</span><small>選填 · 可多選</small><span class="acc-chev">▾</span></div>
         <div class="acc-bd"><div class="acc-in"><div id="detailEmotions"></div></div></div>
@@ -2380,28 +2609,15 @@ body.c2-dragmode .tabbar{pointer-events:none}
 
   <!-- 復盤頁 -->
   <section class="page" id="page-review">
-    <div class="pg-head">
-      <div class="tt">復盤</div>
+    <div class="pg-head rv-pick-head">
+      <button class="wk-nav" id="rvWkPrev" type="button" aria-label="上一週"><i data-lucide="chevron-left"></i></button>
+      <button class="wk-mid" id="rvWkMid" type="button" aria-label="選擇年份與週次">
+        <span class="wk-big" id="rvWkBig">—</span>
+        <span class="wk-sub" id="rvWkSub">—</span>
+      </button>
+      <button class="wk-nav" id="rvWkNext" type="button" aria-label="下一週"><i data-lucide="chevron-right"></i></button>
     </div>
     <div class="pg-body">
-      <div class="rv-card cal-card closed" id="calCard">
-        <div class="rv-h"><span class="ic-circle c-sky"><i data-lucide="calendar"></i></span><b>日曆</b>
-          <span class="cal-month" id="calTitle">—</span>
-          <span class="cal-nav">
-            <button id="calPrev" type="button" aria-label="上個月"><i data-lucide="chevron-left"></i></button>
-            <button id="calNext" type="button" aria-label="下個月"><i data-lucide="chevron-right"></i></button>
-            <button id="calToggle" type="button" aria-label="展開日曆" aria-expanded="false"><i data-lucide="chevron-down"></i></button>
-          </span>
-        </div>
-        <div class="cal-body" id="calBody">
-          <div class="cal-dow"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
-          <div class="cal-grid" id="calGrid"></div>
-          <div class="cal-detail" id="calDetailSec" hidden>
-            <div class="cd-h" id="calDetailTitle">當天詳情</div>
-            <div id="calDetail"></div>
-          </div>
-        </div>
-      </div>
       <div id="reviewStats"></div>
       <div class="rv-card" id="wheelCard">
         <div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="target"></i></span><b>生命之輪</b>
@@ -2494,10 +2710,8 @@ body.c2-dragmode .tabbar{pointer-events:none}
 <div class="overlay" id="sheetOverlay"></div>
 <div class="sheet" id="sheet">
   <div class="grab"></div>
-  <div class="field"><label><i data-lucide="target"></i> 本月主題</label><input type="text" class="input" id="quickMonth" placeholder="例如：運動月"></div>
-  <div class="field"><label><i data-lucide="target"></i> 本週重點</label><input type="text" class="input" id="quickWeek" placeholder="例如：早睡"></div>
-  <button class="btn btn-primary btn-block" id="quickSave">儲存主題</button>
-  <button class="btn btn-ghost btn-block" id="quickOpenSettings" style="margin-top:10px"><i data-lucide="settings"></i> 完整設定</button>
+  <div id="sheetBody"></div>
+  <button class="btn btn-primary btn-block" id="quickSave">儲存</button>
 </div>
 
 <!-- Modal 容器 -->
@@ -2758,6 +2972,29 @@ body.c2-dragmode .tabbar{pointer-events:none}
   </div>
 </div>
 
+<!-- 復盤：三列聯動週次滾輪 -->
+<div class="wheel-overlay" id="wkPickOverlay">
+  <div class="wheel-backdrop" id="wkPickBackdrop"></div>
+  <div class="wheel-panel">
+    <div class="wheel-head">
+      <button class="wheel-btn" id="wkPickCancel" type="button">取消</button>
+      <div class="wheel-title" id="wkPickTitle">選擇週次</div>
+      <button class="wheel-btn wheel-ok" id="wkPickOk" type="button">完成</button>
+    </div>
+    <div class="wp-legend"><span>年</span><span>月</span><span>週</span></div>
+    <div class="wheel-wrap">
+      <div class="wp-cols">
+        <div class="wp-col" id="wpYearCol" role="listbox" aria-label="年份"></div>
+        <div class="wp-col" id="wpMonthCol" role="listbox" aria-label="月份"></div>
+        <div class="wp-col" id="wpWeekCol" role="listbox" aria-label="週次"></div>
+      </div>
+      <div class="wheel-highlight wp-hl"></div>
+      <div class="wheel-fade wheel-fade-top"></div>
+      <div class="wheel-fade wheel-fade-bottom"></div>
+    </div>
+  </div>
+</div>
+
 <!-- 所屬長期專案選擇（Bottom Sheet） -->
 <div class="overlay" id="projSheetOverlay"></div>
 <div class="sheet" id="projSheet">
@@ -2881,6 +3118,9 @@ window.lucide={createIcons(root){const scope=root||document;scope.querySelectorA
 </script>
 <script>'use strict';
 
+let timer = null; /* 計時器狀態（嚴格模式必須先宣告，否則 startTimer 會丟 ReferenceError） */
+const T_ARC_C = 2 * Math.PI * 97; /* 計時圓弧 r=97 的周長（進度環用） */
+
 /* ============================================================
    下班後行動啟動器 v2.1（第一階段 MVP + 三項調整）
    純前端 · IndexedDB(Dexie) · 完全離線
@@ -2909,7 +3149,7 @@ const ICON_PALETTE = [
   'clock','alarm-clock','timer','bell','calendar-heart','target','trophy','zap','smile','languages','wallet','piggy-bank'
 ];
 const TYPES = ['副業', '自我成長', '放鬆', '雜事'];
-const FILTERS = ['全部', '副業', '自我成長', '放鬆', '雜事', '長期專案', '已歸檔'];
+const FILTERS = ['全部', '副業', '自我成長', '放鬆', '雜事', '長期專案', '休眠區', '已歸檔'];
 const QUICK_DURATIONS = [5, 10, 15, 30, 60];
 const WEEK_CN = ['日', '一', '二', '三', '四', '五', '六'];
 
@@ -3129,6 +3369,289 @@ function weekRange() {
   const monday = addDays(now, diff);
   const sunday = addDays(monday, 6);
   return { monday, sunday };
+}
+
+/* ===== P56：週次模型 =====
+   從每年 1/1 起算：第 1 週是 1/1 到首個週日，之後每週一～週日。
+   2026/10/01 是資料起點，第 40 週只顯示 10/01–10/04。 */
+const APP_START_DS = '2026-10-01';
+function appStartDate() { return parseDate(APP_START_DS); }
+function firstMondayOfYear(y) {
+  const d = new Date(y, 0, 1);
+  const dow = (d.getDay() + 6) % 7;
+  return dow === 0 ? d : addDays(d, 7 - dow);
+}
+function weeksInYear(y) {
+  const jan1 = new Date(y, 0, 1), fm = firstMondayOfYear(y), dec31 = new Date(y, 11, 31);
+  const from = fm.getTime() === jan1.getTime() ? jan1 : fm;
+  return (fm.getTime() === jan1.getTime() ? 0 : 1) +
+    Math.ceil((Math.round((dec31 - from) / 86400000) + 1) / 7);
+}
+function weekRangeOf(y, k) {
+  const jan1 = new Date(y, 0, 1), fm = firstMondayOfYear(y);
+  let start, end;
+  if (k <= 1) {
+    start = jan1;
+    end = fm.getTime() === jan1.getTime() ? addDays(jan1, 6) : addDays(fm, -1);
+  } else {
+    start = addDays(fm, (k - 2) * 7);
+    end = addDays(start, 6);
+  }
+  const dec31 = new Date(y, 11, 31);
+  if (end > dec31) end = dec31;
+  const app = appStartDate();
+  if (start < app && end >= app) start = app;
+  return { start: start, end: end };
+}
+function weekOfDate(ds) {
+  const d = parseDate(ds), y = d.getFullYear(), fm = firstMondayOfYear(y);
+  let k = d < fm ? 1 : 2 + Math.floor(Math.round((d - fm) / 86400000) / 7);
+  return { y: y, k: Math.min(k, weeksInYear(y)) };
+}
+function monthOfWeek(y, k) {
+  const r = weekRangeOf(y, k), t = parseDate(todayStr());
+  if (t >= r.start && t <= r.end) return t.getMonth() + 1;
+  return r.start.getMonth() + 1;
+}
+function monthsOfYear(y) {
+  const from = y === 2026 ? 10 : 1, out = [];
+  for (let m = from; m <= 12; m++) out.push(m);
+  return out;
+}
+function weeksOfMonthAll(y, m) {
+  const out = [], total = weeksInYear(y);
+  const mStart = new Date(y, m - 1, 1), mEnd = new Date(y, m, 0);
+  for (let k = 1; k <= total; k++) {
+    const r = weekRangeOf(y, k);
+    if (r.start <= mEnd && r.end >= mStart) out.push(k);
+  }
+  return out;
+}
+function weeksOfMonth(y, m, nowDs) {
+  const today = parseDate(nowDs || todayStr());
+  return weeksOfMonthAll(y, m).filter(function (k) { return weekRangeOf(y, k).start <= today; });
+}
+function adjacentWeek(sel, dir) {
+  let y = sel.y, k = sel.k;
+  if (dir > 0) {
+    if (k < weeksInYear(y)) k++; else { y++; k = 1; }
+  } else {
+    if (k > 1) k--; else { y--; k = weeksInYear(y); }
+  }
+  return { y: y, k: k };
+}
+function reviewWeekInit() {
+  let s = state.reviewWeek;
+  const today = parseDate(todayStr()), app = appStartDate();
+  if (!s) { s = weekOfDate(todayStr()); state.reviewWeek = s; return s; }
+  const r = weekRangeOf(s.y, s.k);
+  if (s.y < 2026 || s.k < 1 || s.k > weeksInYear(s.y) || r.start > today || r.end < app) {
+    s = weekOfDate(todayStr()); state.reviewWeek = s;
+  }
+  return s;
+}
+function mdPad(d) { return (d.getMonth() + 1) + '/' + pad(d.getDate()); }
+function updateWeekHead() {
+  const sel = reviewWeekInit(), r = weekRangeOf(sel.y, sel.k);
+  const big = $('#rvWkBig'), sub = $('#rvWkSub');
+  if (big) big.textContent = sel.y + ' 年 第 ' + sel.k + ' 週';
+  if (sub) sub.textContent = mdPad(r.start) + ' - ' + mdPad(r.end);
+  const today = parseDate(todayStr());
+  const pv = adjacentWeek(sel, -1);
+  const atStart = weekRangeOf(pv.y, pv.k).end < appStartDate();
+  const nx = adjacentWeek(sel, 1);
+  const atEnd = weekRangeOf(nx.y, nx.k).start > today;
+  const bp = $('#rvWkPrev'), bn = $('#rvWkNext');
+  if (bp) { bp.classList.toggle('is-off', atStart); bp.setAttribute('aria-disabled', atStart ? 'true' : 'false'); }
+  if (bn) { bn.classList.toggle('is-off', atEnd); bn.setAttribute('aria-disabled', atEnd ? 'true' : 'false'); }
+}
+function applyReviewWeek(t) {
+  state.reviewWeek = { y: t.y, k: t.k };
+  updateWeekHead();
+  const body = $('#page-review .pg-body');
+  if (body) body.scrollTop = 0;
+  renderReview();
+}
+function shiftReviewWeek(dir) {
+  const sel = reviewWeekInit(), t = adjacentWeek(sel, dir), r = weekRangeOf(t.y, t.k);
+  if (dir > 0 && r.start > parseDate(todayStr())) { toast('已經是最新的一週'); return; }
+  if (dir < 0 && r.end < appStartDate()) { toast('已到達記錄起點'); return; }
+  applyReviewWeek(t);
+}
+
+/* ===== P56：三列聯動滾輪 ===== */
+const WP_H = 48;
+let wpCtx = null;
+
+function wpYears() {
+  const y1 = parseDate(todayStr()).getFullYear(), out = [];
+  for (let y = 2026; y <= y1; y++) out.push(y);
+  return out;
+}
+function wpFutureMonth(y, m) {
+  const t = parseDate(todayStr());
+  return y > t.getFullYear() || (y === t.getFullYear() && m > t.getMonth() + 1);
+}
+function wpMark(col, idx) {
+  const items = col.querySelectorAll('.wp-item');
+  for (let i = 0; i < items.length; i++) items[i].classList.toggle('active', i === idx);
+}
+function wpFill(col, items, idx, label, dimFn) {
+  if (!col) return;
+  col.innerHTML = '<div class="wp-list">' + items.map(function (it, i) {
+    return '<div class="wp-item' + (i === idx ? ' active' : '') + (dimFn && dimFn(it) ? ' dim' : '') +
+      '" role="option" data-i="' + i + '" aria-selected="' + (i === idx) + '">' + label(it) + '</div>';
+  }).join('') + '</div>';
+  col._lock = true;
+  requestAnimationFrame(function () {
+    col.scrollTop = idx * WP_H;
+    setTimeout(function () { col._lock = false; }, 90);
+  });
+}
+function wpDefaultWeek(y, m, weeks) {
+  if (!weeks.length) return null;
+  const cw = weekOfDate(todayStr());
+  if (y === cw.y && m === monthOfWeek(cw.y, cw.k)) return cw.k;
+  return weeks[weeks.length - 1];
+}
+function wpTitle() {
+  const t = document.getElementById('wkPickTitle');
+  if (t && wpCtx) t.textContent = wpCtx.y + ' 年 ' + wpCtx.m + ' 月 · 第 ' + wpCtx.k + ' 週';
+}
+function wpMonthLabel(m) { return m + ' 月'; }
+function wpWeekLabel(k) { return k + ' 週'; }
+function wpRenderMonths() {
+  const col = document.getElementById('wpMonthCol');
+  wpFill(col, wpCtx.months, wpCtx.mi, wpMonthLabel, function (m) { return wpFutureMonth(wpCtx.y, m); });
+}
+function wpRenderWeeks() {
+  wpFill(document.getElementById('wpWeekCol'), wpCtx.weeks, wpCtx.wi, wpWeekLabel);
+}
+function wpSetYear(y) {
+  const c = wpCtx; if (!c) return;
+  const months = monthsOfYear(y);
+  c.y = y; c.yi = c.years.indexOf(y);
+  c.months = months; c.m = months[0]; c.mi = 0;
+  wpRenderMonths();
+  c.weeks = weeksOfMonth(y, c.m);
+  c.k = wpDefaultWeek(y, c.m, c.weeks);
+  c.wi = Math.max(0, c.weeks.indexOf(c.k));
+  wpRenderWeeks();
+  wpTitle();
+}
+function wpSetMonth(m) {
+  const c = wpCtx; if (!c) return false;
+  if (wpFutureMonth(c.y, m)) {
+    let last = c.months[0];
+    for (let i = 0; i < c.months.length; i++) if (!wpFutureMonth(c.y, c.months[i])) last = c.months[i];
+    if (last !== c.m) {
+      wpSetMonth(last);
+      const col2 = document.getElementById('wpMonthCol');
+      col2._lock = true;
+      col2.scrollTop = c.mi * WP_H;
+      wpMark(col2, c.mi);
+      setTimeout(function () { col2._lock = false; }, 120);
+      return false;
+    }
+    const col = document.getElementById('wpMonthCol');
+    col._lock = true;
+    col.scrollTop = c.mi * WP_H;
+    wpMark(col, c.mi);
+    setTimeout(function () { col._lock = false; }, 90);
+    return false;
+  }
+  c.m = m; c.mi = c.months.indexOf(m);
+  c.weeks = weeksOfMonth(c.y, m);
+  c.k = c.weeks.indexOf(c.k) >= 0 ? c.k : wpDefaultWeek(c.y, m, c.weeks);
+  c.wi = Math.max(0, c.weeks.indexOf(c.k));
+  wpRenderWeeks();
+  wpTitle();
+  return true;
+}
+function wpCommit(which, idx) {
+  const c = wpCtx; if (!c) return;
+  if (which === 'y') {
+    const y = c.years[idx];
+    if (y !== c.y) wpSetYear(y);
+  } else if (which === 'm') {
+    if (idx !== c.mi) wpSetMonth(c.months[idx]);
+  } else {
+    const k = c.weeks[idx];
+    if (k == null || k === c.k) return;
+    c.k = k; c.wi = idx;
+    wpTitle();
+  }
+}
+function wpScroll(which) {
+  const c = wpCtx; if (!c) return;
+  const col = document.getElementById(which === 'y' ? 'wpYearCol' : which === 'm' ? 'wpMonthCol' : 'wpWeekCol');
+  if (!col || col._lock) return;
+  const items = which === 'y' ? c.years : which === 'm' ? c.months : c.weeks;
+  if (!items.length) return;
+  const idx = Math.max(0, Math.min(items.length - 1, Math.round(col.scrollTop / WP_H)));
+  wpMark(col, idx);
+  clearTimeout(col._t);
+  col._t = setTimeout(function () { wpCommit(which, idx); }, 120);
+}
+function openWeekPicker() {
+  const sel = reviewWeekInit();
+  const years = wpYears();
+  const months = monthsOfYear(sel.y);
+  let m = monthOfWeek(sel.y, sel.k);
+  if (months.indexOf(m) < 0) m = months[0];
+  const weeks = weeksOfMonth(sel.y, m);
+  const k = weeks.indexOf(sel.k) >= 0 ? sel.k : wpDefaultWeek(sel.y, m, weeks);
+  wpCtx = {
+    years: years, months: months, weeks: weeks, y: sel.y, m: m, k: k,
+    yi: Math.max(0, years.indexOf(sel.y)), mi: months.indexOf(m), wi: Math.max(0, weeks.indexOf(k))
+  };
+  document.getElementById('wkPickOverlay').classList.add('show');
+  wpFill(document.getElementById('wpYearCol'), years, wpCtx.yi, function (v) { return v + ' 年'; });
+  wpRenderMonths();
+  wpRenderWeeks();
+  wpTitle();
+}
+function closeWeekPicker() {
+  const el = document.getElementById('wkPickOverlay');
+  if (el) el.classList.remove('show');
+  wpCtx = null;
+}
+function wpSyncFromScroll() {
+  const c = wpCtx; if (!c) return;
+  const yCol = document.getElementById('wpYearCol'), mCol = document.getElementById('wpMonthCol'), wCol = document.getElementById('wpWeekCol');
+  const idx = function (col, n) { return Math.max(0, Math.min(n - 1, Math.round(col.scrollTop / WP_H))); };
+  const yi = idx(yCol, c.years.length);
+  if (c.years[yi] !== c.y) { wpSetYear(c.years[yi]); return; }
+  const mi = idx(mCol, c.months.length);
+  if (c.months[mi] !== c.m) { wpSetMonth(c.months[mi]); return; }
+  if (!c.weeks.length) return;
+  const wi = idx(wCol, c.weeks.length);
+  c.k = c.weeks[wi]; c.wi = wi;
+}
+function confirmWeekPicker() {
+  if (!wpCtx) { closeWeekPicker(); return; }
+  wpSyncFromScroll();
+  if (!wpCtx || !wpCtx.k) { closeWeekPicker(); return; }
+  const t = { y: wpCtx.y, k: wpCtx.k };
+  closeWeekPicker();
+  applyReviewWeek(t);
+}
+function wpBind() {
+  [['wpYearCol', 'y'], ['wpMonthCol', 'm'], ['wpWeekCol', 'w']].forEach(function (pair) {
+    const col = document.getElementById(pair[0]);
+    if (!col) return;
+    col.addEventListener('scroll', function () { wpScroll(pair[1]); }, { passive: true });
+    col.addEventListener('click', function (e) {
+      const it = e.target.closest('.wp-item');
+      if (!it || !wpCtx) return;
+      const i = +it.dataset.i;
+      if (pair[1] === 'm' && wpFutureMonth(wpCtx.y, wpCtx.months[i])) return;
+      col._lock = false;
+      wpMark(col, i);
+      col.scrollTo({ top: i * WP_H, behavior: 'smooth' });
+      wpCommit(pair[1], i);
+    });
+  });
 }
 
 function esc(s) {
@@ -3624,6 +4147,7 @@ let state = {
   drawn: [],
   selDate: todayStr(),      /* 週曆選中的日期 */
   recordDate: null,         /* 記錄頁檢視/補記的日期 */
+  reviewWeek: null,         /* P56：復盤選中的週 {y,k} */
   weekAnchor: null,         /* 顯示中那週的週一（YYYY-MM-DD） */
   filter: '全部',
   selecting: { state: new Set(), activity: new Set() },
@@ -3658,17 +4182,49 @@ function switchTab(tab) {
   window.scrollTo({ top: 0 });
 }
 
-/* 浮動設定齒輪已退役：主題月／週在首頁主題卡直接點，完整設定從左上抽屜進。
+/* 浮動設定齒輪已退役：主題月／週在首頁主題卡直接點，兩者分開設定。
    卡庫、管家兩頁不再出現浮球；保留 DOM 與 openSheet 供既有入口呼叫。 */
 function openDrawer() { $('#drawer').classList.add('show'); $('#drawerOverlay').classList.add('show'); }
 function closeDrawer() { $('#drawer').classList.remove('show'); $('#drawerOverlay').classList.remove('show'); }
+let sheetKind = 'month';
+let sheetTags = [];
 async function openSheet(focus) {
-  $('#quickMonth').value = await getSetting('themeMonth', '');
-  $('#quickWeek').value = await getSetting('themeWeek', '');
+  sheetKind = focus === 'week' ? 'week' : 'month';
+  const isWeek = sheetKind === 'week';
+  const title = isWeek ? '本週重點' : '本月主題';
+  const ph = isWeek ? '例如：早睡' : '例如：運動月';
+  const val = await getSetting(isWeek ? 'themeWeek' : 'themeMonth', '');
+  var body = '<div class="field"><label>' + title + '</label>' +
+    '<input type="text" class="input" id="quickTheme" placeholder="' + ph + '"></div>';
+  if (!isWeek) {
+    const st = await themeTagState();
+    sheetTags = st.cur.slice();
+    body += '<div class="field"><label>本月標籤 <span class="hint">最多 3 個 · 抽卡時帶這些標籤的卡會優先出現</span></label>' +
+      (st.lib.length
+        ? '<div class="seg" id="quickTags">' + st.lib.map(function (t) {
+            return '<button type="button" class="opt' + (sheetTags.indexOf(t) >= 0 ? ' on' : '') + '" data-t="' + esc(t) + '">' + esc(t) + '</button>';
+          }).join('') + '</div>'
+        : '<div class="hint2">還沒有卡片標籤。到「標籤管理 › 卡片」新增，或在卡片編輯頁替卡片加標籤。</div>') +
+      '</div>';
+  }
+  $('#sheetBody').innerHTML = body;
+  $('#quickSave').textContent = isWeek ? '儲存本週重點' : '儲存本月主題';
   $('#sheet').classList.add('show');
   $('#sheetOverlay').classList.add('show');
-  if (focus === 'week') $('#quickWeek').focus();
-  else if (focus === 'month') $('#quickMonth').focus();
+  const inp = $('#quickTheme');
+  if (inp) { inp.value = val; inp.focus(); }
+  $$('#quickTags .opt').forEach(function (b) {
+    b.onclick = function () {
+      const t = b.dataset.t;
+      const i = sheetTags.indexOf(t);
+      if (i >= 0) sheetTags.splice(i, 1);
+      else {
+        if (sheetTags.length >= 3) { toast('本月主題標籤最多 3 個'); return; }
+        sheetTags.push(t);
+      }
+      $$('#quickTags .opt').forEach(function (x) { x.classList.toggle('on', sheetTags.indexOf(x.dataset.t) >= 0); });
+    };
+  });
 }
 function closeSheet() { $('#sheet').classList.remove('show'); $('#sheetOverlay').classList.remove('show'); }
 
@@ -3726,6 +4282,7 @@ async function setEnergy(v) {
   state.energy = Math.max(1, Math.min(10, v));
   await saveDayEnergy(todayStr(), state.energy);
   renderEnergy();
+  drawCards(); /* 能量變了，抽卡池與入口跟著重算 */
 }
 function renderEnergy() {
   $('#energyNum').textContent = state.energy + '/10';
@@ -3779,7 +4336,7 @@ async function renderThemeStrip() {
   const w = await getSetting('themeWeek', '');
   $('#themeStrip').innerHTML =
     themeCard('month', '本月主題', 'calendar', 'c-butter', m) +
-    themeCard('week', '本週重點', 'target', 'c-violet', w);
+    themeCard('week', '本週重點', 'sparkles', 'c-violet', w);
   $$('#themeStrip [data-theme]').forEach(t => t.addEventListener('click', () => {
     openSheet(t.dataset.theme === 'week' ? 'week' : 'month');
   }));
@@ -3819,16 +4376,71 @@ function colorName(k) {
   if (f) return f.n;
   return LEGACY_COLOR_NAMES[k] || '跟隨類型';
 }
+/* 抽卡池 —— 休眠不上場；能量門檻過濾；能量 ≤3 只抽 1–2 級 */
+function drawPoolOf(list, energy) {
+  const base = list.filter(c => !c.isArchived && !c.isMerged && !c.isSleeping);
+  const e = energy || 6;
+  const amt = c => (c.energyAmount != null ? c.energyAmount : 3);
+  let pool = base.filter(c => amt(c) <= e + 2);
+  if (e <= 3) pool = pool.filter(c => amt(c) <= 2);
+  if (pool.length < 3) pool = base;
+  return pool;
+}
+let drawPoolCache = [];
+let monthThemeTags = [];
+let monthThemeTitle = '';
+/* 主題 UP 文案只在抽卡入口與抽卡頁出現，其他頁面一律不顯示 */
+function themeHitOf(c) {
+  if (!monthThemeTags.length) return false;
+  var ts = Array.isArray(c.tags) ? c.tags : [];
+  for (var i = 0; i < ts.length; i++) if (monthThemeTags.indexOf(ts[i]) >= 0) return true;
+  return false;
+}
+function themeUpHtml() {
+  if (!monthThemeTags.length) return '';
+  var hit = false;
+  for (var i = 0; i < drawPoolCache.length; i++) {
+    if (themeHitOf(drawPoolCache[i])) { hit = true; break; }
+  }
+  if (!hit) return '';
+  var title = monthThemeTitle
+    ? '本月主題：' + esc(monthThemeTitle) + '　'
+    : '本月主題標籤　';
+  return '<span class="tt-title">' + title + '</span>' +
+    monthThemeTags.map(function (t) { return '<span class="tt-tag">' + esc(t) + '</span>'; }).join('') +
+    '<span class="tt-up">概率 UP！</span>';
+}
 async function drawCards() {
-  const list = await ldb.cards.toArray();
-  const pool = list.filter(c => !c.isArchived && !c.isMerged && (c.energyAmount || 3) <= state.energy);
-  if (pool.length === 0) {
-    $('#drawGrid').innerHTML = '<div class="empty"><span class="big"><i data-lucide="sprout"></i></span>卡庫還沒有適合現在能量的卡。<br>去「卡庫」加幾張低能量量級的卡吧！</div>';
-    state.drawn = [];
+  let list = [];
+  try { list = await ldb.cards.toArray(); } catch (e) { /* ignore */ }
+  try { monthThemeTitle = await getSetting('themeMonth', ''); } catch (e) { monthThemeTitle = ''; }
+  try {
+    const raw = await getSetting('themeMonthTags', '[]');
+    const arr = JSON.parse(raw || '[]');
+    monthThemeTags = Array.isArray(arr) ? arr.filter(Boolean) : [];
+  } catch (e) { monthThemeTags = []; }
+  drawPoolCache = drawPoolOf(list, state.energy);
+  state.drawn = [];
+  renderDrawEntry();
+}
+function renderDrawEntry() {
+  const el = document.getElementById('drawEntry');
+  if (!el) return;
+  const n = drawPoolCache.length;
+  if (!n) {
+    el.innerHTML = '<div class="de-empty">卡庫裡沒有適合現在能量的卡。去「卡庫」加一張，或把休眠的卡喚醒。</div>';
     return;
   }
-  state.drawn = weightedSample(pool, 3);
-  renderDrawn();
+  var up = themeUpHtml();
+  el.innerHTML = '<button type="button" class="de-btn" id="deBtn">' +
+    '<span class="de-l"><span class="de-t">抽一張卡</span>' +
+    '<span class="de-s">能量 ' + state.energy + ' · 卡池 ' + n + ' 張' + (state.energy <= 3 ? ' · 低能量優先' : '') + '</span>' +
+    '</span>' +
+    '<span class="de-go"><i data-lucide="sparkles"></i></span></button>' +
+    (up ? '<div class="de-note">' + up + '</div>' : '');
+  if (window.lucide) lucide.createIcons(el);
+  const b = document.getElementById('deBtn');
+  if (b) b.addEventListener('click', openTarot);
 }
 /* ---------------- P15：5 分鐘放鬆盲盒（不記錄任何數據） ----------------
    纯粹的「替代滑手机」解压工具：随机抽一件小事 + 5 分钟倒计时，结束自动关闭。*/
@@ -3885,49 +4497,6 @@ function closeBlindBox() {
   if (blindTick) { clearInterval(blindTick); blindTick = null; }
   closeModal();
 }
-/* 加權抽樣（不重複）：距截止 ≤3 天（含已過期）權重 1.4，其餘 1——只是稍微提高，不是強制 */
-function weightedSample(pool, n) {
-  const bag = pool.map(c => ({ c, w: isSoon(c.deadline) ? 1.4 : 1 }));
-  const picked = [];
-  while (picked.length < n && bag.length) {
-    let total = 0;
-    bag.forEach(x => { total += x.w; });
-    let r = Math.random() * total, i = 0;
-    for (; i < bag.length; i++) { r -= bag[i].w; if (r <= 0) break; }
-    if (i >= bag.length) i = bag.length - 1;
-    picked.push(bag.splice(i, 1)[0].c);
-  }
-  return picked;
-}
-function renderDrawn() {
-  const g = $('#drawGrid');
-  if (!state.drawn.length) { g.innerHTML = ''; return; }
-  g.innerHTML = state.drawn.map(c => {
-    const meta = TYPE_META[c.type] || TYPE_META['自我成長'];
-    const ci = cardCi(c);
-    const em = ENERGY_MODES[c.energyMode] || ENERGY_MODES['neutral'];
-    const iconName = c.icon || meta.icon;
-    return '<article class="dcard ' + ci + '">' +
-      '<span class="dc-wm">' + meta.emoji + '</span>' +
-      (c.deadline ? '<span class="dc-dl' + deadlineClass(c.deadline) + '" title="有截止日"><i data-lucide="flag"></i></span>' : '') +
-      '<div class="dc-head">' +
-      '<div class="dc-ic" style="color:var(--' + ci + '-ink)"><i data-lucide="' + esc(iconName) + '"></i></div>' +
-      '<span class="dc-cat">' + esc(c.type) + '</span></div>' +
-      '<div class="dc-mid"><div class="dc-nz"><div class="dc-n">' + esc(c.name) + '</div></div>' +
-      '<div class="dc-pills">' +
-      '<span class="pc-time">' + esc(c.duration) + ' 分鐘</span>' +
-      '<span class="pc-en">' + em.label + ' ' + (c.energyAmount != null ? c.energyAmount : 3) + '</span></div>' +
-      (c.why ? '<div class="dc-why" title="' + esc(c.why) + '"><i data-lucide="star"></i><span>' + esc(c.why) + '</span></div>' : '') + '</div>' +
-      '<div class="dc-foot">' +
-      '<button class="dc-go" title="開始計時" onclick="startTimer(' + c.id + ')"><i data-lucide="play"></i>開始</button>' +
-      '<button class="dc-sch" title="加入時間線" onclick="openAddTimeSheet(' + c.id + ')"><i data-lucide="calendar"></i></button>' +
-      '</div></article>';
-  }).join('');
-}
-
-/* ---------------- 計時器 ---------------- */
-let timer = null;
-const T_ARC_C = 2 * Math.PI * 97;
 function fmtHM(d) { return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
 function pcTimerModePref() {
   try { return localStorage.getItem('pcTimerMode') === 'up' ? 'up' : 'down'; } catch (e) { return 'down'; }
@@ -3964,11 +4533,12 @@ function setPauseIcon(paused) {
   $('#tPause').innerHTML = '<i data-lucide="' + (paused ? 'play' : 'pause') + '"></i>';
   $('#tPause').title = paused ? '繼續' : '暫停';
 }
-async function startTimer(cardId, source) {
+async function startTimer(cardId, source, opts) {
   const c = await ldb.cards.get(cardId);
   if (!c) return;
   await autoAddToTimeline(c);
-  const target = (c.duration || 5) * 60;
+  const draft = !!(opts && opts.draft);
+  const target = draft ? 60 : (c.duration || 5) * 60;
   timer = {
     card: c,
     target: target,
@@ -3979,10 +4549,11 @@ async function startTimer(cardId, source) {
     paused: false,
     iv: null,
     source: source || { type: 'card' },
+    draft: draft,
     startedAt: Date.now(),
   };
   $('#tEmoji').innerHTML = '<i data-lucide="' + esc(c.icon || (TYPE_META[c.type] || TYPE_META['自我成長']).icon) + '"></i>';
-  $('#tName').textContent = c.name;
+  $('#tName').textContent = draft ? '先做 1 分鐘：' + c.name : c.name;
   var tipEl = document.getElementById('tTip');
   if (tipEl) {
     var tipTxt = tipEl.querySelector('span');
@@ -4088,6 +4659,7 @@ function minimizeTimer() {
 }
 function finishTimer() {
   if (!timer) return;
+  if (timer.draft) { finishDraft(); return; }
   stopTimerClock();
   timer.finishedMin = Math.max(1, Math.round(timer.elapsed / 60));
   $('#timerOverlay').classList.remove('show');
@@ -4103,6 +4675,40 @@ function quitTimer() {
   timer = null;
 }
 function stopTimerClock() { if (timer && timer.iv) clearInterval(timer.iv); }
+
+/* ---------- 非完美啟動（Draft Mode）----------
+   用同一件本來要做的事、把門檻降到 1 分鐘。只記「已啟動」，
+   不計完成率、不問歸檔、不動時間線的完成狀態。 */
+function draftKey(d) { return 'draftStarted_' + (d || todayStr()); }
+function markDraftStarted(cardId) {
+  try {
+    const k = draftKey(), arr = JSON.parse(localStorage.getItem(k) || '[]');
+    if (arr.indexOf(cardId) < 0) { arr.push(cardId); localStorage.setItem(k, JSON.stringify(arr)); }
+  } catch (e) { /* ignore */ }
+}
+function draftStartedToday(cardId) {
+  try { return JSON.parse(localStorage.getItem(draftKey()) || '[]').indexOf(cardId) >= 0; }
+  catch (e) { return false; }
+}
+async function startDraftTimer(cardId) {
+  const c = await ldb.cards.get(cardId);
+  if (!c) { toast('卡片已不存在'); return; }
+  await autoAddToTimeline(c); /* 留在時間線，但不要 marked done */
+  await startTimer(cardId, { type: 'draft' }, { draft: true });
+  toast('先做 1 分鐘就好，做到哪裡都不算失敗');
+}
+function finishDraft() {
+  if (!timer || !timer.draft) return;
+  const c = timer.card;
+  stopTimerClock();
+  $('#timerOverlay').classList.remove('show');
+  $('#timerMini').classList.remove('show');
+  markDraftStarted(c.id);
+  timer = null;
+  toast('已啟動「' + c.name + '」· 1 分鐘草稿不算完成，想接著做就點時間線');
+  Promise.resolve(renderCards()).catch(function () {});
+  Promise.resolve(renderSchedule()).catch(function () {});
+}
 
 function showCompletionModal(card) {
   const defMode = card.energyMode || 'neutral';
@@ -4335,6 +4941,7 @@ async function confirmAddToTimeline() {
   }
 }
 async function autoAddToTimeline(c) {
+  if (c && c.isSleeping) return; /* 休眠中的卡不上時間線 */
   const list = await getSchedule(todayStr());
   if (list.some(it => it.kind === 'card' && it.cardId === c.id && !it.done)) return;
   await pushScheduleItem({ period: defaultPeriod(), text: c.name, kind: 'card', cardId: c.id, type: c.type, duration: c.duration, energyMode: c.energyMode, energyAmount: c.energyAmount }, todayStr());
@@ -4699,7 +5306,7 @@ async function delSchedule(id) {
 /* ---------------- 卡庫 ---------------- */
 function renderFilter() {
   const row = $('#filterRow');
-  const map = { '全部': ['primary', 'soft'], '副業': ['c-sky-ink', 'c-sky-bg'], '自我成長': ['c-violet-ink', 'c-violet-bg'], '放鬆': ['c-mint-ink', 'c-mint-bg'], '雜事': ['c-pink-ink', 'c-pink-bg'], '長期專案': ['c-butter-ink', 'c-butter-bg'], '已歸檔': ['c-slate-ink', 'c-slate-bg'] };
+  const map = { '全部': ['primary', 'soft'], '休眠區': ['c-slate-ink', 'c-slate-bg'], '副業': ['c-sky-ink', 'c-sky-bg'], '自我成長': ['c-violet-ink', 'c-violet-bg'], '放鬆': ['c-mint-ink', 'c-mint-bg'], '雜事': ['c-pink-ink', 'c-pink-bg'], '長期專案': ['c-butter-ink', 'c-butter-bg'], '已歸檔': ['c-slate-ink', 'c-slate-bg'] };
   row.innerHTML = FILTERS.map(f => {
     const ci = map[f][0], ct = map[f][1];
     const style = ' style="--ci:var(--' + ci + ');--ct:var(--' + ct + ')"';
@@ -4712,6 +5319,32 @@ async function renderCards(beforeRects) {
   const before = beforeRects || c2SnapshotRects();
   $('#cardCount').textContent = '（' + active.length + '）';
   const g = $('#cardGrid');
+
+  /* 休眠區：做不完但不想刪的卡都放這裡 */
+  if (state.filter === '休眠區') {
+    g.classList.remove('single');
+    const sl = list.filter(c => c.isSleeping && !c.isMerged);
+    if (!sl.length) {
+      g.innerHTML = '<div class="empty" style="grid-column:1/-1;"><span class="big"><i data-lucide="moon"></i></span>休眠區是空的。<br>做不完又不想刪的卡，點卡片上的月亮送進來，<br>它就不會再出現在抽卡裡。</div>';
+      lucide.createIcons(g);
+      c2UpdateTipBar();
+      return;
+    }
+    g.innerHTML = sl.map(c => {
+      const meta = TYPE_META[c.type] || TYPE_META['自我成長'];
+      const ci = cardCi(c);
+      return '<div class="citem sleep" style="--cb:var(--' + ci + '-ink)">' +
+        '<div class="ctop"><span class="ic-circle ' + ci + '" style="background:var(--' + ci + '-bg);color:var(--' + ci + '-ink)"><i data-lucide="' + esc(c.icon || meta.icon) + '"></i></span>' +
+        '<span class="ct-right"><span class="tbadge ' + ci + '">' + esc(c.type) + '</span></span></div>' +
+        '<div class="cname">' + esc(c.name) + '</div>' +
+        '<div class="cpills"><span class="tpil">' + esc(c.duration) + ' 分鐘</span><span class="epil">' + esc(energyBadge(c)) + '</span></div>' +
+        '<div class="cacts"><button class="cdo restore" onclick="wakeCard(' + c.id + ')"><i data-lucide="sun"></i> 喚醒</button></div>' +
+        '</div>';
+    }).join('');
+    lucide.createIcons(g);
+    c2UpdateTipBar();
+    return;
+  }
 
   /* 已歸檔視圖：成就展示牆（可一鍵恢復到卡庫） */
   if (state.filter === '已歸檔') {
@@ -4748,8 +5381,10 @@ async function renderCards(beforeRects) {
     return;
   }
   g.classList.remove('single');
-  let shown = active;
-  if (state.filter !== '全部') shown = active.filter(c => c.type === state.filter);
+  /* 休眠卡在「全部」與各分類裡都先收起來，只在休眠區出現 */
+  const awake = active.filter(c => !c.isSleeping);
+  let shown = awake;
+  if (state.filter !== '全部') shown = awake.filter(c => c.type === state.filter);
   if (!shown.length) {
     g.innerHTML = '<div class="empty" style="grid-column:1/-1;"><span class="big"><i data-lucide="folder"></i></span>這裡還沒有卡片。<br>點右上角「＋ 新增」加入第一張。</div>';
   } else {
@@ -4762,6 +5397,9 @@ async function renderCards(beforeRects) {
       const hasDraft = !!pcDraftForCard(c.id);
       const stepChip = steps.length
         ? '<button type="button" class="step-n step-chip" data-act="c2flip" data-card="' + c.id + '" title="翻開步驟卡">' + doneN + '/' + steps.length + ' 步</button>' : '';
+      const draftChip = '<button type="button" class="draft-pil' + (draftStartedToday(c.id) ? ' started' : '') +
+          '" onclick="event.stopPropagation();startDraftTimer(' + c.id + ')" title="先做 1 分鐘草稿（不算完成）"><i data-lucide="zap"></i>' +
+          (draftStartedToday(c.id) ? '已啟動' : '1 分鐘') + '</button>';
       /* 只有拆過步驟的卡才墊一疊；色系統一用主題紫（深→淺），错开收斂避免擁擠 */
       var ghosts = '';
       if (steps.length) {
@@ -4783,10 +5421,11 @@ async function renderCards(beforeRects) {
         '<div class="c2corner">' +
         (c.isRepeating ? '<span class="ci-rep" title="可重複"><i data-lucide="repeat"></i></span>' : '') +
         (c.deadline ? '<span class="ci-dl' + deadlineClass(c.deadline) + '" title="截止 ' + mdShort(c.deadline) + '"><i data-lucide="flag"></i></span>' : '') +
+        '<button type="button" class="ci-sleep" title="送入休眠" aria-label="送入休眠" onclick="event.stopPropagation();sleepCard(' + c.id + ')"><i data-lucide="moon"></i></button>' +
         '</div></div>' +
         '<div class="cpills">' +
         '<span class="tpil">' + esc(c.duration) + ' 分</span>' +
-        '<span class="epil">' + esc(energyBadge(c)) + '</span>' + stepChip +
+        '<span class="epil">' + esc(energyBadge(c)) + '</span>' + stepChip + draftChip +
         '</div>' +
         (c.why ? '<div class="c2why" title="' + esc(c.why) + '"><i data-lucide="star"></i><span>' + esc(c.why) + '</span></div>' : '') +
         '<div class="c2acts">' +
@@ -4890,6 +5529,10 @@ function cardForm(card) {
     '<div class="fld"><label>能量量級</label><div class="amounts" id="fAmount">' + amountIcons + '</div><div class="hint2">參考：每 30 分鐘約等於 1 能量</div></div>' +
     '<div class="fld"><label>時間需求</label><div class="seg" id="fDuration">' + durSeg + '</div></div>' +
     '<div class="fld"><label>類型 <span class="hint">選中填滿分類色</span></label><div class="seg" id="fType">' + typeSeg + '</div></div>' +
+    '<div class="fld"><label>標籤 <span class="hint">選填 · 只在後台配對主題，卡面不顯示</span></label>' +
+    '<div class="tag-field"><div class="tag-chips" id="fTagChips"></div>' +
+    '<div class="tag-add"><input type="text" class="input" id="fTagInput" maxlength="12" placeholder="輸入標籤，按 Enter 加入"><button type="button" class="tag-add-btn" id="fTagAdd" aria-label="加入標籤">+</button></div>' +
+    '<div id="fTagHistWrap"><div class="tag-hist-lab">用過的標籤</div><div class="tag-hist" id="fTagHist"></div></div></div></div>' +
     '<div class="fld"><label>任務性質</label><div class="seg" id="fNature">' + natureSeg + '</div>' +
     '<div class="hint2" id="fNatureHint">' + (c.isRepeating ? '循環：可反覆做，完成後也能收進成就牆' : '一次性：完成後可選擇歸檔移除') + '</div></div>' +
     '<div class="fld"><label>圖標 <span class="hint">從 lucide 選擇</span></label>' +
@@ -5079,8 +5722,118 @@ function bindCardFormSegs(c) {
     if (h) h.textContent = cur.isRepeating ? '循環：可反覆做，完成後也能收進成就牆' : '一次性：完成後可選擇歸檔移除';
   });
   window._cardDraft = cur;
+  cur.tags = Array.isArray(c.tags) ? c.tags.filter(Boolean).slice(0, 8) : [];
+  renderCardTagEditor(cur);
+  const _tagInp = $('#fTagInput');
+  if (_tagInp) _tagInp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); addCardTag(cur, _tagInp.value); } });
+  const _tagAdd = $('#fTagAdd'); if (_tagAdd) _tagAdd.onclick = () => addCardTag(cur, (_tagInp && _tagInp.value) || '');
   /* P15：初始化颜色圆点（表單 DOM 已由 cardForm 生成） */
   setTimeout(function () { updateColorField(cur.color || ''); }, 0);
+}
+/* ---------- 卡片標籤：只存在資料裡，卡面完全不顯示 ----------
+   標籤庫＝「所有卡片正在用的」∪「使用者手動新增的」；
+   卡片標籤一增一減，庫與本月主題標籤都會跟著同步。 */
+const CARD_TAG_HIST_KEY = 'cardTagHistory';
+async function cardTagsInUse() {
+  var used = [], seen = Object.create(null);
+  try {
+    var cards = await ldb.cards.toArray();
+    cards.forEach(function (c) {
+      (Array.isArray(c.tags) ? c.tags : []).forEach(function (t) {
+        if (t && !seen[t]) { seen[t] = 1; used.push(t); }
+      });
+    });
+  } catch (e) { /* ignore */ }
+  return used;
+}
+async function cardTagsManual() {
+  try {
+    var a = JSON.parse(await getSetting('cardTagManual', '[]') || '[]');
+    return Array.isArray(a) ? a.filter(Boolean) : [];
+  } catch (e) { return []; }
+}
+async function cardTagLibrary() {
+  var used = await cardTagsInUse(), manual = await cardTagsManual();
+  var out = [], seen = Object.create(null);
+  manual.concat(used).forEach(function (t) { if (t && !seen[t]) { seen[t] = 1; out.push(t); } });
+  return out;
+}
+/* 庫同步：主題標籤必須在庫內，否則抽卡加權自動失效 */
+async function syncCardTagLibrary() {
+  var lib = await cardTagLibrary();
+  try { await setSetting('cardTagLibrary', JSON.stringify(lib)); } catch (e) {}
+  var cur = [];
+  try {
+    var a = JSON.parse(await getSetting('themeMonthTags', '[]') || '[]');
+    cur = Array.isArray(a) ? a.filter(Boolean) : [];
+  } catch (e) {}
+  var next = cur.filter(function (t) { return lib.indexOf(t) >= 0; }).slice(0, 3);
+  var changed = next.length !== cur.length || next.some(function (t, i) { return cur[i] !== t; });
+  if (changed) {
+    monthThemeTags = next;
+    try { await setSetting('themeMonthTags', JSON.stringify(next)); } catch (e) {}
+  }
+  return { lib: lib, changed: changed };
+}
+/* 候選標籤：庫優先，補上舊的歷史紀錄 */
+async function cardTagCandidates(exclude) {
+  var lib = await cardTagLibrary();
+  try {
+    var h = JSON.parse(localStorage.getItem(CARD_TAG_HIST_KEY) || '[]');
+    if (Array.isArray(h)) h.forEach(function (t) { if (t && lib.indexOf(t) < 0) lib.push(t); });
+  } catch (e) { /* ignore */ }
+  return lib.filter(function (t) { return !exclude || exclude.indexOf(t) < 0; });
+}
+function loadCardTagHistory() {
+  try { const a = JSON.parse(localStorage.getItem(CARD_TAG_HIST_KEY) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; }
+}
+function rememberCardTags(tags) {
+  try {
+    const h = loadCardTagHistory();
+    (tags || []).forEach(function (t) { if (t && h.indexOf(t) < 0) h.unshift(t); });
+    localStorage.setItem(CARD_TAG_HIST_KEY, JSON.stringify(h.slice(0, 40)));
+  } catch (e) { /* ignore */ }
+}
+async function renderCardTagEditor(cur) {
+  const box = document.getElementById('fTagChips');
+  if (!box) return;
+  box.innerHTML = (cur.tags && cur.tags.length)
+    ? cur.tags.map(function (t, i) { return '<span class="tag-chip">' + esc(t) + '<button type="button" data-i="' + i + '" aria-label="移除標籤">×</button></span>'; }).join('')
+    : '<span class="tag-none">還沒有標籤</span>';
+  box.querySelectorAll('button[data-i]').forEach(function (b) {
+    b.onclick = function () { cur.tags.splice(+b.dataset.i, 1); renderCardTagEditor(cur); };
+  });
+  const hist = (await cardTagCandidates(cur.tags)).slice(0, 12);
+  const hw = document.getElementById('fTagHistWrap'), hh = document.getElementById('fTagHist');
+  if (!hw || !hh) return;
+  if (!hist.length) { hw.style.display = 'none'; return; }
+  hw.style.display = '';
+  hh.innerHTML = hist.map(function (t) { return '<button type="button" class="tag-hist-chip">' + esc(t) + '</button>'; }).join('');
+  hh.querySelectorAll('button').forEach(function (b) { b.onclick = function () { addCardTag(cur, b.textContent); }; });
+}
+async function addCardTag(cur, raw) {
+  const t = String(raw || '').trim().replace(/\s+/g, ' ').slice(0, 12);
+  if (!t) return;
+  if (cur.tags.length >= 8) { toast('每張卡最多 8 個標籤'); return; }
+  if (cur.tags.indexOf(t) >= 0) { toast('已經有這個標籤'); return; }
+  cur.tags.push(t); renderCardTagEditor(cur);
+  const inp = document.getElementById('fTagInput'); if (inp) { inp.value = ''; inp.focus(); }
+}
+/* ---------- 本月主題標籤：從標籤庫裡挑最多 3 個，卡片標籤變動時自動同步 ---------- */
+async function themeTagState() {
+  var lib = await cardTagLibrary();
+  var cur = [];
+  try {
+    var arr = JSON.parse(await getSetting('themeMonthTags', '[]') || '[]');
+    cur = Array.isArray(arr) ? arr.filter(Boolean) : [];
+  } catch (e) {}
+  return { lib: lib, cur: cur.filter(function (t) { return lib.indexOf(t) >= 0; }).slice(0, 3) };
+}
+/* 卡片標籤被移除（或卡片刪除）後，失效的主題標籤自動剔除 */
+async function syncThemeTagsWithCards() {
+  var r = await syncCardTagLibrary();
+  if (r.changed) await drawCards();
+  return r;
 }
 /* ---------------- 時間滾輪選擇器（Wheel Picker） ---------------- */
 let wheelCtx = null;
@@ -5197,6 +5950,7 @@ async function saveCard(id) {
     tip: $('#fTip') ? $('#fTip').value.trim() : ((old && old.tip) || ''),
     deadline: draft.deadline || '',
     isRepeating: !!draft.isRepeating,
+    tags: Array.isArray(draft.tags) ? draft.tags.filter(Boolean).slice(0, 8) : [],
     steps: steps,
     stepDone: stepDone,
     updatedAt: Date.now(),
@@ -5205,13 +5959,16 @@ async function saveCard(id) {
     data.cloudId = old ? old.cloudId : undefined;
     data.isArchived = old ? (!!old.isArchived) : false;
     await ldb.cards.update(id, data);
+    rememberCardTags(data.tags);
     toast('已儲存修改');
   } else {
     data.createdAt = Date.now();
     await ldb.cards.add(data);
+    rememberCardTags(data.tags);
     toast('已加入卡庫');
   }
   CloudSync.notifyLocalChange('cards', null);
+  await syncThemeTagsWithCards();
   closeModal();
   await renderCards();
   await drawCards();
@@ -5222,11 +5979,31 @@ async function deleteCard(id) {
   if (!confirm('刪除卡片「' + c.name + '」？')) return;
   await ldb.cards.delete(id);
   if (c.cloudId) await ldb.syncDel.add({ table: 'cards', cloudId: c.cloudId, ts: Date.now() });
+  await syncThemeTagsWithCards();
   closeModal();
   toast('已刪除');
   await renderCards();
   await drawCards();
   CloudSync.notifyLocalChange('cards', null);
+}
+/* P57：休眠 —— 做不完但不想刪的卡，暫時離開抽卡池與時間線 */
+async function sleepCard(id) {
+  const c = await ldb.cards.get(id);
+  if (!c) return;
+  await ldb.cards.update(id, { isSleeping: true, sleptAt: Date.now() });
+  CloudSync.notifyLocalChange('cards', null);
+  toast('已送入休眠，想起來再喚醒它');
+  await renderCards();
+  await drawCards();
+}
+async function wakeCard(id) {
+  const c = await ldb.cards.get(id);
+  if (!c) return;
+  await ldb.cards.update(id, { isSleeping: false, sleptAt: undefined });
+  CloudSync.notifyLocalChange('cards', null);
+  toast('已喚醒「' + c.name + '」');
+  await renderCards();
+  await drawCards();
 }
 /* ---------------- 完成任務：歸檔提示卡（底部滑出） ----------------
    恢復原本的底部提示卡，不用置中對話框。
@@ -5272,8 +6049,7 @@ async function restoreCard(id) {
 }
 
 /* ---------------- 記錄頁（支援補記：可切換過去 30 天） ---------------- */
-const RECORD_DAYS_BACK = 30;
-function recordMinDate() { return dateStr(addDays(parseDate(getLogicalDate()), -RECORD_DAYS_BACK)); }
+function recordMinDate() { return APP_START_DS; }
 function recordMaxDate() { return getLogicalDate(); }
 
 /* 切換日期（帶淡出→載入→淡入，避免閃爍） */
@@ -5305,6 +6081,10 @@ async function renderRecord(date) {
   $('#recordTag').textContent = ds === today ? '今天' : (ds === yest ? '昨天' : '補記');
   $('#recNext').disabled = ds >= today;
   $('#recPrev').disabled = ds <= recordMinDate();
+  calState.selected = ds;
+  calState.year = d.getFullYear();
+  calState.month = d.getMonth();
+  renderCalendar();
 
   const log = await ldb.dailyLogs.get(ds);
   let genAt = '';
@@ -5405,15 +6185,6 @@ function closeRecDate() {
   $('#recDateOverlay').classList.remove('show');
   recDateCtx = null;
 }
-/* 從復盤跳轉補記 */
-function openRecordForDate(ds) {
-  if (!ds) return;
-  state.recordDate = ds;
-  switchTab('record');
-  const body = $('#page-record .pg-body');
-  if (body) body.scrollTop = 0;
-}
-
 /* 壓力：三格能量條（低 / 中 / 高） */
 const PRESSURE_LEVELS = ['低', '中', '高'];
 function setMeter(el, val) {
@@ -6611,19 +7382,19 @@ function bowelStripHTML(days) {
 
 function bowelInsight(days, st) {
   if (!st.logged) return '還沒有紀錄。點一個就好，沒拉也可以記。';
-  if (st.loose >= 2) return '這 7 天有 <b>' + st.loose + ' 天</b>腹瀉，腸胃還沒緩過來。';
+  if (st.loose >= 2) return '這週有 <b>' + st.loose + ' 天</b>腹瀉，腸胃還沒緩過來。';
   if (!st.active) {
-    if (st.logged >= 4) return '這 7 天<b>都沒有排便</b>。記著，回診時可以給醫生看。';
-    return '這 7 天已記 <b>' + st.noPoo + ' 天</b>沒拉。持續記錄，才看得出節奏。';
+    if (st.logged >= 4) return '這週<b>都沒有排便</b>。記著，回診時可以給醫生看。';
+    return '這週已記 <b>' + st.noPoo + ' 天</b>沒拉。持續記錄，才看得出節奏。';
   }
   let i = days.length - 1;
   while (i >= 0 && !(days[i].b && days[i].b.logged)) i--;
   let streak = 0;
   while (i >= 0 && days[i].b && days[i].b.logged && !days[i].b.count) { streak++; i--; }
   if (streak >= 2) return '已 <b>' + streak + ' 天</b>沒有排便紀錄。喝水、散步，讓腸胃動一動。';
-  if (st.loose === 1) return '這 7 天有 <b>1 天</b>腹瀉，其他天還算穩。';
-  if (st.active >= 4) return '這 7 天有 <b>' + st.active + ' 天</b>排便，節奏穩定。';
-  return '這 7 天有 <b>' + st.active + ' 天</b>排便' +
+  if (st.loose === 1) return '這週有 <b>1 天</b>腹瀉，其他天還算穩。';
+  if (st.active >= 4) return '這週有 <b>' + st.active + ' 天</b>排便，節奏穩定。';
+  return '這週有 <b>' + st.active + ' 天</b>排便' +
     (st.noPoo ? '，另外 <b>' + st.noPoo + ' 天</b>沒拉。' : '。');
 }
 
@@ -6882,16 +7653,15 @@ function wkDaysStats(days) {
   return st;
 }
 
-async function s2RenderWorkoutReport() {
+async function s2RenderWorkoutReport(days) {
   const host = document.getElementById('wkReportBody');
   if (!host) return;
-  const days = await last7Logs(todayStr());
   const st = wkDaysStats(days);
   const avg = st.n ? Math.round(st.min / st.n) : 0;
   let h = '<div class="wk-hero"><b>' + (st.min || 0) + '</b><span>分鐘</span></div>' +
     '<div class="wk-sub2">' + (st.n
-      ? '本週共 <b>' + st.n + '</b> 天有運動' + (avg ? ' · 平均每次 ' + avg + ' 分鐘' : '')
-      : '本週還沒有紀錄') + '</div>';
+      ? '這週共 <b>' + st.n + '</b> 天有運動' + (avg ? ' · 平均每次 ' + avg + ' 分鐘' : '')
+      : '這週還沒有紀錄') + '</div>';
   h += '<div class="tk-strip">' + wkStripHTML(days) + '</div>';
   if (st.n) {
     const order = Object.keys(st.cnt).sort(function (a, b) { return st.mins[b] - st.mins[a]; });
@@ -6956,10 +7726,9 @@ function s2PlantSVG(leaves, wilt, h) {
   return out;
 }
 
-async function s2RenderBowelReport() {
+async function s2RenderBowelReport(days) {
   const host = document.getElementById('bowelReportBody');
   if (!host) return;
-  const days = await last7Logs(todayStr());
   const st = bowelDaysStats(days);
   host.innerHTML = '<div class="tk-strip">' + bowelStripHTML(days) + '</div>' +
     '<div class="bowel-sum">' + bowelInsight(days, st) + '</div>';
@@ -7152,8 +7921,8 @@ async function s2RenderCycleCard() {
 /* 半圓環：用 pathLength=100 讓每段以比例算，兩端補圓頭 */
 function s2DrinkArc(st) {
   const keys = DRINK_KEYS.filter(function (k) { return st.by[k] > 0; });
-  const D = 'M22 100A78 78 0 0 1 178 100';
-  let out = '<svg class="dk-ring" viewBox="0 0 200 108" aria-hidden="true">' +
+  const D = 'M10 104A90 90 0 0 1 190 104';
+  let out = '<svg class="dk-ring" viewBox="0 0 200 116" aria-hidden="true">' +
     '<path d="' + D + '" fill="none" stroke="#F2EFF8" stroke-width="12"/>';
   if (st.cups) {
     const gap = 1.1, total = st.cups;
@@ -7167,8 +7936,8 @@ function s2DrinkArc(st) {
         (-from).toFixed(2) + '"/>';
       acc += pct;
     });
-    out += '<circle cx="22" cy="100" r="6" fill="' + DRINK_TYPES[keys[0]].c + '"/>' +
-      '<circle cx="178" cy="100" r="6" fill="' + DRINK_TYPES[keys[keys.length - 1]].c + '"/>';
+    out += '<circle cx="10" cy="104" r="6" fill="' + DRINK_TYPES[keys[0]].c + '"/>' +
+      '<circle cx="190" cy="104" r="6" fill="' + DRINK_TYPES[keys[keys.length - 1]].c + '"/>';
   }
   return out + '</svg>';
 }
@@ -7200,7 +7969,7 @@ async function s2RenderDrinkReport(logs) {
 
   let h = '<div class="dk-hero">' + s2DrinkArc(st) +
     '<div class="dk-plant">' + s2PlantSVG(leaves, wilt, 64) + '</div>' +
-    '<div class="dk-total">' + (total ? '總計 <b>' + total + '</b> 杯' : '本週 0 杯') + '</div></div>';
+    '<div class="dk-total">' + (total ? '總計 <b>' + total + '</b> 杯' : '這週 0 杯') + '</div></div>';
   if (total) {
     h += '<div class="dk-leg">' + DRINK_KEYS.filter(function (k) { return st.by[k] > 0; }).map(function (k) {
       return '<span>' + drinkCup(k, 15) + DRINK_TYPES[k].name + '<b>' + st.by[k] + '</b></span>';
@@ -7306,17 +8075,17 @@ function tagCount(logs, field, names) {
   return logs.reduce((n, l) => n + (Array.isArray(l[field]) && l[field].some(t => names.indexOf(t) >= 0) ? 1 : 0), 0);
 }
 /* 計算某一週（weekOffset: 0=本週, -1=上週）的 8 維分數 */
-async function s2WheelCompute(weekOffset) {
+async function s2WheelCompute(weekOffset, span) {
   const base = weekRange();
-  const mon = addDays(base.monday, (weekOffset || 0) * 7);
-  const sun = addDays(mon, 6);
+  const mon = span ? span.start : addDays(base.monday, (weekOffset || 0) * 7);
+  const sun = span ? span.end : addDays(mon, 6);
   const mStr = dateStr(mon), sStr = dateStr(sun);
   const logs = await ldb.dailyLogs.where('date').between(mStr, sStr, true, true).toArray();
   const recs = await ldb.records.where('ts').between(mon.getTime(), sun.getTime() + 86399999, true, true).toArray();
   const done = recs.filter(r => r.completed);
   const days = logs.length || 1;  // 避免除以 0；用「有記錄的天數」當分母更公平
   const doneType = (t) => done.filter(r => r.type === t).length;
-  const R = (label, val, raw, detail) => ({ label, val: clamp10(Math.round(val * 10) / 10), raw, detail });
+  const R = (label, val, raw, detail, unit, neg) => ({ label, val: clamp10(Math.round(val * 10) / 10), raw, detail, unit: unit || '天', neg: !!neg });
 
   const dims = {};
 
@@ -7327,9 +8096,9 @@ async function s2WheelCompute(weekOffset) {
   dims.body = {
     score: clamp10((sleepOk / days) * 5 + (exercise / 3) * 3 + Math.max(0, (1 - tired / days)) * 2),
     reasons: [
-      R('睡眠達標', sleepOk + '/' + logs.length + ' 天', sleepOk, '每晚睡 6.5–9 小時'),
-      R('運動', exercise + ' 次', exercise, '目標每週 3 次'),
-      R('疲憊天數', tired + ' 天', tired, '越少越好'),
+      R('睡眠達標', sleepOk + '/' + logs.length + ' 天', sleepOk, '每晚睡 6.5–9 小時', '天'),
+      R('運動', exercise + ' 次', exercise, '目標每週 3 次', '次'),
+      R('疲憊天數', tired + ' 天', tired, '越少越好', '天', true),
     ],
   };
 
@@ -7339,8 +8108,8 @@ async function s2WheelCompute(weekOffset) {
   dims.work = {
     score: clamp10((workCards / 4) * 6 + (overtime / 4) * 4),
     reasons: [
-      R('副業完成', workCards + ' 次', workCards, '完成卡片'),
-      R('工作投入', overtime + ' 天', overtime, '標記「工作加班」'),
+      R('副業完成', workCards + ' 次', workCards, '完成卡片', '次'),
+      R('工作投入', overtime + ' 天', overtime, '標記「工作加班」', '天'),
     ],
   };
 
@@ -7350,8 +8119,8 @@ async function s2WheelCompute(weekOffset) {
   dims.growth = {
     score: clamp10((growCards / 4) * 6 + (study / 4) * 4),
     reasons: [
-      R('成長完成', growCards + ' 次', growCards, '完成卡片'),
-      R('學習', study + ' 天', study, '標記「學習」'),
+      R('成長完成', growCards + ' 次', growCards, '完成卡片', '次'),
+      R('學習', study + ' 天', study, '標記「學習」', '天'),
     ],
   };
 
@@ -7361,8 +8130,8 @@ async function s2WheelCompute(weekOffset) {
   dims.relax = {
     score: clamp10((relaxCards / 4) * 5 + (fun / 4) * 5),
     reasons: [
-      R('放鬆完成', relaxCards + ' 次', relaxCards, '完成卡片'),
-      R('興趣/戶外', fun + ' 天', fun, '標記「興趣」或「戶外活動」'),
+      R('放鬆完成', relaxCards + ' 次', relaxCards, '完成卡片', '次'),
+      R('興趣/戶外', fun + ' 天', fun, '標記「興趣」或「戶外活動」', '天'),
     ],
   };
 
@@ -7370,14 +8139,14 @@ async function s2WheelCompute(weekOffset) {
   const friends = tagCount(logs, 'activityTags', ['朋友聚會']);
   dims.social = {
     score: clamp10((friends / 3) * 10),
-    reasons: [ R('朋友聚會', friends + ' 天', friends, '目標每週 3 次') ],
+    reasons: [ R('朋友聚會', friends + ' 天', friends, '目標每週 3 次', '天') ],
   };
 
   // 家庭：家庭活動
   const family = tagCount(logs, 'activityTags', ['家庭活動']);
   dims.family = {
     score: clamp10((family / 4) * 10),
-    reasons: [ R('家庭活動', family + ' 天', family, '標記「家庭活動」') ],
+    reasons: [ R('家庭活動', family + ' 天', family, '標記「家庭活動」', '天') ],
   };
 
   // 心靈：獨處放鬆 + 負向詳細情緒（低能量／高能量）
@@ -7391,8 +8160,8 @@ async function s2WheelCompute(weekOffset) {
   dims.mind = {
     score: clamp10((alone / 4) * 6 + Math.max(0, (1 - negEmotionDays / days)) * 4),
     reasons: [
-      R('獨處放鬆', alone + ' 天', alone, '標記「獨處放鬆」'),
-      R('負向情緒', negEmotionDays + ' 天', negEmotionDays, '詳細情緒偏負向，越少越好'),
+      R('獨處放鬆', alone + ' 天', alone, '標記「獨處放鬆」', '天'),
+      R('負向情緒', negEmotionDays + ' 天', negEmotionDays, '詳細情緒偏負向，越少越好', '天', true),
     ],
   };
 
@@ -7402,9 +8171,9 @@ async function s2WheelCompute(weekOffset) {
   dims.order = {
     score: clamp10((water / days) * 4 + (calm / days) * 3 + (logs.length / 7) * 3),
     reasons: [
-      R('喝水達標', water + '/' + logs.length + ' 天', water, '每天 4 杯以上'),
-      R('壓力低', calm + ' 天', calm, '標記壓力「低」'),
-      R('記錄天數', logs.length + '/7 天', logs.length, '每天記一筆'),
+      R('喝水達標', water + '/' + logs.length + ' 天', water, '每天 4 杯以上', '天'),
+      R('壓力低', calm + ' 天', calm, '標記壓力「低」', '天'),
+      R('記錄天數', logs.length + '/7 天', logs.length, '每天記一筆', '天'),
     ],
   };
 
@@ -7413,7 +8182,15 @@ async function s2WheelCompute(weekOffset) {
 
 let s2WheelChart = null;
 let s2WheelData = null;       // 本週計算結果（供點擊展開）
+let s2WheelPrev = null;       // 上週計算結果（供趨勢對比）
+let s2WheelIsNow = true;      // 目前看的是不是進行中的這一週
 let s2WheelOpenDim = null;    // 目前展開的維度 key
+/* 分數顏色：進行中（0<分≤5 紫、>5 綠、0 灰）；已過週（達標綠、未達標柔紅、0 灰） */
+function wheelTone(v, isNow) {
+  if (!v) return 't-zero';
+  if (isNow) return v > 5 ? 't-good' : 't-mid';
+  return v >= 5 ? 't-good' : 't-low';
+}
 
 function s2WheelScoreText(v) {
   if (v >= 8) return '飽滿';
@@ -7421,12 +8198,16 @@ function s2WheelScoreText(v) {
   if (v >= 2.5) return '待照顧';
   return '留白';
 }
-async function s2RenderWheel() {
+async function s2RenderWheel(span, prevSpan, seq) {
   const box = $('#wheelBody');
   if (!box) return;
-  const now = await s2WheelCompute(0);
-  const prev = await s2WheelCompute(-1);
+  const now = await s2WheelCompute(0, span);
+  const prev = prevSpan ? await s2WheelCompute(0, prevSpan) : await s2WheelCompute(-1);
+  if (seq != null && seq !== reviewSeq) return;
+  const isNow = !span || dateStr(span.start) === dateStr(weekRange().monday);
   s2WheelData = now;
+  s2WheelPrev = prev;
+  s2WheelIsNow = isNow;
   /* 完全沒有任何記錄 → 空狀態引導（不顯示全 0 讓人挫敗） */
   if (!now.logs && !prev.logs && !now.done && !prev.done) {
     box.innerHTML = '<div class="wheel-empty"><div><div class="we-ic">🛞</div>还没有足够的记录来画出你的生命之轮。<br>' +
@@ -7437,17 +8218,20 @@ async function s2RenderWheel() {
   const last = WHEEL_DIMS.map(d => prev.dims[d.key].score);
   box.innerHTML =
     '<div class="wheel-legend">' +
-      '<span class="wl"><i></i>本週</span>' +
+      '<span class="wl"><i></i>這週</span>' +
       '<span class="wl prev"><i></i>上週</span>' +
     '</div>' +
     '<div class="wheel-wrap"><canvas id="wheelChart"></canvas></div>' +
     '<div class="wheel-insight" id="wheelInsight"></div>' +
-    '<div class="wheel-detail" id="wheelDetail"></div>' +
     '<div class="wheel-tip">點下面的維度，看分數是怎麼算出來的</div>' +
-    '<div class="wheel-chips" id="wheelChips" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px">' +
-      WHEEL_DIMS.map(d => '<button type="button" class="wchip" data-k="' + d.key + '" style="--wc:var(--' + d.ci + '-ink)">' +
-        d.emoji + ' ' + d.name + ' <b>' + now.dims[d.key].score.toFixed(1) + '</b></button>').join('') +
-    '</div>';
+    '<div class="wheel-chips" id="wheelChips">' +
+      WHEEL_DIMS.map(d => {
+        const sc = now.dims[d.key].score;
+        return '<button type="button" class="wchip ' + wheelTone(sc, isNow) + '" data-k="' + d.key + '">' +
+          d.emoji + ' ' + d.name + ' <b>' + sc.toFixed(1) + '</b></button>';
+      }).join('') +
+    '</div>' +
+    '<div class="wheel-detail" id="wheelDetail"></div>';
   /* 洞察：最高/最低維度 */
   const ranked = WHEEL_DIMS.map(d => ({ d, v: now.dims[d.key].score })).sort((a, b) => b.v - a.v);
   const hi = ranked[0], lo = ranked[ranked.length - 1];
@@ -7469,7 +8253,7 @@ async function s2RenderWheel() {
         datasets: [
           { label: '上週', data: last, borderColor: '#C9C4D6', backgroundColor: 'rgba(201,196,214,.08)',
             borderWidth: 1.5, borderDash: [5, 4], pointBackgroundColor: '#C9C4D6', pointRadius: 2, pointHoverRadius: 3 },
-          { label: '本週', data: cur, borderColor: '#7C80DC', backgroundColor: 'rgba(124,128,220,.20)',
+          { label: '這週', data: cur, borderColor: '#7C80DC', backgroundColor: 'rgba(124,128,220,.20)',
             borderWidth: 2, pointBackgroundColor: '#7C80DC', pointBorderColor: '#fff', pointBorderWidth: 1.5,
             pointRadius: 3.5, pointHoverRadius: 5 },
         ],
@@ -7505,28 +8289,45 @@ async function s2RenderWheel() {
   };
   if (s2WheelOpenDim) s2WheelRenderDetail();
 }
+function wdArrowSvg(up) {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" ' +
+    'stroke-linejoin="round" aria-hidden="true"><path d="' + (up ? 'M12 19V5M5 12l7-7 7 7' : 'M12 5v14M19 12l-7 7-7-7') + '"/></svg>';
+}
+/* 與上週同一指標對比：↑+X / ↓-X / 持平 / ✨首次 */
+function wdTrendOf(r, pr) {
+  if (!pr) return { k: 'first', html: '<span class="em">✨</span>首次' };
+  const pv = pr.raw || 0, cv = r.raw || 0;
+  if (pv === 0 && cv > 0) return { k: 'first', html: '<span class="em">✨</span>首次' };
+  if (cv === pv) return { k: 'flat', html: '持平' };
+  const up = cv > pv;
+  const k = r.neg ? (up ? 'alert' : 'good') : (up ? 'good' : 'soft');
+  return { k: k, html: wdArrowSvg(up) + (up ? '+' : '−') + Math.abs(cv - pv) };
+}
 function s2WheelRenderDetail() {
   const box = $('#wheelDetail');
   if (!box) return;
   if (!s2WheelOpenDim) { box.classList.remove('show'); box.innerHTML = ''; return; }
   const d = WHEEL_DIMS.find(x => x.key === s2WheelOpenDim);
   const info = s2WheelData && s2WheelData.dims[s2WheelOpenDim];
-  if (!d || !info) return;
-  const prevInfo = null;
+  const prev = s2WheelPrev && s2WheelPrev.dims[s2WheelOpenDim];
+  if (!d || !info) { box.classList.remove('show'); box.innerHTML = ''; return; }
+  const tone = wheelTone(info.score, s2WheelIsNow);
   box.innerHTML =
     '<div class="wd-head"><span class="wd-ic" style="background:var(--' + d.ci + '-bg)">' + d.emoji + '</span>' +
       '<span class="wd-nm">' + d.name + '</span>' +
-      '<span class="wd-score">' + info.score.toFixed(1) + '<small> /10 · ' + s2WheelScoreText(info.score) + '</small></span></div>' +
-    '<div class="wd-rows">' + info.reasons.map(r =>
-      '<div class="wd-row"><span style="width:62px;flex:0 0 auto">' + r.label + '</span>' +
-      '<span class="bar"><i style="width:' + Math.min(100, r.val * 12) + '%"></i></span>' +
-      '<span class="v">' + r.raw + '</span></div>').join('') + '</div>' +
-    '<div class="wd-empty" style="margin-top:7px">' + info.reasons.map(r => r.label + '：' + r.detail).join(' · ') + '</div>';
+      '<span class="wd-score ' + tone + '">' + info.score.toFixed(1) + '<small>/10</small></span></div>' +
+    '<div class="wd-rows">' + info.reasons.map(function (r, i) {
+      const t = wdTrendOf(r, prev && prev.reasons[i]);
+      return '<div class="wd-row' + (r.raw ? '' : ' zero') + '">' +
+        '<span class="wd-lb">' + r.label + '</span>' +
+        '<span class="wd-rt"><b>' + r.raw + '</b><small>' + r.unit + '</small>' +
+          '<span class="wd-tr ' + t.k + '">' + t.html + '</span></span></div>';
+    }).join('') + '</div>';
   box.classList.add('show');
 }
 
-/* ---------------- 復盤頁（本週數據 + 可收起日曆） ---------------- */
-let calState = { year: null, month: null, selected: null, open: false };  /* P47：日曆仍在最上方，但預設收合，先看這週 */
+/* ---------------- 復盤頁（選中週數據）＋記錄頁日曆 ---------------- */
+let calState = { year: null, month: null, selected: null, open: false };  /* P56：日曆移到記錄頁，預設收起 */
 
 function s2WeekMetrics(logs) {
   const list = logs || [];
@@ -7567,14 +8368,18 @@ function s2RenderWeekCard(cur, prev, monday, sunday) {
 
   const DOW = ['一', '二', '三', '四', '五', '六', '日'];
   const today = todayStr();
+  const len = Math.round((sunday - monday) / 86400000) + 1;
+  const lead = (monday.getDay() + 6) % 7;
   let strip = '';
-  for (let i = 0; i < 7; i++) {
-    const ds = dateStr(addDays(monday, i));
+  for (let i = 0; i < lead; i++) strip += '<div class="d"><span></span><i></i></div>';
+  for (let i = 0; i < len; i++) {
+    const d = addDays(monday, i), ds = dateStr(d);
     const on = !!(ds <= today && cur.daySet && cur.daySet[ds]);
-    strip += '<div class="d' + (on ? ' on' : '') + (ds === today ? ' today' : '') + '"><span>' + DOW[i] + '</span><i></i></div>';
+    strip += '<div class="d' + (on ? ' on' : '') + (ds === today ? ' today' : '') + '"><span>' + DOW[(d.getDay() + 6) % 7] + '</span><i></i></div>';
   }
+  for (let i = lead + len; i < 7; i++) strip += '<div class="d"><span></span><i></i></div>';
 
-  let foot = '這週記了 <b>' + cur.days + '/7</b> 天';
+  let foot = '這週記了 <b>' + cur.days + '/' + len + '</b> 天';
   if (prev.days != null) {
     const dd = cur.days - prev.days;
     if (dd > 0) foot += '，比上週多 ' + dd + ' 天';
@@ -7583,8 +8388,8 @@ function s2RenderWeekCard(cur, prev, monday, sunday) {
   }
 
   host.innerHTML = '<div class="rv-card" id="weekCard">' +
-    '<div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="activity"></i></span><b>本週摘要</b>' +
-    '<span class="rv-right">' + mdShort(dateStr(monday)) + ' – ' + mdShort(dateStr(sunday)) + '</span></div>' +
+    '<div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="activity"></i></span><b>這週摘要</b>' +
+    '<span class="rv-right">' + mdPad(monday) + ' – ' + mdPad(sunday) + '</span></div>' +
     '' +
     '<div class="wm-grid" style="margin-top:10px">' + tiles + '</div>' +
     '<div class="wk7">' + strip + '</div>' +
@@ -7592,20 +8397,41 @@ function s2RenderWeekCard(cur, prev, monday, sunday) {
   if (window.lucide) lucide.createIcons(host);
 }
 
+function reviewDaysOf(logs, start, end) {
+  const map = {};
+  (logs || []).forEach(function (l) { map[l.date] = l; });
+  const out = [], n = Math.round((end - start) / 86400000) + 1;
+  for (let i = 0; i < n; i++) {
+    const d = addDays(start, i), ds = dateStr(d);
+    out.push({ d: d, ds: ds, log: map[ds] || null, today: ds === todayStr() });
+  }
+  return out;
+}
+
+let reviewSeq = 0;
 async function renderReview() {
-  const { monday, sunday } = weekRange();
+  const seq = ++reviewSeq;
+  const sel = reviewWeekInit();
+  updateWeekHead();
+  const span = weekRangeOf(sel.y, sel.k);
+  const monday = span.start, sunday = span.end;
   const mStr = dateStr(monday), sStr = dateStr(sunday);
   const logs = await ldb.dailyLogs.where('date').between(mStr, sStr, true, true).toArray();
   const records = await ldb.records.where('ts').between(monday.getTime(), sunday.getTime() + 86399999, true, true).toArray();
+  if (seq !== reviewSeq) return;
 
-  /* 上週（週一到週日） */
-  const pm = addDays(monday, -7), ps = addDays(sunday, -7);
-  const prevLogs = await ldb.dailyLogs.where('date').between(dateStr(pm), dateStr(ps), true, true).toArray();
+  const pv = adjacentWeek(sel, -1), pr = weekRangeOf(pv.y, pv.k);
+  const hasPrev = pr.end >= appStartDate();
+  const prevLogs = hasPrev
+    ? await ldb.dailyLogs.where('date').between(dateStr(pr.start), dateStr(pr.end), true, true).toArray()
+    : [];
+  if (seq !== reviewSeq) return;
 
+  const days = reviewDaysOf(logs, monday, sunday);
   const cur = s2WeekMetrics(logs);
   cur.daySet = {};
   logs.forEach(function (l) { cur.daySet[l.date] = true; });
-  s2RenderWeekCard(cur, s2WeekMetrics(prevLogs), monday, sunday);
+  s2RenderWeekCard(cur, hasPrev ? s2WeekMetrics(prevLogs) : {}, monday, sunday);
 
   $('#reviewBody').innerHTML =
     '<div class="rv-card" id="cycleCard"><div class="rv-h"><span class="ic-circle c-pink"><i data-lucide="droplet"></i></span><b>經期</b>' +
@@ -7617,24 +8443,23 @@ async function renderReview() {
       '<div class="slp-wrap"><canvas id="slpChart"></canvas><div class="slp-empty" id="slpEmpty" style="display:none"></div></div>' +
       '<div class="slp-cmp" id="slpCmp"></div></div>' +
     '<div class="rv-card drk-report" id="drinkReport"><div class="rv-h"><span class="ic-circle c-mint"><i data-lucide="droplets"></i></span><b>飲品</b>' +
-      '<span class="rv-right">近 7 天</span></div><div id="drinkReportBody"></div></div>' +
+      '<span class="rv-right">這週</span></div><div id="drinkReportBody"></div></div>' +
     '<div class="rv-card" id="wkReport"><div class="rv-h"><span class="ic-circle c-sage-l"><i data-lucide="footprints"></i></span><b>運動</b>' +
-      '<span class="rv-right">近 7 天</span></div><div id="wkReportBody"></div></div>' +
+      '<span class="rv-right">這週</span></div><div id="wkReportBody"></div></div>' +
     '<div class="rv-card" id="bowelReportCard"><div class="rv-h"><span class="ic-circle c-butter"><i data-lucide="check"></i></span><b>腸道</b>' +
-      '<span class="rv-right">近 7 天</span></div><div id="bowelReportBody"></div></div>' +
-    '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="trending-up"></i></span><b>本週高光與低谷</b></div>' +
+      '<span class="rv-right">這週</span></div><div id="bowelReportBody"></div></div>' +
+    '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-violet"><i data-lucide="trending-up"></i></span><b>這週高光與低谷</b></div>' +
       '<div id="s2Highlight"></div></div>' +
     '<div class="rv-card"><div class="rv-h"><span class="ic-circle c-mint"><i data-lucide="tag"></i></span><b>最常做的事</b></div>' +
       '<div id="s2Tags"></div></div>';
 
-  renderCalendar();
-  Promise.resolve(s2RenderWheel()).catch(function (e) { console.warn('[s2] wheel', e); });
+  Promise.resolve(s2RenderWheel(span, pr, seq)).catch(function (e) { console.warn('[s2] wheel', e); });
   Promise.resolve(s2RenderMoodMap(logs)).catch(function (e) { console.warn('[s2] moodmap', e); });
   Promise.resolve(s2RenderCycleCard()).catch(function (e) { console.warn('[s2] cycle', e); });
   Promise.resolve(s2RenderDrinkReport(logs)).catch(function (e) { console.warn('[s2] drinkReport', e); });
-  Promise.resolve(s2RenderWorkoutReport()).catch(function (e) { console.warn('[s2] wkReport', e); });
-  Promise.resolve(s2RenderBowelReport()).catch(function (e) { console.warn('[s2] bowelReport', e); });
-  Promise.resolve(s2RenderReviewExtras(logs, records)).catch(function (e) { console.warn('[s2] review extras', e); });
+  Promise.resolve(s2RenderWorkoutReport(days)).catch(function (e) { console.warn('[s2] wkReport', e); });
+  Promise.resolve(s2RenderBowelReport(days)).catch(function (e) { console.warn('[s2] bowelReport', e); });
+  Promise.resolve(s2RenderReviewExtras(logs, records, days)).catch(function (e) { console.warn('[s2] review extras', e); });
 }
 
 function toggleCalendar() {
@@ -7646,118 +8471,47 @@ function toggleCalendar() {
     btn.setAttribute('aria-expanded', calState.open ? 'true' : 'false');
     btn.setAttribute('aria-label', calState.open ? '收合日曆' : '展開日曆');
   }
-  s2SyncCalDetail();
 }
-/* S2-P6：詳情區塊只在「日曆展開 + 已點選某一天」時顯示 */
-function s2SyncCalDetail() {
-  const sec = document.getElementById('calDetailSec');
-  if (!sec) return;
-  const show = !!(calState.open && calState.selected);
-  sec.style.display = show ? '' : 'none';
-  if (show) renderCalDetail();
+function calMinYM() { const a = appStartDate(); return { y: a.getFullYear(), m: a.getMonth() }; }
+function calMaxYM() { const t = parseDate(todayStr()); return { y: t.getFullYear(), m: t.getMonth() }; }
+function calPrevMonth() {
+  if (calState.month > 0) calState.month--;
+  else if (calState.year > 2026) { calState.year--; calState.month = 11; }
+  renderCalendar();
 }
-function calPrevMonth() { calState.month--; if (calState.month < 0) { calState.month = 11; calState.year--; } renderCalendar(); }
-function calNextMonth() { calState.month++; if (calState.month > 11) { calState.month = 0; calState.year++; } renderCalendar(); }
+function calNextMonth() {
+  if (calState.month < 11) calState.month++;
+  else { calState.year++; calState.month = 0; }
+  renderCalendar();
+}
 
 async function renderCalendar() {
-  const now = parseDate(getLogicalDate());
-  if (calState.year == null) { calState.year = now.getFullYear(); calState.month = now.getMonth(); }
+  const base = parseDate(state.recordDate || getLogicalDate());
+  if (calState.year == null) { calState.year = base.getFullYear(); calState.month = base.getMonth(); }
+  const min = calMinYM(), max = calMaxYM();
+  if (calState.year < min.y || (calState.year === min.y && calState.month < min.m)) { calState.year = min.y; calState.month = min.m; }
+  if (calState.year > max.y || (calState.year === max.y && calState.month > max.m)) { calState.year = max.y; calState.month = max.m; }
   const y = calState.year, m = calState.month;
   $('#calTitle').textContent = y + '年' + (m + 1) + '月';
+  $('#calPrev').disabled = (y === min.y && m === min.m);
+  $('#calNext').disabled = (y === max.y && m === max.m);
   const first = new Date(y, m, 1);
   const startDow = (first.getDay() + 6) % 7;
   const daysInMonth = new Date(y, m + 1, 0).getDate();
-  // 當月有記錄的日期集合（畫深蜜糖點）
-  const mStart = dateStr(new Date(y, m, 1));
-  const mEnd = dateStr(new Date(y, m, daysInMonth));
+  const mStart = dateStr(new Date(y, m, 1)), mEnd = dateStr(new Date(y, m, daysInMonth));
   const logs = await ldb.dailyLogs.where('date').between(mStart, mEnd, true, true).toArray();
   const recorded = new Set(logs.map(l => l.date));
   const periodSet = new Set(logs.filter(l => l.periodFlow).map(l => l.date));
+  const today = todayStr();
   let cells = '';
   for (let i = 0; i < startDow; i++) cells += '<div class="cal-cell empty"></div>';
   for (let d = 1; d <= daysInMonth; d++) {
     const ds = dateStr(new Date(y, m, d));
-    const isToday = ds === todayStr();
-    const isSel = ds === calState.selected;
-    const hasLog = recorded.has(ds);
-    cells += '<div class="cal-cell' + (isToday ? ' today' : '') + (isSel ? ' sel' : '') + (periodSet.has(ds) ? ' period' : '') + '" data-date="' + ds + '">' + d + (hasLog ? '<span class="pd"></span>' : '') + '</div>';
+    const cls = 'cal-cell' + (ds === today ? ' today' : '') + (ds === calState.selected ? ' sel' : '') +
+      (periodSet.has(ds) ? ' period' : '') + (ds > today ? ' future' : '');
+    cells += '<div class="' + cls + '" data-date="' + ds + '">' + d + (recorded.has(ds) ? '<span class="pd"></span>' : '') + '</div>';
   }
   $('#calGrid').innerHTML = cells;
-  s2SyncCalDetail();
-}
-
-async function renderCalDetail() {
-  const ds = calState.selected;
-  if (!ds) return;
-  const d = parseDate(ds);
-  $('#calDetailTitle').textContent = mdStr(d) + ' ' + weekDayStr(d) + ' 詳情';
-  const log = await ldb.dailyLogs.get(ds);
-  const startTs = d.getTime();
-  const recs = await ldb.records.where('ts').between(startTs, startTs + 86399999, true, true).toArray();
-  const el = $('#calDetail');
-  const editBtn = (ds <= todayStr() && ds >= recordMinDate())
-    ? '<button type="button" class="btn btn-soft btn-block rv-edit" data-edit-date="' + ds + '"><i data-lucide="pencil"></i>' + (ds === todayStr() ? '修改今日記錄' : '補記 / 修改') + '</button>'
-    : '';
-  if (!log && !recs.length) {
-    el.innerHTML = '<div class="empty" style="padding:14px;">當天尚無記錄</div>' + editBtn;
-    return;
-  }
-  const cm = await cycleModel();
-  const cst = cycleStatusOf(cm, ds);
-  let energyVal = (log && log.energy != null) ? log.energy : null;
-  if (energyVal == null) {
-    try {
-      const st = await ldb.dayStates.get(ds);
-      if (st && st.energy != null) energyVal = st.energy;
-    } catch (e) { /* ignore */ }
-  }
-  const modeStr = (log && log.energyMode) ? modeLabel(log.energyMode) : (recs.length ? modeLabel(recs[recs.length - 1].energyMode) : '未記錄');
-  const rows = [];
-  rows.push(dk('c-pink', 'message-circle', '一句話', log && log.note ? log.note : '—'));
-  rows.push(dk('c-violet', 'smile', '情緒', (log && Array.isArray(log.detailMoods) && log.detailMoods.length)
-    ? log.detailMoods.join('、')
-    : (function(){ var k=normMood(log&&log.mood); return k ? MOODS[k].name : '未記錄'; })()));
-  rows.push(dk('c-butter', 'zap', '能量', (energyVal != null ? energyVal + ' / 10' : '未記錄') + ' · ' + modeStr));
-  rows.push(dk('c-night', 'moon', '睡眠', slLogMin(log) != null ? slDur(slLogMin(log)) + (log.sleepQuality ? ' · ' + SLEEP_Q[Math.max(0, Math.min(4, log.sleepQuality - 1))].name : '') : '未記錄'));
-  rows.push(dk('c-green', 'activity', '運動', (function () {
-    const w = logWorkout(log);
-    if (!w) return log ? '無' : '未記錄';
-    const t = WORKOUT_TYPES[w.type] || WORKOUT_TYPES.other;
-    return t.name + (w.min ? ' · ' + w.min + ' 分鐘' : '');
-  })()));
-  rows.push(dk('c-butter', 'check', '排便', (function () {
-    const b = bowelStateOf(log);
-    if (!b.logged) return '未記錄';
-    if (!b.count) return '沒排便';
-    return (b.count >= 3 ? '3+ 次' : b.count + ' 次') + (b.type ? ' · ' + BOWEL_TX[b.type].name : '');
-  })()));
-  rows.push(dk('c-pink', 'droplet', '經期', (function () {
-    const flow = log && log.periodFlow;
-    const dn = cyDayNumber(cm, ds);
-    const sy = cySymptomNames(log && log.periodSymptoms).join('、');
-    if (flow) {
-      return (dn ? '第 ' + dn + ' 天 · ' : '') + CYCLE_FLOW[flow].n + '量' + (sy ? ' · ' + sy : '');
-    }
-    if (dn) return '第 ' + dn + ' 天 · 未記流量';
-    return '—';
-  })()));
-  rows.push(dk('c-mint', 'droplets', '飲品', (function () {
-    const list = logDrinks(log);
-    if (!list.length) return log ? '未喝' : '未記錄';
-    const parts = [];
-    DRINK_KEYS.forEach(function (k) {
-      const c = list.filter(function (d) { return d.t === k; }).length;
-      if (c) parts.push(DRINK_TYPES[k].name + ' ' + c);
-    });
-    return list.length + ' 杯（' + list.reduce(function (a, d) { return a + (d.ml || 400); }, 0) + 'mL）· ' + parts.join('、');
-  })()));
-  rows.push(dk('c-violet', 'heart-pulse', '狀態', log && log.stateTags && log.stateTags.length ? log.stateTags.join('、') : '—'));
-  rows.push(dk('c-sky', 'party-popper', '活動', log && log.activityTags && log.activityTags.length ? log.activityTags.join('、') : '—'));
-  if (recs.length) rows.push(dk('c-green', 'check-circle-2', '完成', recs.length + ' 次（' + recs.map(r => r.cardName).join('、') + '）'));
-  el.innerHTML = rows.join('') + editBtn;
-}
-function dk(cls, icon, k, v) {
-  return '<div class="dk"><span class="ic-circle ' + cls + '"><i data-lucide="' + icon + '"></i></span><span class="k">' + k + '</span><span class="v">' + esc(v) + '</span></div>';
 }
 
 /* ---------------- 抽屜：成就／商店／設定 ---------------- */
@@ -7777,8 +8531,6 @@ function openShop() {
 }
 async function openSettings() {
   closeDrawer();
-  const month = await getSetting('themeMonth', '');
-  const week = await getSetting('themeWeek', '');
   const cm = await cycleModel();
   const cyc = cm.last;
   const start = cyc ? cyc.startDate : '';
@@ -7792,13 +8544,6 @@ async function openSettings() {
   openModal(
     '<div class="m-head"><h2><i data-lucide="settings"></i> 設定</h2><button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>' +
     '<div class="set-body">' +
-
-    '<div class="set-sec">' +
-      '<div class="section-label"><i data-lucide="palette"></i> 主題設定</div>' +
-      '<div class="field"><label>本月主題</label><input type="text" class="input" id="sMonth" placeholder="例如：運動月" value="' + esc(month) + '"></div>' +
-      '<div class="field"><label>本週重點</label><input type="text" class="input" id="sWeek" placeholder="例如：早睡" value="' + esc(week) + '"></div>' +
-      '<button class="btn btn-primary btn-block btn-sm" onclick="saveThemes()">儲存主題</button>' +
-    '</div>' +
 
     '<div class="set-sec">' +
       '<div class="section-label"><i data-lucide="droplet"></i> 經期設定</div>' +
@@ -7864,7 +8609,7 @@ async function openTagManager(type){
   tagMgrType = type || tagMgrType || 'emotion';
   openModal('<div class="m-head"><h2><i data-lucide="tag"></i> 標籤管理</h2><button class="m-close" onclick="closeModal()"><i data-lucide="x"></i></button></div>' +
     '<div id="tagMgrBody" class="tag-mgr"></div>' +
-    '<div class="row"><button class="save" onclick="closeModal()">完成</button></div>');
+    '<div class="row" style="margin-top:14px"><button class="btn btn-primary btn-big btn-block" onclick="closeModal()">完成</button></div>');
   if (window.lucide) lucide.createIcons(document.getElementById('modalRoot'));
   await renderTagManager();
 }
@@ -7878,7 +8623,38 @@ async function renderTagManager(){
     '<button type="button" class="' + (tagMgrType==='emotion'?'on':'') + '" onclick="tagMgrType=\'emotion\';renderTagManager()">情緒</button>' +
     '<button type="button" class="' + (tagMgrType==='state'?'on':'') + '" onclick="tagMgrType=\'state\';renderTagManager()">狀態</button>' +
     '<button type="button" class="' + (tagMgrType==='activity'?'on':'') + '" onclick="tagMgrType=\'activity\';renderTagManager()">活動</button>' +
+    '<button type="button" class="' + (tagMgrType==='card'?'on':'') + '" onclick="tagMgrType=\'card\';renderTagManager()">卡片</button>' +
     '</div>';
+  if (tagMgrType === 'card') {
+    await syncCardTagLibrary();
+    var lib = await cardTagLibrary();
+    var useCount = Object.create(null);
+    try {
+      var allCards = await ldb.cards.toArray();
+      allCards.forEach(function (c) {
+        (Array.isArray(c.tags) ? c.tags : []).forEach(function (t) { useCount[t] = (useCount[t] || 0) + 1; });
+      });
+    } catch (e) { /* ignore */ }
+    var rows = lib.length ? lib.map(function (t) {
+      var n = useCount[t] || 0;
+      return '<div class="tag-mgr-row"><span>' + esc(t) +
+        '<em>' + (n ? n + ' 張卡' : '還沒用過') + '</em></span>' +
+        '<button type="button" class="tag-del" data-del="' + esc(t) + '" aria-label="刪除 ' + esc(t) + '">✕</button></div>';
+    }).join('') : '<div class="imp-hint">還沒有卡片標籤。</div>';
+    host.innerHTML = tabs +
+      '<div class="imp-hint">卡片標籤庫。新增的標籤會出現在卡片編輯頁，也能在「本月主題」裡選；刪除會一併從所有卡片移除。</div>' +
+      '<div class="tag-add-row"><input type="text" class="input" id="cardTagInput" placeholder="輸入新標籤（如：整理）" maxlength="12"><button class="bt-mini" id="cardTagAdd">新增</button></div>' +
+      '<div class="tag-mgr-list">' + rows + '</div>';
+    host.querySelectorAll('.tag-del').forEach(function (b) {
+      b.addEventListener('click', function () { removeCardTag(b.dataset.del); });
+    });
+    var ci = document.getElementById('cardTagInput');
+    if (ci) ci.addEventListener('keydown', function (e) { if (e.key === 'Enter') addCardTagToLibrary(); });
+    var ca = document.getElementById('cardTagAdd');
+    if (ca) ca.onclick = function () { addCardTagToLibrary(); };
+    if (window.lucide) lucide.createIcons(host);
+    return;
+  }
   var hint = tagMgrType === 'emotion'
     ? '<div class="imp-hint">情緒用來訓練自我覺察。新增時選一個維度；記錄頁可橫滑選取。</div>' : '';
   /* 情緒頁：維度下拉；其他頁：一般輸入 */
@@ -7948,14 +8724,43 @@ async function delTagFromManager(name){
   if (state.tab === 'record') await renderTagGroups();
   toast('已刪除「' + name + '」');
 }
-
-async function saveThemes() {
-  await setSetting('themeMonth', $('#sMonth').value.trim());
-  await setSetting('themeWeek', $('#sWeek').value.trim());
-  closeModal();
-  renderThemeStrip();
-  toast('主題已儲存');
+/* ---------- 卡片標籤庫：增 / 減 ---------- */
+async function addCardTagToLibrary() {
+  var inp = document.getElementById('cardTagInput'); if (!inp) return;
+  var n = (inp.value || '').trim().replace(/\s+/g, ' ').slice(0, 12);
+  if (!n) { toast('先輸入標籤名稱'); return; }
+  var lib = await cardTagLibrary();
+  if (lib.indexOf(n) >= 0) { toast('這個標籤已經存在'); return; }
+  var manual = await cardTagsManual();
+  manual.unshift(n);
+  await setSetting('cardTagManual', JSON.stringify(manual.slice(0, 40)));
+  await syncCardTagLibrary();
+  inp.value = '';
+  await renderTagManager();
+  toast('已新增「' + n + '」');
 }
+async function removeCardTag(tag) {
+  var lib = await cardTagLibrary();
+  if (lib.indexOf(tag) < 0) return;
+  try {
+    var cards = await ldb.cards.toArray();
+    for (var i = 0; i < cards.length; i++) {
+      var c = cards[i];
+      if (Array.isArray(c.tags) && c.tags.indexOf(tag) >= 0) {
+        c.tags = c.tags.filter(function (t) { return t !== tag; });
+        await ldb.cards.put(c);
+      }
+    }
+    CloudSync.notifyLocalChange('cards', null);
+  } catch (e) { /* ignore */ }
+  var manual = (await cardTagsManual()).filter(function (t) { return t !== tag; });
+  await setSetting('cardTagManual', JSON.stringify(manual));
+  await syncCardTagLibrary();
+  await drawCards();
+  await renderTagManager();
+  toast('已刪除「' + tag + '」');
+}
+
 async function savePeriod() {
   const start = $('#sStart').value;
   const end = $('#sEnd').value;
@@ -8495,7 +9300,6 @@ function bindEvents() {
   $('#energyMinus').addEventListener('click', () => setEnergy(state.energy - 1));
   $('#energyPlus').addEventListener('click', () => setEnergy(state.energy + 1));
 
-  $('#drawBtn').addEventListener('click', drawCards);
   $('#blindBtn').addEventListener('click', openBlindBox);
 
 
@@ -8912,31 +9716,46 @@ function bindEvents() {
   $('#recDateBackdrop').addEventListener('click', closeRecDate);
   $('#recDateOk').addEventListener('click', confirmRecDate);
 
-  /* 復盤 → 補記 */
-  $('#calDetail').addEventListener('click', e => {
-    const b = e.target.closest('[data-edit-date]');
-    if (!b) return;
-    openRecordForDate(b.dataset.editDate);
-  });
-
   $('#calToggle').addEventListener('click', toggleCalendar);
   $('#calPrev').addEventListener('click', calPrevMonth);
   $('#calNext').addEventListener('click', calNextMonth);
   $('#calGrid').addEventListener('click', e => {
     const c = e.target.closest('.cal-cell');
     if (!c || !c.dataset.date) return;
-    calState.selected = c.dataset.date;
-    renderCalendar();
+    const ds = c.dataset.date;
+    if (ds > recordMaxDate()) { toast('還沒到這一天'); return; }
+    if (ds < recordMinDate()) { toast('已到達記錄起點'); return; }
+    /* 選完就收起，直接看到當天的表單 */
+    calState.open = false;
+    document.getElementById('calCard').classList.add('closed');
+    document.getElementById('calToggle').setAttribute('aria-expanded', 'false');
+    const body = document.querySelector('#page-record .pg-body');
+    if (body) body.scrollTop = 0;
+    changeRecordDate(ds);
   });
+  /* P56：復盤週次 */
+  $('#rvWkPrev').addEventListener('click', () => shiftReviewWeek(-1));
+  $('#rvWkNext').addEventListener('click', () => shiftReviewWeek(1));
+  $('#rvWkMid').addEventListener('click', openWeekPicker);
+  $('#wkPickCancel').addEventListener('click', closeWeekPicker);
+  $('#wkPickBackdrop').addEventListener('click', closeWeekPicker);
+  $('#wkPickOk').addEventListener('click', confirmWeekPicker);
+  wpBind();
 
   $('#quickSave').addEventListener('click', async () => {
-    await setSetting('themeMonth', $('#quickMonth').value.trim());
-    await setSetting('themeWeek', $('#quickWeek').value.trim());
+    const inp = $('#quickTheme');
+    const val = inp ? inp.value.trim() : '';
+    const kind = sheetKind;
+    await setSetting(kind === 'week' ? 'themeWeek' : 'themeMonth', val);
+    if (kind === 'month') {
+      await setSetting('themeMonthTags', JSON.stringify(sheetTags));
+      monthThemeTags = sheetTags.slice();
+    }
     closeSheet();
     renderThemeStrip();
-    toast('主題已儲存');
+    await drawCards();
+    toast(kind === 'week' ? '本週重點已儲存' : '本月主題已儲存');
   });
-  $('#quickOpenSettings').addEventListener('click', () => { closeSheet(); openSettings(); });
 
   $('#formBack').addEventListener('click', () => switchTab(formFrom || 'cards'));
 
@@ -9471,9 +10290,6 @@ async function init() {
   await renderReview();
   await renderQuick();
 
-  $('#quickMonth').value = await getSetting('themeMonth', '');
-  $('#quickWeek').value = await getSetting('themeWeek', '');
-
   renderSyncStatus();
   CloudSync.init();
   PWA.init();
@@ -9498,6 +10314,7 @@ function __layerOn(id) {
 }
 function closeTopLayer() {
   if (c2Drag) { c2CancelDrag(); return true; }
+  if (__layerOn('tarotRoot') && typeof window.tarotClose === 'function') { window.tarotClose(); return true; }
   if (__layerOn('focusOverlay')) { s2CloseFocus(); return true; }
   if (__layerOn('napSheet')) { slCloseNap(); return true; }
   if (__layerOn('sleepRoot')) { closeSleepModal(); return true; }
@@ -9515,6 +10332,7 @@ function closeTopLayer() {
   if (__layerOn('iconSheet')) { closeIconSheet(); return true; }
   if (__layerOn('colorSheet')) { closeColorSheet(); return true; }
   if (__layerOn('wheelOverlay')) { closeWheel(); return true; }
+  if (__layerOn('wkPickOverlay')) { closeWeekPicker(); return true; }
   if (__layerOn('recDateOverlay')) { closeRecDate(); return true; }
   if (__layerOn('drawer')) { closeDrawer(); return true; }
   if (__layerOn('sheet')) { closeSheet(); return true; }
@@ -9765,38 +10583,68 @@ function s2SleepShift(delta) {
   Promise.resolve(s2RenderSleep()).catch(function (e) { console.warn('[s2] sleep', e); });
 }
 
-/* 高光／低谷：跟本週自己的平均比，顯示相對偏差 */
-function s2RenderHighlight(records) {
+/* 高光／低谷：只比「有完成任務或有寫紀錄」的日子。
+   不是每天都有時間做任務，但有寫日誌的日子也算「有在照顧自己」，
+   所以不再只看完成次數、也不會把純空白日誤標成低谷。 */
+function s2RenderHighlight(records, days) {
   var host = document.getElementById('s2Highlight');
   if (!host) return;
-  var days = {};
+  var cnt = {};
   (records || []).forEach(function (r) {
     if (!r.completed) return;
     var d = new Date(r.ts), k = dateStr(d);
-    days[k] = (days[k] || 0) + 1;
+    cnt[k] = (cnt[k] || 0) + 1;
   });
-  var keys = Object.keys(days);
-  if (!keys.length) {
-    host.innerHTML = '<div class="rv-sub" style="margin:2px 0 0">本週還沒有完成紀錄，等第一筆出現就能比了。</div>';
+  var today = todayStr();
+  var list = (days || []).filter(function (d) { return d && d.ds <= today; });
+  if (!list.length) {
+    list = Object.keys(cnt).map(function (k) { return { ds: k, log: null }; });
+  }
+  var rows = [];
+  list.forEach(function (d) {
+    var done = cnt[d.ds] || 0;
+    var lg = d.log;
+    var logged = !!lg;
+    /* 沒任務、也沒紀錄的日子直接略過——那可能只是休息，不該被貼上「低谷」 */
+    if (!done && !logged) return;
+    var rich = 0;
+    if (lg) {
+      if (lg.sleepHours != null) rich++;
+      if ((lg.waterCups || 0) >= 4) rich++;
+      if (lg.mood || (Array.isArray(lg.detailMoods) && lg.detailMoods.length)) rich++;
+      if ((Array.isArray(lg.activityTags) && lg.activityTags.length) || lg.workout) rich++;
+      if (lg.note) rich++;
+    }
+    rows.push({ ds: d.ds, done: done, logged: logged, rich: rich,
+      score: done * 3 + (logged ? 2 : 0) + rich });
+  });
+  if (!rows.length) {
+    host.innerHTML = '<div class="rv-sub" style="margin:0">這週還沒有完成紀錄，也還沒寫下日誌。先挑一張小卡，或到「記錄」寫一筆，這裡就會開始有起伏。</div>';
     return;
   }
-  var vals = keys.map(function (k) { return days[k]; });
-  var avg = vals.reduce(function (a, b) { return a + b; }, 0) / vals.length;
-  var hi = keys[0], lo = keys[0];
-  keys.forEach(function (k) { if (days[k] > days[hi]) hi = k; if (days[k] < days[lo]) lo = k; });
-  function pct(k) {
-    if (!avg) return '0%';
-    var v = Math.round((days[k] - avg) / avg * 100);
-    return (v > 0 ? '+' : '') + v + '%';
-  }
+  rows.sort(function (a, b) { return b.score - a.score; });
+  var hi = rows[0], lo = rows[rows.length - 1];
   function wd(k) {
     var d = parseDate(k);
     return ['日', '一', '二', '三', '四', '五', '六'][d.getDay()];
   }
+  /* 一塊的內容：小標膠囊 → 主數字 → 副行（貼底對齊） */  function block(cls, tag, r, tail) {
+    var num = r.done ? ('<b>' + r.done + '</b><span>件事完成</span>') : ('<b>—</b><span>沒排任務</span>');
+    return '<div class="hl-b ' + cls + '"><span class="k">' + tag + '</span>' +
+      '<span class="v">' + num + '</span>' +
+      '<span class="d">' + (r.logged ? '有寫紀錄' : '沒紀錄') + ' · ' + tail + '</span></div>';
+  }
+  if (rows.length === 1 || hi.score === lo.score) {
+    host.innerHTML = '<div class="hl-row one">' +
+      block('', '這週節奏', hi, '很平均') + '</div>' +
+      '<div class="rv-sub hl-note">起伏不大，也是一種穩定。</div>';
+    return;
+  }
   host.innerHTML = '<div class="hl-row">' +
-    '<div class="hl-b"><div class="k">高光 · 週' + wd(hi) + '</div><div class="v">' + days[hi] + ' 次<span class="d">' + pct(hi) + '</span></div></div>' +
-    '<div class="hl-b low"><div class="k">低谷 · 週' + wd(lo) + '</div><div class="v">' + days[lo] + ' 次<span class="d">' + pct(lo) + '</span></div></div>' +
-    '</div>';
+    block('hi', '高光 · 週' + wd(hi.ds), hi, '最投入') +
+    block('low', '低谷 · 週' + wd(lo.ds), lo, lo.logged ? '慢下來' : '空白') +
+    '</div>' +
+    '<div class="rv-sub hl-note">只比「有任務或有寫紀錄」的日子，沒時間做任務時寫一筆也算數。</div>';
 }
 
 /* 標籤挖掘：最常做的類別 + 「還有這些」可切換 */
@@ -9827,7 +10675,7 @@ async function s2RenderTags(records) {
   top.forEach(function (p) {
     html += '<span class="tg-chip' + (p[0] === sel ? ' on' : '') + '" onclick="s2PickTag(' + JSON.stringify(p[0]).replace(/"/g, '&quot;') + ')">' + esc(p[0]) + '</span>';
   });
-  html += '</div><div class="rv-sub" style="margin-top:9px">「<b>' + esc(sel) + '</b>」本週出現 <b>' + selN + '</b> 次</div>';
+  html += '</div><div class="rv-sub" style="margin-top:9px">「<b>' + esc(sel) + '</b>」這週出現 <b>' + selN + '</b> 次</div>';
   if (more.length) {
     html += '<div class="tg-more">還有這些：' + more.map(function (p) { return esc(p[0]) + '（' + p[1] + '）'; }).join('、') + '</div>';
   }
@@ -9907,9 +10755,9 @@ async function s2RenderMoodMap(logs) {
   for (var i = 0; i < ts.length; i++) ts[i].style.setProperty('--i', i);
 }
 
-async function s2RenderReviewExtras(logs, records) {
+async function s2RenderReviewExtras(logs, records, days) {
   s2LastRecords = records || [];
-  s2RenderHighlight(records);
+  s2RenderHighlight(records, days);
   try { await s2RenderTags(records); } catch (e) { console.warn('[s2] tags', e); }
   try { await s2RenderSleep(); } catch (e) { console.warn('[s2] sleep', e); }
 }
@@ -10725,7 +11573,7 @@ function onC2TouchStart(e) {
   /* 背面步驟卡：走另一套手勢（長按甩出 / 左右切換） */
   if (e.target.closest('.c2stepview')) { c2StepTouchStart(e); return; }
   /* 按鈕與膠囊不參與拖拽，避免點擊被長按吃掉 */
-  if (e.target.closest('.c2btn, .step-chip, .pc-spread-btn')) return;
+  if (e.target.closest('.c2btn, .step-chip, .draft-pil, .pc-spread-btn')) return;
   var card = e.target.closest('#cardGrid .c2card');
   if (!card) return;
   if (c2FlippedEl && c2FlippedEl !== card) c2HideStepView(c2FlippedEl);
@@ -12586,5 +13434,343 @@ getSetting('focusKeepAwake', '0').then(function (v) { s2WakeWant = (v === '1'); 
 <div class="c2drophint" id="c2DropHint" aria-hidden="true"></div>
 <div class="c2dropdel" id="c2DropDel" aria-hidden="true"><i data-lucide="trash-2"></i><span>拖到這裡刪除</span></div>
 <div class="c2undo" id="c2UndoBar" role="status" aria-live="polite"><span id="c2UndoTxt"></span><button type="button" id="c2UndoBtn">復原</button></div>
+
+<script>
+/* ============ 卡牌轉盤：選一個行動 ============
+   只是借用塔羅牌的「翻牌」形式，不是真的抽塔羅。72 個卡位繞滿一整圈（每格 5°），
+   只露出前方 ±36° 的弧。拖動時整圈像方向盤一樣轉：角度 = 卡位角 + 旋轉量，
+   不做資料重排、不移形補位，所以大幅滑動也不會抽搐。
+   只有停在 0° 的那張抬升 30px；圖層只依幾何角度，選中不置頂。 */
+(function () {
+  var THRESH = 118, DAMP = 0.6;
+  var STEP = 5;        /* 每一格的角度 */
+  var SLOTS = 72;      /* 360° / 5° = 72，補滿一整圈，重複幾張也沒關係 */
+  var VIS = 36;        /* 只顯示前方這段弧，後面的卡完全藏起來 */
+  var LIFT = 30;       /* 正中心抬升高度（只改 transform，不改圖層） */
+  var root, fan, hero, slot, acts, note, st = null, g = null, bound = false;
+
+  function byId(id) { return document.getElementById(id); }
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function norm(a) { return ((a + 180) % 360 + 360) % 360 - 180; }
+  function angleOf(e) { return norm(e.i * STEP + st.pos); }
+  function dayKey() { return 'tarotRedraw_' + todayStr(); }
+  function redrawLeft() {
+    try { return Math.max(0, 1 - (parseInt(localStorage.getItem(dayKey()) || '0', 10) || 0)); }
+    catch (e) { return 1; }
+  }
+  function spendRedraw() {
+    try { localStorage.setItem(dayKey(), String((parseInt(localStorage.getItem(dayKey()) || '0', 10) || 0) + 1)); } catch (e) {}
+  }
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  /* 卡片是否帶有本月主題標籤 */
+  function themeHit(c) {
+    if (!monthThemeTags.length) return false;
+    var ts = Array.isArray(c.tags) ? c.tags : [];
+    for (var i = 0; i < ts.length; i++) {
+      if (monthThemeTags.indexOf(ts[i]) >= 0) return true;
+    }
+    return false;
+  }
+  /* 把卡片放進卡陣：主題相關的卡權重 ×3。
+     若卡池裡沒有任何一張帶主題標籤，就退回純隨機，保證照樣出卡。 */
+  function slotsOf(pool) {
+    var n = Math.max(15, Math.min(20, pool.length));
+    var anyHit = false;
+    for (var j = 0; j < pool.length; j++) { if (themeHit(pool[j])) { anyHit = true; break; } }
+    var src = pool;
+    if (anyHit) {
+      src = [];
+      for (var k = 0; k < pool.length; k++) {
+        var w = themeHit(pool[k]) ? 3 : 1;
+        for (var m = 0; m < w; m++) src.push(pool[k]);
+      }
+    }
+    var out = [], bag = [];
+    while (out.length < n) {
+      if (!bag.length) bag = shuffle(src.slice());
+      out.push(bag.pop());
+    }
+    return out;
+  }
+
+  function layout() {
+    if (!st) return;
+    var w = fan.clientWidth || window.innerWidth;
+    var R = clamp(w * 0.78, 260, 420); /* 圓心在螢幕下方遠處，弧才平緩 */
+    for (var i = 0; i < st.els.length; i++) {
+      var e = st.els[i];
+      var a = angleOf(e), ad = Math.abs(a);
+      if (ad > VIS) {
+        /* 弧後面的卡完全藏起來，不要讓它在卡輪背後亂竄 */
+        if (!e.off) {
+          e.el.style.visibility = 'hidden';
+          e.el.style.opacity = '0';
+          e.el.style.pointerEvents = 'none';
+          e.off = true;
+        }
+        continue;
+      }
+      if (e.off) { e.el.style.visibility = 'visible'; e.off = false; }
+      var rad = a * Math.PI / 180;
+      var x = Math.sin(rad) * R;
+      var y = (1 - Math.cos(rad)) * R;
+      /* 只有靠近正中心的那張才抬升，卡片本身的旋轉角完全不動 */
+      var k = ad < STEP * 0.95 ? 1 - ad / (STEP * 0.95) : 0;
+      k = k * k * (3 - 2 * k);
+      var lift = LIFT * k;
+      if (ad < 1) lift += st.pull;   /* 上拉時只有正中心那張跟著手指走 */
+      e.el.style.transform = 'translate(-50%,' + (y - lift).toFixed(1) + 'px) translateX(' +
+        x.toFixed(1) + 'px) rotate(' + a.toFixed(2) + 'deg)';
+      e.el.style.opacity = ad > VIS - 2 ? Math.max(0, (VIS - ad) / 2).toFixed(2) : '1';
+      e.el.style.pointerEvents = 'auto';
+      /* 圖層只跟幾何角度有關：越靠近 12 點越上層，選中不會被拔到最頂 */
+      e.el.style.zIndex = String(60 - Math.round(ad));
+      /* 光影說明它被拿高了：近影收緊、遠影放軟 */
+      var kk = Math.min(1.4, lift / LIFT);
+      e.back.style.boxShadow =
+        '0 ' + (14 + 10 * kk).toFixed(0) + 'px ' + (24 + 12 * kk).toFixed(0) + 'px ' + (-14 - 3 * kk).toFixed(0) +
+          'px rgba(3,2,12,' + (0.9 - 0.12 * kk).toFixed(2) + '), ' +
+        '0 ' + (4 + 26 * kk).toFixed(0) + 'px ' + (10 + 38 * kk).toFixed(0) + 'px ' + (-6 - 10 * kk).toFixed(0) +
+          'px rgba(3,2,12,' + (0.52 * kk).toFixed(2) + '), ' +
+        'inset 1px 0 0 rgba(255,255,255,.34)';
+      e.back.style.filter = kk > 0.04 ? 'brightness(' + (1 + 0.06 * Math.min(1, kk)).toFixed(2) + ')' : '';
+    }
+  }
+
+  /* 圖標名不一定在打包的子集裡，找不到就退回類型圖標 */
+  function safeIconOf(c) {
+    var m = window.__LUCIDE_ICONS || {};
+    if (c.icon && m[c.icon]) return c.icon;
+    return (TYPE_META[c.type] || TYPE_META['自我成長']).icon;
+  }
+  function fillFront(c) {
+    var em = ENERGY_MODES[c.energyMode] || ENERGY_MODES['neutral'];
+    var all = c.steps || [];
+    var steps = all.slice(0, 3);
+    byId('trFront').innerHTML =
+      '<div class="tf-top"><span class="tf-cat">' + esc(c.type) + '</span>' +
+        '</div>' +
+      '<div class="tf-name">' + esc(c.name) + '</div>' +
+      (c.why ? '<div class="tf-why">★ ' + esc(c.why) + '</div>' : '') +
+      '<div class="tf-body">' + (steps.length
+        ? steps.map(function (s) { return '· ' + esc(s); }).join('<br>') +
+          (all.length > 3 ? '<br><span style="color:#B3ADC6">…還有 ' + (all.length - 3) + ' 步</span>' : '')
+        : '<div class="tf-art"><i data-lucide="' + esc(safeIconOf(c)) + '"></i></div>') + '</div>' +
+      '<div class="tf-pills"><span>' + esc(c.duration) + ' 分鐘</span><span>' + em.label + ' ' +
+        (c.energyAmount != null ? c.energyAmount : 3) + '</span></div>' +
+      '<button type="button" class="tf-draft" onclick="startDraftFromTarot()"><i data-lucide="zap"></i> 或先做 1 分鐘草稿</button>';
+    if (window.lucide) lucide.createIcons(byId('trFront'));
+  }
+
+  function syncChip() {
+    var e = byId('trEnergy');
+    if (e) e.textContent = '能量 ' + state.energy + ' · 卡池 ' + drawPoolCache.length + ' 張';
+  }
+  function syncTheme() {
+    var el = byId('trTheme');
+    if (!el) return;
+    var html = themeUpHtml();
+    if (!html) { el.style.display = 'none'; el.innerHTML = ''; return; }
+    el.style.display = '';
+    el.innerHTML = html;
+  }
+  function syncRe() {
+    var b = byId('trRe'), n = byId('trNote');
+    if (!b) return;
+    if (redrawLeft() > 0) {
+      b.disabled = false; b.textContent = '🔄 換一批（今日剩 1 次）';
+      if (n) { n.textContent = ''; n.classList.remove('in'); }
+    } else {
+      b.disabled = true; b.textContent = '🔄 換一批';
+      if (n) { n.textContent = '今日次數已用完，這就是緣分'; n.classList.add('in'); }
+    }
+  }
+
+  function build() {
+    if (slot && slot.getAnimations) slot.getAnimations().forEach(function (an) { an.cancel(); });
+    fan.innerHTML = '';
+    st = null;
+    if (!drawPoolCache.length) return;
+    var data = slotsOf(drawPoolCache);
+    st = { data: data, n: data.length, pos: 0, pull: 0, chosen: null, mode: 'fan', els: [] };
+    for (var i = 0; i < SLOTS; i++) {
+      var el = document.createElement('div');
+      el.className = 'tr-card';
+      el.innerHTML = '<div class="tr-back">' + fan.dataset.back + '</div>';
+      fan.appendChild(el);
+      st.els.push({ el: el, back: el.firstChild, i: i, off: false });
+    }
+    fan.classList.remove('dim');
+    fan.classList.remove('dragging');
+    hero.classList.remove('in');
+    hero.classList.remove('flipped');
+    acts.classList.remove('in');
+    note.classList.remove('in');
+    var orn = document.querySelector('.tr-orn'); if (orn) orn.classList.remove('off');
+    byId('tr3d').classList.remove('flip');
+    byId('trHint').classList.remove('off');
+    byId('trHint').textContent = '左右滑動選卡，向上拉出';
+    syncChip(); syncRe(); syncTheme(); layout();
+  }
+
+  function centerEl() {
+    var best = null, bd = 1e9;
+    for (var i = 0; i < st.els.length; i++) {
+      var d = Math.abs(angleOf(st.els[i]));
+      if (d < bd) { bd = d; best = st.els[i]; }
+    }
+    return best;
+  }
+
+  function promote() {
+    if (!st) return;
+    var e = centerEl(); if (!e) return;
+    var c = st.data[e.i % st.n];
+    var from = e.el.getBoundingClientRect();
+    st.chosen = c;
+    st.mode = 'busy';
+    fillFront(c);
+    byId('tr3d').classList.remove('flip');
+    hero.classList.add('in');
+    fan.classList.add('dim');
+    byId('trHint').textContent = '點一下卡片，看看要做什麼';
+    var orn = document.querySelector('.tr-orn'); if (orn) orn.classList.add('off');
+    var to = slot.getBoundingClientRect();
+    var sx = from.width / to.width;
+    var dx = (from.left + from.width / 2) - (to.left + to.width / 2);
+    var dy = (from.top + from.height / 2) - (to.top + to.height / 2);
+    var an = slot.animate([
+      { transform: 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) scale(' + sx.toFixed(3) + ')' },
+      { transform: 'none' }
+    ], { duration: 460, easing: 'cubic-bezier(.2,.9,.25,1)' });
+    an.onfinish = function () { if (st) st.mode = 'hold'; };
+    if (navigator.vibrate) navigator.vibrate([50]);
+  }
+
+  function flip() {
+    if (!st || st.mode !== 'hold') return;
+    st.mode = 'flip';
+    byId('tr3d').classList.add('flip');
+    hero.classList.add('flipped');
+    if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
+    byId('trHint').classList.add('off');
+    setTimeout(function () { if (st) { st.mode = 'front'; acts.classList.add('in'); syncRe(); } }, 330);
+  }
+
+  function again() {
+    if (!st || st.mode !== 'front' || redrawLeft() <= 0) return;
+    spendRedraw();
+    st.mode = 'busy';
+    acts.classList.remove('in');
+    byId('tr3d').classList.remove('flip');
+    setTimeout(function () {
+      hero.classList.remove('in');
+      fan.classList.remove('dim');
+      build();
+    }, 420);
+  }
+
+  function accept() {
+    if (!st || !st.chosen) return;
+    var c = st.chosen;
+    close();
+    autoAddToTimeline(c).then(function () { return renderSchedule(); }).then(function () {
+      toast('已加入今日行動：' + c.name);
+    });
+  }
+
+  function open() {
+    if (!drawPoolCache.length) { toast('卡池是空的，先去卡庫加一張'); return; }
+    root = byId('tarotRoot'); fan = byId('trFan'); hero = byId('trHero'); slot = byId('trSlot');
+    acts = byId('trActs'); note = byId('trNote');
+    if (!root) return;
+    if (!bound) { bind(); bound = true; }
+    root.classList.add('show');
+    root.setAttribute('aria-hidden', 'false');
+    build();
+  }
+  function close() {
+    var r = byId('tarotRoot');
+    if (!r) return;
+    r.classList.remove('show');
+    r.setAttribute('aria-hidden', 'true');
+    st = null; g = null;
+  }
+
+  function bind() {
+    byId('trClose').addEventListener('click', close);
+    byId('trOk').addEventListener('click', accept);
+    byId('trRe').addEventListener('click', again);
+    slot.addEventListener('click', flip);
+    var stage = byId('trStage');
+
+    stage.addEventListener('pointerdown', function (e) {
+      if (!st || st.mode !== 'fan') return;
+      var el = e.target.closest('.tr-card');
+      if (!el) return;
+      /* 用游標位移增量轉盤，不記舊起點：大幅滑動也不會跳回去抽搐 */
+      g = { x: e.clientX, y: e.clientY, axis: null, up: 0, el: el };
+      fan.classList.add('dragging');
+      try { stage.setPointerCapture(e.pointerId); } catch (err) {}
+      e.preventDefault();
+    }, { passive: false });
+
+    stage.addEventListener('pointermove', function (e) {
+      if (!g || !st || st.mode !== 'fan') return;
+      var dx = e.clientX - g.x, dy = e.clientY - g.y;
+      if (!g.axis) {
+        if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+        g.axis = Math.abs(dx) >= Math.abs(dy) ? 'x' : 'y';
+      }
+      if (g.axis === 'x') {
+        /* 手指往左（dx<0）→ 角度變小 → 盤面往左轉，右邊的卡滑進中心 */
+        st.pos += dx * STEP / 34;
+        g.x = e.clientX;
+        st.pull = 0;
+        layout();
+      } else {
+        g.up = Math.max(0, -dy);
+        st.pull = Math.min(24 + g.up * DAMP, 150);
+        layout();
+      }
+    });
+
+    function end() {
+      if (!st) { g = null; return; }
+      var wasX = g && g.axis === 'x', wasY = g && g.axis === 'y';
+      var up = g ? g.up : 0, tap = g ? g.axis === null : false, tapped = g ? g.el : null;
+      g = null;
+      fan.classList.remove('dragging');
+      if (wasY && up >= THRESH) { st.pull = 0; promote(); return; }
+      if (tap && tapped) {
+        /* 點旁邊的卡：把它轉到正中心（不抽，只是換位置） */
+        for (var i = 0; i < st.els.length; i++) {
+          if (st.els[i].el === tapped) { st.pos += norm(-(st.els[i].i * STEP + st.pos)); break; }
+        }
+      } else if (wasX) {
+        st.pos = Math.round(st.pos / STEP) * STEP; /* 吸附：一定有一張剛好停在 0° */
+      }
+      st.pos = norm(st.pos);
+      st.pull = 0;
+      layout();
+    }
+    stage.addEventListener('pointerup', end);
+    stage.addEventListener('pointercancel', end);
+  }
+
+  window.openTarot = open;
+  window.tarotClose = close;
+  window.startDraftFromTarot = function () {
+    if (!st || !st.chosen) return;
+    var id = st.chosen.id;
+    close();
+    startDraftTimer(id);
+  };
+})();
+</script>
+
 </body>
 </html>
